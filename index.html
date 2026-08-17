@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页 | My Portfolio</title>
+    <title>我的个人主页</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -23,12 +23,12 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
-            transition: all 0.3s ease;
+            margin: 0;
+            min-height: 100vh;
         }
         
         body.dark-mode {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #2b2d42 100%);
-            background-size: 400% 400%;
         }
         
         @keyframes gradient {
@@ -41,7 +41,6 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
         }
         
         .dark-mode .glass-card {
@@ -49,23 +48,45 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .avatar {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        .device-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 64px;
-            color: white;
-            border-radius: 50%;
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            color: white;
         }
         
-        .avatar:hover {
-            transform: scale(1.05) rotate(5deg);
+        .device-icon:hover {
+            transform: translateY(-10px) scale(1.1);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .device-icon i {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        
+        .device-icon span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
         
         .social-link {
@@ -79,57 +100,12 @@
         }
         
         .fade-in {
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 0.8s ease-out;
         }
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .slide-up {
-            animation: slideUp 0.5s ease-out;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .device-frame {
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        .device-screen {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        .mobile-frame {
-            width: 280px;
-            height: 500px;
-        }
-        
-        .tablet-frame {
-            width: 480px;
-            height: 640px;
-        }
-        
-        .desktop-frame {
-            width: 800px;
-            height: 500px;
-        }
-        
-        .notch {
-            width: 60px;
-            height: 6px;
-            background: #333;
-            border-radius: 3px;
-            margin: 8px auto;
         }
         
         .timeline-item {
@@ -180,13 +156,12 @@
         
         .gallery-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
         .music-player {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             border-radius: 50px;
-            padding: 15px 25px;
+            padding: 12px 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
@@ -201,36 +176,6 @@
             background: rgba(0,0,0,0.3);
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        .nav-link {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-        
         .stats-card {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -241,6 +186,7 @@
         
         .carousel {
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
         
         .carousel::-webkit-scrollbar {
@@ -253,77 +199,99 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
+        }
+        
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .avatar-upload {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .avatar-upload:hover {
+            transform: scale(1.05);
+        }
+        
+        .img-upload-zone {
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .img-upload-zone:hover {
+            border-color: var(--primary);
+            background: rgba(102, 126, 234, 0.05);
         }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- 粒子背景 -->
     <div id="particles-js"></div>
     
-    <!-- 主页：设备选择 -->
-    <section id="home" class="min-h-screen flex items-center justify-center p-8">
-        <div class="text-center fade-in">
-            <h1 class="text-5xl font-bold text-white mb-4">✨ 欢迎来到我的世界</h1>
-            <p class="text-xl text-white/80 mb-12">选择你的设备，探索我的个人空间</p>
-            
-            <div class="flex flex-wrap justify-center gap-8">
-                <!-- 手机端 -->
-                <div class="cursor-pointer group" onclick="showDevice('mobile')">
-                    <div class="device-frame mobile-frame transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
-                        <div class="notch"></div>
-                        <div class="device-screen h-full flex items-center justify-center">
-                            <div class="text-center p-4">
-                                <i class="fas fa-mobile-alt text-6xl text-purple-500 mb-4"></i>
-                                <h3 class="text-xl font-bold text-gray-800">手机版</h3>
-                                <p class="text-gray-500 text-sm mt-2">随时随地查看</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 平板端 -->
-                <div class="cursor-pointer group" onclick="showDevice('tablet')">
-                    <div class="device-frame tablet-frame transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
-                        <div class="notch"></div>
-                        <div class="device-screen h-full flex items-center justify-center">
-                            <div class="text-center p-4">
-                                <i class="fas fa-tablet-alt text-6xl text-blue-500 mb-4"></i>
-                                <h3 class="text-xl font-bold text-gray-800">平板版</h3>
-                                <p class="text-gray-500 text-sm mt-2">舒适阅读体验</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 电脑端 -->
-                <div class="cursor-pointer group" onclick="showDevice('desktop')">
-                    <div class="device-frame desktop-frame transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
-                        <div class="flex gap-1.5 mb-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                        </div>
-                        <div class="device-screen h-full flex items-center justify-center">
-                            <div class="text-center p-4">
-                                <i class="fas fa-desktop text-6xl text-pink-500 mb-4"></i>
-                                <h3 class="text-xl font-bold text-gray-800">电脑版</h3>
-                                <p class="text-gray-500 text-sm mt-2">完整功能体验</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- 首页：简洁设备选择 -->
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center relative z-10">
+        <!-- 标题 -->
+        <div class="text-center mb-16 fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
+                ✨ Welcome
+            </h1>
+            <p class="text-xl text-white/80 font-light">选择设备，探索我的世界</p>
+        </div>
+        
+        <!-- 三个设备图标 -->
+        <div class="flex gap-8 md:gap-12 fade-in">
+            <div class="device-icon float" style="animation-delay: 0s" onclick="enterSite('mobile')">
+                <i class="fas fa-mobile-alt"></i>
+                <span>手机</span>
             </div>
+            
+            <div class="device-icon float" style="animation-delay: 0.5s" onclick="enterSite('tablet')">
+                <i class="fas fa-tablet-alt"></i>
+                <span>平板</span>
+            </div>
+            
+            <div class="device-icon float" style="animation-delay: 1s" onclick="enterSite('desktop')">
+                <i class="fas fa-desktop"></i>
+                <span>电脑</span>
+            </div>
+        </div>
+        
+        <!-- 提示文字 -->
+        <div class="mt-16 text-white/50 text-sm fade-in">
+            <p><i class="fas fa-volume-up mr-2"></i>进入后将自动播放背景音乐</p>
         </div>
     </section>
     
-    <!-- 个人网站内容 -->
-    <section id="portfolio" class="hidden">
+    <!-- 个人网站主体 -->
+    <section id="portfolio" class="hidden relative z-10">
         <!-- 导航栏 -->
         <nav class="fixed top-0 left-0 right-0 z-50 glass-card shadow-lg">
             <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="goHome()">
                     <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">M</div>
                     <span class="font-bold text-lg">我的主页</span>
                 </div>
@@ -338,25 +306,30 @@
                 </div>
                 
                 <div class="flex items-center gap-4">
+                    <button onclick="toggleMusic()" class="text-xl hover:scale-110 transition-transform" title="音乐开关">
+                        <i id="musicNavIcon" class="fas fa-volume-up text-purple-500"></i>
+                    </button>
                     <button onclick="toggleDarkMode()" class="text-xl hover:scale-110 transition-transform">
                         <i id="themeIcon" class="fas fa-moon"></i>
                     </button>
                     <button onclick="goHome()" class="text-sm px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
-                        <i class="fas fa-home mr-2"></i>返回
+                        <i class="fas fa-home mr-2"></i>首页
                     </button>
                 </div>
             </div>
         </nav>
         
-        <!-- 主内容 -->
         <div class="max-w-6xl mx-auto px-4 pt-24 pb-20">
             <!-- 关于我 -->
-            <section id="about" class="mb-20 slide-up">
+            <section id="about" class="mb-16 fade-in">
                 <div class="glass-card rounded-3xl p-8 md:p-12">
                     <div class="flex flex-col md:flex-row items-center gap-8">
-                        <div class="avatar" onclick="document.getElementById('avatarInput').click()">
-                            <span>✨</span>
+                        <div class="avatar-upload" onclick="document.getElementById('avatarInput').click()">
+                            <div class="w-40 h-40 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-6xl shadow-xl overflow-hidden" id="avatarContainer">
+                                <span>✨</span>
+                            </div>
                             <input type="file" id="avatarInput" class="hidden" accept="image/*" onchange="changeAvatar(event)">
+                            <p class="text-center text-sm text-gray-400 mt-2">点击更换头像</p>
                         </div>
                         
                         <div class="flex-1 text-center md:text-left">
@@ -368,7 +341,7 @@
                             </div>
                             
                             <div class="flex flex-wrap justify-center md:justify-start gap-3">
-                                <a href="https://github.com/ouyangmingyue060-ship-it" class="social-link flex items-center gap-2 text-white py-2 px-4 rounded-full text-sm">
+                                <a href="https://github.com/ouyangmingyue060-ship-it" target="_blank" class="social-link flex items-center gap-2 text-white py-2 px-4 rounded-full text-sm">
                                     <i class="fab fa-github"></i> GitHub
                                 </a>
                                 <a href="#" class="social-link flex items-center gap-2 text-white py-2 px-4 rounded-full text-sm">
@@ -387,34 +360,34 @@
             </section>
             
             <!-- 访客统计 -->
-            <section class="mb-20 slide-up">
+            <section class="mb-16 fade-in">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="stats-card">
-                        <i class="fas fa-eye text-3xl mb-2"></i>
+                        <i class="fas fa-eye text-2xl mb-2"></i>
                         <div class="text-3xl font-bold" id="viewCount">1,234</div>
-                        <div class="text-sm opacity-80">总访问量</div>
+                        <div class="text-sm opacity-80">访问量</div>
                     </div>
                     <div class="stats-card">
-                        <i class="fas fa-users text-3xl mb-2"></i>
+                        <i class="fas fa-users text-2xl mb-2"></i>
                         <div class="text-3xl font-bold">567</div>
-                        <div class="text-sm opacity-80">访客数</div>
+                        <div class="text-sm opacity-80">访客</div>
                     </div>
                     <div class="stats-card">
-                        <i class="fas fa-heart text-3xl mb-2"></i>
+                        <i class="fas fa-heart text-2xl mb-2"></i>
                         <div class="text-3xl font-bold">89</div>
-                        <div class="text-sm opacity-80">获赞数</div>
+                        <div class="text-sm opacity-80">获赞</div>
                     </div>
                     <div class="stats-card">
-                        <i class="fas fa-comment text-3xl mb-2"></i>
+                        <i class="fas fa-comment text-2xl mb-2"></i>
                         <div class="text-3xl font-bold">42</div>
-                        <div class="text-sm opacity-80">留言数</div>
+                        <div class="text-sm opacity-80">留言</div>
                     </div>
                 </div>
             </section>
             
             <!-- 技能特长 -->
-            <section id="skills" class="mb-20 slide-up">
-                <h2 class="text-3xl font-bold text-center mb-10">
+            <section id="skills" class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-8">
                     <i class="fas fa-code text-purple-500 mr-3"></i>技能特长
                 </h2>
                 
@@ -424,40 +397,20 @@
                             <h3 class="font-bold text-lg mb-4">专业技能</h3>
                             <div class="space-y-4">
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>HTML/CSS</span>
-                                        <span>90%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-fill" style="width: 90%"></div>
-                                    </div>
+                                    <div class="flex justify-between mb-1"><span>HTML/CSS</span><span>90%</span></div>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
                                 </div>
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>JavaScript</span>
-                                        <span>85%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-fill" style="width: 85%"></div>
-                                    </div>
+                                    <div class="flex justify-between mb-1"><span>JavaScript</span><span>85%</span></div>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
                                 </div>
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>Python</span>
-                                        <span>75%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-fill" style="width: 75%"></div>
-                                    </div>
+                                    <div class="flex justify-between mb-1"><span>Python</span><span>75%</span></div>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
                                 </div>
                                 <div>
-                                    <div class="flex justify-between mb-1">
-                                        <span>设计软件</span>
-                                        <span>80%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-fill" style="width: 80%"></div>
-                                    </div>
+                                    <div class="flex justify-between mb-1"><span>设计软件</span><span>80%</span></div>
+                                    <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -471,8 +424,6 @@
                                 <span class="px-4 py-2 bg-green-100 text-green-700 rounded-full">📚 阅读</span>
                                 <span class="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-full">🎵 音乐</span>
                                 <span class="px-4 py-2 bg-red-100 text-red-700 rounded-full">🍳 烹饪</span>
-                                <span class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full">💪 健身</span>
-                                <span class="px-4 py-2 bg-teal-100 text-teal-700 rounded-full">🎮 游戏</span>
                             </div>
                         </div>
                     </div>
@@ -480,8 +431,8 @@
             </section>
             
             <!-- 时间线 -->
-            <section id="timeline" class="mb-20 slide-up">
-                <h2 class="text-3xl font-bold text-center mb-10">
+            <section id="timeline" class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-8">
                     <i class="fas fa-clock text-blue-500 mr-3"></i>我的经历
                 </h2>
                 
@@ -492,59 +443,56 @@
                             <h3 class="font-bold text-lg">个人网站上线</h3>
                             <p class="text-gray-600">用 GitHub Pages 搭建了这个网站，记录生活和成长</p>
                         </div>
-                        
                         <div class="timeline-item">
                             <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm inline-block mb-2">2025</div>
                             <h3 class="font-bold text-lg">开始学习编程</h3>
                             <p class="text-gray-600">对技术产生兴趣，开始自学前端开发</p>
                         </div>
-                        
                         <div class="timeline-item">
                             <div class="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-sm inline-block mb-2">2024</div>
                             <h3 class="font-bold text-lg">大学毕业</h3>
                             <p class="text-gray-600">顺利毕业，开启了人生新篇章</p>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white px-3 py-1 rounded-full text-sm inline-block mb-2">2020</div>
-                            <h3 class="font-bold text-lg">入学</h3>
-                            <p class="text-gray-600">怀着憧憬进入大学校园</p>
                         </div>
                     </div>
                 </div>
             </section>
             
             <!-- 图片画廊 -->
-            <section id="gallery" class="mb-20 slide-up">
-                <h2 class="text-3xl font-bold text-center mb-10">
+            <section id="gallery" class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-8">
                     <i class="fas fa-images text-pink-500 mr-3"></i>精彩瞬间
                 </h2>
                 
                 <div class="glass-card rounded-3xl p-8">
+                    <!-- 上传区域 -->
+                    <div class="img-upload-zone mb-6" onclick="document.getElementById('galleryInput').click()">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-purple-400 mb-3"></i>
+                        <p class="text-gray-500">点击上传图片（支持多选）</p>
+                        <input type="file" id="galleryInput" class="hidden" accept="image/*" multiple onchange="uploadGallery(event)">
+                    </div>
+                    
+                    <!-- 图片轮播 -->
                     <div class="flex overflow-x-auto gap-4 pb-4 carousel" id="galleryCarousel">
                         <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-purple-200 to-pink-200 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-camera text-6xl text-purple-400"></i>
+                            <div class="text-center">
+                                <i class="fas fa-camera text-5xl text-purple-400 mb-2"></i>
+                                <p class="text-purple-500">示例图片</p>
+                            </div>
                         </div>
                         <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-blue-200 to-purple-200 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-image text-6xl text-blue-400"></i>
-                        </div>
-                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-pink-200 to-red-200 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-heart text-6xl text-pink-400"></i>
-                        </div>
-                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-green-200 to-teal-200 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-sun text-6xl text-green-400"></i>
-                        </div>
-                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-yellow-200 to-orange-200 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-star text-6xl text-yellow-400"></i>
+                            <div class="text-center">
+                                <i class="fas fa-image text-5xl text-blue-400 mb-2"></i>
+                                <p class="text-blue-500">上传你的照片</p>
+                            </div>
                         </div>
                     </div>
-                    <p class="text-center text-gray-500 mt-4">← 左右滑动查看更多 →</p>
+                    <p class="text-center text-gray-400 mt-4 text-sm">← 左右滑动查看更多 →</p>
                 </div>
             </section>
             
             <!-- 项目展示 -->
-            <section id="projects" class="mb-20 slide-up">
-                <h2 class="text-3xl font-bold text-center mb-10">
+            <section id="projects" class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-8">
                     <i class="fas fa-project-diagram text-green-500 mr-3"></i>我的项目
                 </h2>
                 
@@ -559,8 +507,8 @@
                                 <span class="text-sm text-gray-500">HTML • CSS • JavaScript</span>
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">你正在访问的这个网站！使用 GitHub Pages 搭建。</p>
-                        <a href="https://github.com/ouyangmingyue060-ship-it/ouyangmingyue060-ship-it.github.io" class="text-purple-500 hover:underline">
+                        <p class="text-gray-600 mb-4">你正在访问的这个网站！</p>
+                        <a href="https://github.com/ouyangmingyue060-ship-it/ouyangmingyue060-ship-it.github.io" target="_blank" class="text-purple-500 hover:underline">
                             <i class="fab fa-github mr-1"></i>查看源码
                         </a>
                     </div>
@@ -568,56 +516,63 @@
                     <div class="glass-card rounded-2xl p-6 hover:shadow-xl transition-all">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white">
-                                <i class="fas fa-code"></i>
+                                <i class="fas fa-plus"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold">更多项目</h3>
-                                <span class="text-sm text-gray-500">Coming Soon</span>
+                                <h3 class="font-bold">添加新项目</h3>
+                                <span class="text-sm text-gray-500">编辑代码添加</span>
                             </div>
                         </div>
-                        <p class="text-gray-600 mb-4">更多精彩项目正在路上，敬请期待...</p>
-                        <span class="text-gray-400">
-                            <i class="fas fa-hourglass-half mr-1"></i>开发中
-                        </span>
+                        <p class="text-gray-600">在代码中添加更多项目展示...</p>
                     </div>
                 </div>
             </section>
             
-            <!-- 背景音乐播放器 -->
-            <section class="mb-20 slide-up">
-                <h2 class="text-3xl font-bold text-center mb-10">
+            <!-- 音乐播放器 -->
+            <section class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-8">
                     <i class="fas fa-music text-yellow-500 mr-3"></i>背景音乐
                 </h2>
                 
-                <div class="flex justify-center">
-                    <div class="music-player flex items-center gap-4">
-                        <button onclick="toggleMusic()" class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
-                            <i id="musicIcon" class="fas fa-play"></i>
-                        </button>
-                        <div class="text-white">
-                            <div class="font-bold">暂无音乐</div>
-                            <div class="text-sm text-gray-400">添加音乐链接即可播放</div>
+                <div class="glass-card rounded-3xl p-8">
+                    <div class="flex justify-center">
+                        <div class="music-player flex items-center gap-4">
+                            <button onclick="toggleMusic()" class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
+                                <i id="musicIcon" class="fas fa-play"></i>
+                            </button>
+                            <div class="text-white">
+                                <div class="font-bold" id="musicTitle">正在播放</div>
+                                <div class="text-sm text-gray-400" id="musicArtist">背景音乐</div>
+                            </div>
+                            <div class="flex gap-2 ml-4">
+                                <i class="fab fa-netease-music text-xl text-white/60"></i>
+                                <i class="fab fa-qq text-xl text-white/60"></i>
+                            </div>
                         </div>
-                        <div class="flex gap-2 ml-4">
-                            <a href="#" class="text-white/60 hover:text-white"><i class="fab fa-netease-music text-xl"></i></a>
-                            <a href="#" class="text-white/60 hover:text-white"><i class="fab fa-qq text-xl"></i></a>
-                        </div>
+                    </div>
+                    
+                    <!-- 音乐导入说明 -->
+                    <div class="mt-6 p-4 bg-gray-50 rounded-xl text-sm text-gray-600">
+                        <p class="font-bold mb-2">🎵 如何导入音乐：</p>
+                        <ol class="list-decimal list-inside space-y-1">
+                            <li>将音乐文件（.mp3）上传到 GitHub 仓库</li>
+                            <li>获取文件的 Raw 链接</li>
+                            <li>修改代码中的 <code class="bg-purple-100 px-1 rounded">audio src</code></li>
+                        </ol>
                     </div>
                 </div>
             </section>
             
-            <!-- 留言评论区 -->
-            <section id="comments" class="mb-20 slide-up">
-                <h2 class="text-3xl font-bold text-center mb-10">
+            <!-- 留言区 -->
+            <section id="comments" class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-8">
                     <i class="fas fa-comments text-blue-500 mr-3"></i>访客留言
                 </h2>
                 
                 <div class="glass-card rounded-3xl p-8">
-                    <!-- 留言表单 -->
-                    <div class="mb-8">
-                        <div class="flex gap-4 mb-4">
+                    <div class="mb-6">
+                        <div class="flex flex-col md:flex-row gap-4 mb-4">
                             <input type="text" id="commentName" placeholder="你的昵称" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 transition-colors">
-                            <input type="email" id="commentEmail" placeholder="邮箱（选填）" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 transition-colors">
                         </div>
                         <textarea id="commentContent" placeholder="写下你想说的话..." rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 transition-colors resize-none"></textarea>
                         <button onclick="addComment()" class="mt-4 px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:shadow-lg transition-all">
@@ -625,7 +580,6 @@
                         </button>
                     </div>
                     
-                    <!-- 留言列表 -->
                     <div id="commentList">
                         <div class="comment-box">
                             <div class="flex items-center gap-3 mb-2">
@@ -643,38 +597,73 @@
             
             <!-- 底部 -->
             <footer class="text-center text-white/60 py-8">
-                <p>Made with 💖 by 小可爱</p>
+                <p>Made with 💖</p>
                 <p class="text-sm mt-2">© 2026 All rights reserved</p>
             </footer>
         </div>
     </section>
     
+    <!-- 隐藏的音频播放器 -->
+    <audio id="bgMusic" loop>
+        <!-- 在这里替换你的音乐链接 -->
+        <source src="" type="audio/mpeg">
+    </audio>
+    
     <script>
+        // 进入网站
+        function enterSite(device) {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('portfolio').classList.remove('hidden');
+            
+            // 自动播放音乐
+            setTimeout(() => {
+                const audio = document.getElementById('bgMusic');
+                audio.play().then(() => {
+                    isMusicPlaying = true;
+                    updateMusicIcons();
+                }).catch(err => {
+                    console.log('自动播放被阻止，需要用户交互');
+                });
+            }, 500);
+        }
+        
         // 返回首页
         function goHome() {
             document.getElementById('home').classList.remove('hidden');
             document.getElementById('portfolio').classList.add('hidden');
+            
+            // 暂停音乐
+            document.getElementById('bgMusic').pause();
         }
         
-        // 显示设备预览
-        function showDevice(device) {
-            document.getElementById('home').classList.add('hidden');
-            document.getElementById('portfolio').classList.remove('hidden');
-            
-            // 根据设备调整样式
-            const body = document.body;
-            if (device === 'mobile') {
-                body.style.maxWidth = '375px';
-                body.style.margin = '0 auto';
-            } else if (device === 'tablet') {
-                body.style.maxWidth = '768px';
-                body.style.margin = '0 auto';
+        // 音乐控制
+        let isMusicPlaying = false;
+        
+        function toggleMusic() {
+            const audio = document.getElementById('bgMusic');
+            if (isMusicPlaying) {
+                audio.pause();
             } else {
-                body.style.maxWidth = '100%';
+                audio.play();
+            }
+            isMusicPlaying = !isMusicPlaying;
+            updateMusicIcons();
+        }
+        
+        function updateMusicIcons() {
+            const icon = document.getElementById('musicIcon');
+            const navIcon = document.getElementById('musicNavIcon');
+            
+            if (isMusicPlaying) {
+                icon.classList.replace('fa-play', 'fa-pause');
+                navIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
+            } else {
+                icon.classList.replace('fa-pause', 'fa-play');
+                navIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
             }
         }
         
-        // 暗色模式切换
+        // 暗色模式
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             const icon = document.getElementById('themeIcon');
@@ -685,16 +674,33 @@
             }
         }
         
-        // 音乐播放
-        let isPlaying = false;
-        function toggleMusic() {
-            isPlaying = !isPlaying;
-            const icon = document.getElementById('musicIcon');
-            if (isPlaying) {
-                icon.classList.replace('fa-play', 'fa-pause');
-            } else {
-                icon.classList.replace('fa-pause', 'fa-play');
+        // 修改头像
+        function changeAvatar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatarContainer').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+                }
+                reader.readAsDataURL(file);
             }
+        }
+        
+        // 上传图片到画廊
+        function uploadGallery(event) {
+            const files = event.target.files;
+            const carousel = document.getElementById('galleryCarousel');
+            
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'gallery-item flex-shrink-0 w-64 h-64 rounded-2xl overflow-hidden';
+                    div.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+                    carousel.appendChild(div);
+                }
+                reader.readAsDataURL(file);
+            });
         }
         
         // 添加留言
@@ -709,12 +715,11 @@
             
             const today = new Date().toISOString().split('T')[0];
             const initial = name.charAt(0).toUpperCase();
-            
             const colors = ['from-purple-400 to-pink-400', 'from-blue-400 to-purple-400', 'from-green-400 to-teal-400'];
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             
             const commentHtml = `
-                <div class="comment-box slide-up">
+                <div class="comment-box fade-in">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-10 h-10 bg-gradient-to-r ${randomColor} rounded-full flex items-center justify-center text-white font-bold">${initial}</div>
                         <div>
@@ -727,45 +732,27 @@
             `;
             
             document.getElementById('commentList').insertAdjacentHTML('afterbegin', commentHtml);
-            
-            // 清空表单
             document.getElementById('commentName').value = '';
-            document.getElementById('commentEmail').value = '';
             document.getElementById('commentContent').value = '';
-        }
-        
-        // 修改头像
-        function changeAvatar(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.querySelector('.avatar').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
-                }
-                reader.readAsDataURL(file);
-            }
         }
         
         // 平滑滚动
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-            
-            // 更新导航状态
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             event.target.classList.add('active');
         }
         
-        // 模拟访客计数增加
+        // 访客计数动画
         let viewCount = 1234;
         setInterval(() => {
             viewCount += Math.floor(Math.random() * 3);
             document.getElementById('viewCount').textContent = viewCount.toLocaleString();
         }, 5000);
         
-        // 简单的粒子效果
+        // 粒子效果
         function createParticles() {
             const canvas = document.createElement('canvas');
-            canvas.id = 'particleCanvas';
             document.getElementById('particles-js').appendChild(canvas);
             const ctx = canvas.getContext('2d');
             
@@ -778,8 +765,8 @@
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
                     size: Math.random() * 3 + 1,
-                    speedX: Math.random() * 2 - 1,
-                    speedY: Math.random() * 2 - 1,
+                    speedX: Math.random() * 1 - 0.5,
+                    speedY: Math.random() * 1 - 0.5,
                     opacity: Math.random() * 0.5 + 0.2
                 });
             }
