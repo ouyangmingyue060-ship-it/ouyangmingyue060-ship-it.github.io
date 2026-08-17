@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
+    <title>我的个人主页 | My Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+        }
+        
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #2b2d42 100%);
+            background-size: 400% 400%;
         }
         
         @keyframes gradient {
@@ -18,28 +37,40 @@
             100% { background-position: 0% 50%; }
         }
         
-        .card {
+        .glass-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode .glass-card {
+            background: rgba(30, 30, 50, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
+            font-size: 64px;
             color: white;
             border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05) rotate(5deg);
         }
         
         .social-link {
             transition: all 0.3s ease;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
         
         .social-link:hover {
@@ -55,74 +86,732 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .device-frame {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .device-screen {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .mobile-frame {
+            width: 280px;
+            height: 500px;
+        }
+        
+        .tablet-frame {
+            width: 480px;
+            height: 640px;
+        }
+        
+        .desktop-frame {
+            width: 800px;
+            height: 500px;
+        }
+        
+        .notch {
+            width: 60px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            margin: 8px auto;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .music-player {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 50px;
+            padding: 15px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .comment-box {
+            background: rgba(255,255,255,0.5);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .dark-mode .comment-box {
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .nav-link {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .carousel {
+            scroll-behavior: smooth;
+        }
+        
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+        
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
-    <div class="card rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl fade-in">
-        <!-- 头像占位区 -->
-        <div class="flex justify-center mb-6">
-            <div class="avatar">
-                <span>✨</span>
+<body class="min-h-screen">
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+    
+    <!-- 主页：设备选择 -->
+    <section id="home" class="min-h-screen flex items-center justify-center p-8">
+        <div class="text-center fade-in">
+            <h1 class="text-5xl font-bold text-white mb-4">✨ 欢迎来到我的世界</h1>
+            <p class="text-xl text-white/80 mb-12">选择你的设备，探索我的个人空间</p>
+            
+            <div class="flex flex-wrap justify-center gap-8">
+                <!-- 手机端 -->
+                <div class="cursor-pointer group" onclick="showDevice('mobile')">
+                    <div class="device-frame mobile-frame transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                        <div class="notch"></div>
+                        <div class="device-screen h-full flex items-center justify-center">
+                            <div class="text-center p-4">
+                                <i class="fas fa-mobile-alt text-6xl text-purple-500 mb-4"></i>
+                                <h3 class="text-xl font-bold text-gray-800">手机版</h3>
+                                <p class="text-gray-500 text-sm mt-2">随时随地查看</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 平板端 -->
+                <div class="cursor-pointer group" onclick="showDevice('tablet')">
+                    <div class="device-frame tablet-frame transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                        <div class="notch"></div>
+                        <div class="device-screen h-full flex items-center justify-center">
+                            <div class="text-center p-4">
+                                <i class="fas fa-tablet-alt text-6xl text-blue-500 mb-4"></i>
+                                <h3 class="text-xl font-bold text-gray-800">平板版</h3>
+                                <p class="text-gray-500 text-sm mt-2">舒适阅读体验</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 电脑端 -->
+                <div class="cursor-pointer group" onclick="showDevice('desktop')">
+                    <div class="device-frame desktop-frame transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                        <div class="flex gap-1.5 mb-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="device-screen h-full flex items-center justify-center">
+                            <div class="text-center p-4">
+                                <i class="fas fa-desktop text-6xl text-pink-500 mb-4"></i>
+                                <h3 class="text-xl font-bold text-gray-800">电脑版</h3>
+                                <p class="text-gray-500 text-sm mt-2">完整功能体验</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
+    
+    <!-- 个人网站内容 -->
+    <section id="portfolio" class="hidden">
+        <!-- 导航栏 -->
+        <nav class="fixed top-0 left-0 right-0 z-50 glass-card shadow-lg">
+            <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">M</div>
+                    <span class="font-bold text-lg">我的主页</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-6">
+                    <a class="nav-link active" onclick="scrollToSection('about')">关于我</a>
+                    <a class="nav-link" onclick="scrollToSection('skills')">技能</a>
+                    <a class="nav-link" onclick="scrollToSection('timeline')">经历</a>
+                    <a class="nav-link" onclick="scrollToSection('gallery')">相册</a>
+                    <a class="nav-link" onclick="scrollToSection('projects')">项目</a>
+                    <a class="nav-link" onclick="scrollToSection('comments')">留言</a>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleDarkMode()" class="text-xl hover:scale-110 transition-transform">
+                        <i id="themeIcon" class="fas fa-moon"></i>
+                    </button>
+                    <button onclick="goHome()" class="text-sm px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
+                        <i class="fas fa-home mr-2"></i>返回
+                    </button>
+                </div>
+            </div>
+        </nav>
         
-        <!-- 个人简介 -->
-        <div class="text-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">
-                你好，我是小可爱 ✨
-            </h1>
-            <p class="text-gray-600 leading-relaxed">
-                26岁 | 热爱生活 | 追求美好<br>
-                分享日常、穿搭、生活灵感
-            </p>
-        </div>
-        
-        <!-- 一句话签名 -->
-        <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-4 mb-6 text-center">
-            <p class="text-sm text-gray-600 italic">
-                "保持热爱，奔赴山海 🌊"
-            </p>
-        </div>
-        
-        <!-- 社交媒体链接 -->
-        <div class="space-y-3">
-            <a href="https://github.com/ouyangmingyue060-ship-it" 
-               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-            </a>
+        <!-- 主内容 -->
+        <div class="max-w-6xl mx-auto px-4 pt-24 pb-20">
+            <!-- 关于我 -->
+            <section id="about" class="mb-20 slide-up">
+                <div class="glass-card rounded-3xl p-8 md:p-12">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="avatar" onclick="document.getElementById('avatarInput').click()">
+                            <span>✨</span>
+                            <input type="file" id="avatarInput" class="hidden" accept="image/*" onchange="changeAvatar(event)">
+                        </div>
+                        
+                        <div class="flex-1 text-center md:text-left">
+                            <h1 class="text-4xl font-bold mb-2">你好，我是小可爱 ✨</h1>
+                            <p class="text-xl text-purple-500 mb-4">热爱生活 · 追求美好 · 分享日常</p>
+                            
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-4 mb-6 inline-block">
+                                <p class="text-gray-600 italic">"保持热爱，奔赴山海 🌊"</p>
+                            </div>
+                            
+                            <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                                <a href="https://github.com/ouyangmingyue060-ship-it" class="social-link flex items-center gap-2 text-white py-2 px-4 rounded-full text-sm">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                                <a href="#" class="social-link flex items-center gap-2 text-white py-2 px-4 rounded-full text-sm">
+                                    <i class="fab fa-weibo"></i> 微博
+                                </a>
+                                <a href="#" class="social-link flex items-center gap-2 text-white py-2 px-4 rounded-full text-sm">
+                                    <i class="fab fa-weixin"></i> 微信
+                                </a>
+                                <a href="mailto:your-email@example.com" class="social-link flex items-center gap-2 text-white py-2 px-4 rounded-full text-sm">
+                                    <i class="fas fa-envelope"></i> 邮箱
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
-            <a href="https://www.xiaohongshu.com" 
-               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-                小红书
-            </a>
+            <!-- 访客统计 -->
+            <section class="mb-20 slide-up">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="stats-card">
+                        <i class="fas fa-eye text-3xl mb-2"></i>
+                        <div class="text-3xl font-bold" id="viewCount">1,234</div>
+                        <div class="text-sm opacity-80">总访问量</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-users text-3xl mb-2"></i>
+                        <div class="text-3xl font-bold">567</div>
+                        <div class="text-sm opacity-80">访客数</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-heart text-3xl mb-2"></i>
+                        <div class="text-3xl font-bold">89</div>
+                        <div class="text-sm opacity-80">获赞数</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-comment text-3xl mb-2"></i>
+                        <div class="text-3xl font-bold">42</div>
+                        <div class="text-sm opacity-80">留言数</div>
+                    </div>
+                </div>
+            </section>
             
-            <a href="https://weibo.com" 
-               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.194 14.197c0 3.314-4.174 6.003-9.318 6.003-5.145 0-9.318-2.689-9.318-6.003 0-3.314 4.173-6.003 9.318-6.003 5.144 0 9.318 2.689 9.318 6.003zM10.876 4.836c-3.277.256-5.836 2.452-5.836 5.094 0 1.46.68 2.84 1.824 3.916-.196.55-.372 1.1-.528 1.65-.34 1.18-.594 2.38-.794 3.59 2.2-.89 4.19-2.13 5.84-3.61.94.27 1.93.42 2.95.42 5.14 0 9.32-2.69 9.32-6.01 0-3.31-4.18-6-9.32-6.01-.62 0-1.23.04-1.83.11-.44-.99-1.13-1.82-2-2.44-.31-.22-.66-.4-1.02-.55-.49-.21-1.01-.35-1.55-.42-.24-.03-.48-.05-.73-.06l-.34-.01z"/>
-                </svg>
-                微博
-            </a>
+            <!-- 技能特长 -->
+            <section id="skills" class="mb-20 slide-up">
+                <h2 class="text-3xl font-bold text-center mb-10">
+                    <i class="fas fa-code text-purple-500 mr-3"></i>技能特长
+                </h2>
+                
+                <div class="glass-card rounded-3xl p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-bold text-lg mb-4">专业技能</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>HTML/CSS</span>
+                                        <span>90%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>JavaScript</span>
+                                        <span>85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>Python</span>
+                                        <span>75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>设计软件</span>
+                                        <span>80%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-bold text-lg mb-4">兴趣爱好</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-4 py-2 bg-purple-100 text-purple-700 rounded-full">📷 摄影</span>
+                                <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full">🎨 设计</span>
+                                <span class="px-4 py-2 bg-pink-100 text-pink-700 rounded-full">✈️ 旅行</span>
+                                <span class="px-4 py-2 bg-green-100 text-green-700 rounded-full">📚 阅读</span>
+                                <span class="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-full">🎵 音乐</span>
+                                <span class="px-4 py-2 bg-red-100 text-red-700 rounded-full">🍳 烹饪</span>
+                                <span class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full">💪 健身</span>
+                                <span class="px-4 py-2 bg-teal-100 text-teal-700 rounded-full">🎮 游戏</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
-            <a href="mailto:your-email@example.com" 
-               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-                联系我
-            </a>
+            <!-- 时间线 -->
+            <section id="timeline" class="mb-20 slide-up">
+                <h2 class="text-3xl font-bold text-center mb-10">
+                    <i class="fas fa-clock text-blue-500 mr-3"></i>我的经历
+                </h2>
+                
+                <div class="glass-card rounded-3xl p-8">
+                    <div class="space-y-8">
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm inline-block mb-2">2026</div>
+                            <h3 class="font-bold text-lg">个人网站上线</h3>
+                            <p class="text-gray-600">用 GitHub Pages 搭建了这个网站，记录生活和成长</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm inline-block mb-2">2025</div>
+                            <h3 class="font-bold text-lg">开始学习编程</h3>
+                            <p class="text-gray-600">对技术产生兴趣，开始自学前端开发</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-1 rounded-full text-sm inline-block mb-2">2024</div>
+                            <h3 class="font-bold text-lg">大学毕业</h3>
+                            <p class="text-gray-600">顺利毕业，开启了人生新篇章</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white px-3 py-1 rounded-full text-sm inline-block mb-2">2020</div>
+                            <h3 class="font-bold text-lg">入学</h3>
+                            <p class="text-gray-600">怀着憧憬进入大学校园</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 图片画廊 -->
+            <section id="gallery" class="mb-20 slide-up">
+                <h2 class="text-3xl font-bold text-center mb-10">
+                    <i class="fas fa-images text-pink-500 mr-3"></i>精彩瞬间
+                </h2>
+                
+                <div class="glass-card rounded-3xl p-8">
+                    <div class="flex overflow-x-auto gap-4 pb-4 carousel" id="galleryCarousel">
+                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-purple-200 to-pink-200 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-camera text-6xl text-purple-400"></i>
+                        </div>
+                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-blue-200 to-purple-200 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-image text-6xl text-blue-400"></i>
+                        </div>
+                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-pink-200 to-red-200 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-heart text-6xl text-pink-400"></i>
+                        </div>
+                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-green-200 to-teal-200 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-sun text-6xl text-green-400"></i>
+                        </div>
+                        <div class="gallery-item flex-shrink-0 w-64 h-64 bg-gradient-to-br from-yellow-200 to-orange-200 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-star text-6xl text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <p class="text-center text-gray-500 mt-4">← 左右滑动查看更多 →</p>
+                </div>
+            </section>
+            
+            <!-- 项目展示 -->
+            <section id="projects" class="mb-20 slide-up">
+                <h2 class="text-3xl font-bold text-center mb-10">
+                    <i class="fas fa-project-diagram text-green-500 mr-3"></i>我的项目
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass-card rounded-2xl p-6 hover:shadow-xl transition-all">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold">个人网站</h3>
+                                <span class="text-sm text-gray-500">HTML • CSS • JavaScript</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">你正在访问的这个网站！使用 GitHub Pages 搭建。</p>
+                        <a href="https://github.com/ouyangmingyue060-ship-it/ouyangmingyue060-ship-it.github.io" class="text-purple-500 hover:underline">
+                            <i class="fab fa-github mr-1"></i>查看源码
+                        </a>
+                    </div>
+                    
+                    <div class="glass-card rounded-2xl p-6 hover:shadow-xl transition-all">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold">更多项目</h3>
+                                <span class="text-sm text-gray-500">Coming Soon</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">更多精彩项目正在路上，敬请期待...</p>
+                        <span class="text-gray-400">
+                            <i class="fas fa-hourglass-half mr-1"></i>开发中
+                        </span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 背景音乐播放器 -->
+            <section class="mb-20 slide-up">
+                <h2 class="text-3xl font-bold text-center mb-10">
+                    <i class="fas fa-music text-yellow-500 mr-3"></i>背景音乐
+                </h2>
+                
+                <div class="flex justify-center">
+                    <div class="music-player flex items-center gap-4">
+                        <button onclick="toggleMusic()" class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
+                            <i id="musicIcon" class="fas fa-play"></i>
+                        </button>
+                        <div class="text-white">
+                            <div class="font-bold">暂无音乐</div>
+                            <div class="text-sm text-gray-400">添加音乐链接即可播放</div>
+                        </div>
+                        <div class="flex gap-2 ml-4">
+                            <a href="#" class="text-white/60 hover:text-white"><i class="fab fa-netease-music text-xl"></i></a>
+                            <a href="#" class="text-white/60 hover:text-white"><i class="fab fa-qq text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 留言评论区 -->
+            <section id="comments" class="mb-20 slide-up">
+                <h2 class="text-3xl font-bold text-center mb-10">
+                    <i class="fas fa-comments text-blue-500 mr-3"></i>访客留言
+                </h2>
+                
+                <div class="glass-card rounded-3xl p-8">
+                    <!-- 留言表单 -->
+                    <div class="mb-8">
+                        <div class="flex gap-4 mb-4">
+                            <input type="text" id="commentName" placeholder="你的昵称" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 transition-colors">
+                            <input type="email" id="commentEmail" placeholder="邮箱（选填）" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 transition-colors">
+                        </div>
+                        <textarea id="commentContent" placeholder="写下你想说的话..." rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 transition-colors resize-none"></textarea>
+                        <button onclick="addComment()" class="mt-4 px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:shadow-lg transition-all">
+                            <i class="fas fa-paper-plane mr-2"></i>发表留言
+                        </button>
+                    </div>
+                    
+                    <!-- 留言列表 -->
+                    <div id="commentList">
+                        <div class="comment-box">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                                <div>
+                                    <div class="font-bold">匿名访客</div>
+                                    <div class="text-xs text-gray-400">2026-08-17</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">网站很漂亮！加油！✨</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 底部 -->
+            <footer class="text-center text-white/60 py-8">
+                <p>Made with 💖 by 小可爱</p>
+                <p class="text-sm mt-2">© 2026 All rights reserved</p>
+            </footer>
         </div>
+    </section>
+    
+    <script>
+        // 返回首页
+        function goHome() {
+            document.getElementById('home').classList.remove('hidden');
+            document.getElementById('portfolio').classList.add('hidden');
+        }
         
-        <!-- 底部装饰 -->
-        <div class="mt-8 text-center text-xs text-gray-400">
-            <p>Made with 💖</p>
-        </div>
-    </div>
+        // 显示设备预览
+        function showDevice(device) {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('portfolio').classList.remove('hidden');
+            
+            // 根据设备调整样式
+            const body = document.body;
+            if (device === 'mobile') {
+                body.style.maxWidth = '375px';
+                body.style.margin = '0 auto';
+            } else if (device === 'tablet') {
+                body.style.maxWidth = '768px';
+                body.style.margin = '0 auto';
+            } else {
+                body.style.maxWidth = '100%';
+            }
+        }
+        
+        // 暗色模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+        
+        // 音乐播放
+        let isPlaying = false;
+        function toggleMusic() {
+            isPlaying = !isPlaying;
+            const icon = document.getElementById('musicIcon');
+            if (isPlaying) {
+                icon.classList.replace('fa-play', 'fa-pause');
+            } else {
+                icon.classList.replace('fa-pause', 'fa-play');
+            }
+        }
+        
+        // 添加留言
+        function addComment() {
+            const name = document.getElementById('commentName').value || '匿名访客';
+            const content = document.getElementById('commentContent').value;
+            
+            if (!content.trim()) {
+                alert('请输入留言内容！');
+                return;
+            }
+            
+            const today = new Date().toISOString().split('T')[0];
+            const initial = name.charAt(0).toUpperCase();
+            
+            const colors = ['from-purple-400 to-pink-400', 'from-blue-400 to-purple-400', 'from-green-400 to-teal-400'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            const commentHtml = `
+                <div class="comment-box slide-up">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 bg-gradient-to-r ${randomColor} rounded-full flex items-center justify-center text-white font-bold">${initial}</div>
+                        <div>
+                            <div class="font-bold">${name}</div>
+                            <div class="text-xs text-gray-400">${today}</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">${content}</p>
+                </div>
+            `;
+            
+            document.getElementById('commentList').insertAdjacentHTML('afterbegin', commentHtml);
+            
+            // 清空表单
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentEmail').value = '';
+            document.getElementById('commentContent').value = '';
+        }
+        
+        // 修改头像
+        function changeAvatar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('.avatar').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-full">`;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // 平滑滚动
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            
+            // 更新导航状态
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        // 模拟访客计数增加
+        let viewCount = 1234;
+        setInterval(() => {
+            viewCount += Math.floor(Math.random() * 3);
+            document.getElementById('viewCount').textContent = viewCount.toLocaleString();
+        }, 5000);
+        
+        // 简单的粒子效果
+        function createParticles() {
+            const canvas = document.createElement('canvas');
+            canvas.id = 'particleCanvas';
+            document.getElementById('particles-js').appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: Math.random() * 2 - 1,
+                    speedY: Math.random() * 2 - 1,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    
+                    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        createParticles();
+    </script>
 </body>
 </html>
