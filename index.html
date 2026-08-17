@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .social-link {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="card rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl fade-in">
+        <!-- 头像占位区 -->
+        <div class="flex justify-center mb-6">
+            <div class="avatar">
+                <span>✨</span>
+            </div>
+        </div>
+        
+        <!-- 个人简介 -->
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                你好，我是小可爱 ✨
+            </h1>
+            <p class="text-gray-600 leading-relaxed">
+                26岁 | 热爱生活 | 追求美好<br>
+                分享日常、穿搭、生活灵感
+            </p>
+        </div>
+        
+        <!-- 一句话签名 -->
+        <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-4 mb-6 text-center">
+            <p class="text-sm text-gray-600 italic">
+                "保持热爱，奔赴山海 🌊"
+            </p>
+        </div>
+        
+        <!-- 社交媒体链接 -->
+        <div class="space-y-3">
+            <a href="https://github.com/ouyangmingyue060-ship-it" 
+               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>
+            
+            <a href="https://www.xiaohongshu.com" 
+               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                小红书
+            </a>
+            
+            <a href="https://weibo.com" 
+               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.194 14.197c0 3.314-4.174 6.003-9.318 6.003-5.145 0-9.318-2.689-9.318-6.003 0-3.314 4.173-6.003 9.318-6.003 5.144 0 9.318 2.689 9.318 6.003zM10.876 4.836c-3.277.256-5.836 2.452-5.836 5.094 0 1.46.68 2.84 1.824 3.916-.196.55-.372 1.1-.528 1.65-.34 1.18-.594 2.38-.794 3.59 2.2-.89 4.19-2.13 5.84-3.61.94.27 1.93.42 2.95.42 5.14 0 9.32-2.69 9.32-6.01 0-3.31-4.18-6-9.32-6.01-.62 0-1.23.04-1.83.11-.44-.99-1.13-1.82-2-2.44-.31-.22-.66-.4-1.02-.55-.49-.21-1.01-.35-1.55-.42-.24-.03-.48-.05-.73-.06l-.34-.01z"/>
+                </svg>
+                微博
+            </a>
+            
+            <a href="mailto:your-email@example.com" 
+               class="social-link flex items-center justify-center gap-3 text-white py-3 px-6 rounded-xl font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                联系我
+            </a>
+        </div>
+        
+        <!-- 底部装饰 -->
+        <div class="mt-8 text-center text-xs text-gray-400">
+            <p>Made with 💖</p>
+        </div>
+    </div>
+</body>
+</html>
