@@ -1,22 +1,41 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的生活轨迹</title>
+    <title>My Life Journey ✨</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 艺术字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
-        
         * {
-            font-family: 'Noto Sans SC', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        /* 字体设置 */
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-script {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .font-body {
+            font-family: 'Quicksand', 'Poppins', sans-serif;
+        }
+        
+        .font-cn {
+            font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
         body {
+            font-family: 'Quicksand', 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
@@ -34,46 +53,49 @@
         }
         
         .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         }
         
         .dark-mode .glass-card {
-            background: rgba(30, 30, 50, 0.9);
+            background: rgba(30, 30, 50, 0.92);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* 设备图标 */
         .device-icon {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 28px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: white;
         }
         
         .device-icon:hover {
-            transform: translateY(-10px) scale(1.1);
-            background: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-15px) scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
         
         .device-icon i {
-            font-size: 36px;
-            margin-bottom: 8px;
+            font-size: 40px;
+            margin-bottom: 10px;
         }
         
         .device-icon span {
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
         
         .float {
@@ -85,44 +107,43 @@
             50% { transform: translateY(-20px); }
         }
         
-        /* 朋友圈样式 */
+        /* 朋友圈卡片 */
         .moments-card {
             background: white;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+        
+        .moments-card:hover {
+            transform: translateY(-2px);
         }
         
         .dark-mode .moments-card {
             background: #2a2a3e;
         }
         
-        .moments-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        
         .moments-avatar {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-            font-size: 18px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            font-weight: 700;
             flex-shrink: 0;
         }
         
         .moments-images {
             display: grid;
-            gap: 4px;
-            margin-top: 12px;
+            gap: 6px;
+            margin-top: 14px;
         }
         
         .moments-images.grid-1 { grid-template-columns: 1fr; }
@@ -134,20 +155,20 @@
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.3s;
         }
         
         .moments-img:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
         
         .moments-actions {
             display: flex;
             justify-content: space-around;
-            margin-top: 12px;
-            padding-top: 12px;
+            margin-top: 14px;
+            padding-top: 14px;
             border-top: 1px solid #f0f0f0;
         }
         
@@ -158,28 +179,30 @@
         .moments-action {
             display: flex;
             align-items: center;
-            gap: 6px;
-            color: #666;
+            gap: 8px;
+            color: #888;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: all 0.2s;
             font-size: 14px;
+            font-weight: 500;
         }
         
         .moments-action:hover {
             color: #667eea;
+            transform: scale(1.05);
         }
         
         .moments-action.liked {
             color: #e74c3c;
         }
         
-        /* 打卡样式 */
+        /* 打卡卡片 */
         .checkin-card {
             background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         
         .dark-mode .checkin-card {
@@ -189,42 +212,45 @@
         .streak-badge {
             background: linear-gradient(135deg, #f093fb, #f5576c);
             color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
         }
         
         .checkin-btn {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 12px 32px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: 0.5px;
         }
         
         .checkin-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
         }
         
         .checkin-btn:disabled {
-            background: #ccc;
+            background: linear-gradient(135deg, #a0a0a0, #808080);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
         
+        /* 日历 */
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -239,34 +265,33 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
         
         .calendar-day.today {
-            border: 2px solid #667eea;
+            border: 3px solid #667eea;
+            font-weight: 700;
         }
         
         .calendar-day.checked {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-        }
-        
-        .calendar-day.missed {
-            background: #fee2e2;
-            color: #ef4444;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
         }
         
         .calendar-day.future {
-            color: #ccc;
+            color: #ddd;
         }
         
+        /* 历史记录 */
         .history-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f5f5f5;
         }
         
         .dark-mode .history-item {
@@ -274,56 +299,53 @@
         }
         
         .history-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 18px;
         }
         
         .history-icon.success {
-            background: #dcfce7;
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
             color: #22c55e;
         }
         
-        .history-icon.missed {
-            background: #fee2e2;
-            color: #ef4444;
-        }
-        
-        /* 导航栏 */
+        /* 导航 */
         .nav-link {
             position: relative;
             cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.2s;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         .nav-link:hover,
         .nav-link.active {
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(102, 126, 234, 0.15);
             color: #667eea;
         }
         
         .fade-in {
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn 0.6s ease-out;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 发布朋友圈输入框 */
+        /* 发布框 */
         .publish-box {
             background: white;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
         
         .dark-mode .publish-box {
@@ -336,49 +358,67 @@
             outline: none;
             resize: none;
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.7;
             min-height: 80px;
-        }
-        
-        .publish-images {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 12px;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .publish-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
+            width: 85px;
+            height: 85px;
+            border-radius: 10px;
             object-fit: cover;
         }
         
         .add-img-btn {
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
             border: 2px dashed #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
-            color: #999;
+            transition: all 0.3s;
+            color: #bbb;
         }
         
         .add-img-btn:hover {
             border-color: #667eea;
             color: #667eea;
+            transform: scale(1.05);
         }
         
-        /* 进度条 */
-        .progress-ring {
-            transform: rotate(-90deg);
+        /* 中文翻译样式 */
+        .cn-trans {
+            font-size: 12px;
+            color: #999;
+            font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+            margin-top: 2px;
         }
         
-        .progress-ring circle {
-            transition: stroke-dashoffset 0.3s;
+        .dark-mode .cn-trans {
+            color: #777;
+        }
+        
+        .cn-small {
+            font-size: 11px;
+            color: #aaa;
+            font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+        }
+        
+        /* 标题装饰 */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title .icon {
+            font-size: 32px;
         }
         
         /* 响应式 */
@@ -390,62 +430,96 @@
             .calendar-day {
                 font-size: 12px;
             }
+            
+            .section-title {
+                font-size: 22px;
+            }
+        }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(102, 126, 234, 0.5);
         }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- 首页 -->
+    
+    <!-- ========== Landing Page ========== -->
     <section id="home" class="min-h-screen flex flex-col items-center justify-center p-8">
         <div class="text-center mb-16 fade-in">
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
-                🌟 我的生活轨迹
+            <h1 class="font-script text-7xl md:text-9xl text-white mb-4 drop-shadow-lg" style="text-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                My Life Journey
             </h1>
-            <p class="text-xl text-white/80 font-light">记录每一天的美好</p>
+            <p class="font-display text-xl md:text-2xl text-white/90 font-light italic">
+                "Cherish every moment, embrace every sunrise"
+            </p>
+            <p class="cn-trans text-white/60 mt-2 text-base">珍惜每一刻，拥抱每一个日出</p>
         </div>
         
-        <div class="flex gap-8 md:gap-12 fade-in">
+        <div class="flex gap-8 md:gap-14 fade-in">
             <div class="device-icon float" style="animation-delay: 0s" onclick="enterSite('mobile')">
                 <i class="fas fa-mobile-alt"></i>
-                <span>手机</span>
+                <span>Mobile</span>
             </div>
             <div class="device-icon float" style="animation-delay: 0.5s" onclick="enterSite('tablet')">
                 <i class="fas fa-tablet-alt"></i>
-                <span>平板</span>
+                <span>Tablet</span>
             </div>
             <div class="device-icon float" style="animation-delay: 1s" onclick="enterSite('desktop')">
                 <i class="fas fa-desktop"></i>
-                <span>电脑</span>
+                <span>Desktop</span>
             </div>
+        </div>
+        
+        <div class="mt-20 text-white/40 text-sm fade-in font-body">
+            <i class="fas fa-volume-up mr-2"></i>
+            Music will autoplay after entering
+            <span class="cn-small ml-2">进入后自动播放音乐</span>
         </div>
     </section>
     
-    <!-- 主站内容 -->
-    <section id="main" class="hidden relative z-10">
-        <!-- 导航栏 -->
+    <!-- ========== Main Content ========== -->
+    <section id="main" class="hidden relative z-10 min-h-screen">
+        <!-- Navbar -->
         <nav class="fixed top-0 left-0 right-0 z-50 glass-card shadow-lg">
             <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="goHome()">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white">
                         <i class="fas fa-star"></i>
                     </div>
-                    <span class="font-bold text-lg">我的轨迹</span>
+                    <span class="font-script text-2xl font-bold">My Journey</span>
                 </div>
                 
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-3">
                     <button class="nav-link active" onclick="switchTab('life')">
-                        <i class="fas fa-heart mr-1"></i>生活
+                        <i class="fas fa-heart mr-2"></i>Life
+                        <span class="cn-small ml-1">生活</span>
                     </button>
                     <button class="nav-link" onclick="switchTab('study')">
-                        <i class="fas fa-book mr-1"></i>学习
+                        <i class="fas fa-book mr-2"></i>Study
+                        <span class="cn-small ml-1">学习</span>
                     </button>
                 </div>
                 
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleDarkMode()" class="text-xl hover:scale-110 transition-transform">
+                    <button onclick="toggleDarkMode()" class="text-xl hover:scale-110 transition-transform p-2">
                         <i id="themeIcon" class="fas fa-moon"></i>
                     </button>
-                    <button onclick="goHome()" class="text-sm px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
-                        <i class="fas fa-home mr-1"></i>
+                    <button onclick="goHome()" class="text-sm px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all font-semibold">
+                        <i class="fas fa-home mr-2"></i>Home
                     </button>
                 </div>
             </div>
@@ -453,228 +527,252 @@
         
         <div class="max-w-4xl mx-auto px-4 pt-20 pb-20">
             
-            <!-- ========== 生活部分（朋友圈） ========== -->
+            <!-- ========== Life Tab (Moments) ========== -->
             <div id="lifeTab" class="fade-in">
-                <!-- 用户信息头部 -->
+                <!-- Profile Header -->
                 <div class="glass-card rounded-2xl p-6 mb-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-3xl shadow-lg">
+                    <div class="flex items-center gap-5">
+                        <div class="w-24 h-24 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-4xl shadow-lg font-script">
                             ✨
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold">小可爱</h2>
-                            <p class="text-gray-500">保持热爱，奔赴山海 🌊</p>
+                            <h2 class="font-script text-3xl font-bold">Little Cutie</h2>
+                            <p class="text-gray-500 font-display italic text-lg mt-1">
+                                "Stay passionate, chase the horizon"
+                            </p>
+                            <p class="cn-small mt-1">保持热爱，奔赴山海</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- 发布新动态 -->
+                <!-- New Post Box -->
                 <div class="publish-box">
-                    <textarea id="newPost" class="publish-input dark-mode:text-white" placeholder="分享你的生活点滴..."></textarea>
+                    <textarea id="newPost" class="publish-input dark-mode:text-white" placeholder="Share your moments... 分享你的生活..."></textarea>
                     
-                    <div id="previewImages" class="publish-images hidden"></div>
+                    <div id="previewImages" class="flex gap-2 flex-wrap mt-3 hidden"></div>
                     
                     <div class="flex justify-between items-center mt-4">
-                        <div class="flex gap-3">
-                            <label class="cursor-pointer text-gray-400 hover:text-purple-500 transition-colors">
+                        <div class="flex gap-4">
+                            <label class="cursor-pointer text-gray-400 hover:text-purple-500 transition-colors" title="Add Photos 添加照片">
                                 <i class="fas fa-camera text-xl"></i>
                                 <input type="file" id="postImages" class="hidden" accept="image/*" multiple onchange="previewPostImages(event)">
                             </label>
-                            <label class="cursor-pointer text-gray-400 hover:text-purple-500 transition-colors">
+                            <label class="cursor-pointer text-gray-400 hover:text-purple-500 transition-colors" title="Add Location 添加位置">
                                 <i class="fas fa-map-marker-alt text-xl"></i>
                             </label>
-                            <label class="cursor-pointer text-gray-400 hover:text-purple-500 transition-colors">
-                                <i class="fas fa-smile text-xl"></i>
-                            </label>
                         </div>
-                        <button onclick="publishPost()" class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all">
-                            发布
+                        <button onclick="publishPost()" class="px-8 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:shadow-lg transition-all">
+                            <i class="fas fa-paper-plane mr-2"></i>Publish
                         </button>
                     </div>
                 </div>
                 
-                <!-- 朋友圈动态列表 -->
-                <div id="momentsList">
-                    <!-- 动态会在这里动态生成 -->
-                </div>
+                <!-- Moments Feed -->
+                <div id="momentsList"></div>
             </div>
             
-            <!-- ========== 学习部分 ========== -->
+            <!-- ========== Study Tab ========== -->
             <div id="studyTab" class="hidden fade-in">
-                <!-- 学习统计卡片 -->
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="glass-card rounded-2xl p-5 text-center">
-                        <div class="text-3xl mb-2">📚</div>
-                        <div class="text-2xl font-bold text-purple-600" id="totalEnglish">0</div>
-                        <div class="text-sm text-gray-500">英语打卡天数</div>
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-2 gap-5 mb-8">
+                    <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-transform">
+                        <div class="text-4xl mb-3">📚</div>
+                        <div class="font-display text-3xl font-bold text-purple-600" id="totalEnglish">0</div>
+                        <div class="font-semibold text-gray-600">English Days</div>
+                        <div class="cn-small">英语打卡天数</div>
                     </div>
-                    <div class="glass-card rounded-2xl p-5 text-center">
-                        <div class="text-3xl mb-2">🎸</div>
-                        <div class="text-2xl font-bold text-pink-600" id="totalMusic">0</div>
-                        <div class="text-sm text-gray-500">乐器练习天数</div>
+                    <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-transform">
+                        <div class="text-4xl mb-3">🎸</div>
+                        <div class="font-display text-3xl font-bold text-pink-600" id="totalMusic">0</div>
+                        <div class="font-semibold text-gray-600">Music Days</div>
+                        <div class="cn-small">乐器练习天数</div>
                     </div>
                 </div>
                 
-                <!-- 英语学习 -->
+                <!-- English Learning Section -->
                 <div class="checkin-card">
-                    <div class="flex justify-between items-start mb-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                         <div>
-                            <h3 class="text-xl font-bold flex items-center gap-2">
-                                <span class="text-2xl">📚</span> 英语学习
+                            <h3 class="section-title">
+                                <span class="icon">📚</span> English Learning
                             </h3>
-                            <p class="text-gray-500 text-sm mt-1">每天进步一点点</p>
+                            <p class="text-gray-500 mt-1 font-medium">
+                                Every day is a step forward
+                                <span class="cn-small ml-2">每天进步一点点</span>
+                            </p>
                         </div>
                         <div class="streak-badge">
                             <i class="fas fa-fire"></i>
-                            连续 <span id="englishStreak">0</span> 天
+                            <span id="englishStreak">0</span> Day Streak
+                            <span class="cn-small ml-1">连续打卡</span>
                         </div>
                     </div>
                     
-                    <!-- 本月日历 -->
-                    <div class="mb-4">
-                        <div class="flex justify-between items-center mb-3">
-                            <button onclick="changeMonth('english', -1)" class="text-gray-400 hover:text-purple-500">
-                                <i class="fas fa-chevron-left"></i>
+                    <!-- Calendar -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <button onclick="changeMonth('english', -1)" class="w-10 h-10 rounded-full hover:bg-purple-100 transition-colors flex items-center justify-center">
+                                <i class="fas fa-chevron-left text-purple-500"></i>
                             </button>
-                            <span class="font-medium" id="englishMonth">2026年8月</span>
-                            <button onclick="changeMonth('english', 1)" class="text-gray-400 hover:text-purple-500">
-                                <i class="fas fa-chevron-right"></i>
+                            <span class="font-display text-xl font-bold" id="englishMonth">August 2026</span>
+                            <button onclick="changeMonth('english', 1)" class="w-10 h-10 rounded-full hover:bg-purple-100 transition-colors flex items-center justify-center">
+                                <i class="fas fa-chevron-right text-purple-500"></i>
                             </button>
                         </div>
                         
-                        <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-400 mb-2">
-                            <div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div>
+                        <div class="grid grid-cols-7 gap-1 text-center text-sm font-semibold text-gray-400 mb-3">
+                            <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
                         </div>
                         
                         <div id="englishCalendar" class="calendar-grid"></div>
                     </div>
                     
-                    <!-- 打卡按钮 -->
-                    <div class="text-center">
-                        <button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn mx-auto">
+                    <!-- Checkin Button -->
+                    <div class="text-center mb-6">
+                        <button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn">
                             <i class="fas fa-check-circle"></i>
-                            今日打卡
+                            Check In Today
+                            <span class="cn-small ml-2">今日打卡</span>
                         </button>
                     </div>
                     
-                    <!-- 学习记录 -->
-                    <div class="mt-6">
-                        <h4 class="font-bold mb-3 text-gray-600">最近记录</h4>
-                        <div id="englishHistory" class="space-y-0">
-                            <!-- 动态生成 -->
-                        </div>
+                    <!-- Note Input -->
+                    <div class="p-5 bg-gray-50 rounded-2xl mb-6 dark-mode:bg-gray-800">
+                        <p class="font-semibold text-gray-600 mb-2">
+                            <i class="fas fa-pen mr-2"></i>Today's Notes 学习笔记
+                        </p>
+                        <textarea id="englishNote" class="w-full bg-transparent outline-none resize-none" placeholder="What did you learn today?&#10;今天学了什么？&#10;&#10;e.g. Learned 50 new words, watched 2 episodes of Friends" rows="3"></textarea>
                     </div>
                     
-                    <!-- 学习笔记输入 -->
-                    <div class="mt-4 p-4 bg-gray-50 rounded-xl dark-mode:bg-gray-800">
-                        <textarea id="englishNote" class="w-full bg-transparent outline-none resize-none text-sm" placeholder="记录今天的学习内容...&#10;例如：背了50个单词，看了2集美剧" rows="3"></textarea>
+                    <!-- History -->
+                    <div>
+                        <h4 class="font-bold text-gray-600 mb-4">
+                            <i class="fas fa-history mr-2"></i>Recent Activity 最近记录
+                        </h4>
+                        <div id="englishHistory"></div>
                     </div>
                 </div>
                 
-                <!-- 乐器学习 -->
+                <!-- Music Learning Section -->
                 <div class="checkin-card">
-                    <div class="flex justify-between items-start mb-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                         <div>
-                            <h3 class="text-xl font-bold flex items-center gap-2">
-                                <span class="text-2xl">🎸</span> 乐器学习
+                            <h3 class="section-title">
+                                <span class="icon">🎸</span> Instrument Practice
                             </h3>
-                            <p class="text-gray-500 text-sm mt-1">享受音乐的美好</p>
+                            <p class="text-gray-500 mt-1 font-medium">
+                                Embrace the beauty of music
+                                <span class="cn-small ml-2">享受音乐的美好</span>
+                            </p>
                         </div>
                         <div class="streak-badge">
                             <i class="fas fa-fire"></i>
-                            连续 <span id="musicStreak">0</span> 天
+                            <span id="musicStreak">0</span> Day Streak
+                            <span class="cn-small ml-1">连续打卡</span>
                         </div>
                     </div>
                     
-                    <!-- 本月日历 -->
-                    <div class="mb-4">
-                        <div class="flex justify-between items-center mb-3">
-                            <button onclick="changeMonth('music', -1)" class="text-gray-400 hover:text-purple-500">
-                                <i class="fas fa-chevron-left"></i>
+                    <!-- Calendar -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <button onclick="changeMonth('music', -1)" class="w-10 h-10 rounded-full hover:bg-pink-100 transition-colors flex items-center justify-center">
+                                <i class="fas fa-chevron-left text-pink-500"></i>
                             </button>
-                            <span class="font-medium" id="musicMonth">2026年8月</span>
-                            <button onclick="changeMonth('music', 1)" class="text-gray-400 hover:text-purple-500">
-                                <i class="fas fa-chevron-right"></i>
+                            <span class="font-display text-xl font-bold" id="musicMonth">August 2026</span>
+                            <button onclick="changeMonth('music', 1)" class="w-10 h-10 rounded-full hover:bg-pink-100 transition-colors flex items-center justify-center">
+                                <i class="fas fa-chevron-right text-pink-500"></i>
                             </button>
                         </div>
                         
-                        <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-400 mb-2">
-                            <div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div>
+                        <div class="grid grid-cols-7 gap-1 text-center text-sm font-semibold text-gray-400 mb-3">
+                            <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
                         </div>
                         
                         <div id="musicCalendar" class="calendar-grid"></div>
                     </div>
                     
-                    <!-- 打卡按钮 -->
-                    <div class="text-center">
-                        <button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn mx-auto">
+                    <!-- Checkin Button -->
+                    <div class="text-center mb-6">
+                        <button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn">
                             <i class="fas fa-check-circle"></i>
-                            今日打卡
+                            Check In Today
+                            <span class="cn-small ml-2">今日打卡</span>
                         </button>
                     </div>
                     
-                    <!-- 学习记录 -->
-                    <div class="mt-6">
-                        <h4 class="font-bold mb-3 text-gray-600">最近记录</h4>
-                        <div id="musicHistory" class="space-y-0">
-                            <!-- 动态生成 -->
-                        </div>
+                    <!-- Note Input -->
+                    <div class="p-5 bg-gray-50 rounded-2xl mb-6 dark-mode:bg-gray-800">
+                        <p class="font-semibold text-gray-600 mb-2">
+                            <i class="fas fa-pen mr-2"></i>Today's Notes 练习笔记
+                        </p>
+                        <textarea id="musicNote" class="w-full bg-transparent outline-none resize-none" placeholder="What did you practice today?&#10;今天练习了什么？&#10;&#10;e.g. Practiced guitar for 30 mins, learned a new song" rows="3"></textarea>
                     </div>
                     
-                    <!-- 学习笔记输入 -->
-                    <div class="mt-4 p-4 bg-gray-50 rounded-xl dark-mode:bg-gray-800">
-                        <textarea id="musicNote" class="w-full bg-transparent outline-none resize-none text-sm" placeholder="记录今天的练习内容...&#10;例如：练习了30分钟吉他，学会了一首新歌" rows="3"></textarea>
+                    <!-- History -->
+                    <div>
+                        <h4 class="font-bold text-gray-600 mb-4">
+                            <i class="fas fa-history mr-2"></i>Recent Activity 最近记录
+                        </h4>
+                        <div id="musicHistory"></div>
                     </div>
+                </div>
+                
+                <!-- Tips -->
+                <div class="glass-card rounded-2xl p-6 text-center">
+                    <p class="font-display text-xl italic text-gray-600">
+                        "The secret of getting ahead is getting started."
+                    </p>
+                    <p class="cn-small mt-2">— Mark Twain 马克·吐温</p>
                 </div>
             </div>
         </div>
     </section>
     
     <script>
-        // ========== 数据存储 ==========
+        // ========== Data Storage ==========
         let appData = {
             moments: [],
             english: { checkedDates: [], notes: {} },
             music: { checkedDates: [], notes: {} }
         };
         
-        // 从 localStorage 加载数据
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                           'July', 'August', 'September', 'October', 'November', 'December'];
+        
         function loadData() {
-            const saved = localStorage.getItem('myLifeTracker');
+            const saved = localStorage.getItem('myLifeJourney');
             if (saved) {
                 appData = JSON.parse(saved);
             } else {
-                // 添加示例数据
                 appData.moments = [
                     {
                         id: 1,
-                        content: '今天天气真好，出去散步了～',
+                        content: 'Beautiful sunset today! Nature always knows how to paint the sky. 🌅',
                         images: [],
-                        time: '2026-08-17 14:30',
-                        likes: 3,
+                        time: '2026-08-17 19:30',
+                        likes: 5,
                         liked: false,
-                        location: '公园'
+                        location: 'City Park 城市公园'
                     },
                     {
                         id: 2,
-                        content: '学会了一首新歌，开心！🎵',
+                        content: 'Finally learned to play "Twinkle Twinkle Little Star" on guitar! Small wins matter. 🎸✨',
                         images: [],
-                        time: '2026-08-16 20:15',
-                        likes: 5,
+                        time: '2026-08-16 21:15',
+                        likes: 8,
                         liked: true,
-                        location: '家'
+                        location: 'Home 家'
                     }
                 ];
                 saveData();
             }
         }
         
-        // 保存数据到 localStorage
         function saveData() {
-            localStorage.setItem('myLifeTracker', JSON.stringify(appData));
+            localStorage.setItem('myLifeJourney', JSON.stringify(appData));
         }
         
-        // ========== 网站导航 ==========
+        // ========== Navigation ==========
         function enterSite(device) {
             document.getElementById('home').classList.add('hidden');
             document.getElementById('main').classList.remove('hidden');
@@ -685,6 +783,8 @@
             renderCalendar('music');
             updateStats();
             checkTodayStatus();
+            renderHistory('english');
+            renderHistory('music');
         }
         
         function goHome() {
@@ -694,7 +794,7 @@
         
         function switchTab(tab) {
             document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
+            event.target.closest('.nav-link').classList.add('active');
             
             document.getElementById('lifeTab').classList.toggle('hidden', tab !== 'life');
             document.getElementById('studyTab').classList.toggle('hidden', tab !== 'study');
@@ -710,7 +810,7 @@
             }
         }
         
-        // ========== 朋友圈功能 ==========
+        // ========== Moments ==========
         let selectedImages = [];
         
         function previewPostImages(event) {
@@ -737,7 +837,7 @@
         function publishPost() {
             const content = document.getElementById('newPost').value.trim();
             if (!content && selectedImages.length === 0) {
-                alert('请输入内容或添加图片');
+                alert('Please write something or add photos!\n请写点什么或添加照片！');
                 return;
             }
             
@@ -748,7 +848,7 @@
                            String(now.getHours()).padStart(2, '0') + ':' + 
                            String(now.getMinutes()).padStart(2, '0');
             
-            const newPost = {
+            appData.moments.unshift({
                 id: Date.now(),
                 content: content,
                 images: [...selectedImages],
@@ -756,12 +856,9 @@
                 likes: 0,
                 liked: false,
                 location: ''
-            };
-            
-            appData.moments.unshift(newPost);
+            });
             saveData();
             
-            // 清空输入
             document.getElementById('newPost').value = '';
             document.getElementById('previewImages').innerHTML = '';
             document.getElementById('previewImages').classList.add('hidden');
@@ -775,15 +872,15 @@
             const container = document.getElementById('momentsList');
             container.innerHTML = appData.moments.map(post => `
                 <div class="moments-card fade-in">
-                    <div class="moments-header">
-                        <div class="moments-avatar">小</div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="moments-avatar">L</div>
                         <div>
-                            <div class="font-bold">小可爱</div>
-                            <div class="text-xs text-gray-400">${post.time} ${post.location ? '· ' + post.location : ''}</div>
+                            <div class="font-bold text-lg">Little Cutie</div>
+                            <div class="text-sm text-gray-400">${post.time} ${post.location ? '· ' + post.location : ''}</div>
                         </div>
                     </div>
                     
-                    <div class="text-gray-700 dark-mode:text-gray-300">${post.content}</div>
+                    <div class="text-gray-700 dark-mode:text-gray-300 text-lg leading-relaxed">${post.content}</div>
                     
                     ${post.images.length > 0 ? `
                         <div class="moments-images grid-${Math.min(post.images.length, 4)}">
@@ -798,17 +895,17 @@
                             <i class="fas fa-heart"></i>
                             <span>${post.likes}</span>
                         </div>
-                        <div class="moments-action" onclick="alert('评论功能开发中')">
+                        <div class="moments-action">
                             <i class="far fa-comment"></i>
-                            <span>评论</span>
+                            <span>Comment 评论</span>
                         </div>
-                        <div class="moments-action" onclick="alert('已复制分享链接')">
+                        <div class="moments-action">
                             <i class="fas fa-share"></i>
-                            <span>分享</span>
+                            <span>Share 分享</span>
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `).join('') || '<div class="text-center text-gray-400 py-10">No moments yet. Share something! 还没有动态，快分享吧！</div>';
         }
         
         function toggleLike(postId) {
@@ -821,7 +918,7 @@
             }
         }
         
-        // ========== 打卡功能 ==========
+        // ========== Calendar & Checkin ==========
         let currentMonths = {
             english: new Date().getMonth(),
             music: new Date().getMonth()
@@ -829,11 +926,8 @@
         
         function changeMonth(type, delta) {
             currentMonths[type] += delta;
-            if (currentMonths[type] > 11) {
-                currentMonths[type] = 0;
-            } else if (currentMonths[type] < 0) {
-                currentMonths[type] = 11;
-            }
+            if (currentMonths[type] > 11) currentMonths[type] = 0;
+            else if (currentMonths[type] < 0) currentMonths[type] = 11;
             renderCalendar(type);
         }
         
@@ -842,23 +936,22 @@
             const month = currentMonths[type];
             const year = new Date().getFullYear();
             
-            document.getElementById(type + 'Month').textContent = `${year}年${month + 1}月`;
+            document.getElementById(type + 'Month').textContent = monthNames[month] + ' ' + year;
             
             const firstDay = new Date(year, month, 1);
             const lastDay = new Date(year, month + 1, 0);
-            const startWeekday = firstDay.getDay() === 0 ? 7 : firstDay.getDay();
+            let startWeekday = firstDay.getDay();
+            if (startWeekday === 0) startWeekday = 7;
             
             const today = new Date();
             const todayStr = formatDate(today);
             
             let html = '';
             
-            // 填充月初空白
             for (let i = 1; i < startWeekday; i++) {
                 html += '<div class="calendar-day"></div>';
             }
             
-            // 生成每一天
             for (let day = 1; day <= lastDay.getDate(); day++) {
                 const date = new Date(year, month, day);
                 const dateStr = formatDate(date);
@@ -888,18 +981,14 @@
             const data = appData[type];
             
             if (data.checkedDates.includes(today)) {
-                alert('今天已经打过卡啦！');
+                alert('Already checked in today! 今天已经打过卡啦！');
                 return;
             }
             
-            // 获取笔记
-            const noteEl = document.getElementById(type + 'Note');
-            const note = noteEl.value.trim();
+            const note = document.getElementById(type + 'Note').value.trim();
             
             data.checkedDates.push(today);
-            if (note) {
-                data.notes[today] = note;
-            }
+            if (note) data.notes[today] = note;
             
             saveData();
             renderCalendar(type);
@@ -907,23 +996,18 @@
             checkTodayStatus();
             renderHistory(type);
             
-            // 清空笔记
-            noteEl.value = '';
+            document.getElementById(type + 'Note').value = '';
             
-            // 显示成功动画
-            showCheckinSuccess();
-        }
-        
-        function showCheckinSuccess() {
-            const btn = event.target.closest('.checkin-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> 打卡成功！';
+            // Success animation
+            const btn = document.getElementById(type + 'CheckinBtn');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Checked In! 打卡成功！';
             btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
             
             setTimeout(() => {
-                btn.innerHTML = originalText;
+                btn.innerHTML = original;
                 btn.style.background = '';
-            }, 2000);
+            }, 2500);
         }
         
         function checkTodayStatus() {
@@ -935,10 +1019,10 @@
                 
                 if (isChecked) {
                     btn.disabled = true;
-                    btn.innerHTML = '<i class="fas fa-check-double"></i> 今日已打卡';
+                    btn.innerHTML = '<i class="fas fa-check-double"></i> Done for Today <span class="cn-small ml-2">今日已完成</span>';
                 } else {
                     btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-check-circle"></i> 今日打卡';
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> Check In Today <span class="cn-small ml-2">今日打卡</span>';
                 }
             });
         }
@@ -947,7 +1031,6 @@
             document.getElementById('totalEnglish').textContent = appData.english.checkedDates.length;
             document.getElementById('totalMusic').textContent = appData.music.checkedDates.length;
             
-            // 计算连续天数
             ['english', 'music'].forEach(type => {
                 const dates = appData[type].checkedDates.sort().reverse();
                 let streak = 0;
@@ -956,9 +1039,7 @@
                 for (let i = 0; i < 365; i++) {
                     const checkDate = new Date(today);
                     checkDate.setDate(checkDate.getDate() - i);
-                    const dateStr = formatDate(checkDate);
-                    
-                    if (dates.includes(dateStr)) {
+                    if (dates.includes(formatDate(checkDate))) {
                         streak++;
                     } else if (i > 0) {
                         break;
@@ -972,25 +1053,24 @@
         function renderHistory(type) {
             const container = document.getElementById(type + 'History');
             const data = appData[type];
-            const recentDates = data.checkedDates.sort().reverse().slice(0, 7);
+            const recent = data.checkedDates.sort().reverse().slice(0, 7);
             
-            container.innerHTML = recentDates.map(date => `
+            container.innerHTML = recent.map(date => `
                 <div class="history-item">
                     <div class="history-icon success">
                         <i class="fas fa-check"></i>
                     </div>
                     <div class="flex-1">
-                        <div class="font-medium">${date}</div>
-                        ${data.notes[date] ? `<div class="text-sm text-gray-500">${data.notes[date]}</div>` : ''}
+                        <div class="font-semibold">${date}</div>
+                        ${data.notes[date] ? `<div class="text-sm text-gray-500 mt-1">${data.notes[date]}</div>` : ''}
                     </div>
+                    <div class="text-green-500 font-bold">✓</div>
                 </div>
-            `).join('') || '<div class="text-center text-gray-400 py-4">暂无记录</div>';
+            `).join('') || '<div class="text-center text-gray-400 py-6">No records yet 暂无记录</div>';
         }
         
-        // 初始化
+        // Init
         loadData();
-        renderHistory('english');
-        renderHistory('music');
     </script>
 </body>
 </html>
