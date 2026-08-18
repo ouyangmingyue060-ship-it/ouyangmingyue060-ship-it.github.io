@@ -6,744 +6,638 @@
     <title>人生乱套 我睡大觉</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&family=Long+Cang&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
-        /* ========== 本地字体 ========== */
-        @font-face { font-family: 'GBai'; src: url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype'); font-weight: normal; }
-        @font-face { font-family: 'Shantell Sans'; src: url('/assets/fonts/ShantellSans-Italic-VariableFont_BNCE,INFM,SPAC,wght.ttf') format('truetype'); font-weight: normal; font-style: italic; }
+    @font-face{font-family:'GBai';src:url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype');font-weight:normal;}
+    @font-face{font-family:'Shantell Sans';src:url('/assets/fonts/ShantellSans-Italic-VariableFont_BNCE,INFM,SPAC,wght.ttf') format('truetype');font-weight:normal;font-style:italic;}
+    *{margin:0;padding:0;box-sizing:border-box;}body{min-height:100vh;overflow:hidden;}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { min-height: 100vh; overflow: hidden; }
+    /* === 着陆页 === */
+    #home{min-height:100vh;background:linear-gradient(135deg,#1a0011 0%,#4a1942 30%,#8b3a7a 60%,#d462a6 80%,#ff9a9e 100%);background-size:400% 400%;animation:gradientFlow 12s ease infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;}
+    @keyframes gradientFlow{0%{background-position:0% 50%}25%{background-position:50% 0%}50%{background-position:100% 50%}75%{background-position:50% 100%}100%{background-position:0% 50%}}
+    .particles-container{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden;}
+    .particle{position:absolute;pointer-events:none;user-select:none;will-change:transform;}
+    .particle.floating{animation:starFloat var(--float-duration,4s) ease-in-out infinite;animation-delay:var(--float-delay,0s);}
+    @keyframes starFloat{0%,100%{transform:translateY(0) rotate(0deg);opacity:var(--base-opacity,0.6)}50%{transform:translateY(-18px) rotate(8deg);opacity:calc(var(--base-opacity,0.6) + 0.2)}}
+    .home-title{position:relative;z-index:10;text-align:center;margin-bottom:50px;}
+    .home-title .main-title{font-family:'Ma Shan Zheng','Zhi Mang Xing',cursive;font-size:64px;color:#fff;text-shadow:0 4px 30px rgba(212,98,166,0.6),0 0 60px rgba(139,58,122,0.3);letter-spacing:8px;line-height:1.3;}
+    .home-title .sub-title{font-family:'Caveat','Dancing Script',cursive;font-size:22px;color:rgba(255,255,255,0.6);margin-top:12px;letter-spacing:3px;text-shadow:0 2px 15px rgba(0,0,0,0.3);}
+    .sunglasses-entry{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:100px;margin-bottom:30px;}
+    .eye-icon{display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
+    .eye-icon .icon-symbol{font-size:56px;color:#fff;line-height:1;text-shadow:0 0 20px rgba(255,215,0,0.8),0 0 40px rgba(224,176,255,0.5),0 0 60px rgba(255,182,193,0.3);animation:pulse 2.5s ease-in-out infinite;transition:transform 0.1s ease;}
+    .eye-icon:nth-child(2) .icon-symbol{text-shadow:0 0 20px rgba(224,176,255,0.8),0 0 40px rgba(255,215,0,0.5),0 0 60px rgba(255,182,193,0.3);animation-delay:0.6s;}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    .eye-icon.pressing .icon-symbol{animation:none;transform:scale(0.85)!important;transition:transform 0.1s ease;}
+    .eye-icon.bounce .icon-symbol{animation:none;transform:scale(1)!important;transition:transform 0.2s cubic-bezier(0.34,1.56,0.64,1);}
+    .eye-icon .icon-label{font-family:'Ma Shan Zheng',cursive;font-size:22px;color:rgba(255,255,255,0.85);letter-spacing:4px;text-shadow:0 2px 10px rgba(0,0,0,0.3);}
+    .eye-icon .icon-label-en{font-family:'Caveat',cursive;font-size:15px;color:rgba(255,255,255,0.5);letter-spacing:2px;}
+    .eye-icon:hover .icon-symbol{filter:brightness(1.3) drop-shadow(0 0 25px rgba(255,215,0,0.6));}
+    #meteorContainer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;pointer-events:none;overflow:hidden;}
+    .meteor-particle{position:fixed;border-radius:50%;pointer-events:none;animation:meteorFly var(--meteor-dur,0.8s) cubic-bezier(0.25,0.46,0.45,0.94) forwards;}
+    @keyframes meteorFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--mx,100px),var(--my,100px)) scale(0.2);opacity:0}}
+    .hover-sparkle{position:fixed;pointer-events:none;border-radius:50%;animation:sparkleLife 1.2s ease-out forwards;}
+    @keyframes sparkleLife{0%{transform:scale(1);opacity:0.7}100%{transform:scale(0) translateY(-20px);opacity:0}}
+    .watermark{position:absolute;bottom:30px;z-index:10;text-align:center;animation:fadeInUp 2s ease-out 1.5s backwards;}
+    .watermark .wm-text{font-family:'Shantell Sans','Caveat',cursive;font-size:14px;color:rgba(255,255,255,0.3);letter-spacing:6px;text-transform:uppercase;}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        /* ========== 着陆页 ========== */
-        #home {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1a0011 0%, #4a1942 30%, #8b3a7a 60%, #d462a6 80%, #ff9a9e 100%);
-            background-size: 400% 400%; animation: gradientFlow 12s ease infinite;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;
-        }
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; } 25% { background-position: 50% 0%; }
-            50% { background-position: 100% 50%; } 75% { background-position: 50% 100%; } 100% { background-position: 0% 50%; }
-        }
+    /* === 探索页面 === */
+    .explore-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#1a0011 0%,#4a1942 30%,#8b3a7a 60%,#d462a6 80%,#ff9a9e 100%);background-size:400% 400%;animation:gradientFlow 12s ease infinite;z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
+    .explore-page.visible{display:flex;flex-direction:column;opacity:1;}
+    .explore-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;background:rgba(26,0,17,0.7);backdrop-filter:blur(12px);}
+    .back-btn{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:10px 24px;border-radius:25px;cursor:pointer;font-family:'Ma Shan Zheng',cursive;font-size:17px;letter-spacing:2px;transition:all 0.3s;}
+    .back-btn:hover{background:rgba(255,255,255,0.25);transform:translateX(-4px);}
+    .explore-content{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 30px 80px;}
+    .explore-title{font-family:'Ma Shan Zheng',cursive;font-size:36px;color:#fff;letter-spacing:6px;margin-bottom:30px;text-shadow:0 4px 20px rgba(212,98,166,0.5);}
 
-        .particles-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; }
-        .particle { position: absolute; pointer-events: none; user-select: none; will-change: transform; }
-        .particle.floating { animation: starFloat var(--float-duration, 4s) ease-in-out infinite; animation-delay: var(--float-delay, 0s); }
-        @keyframes starFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: var(--base-opacity, 0.6); }
-            50% { transform: translateY(-18px) rotate(8deg); opacity: calc(var(--base-opacity, 0.6) + 0.2); }
-        }
+    /* === 模块卡片网格 === */
+    .module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:600px;width:100%;}
+    .module-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden;}
+    .module-card:hover{transform:translateY(-6px) scale(1.03);background:rgba(255,255,255,0.14);box-shadow:0 20px 60px rgba(139,58,122,0.3);}
+    .module-card .mc-icon{font-size:42px;margin-bottom:12px;display:block;}
+    .module-card .mc-title{font-family:'Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:3px;}
+    .module-card .mc-sub{font-family:'Caveat',cursive;font-size:14px;color:rgba(255,255,255,0.45);margin-top:4px;}
+    .module-card.locked::after{content:'🔒';position:absolute;top:10px;right:12px;font-size:16px;}
 
-        .home-title { position: relative; z-index: 10; text-align: center; margin-bottom: 50px; }
-        .home-title .main-title { font-family: 'Ma Shan Zheng', 'Zhi Mang Xing', cursive; font-size: 64px; color: #fff; text-shadow: 0 4px 30px rgba(212,98,166,0.6), 0 0 60px rgba(139,58,122,0.3); letter-spacing: 8px; line-height: 1.3; }
-        .home-title .sub-title { font-family: 'Caveat', 'Dancing Script', cursive; font-size: 22px; color: rgba(255,255,255,0.6); margin-top: 12px; letter-spacing: 3px; text-shadow: 0 2px 15px rgba(0,0,0,0.3); }
+    /* === 钥匙 === */
+    .keys-row{display:flex;gap:16px;justify-content:center;margin-top:16px;}
+    .key-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:12px 16px;cursor:pointer;transition:all 0.25s;color:#fff;min-width:70px;}
+    .key-btn:hover{background:rgba(255,215,0,0.15);border-color:rgba(255,215,0,0.4);transform:translateY(-3px);}
+    .key-btn .key-icon{font-size:24px;}.key-btn .key-name{font-family:'Ma Shan Zheng',cursive;font-size:14px;letter-spacing:2px;color:rgba(255,255,255,0.7);}
 
-        .sunglasses-entry { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; gap: 100px; margin-bottom: 30px; }
-        .eye-icon { display: flex; flex-direction: column; align-items: center; gap: 14px; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; transition: transform 0.15s cubic-bezier(0.34,1.56,0.64,1); }
-        .eye-icon .icon-symbol { font-size: 56px; color: #fff; line-height: 1; text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(224,176,255,0.5), 0 0 60px rgba(255,182,193,0.3); animation: pulse 2.5s ease-in-out infinite; transition: transform 0.1s ease; }
-        .eye-icon:nth-child(2) .icon-symbol { text-shadow: 0 0 20px rgba(224,176,255,0.8), 0 0 40px rgba(255,215,0,0.5), 0 0 60px rgba(255,182,193,0.3); animation-delay: 0.6s; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
-        .eye-icon.pressing .icon-symbol { animation: none; transform: scale(0.85) !important; transition: transform 0.1s ease; }
-        .eye-icon.bounce .icon-symbol { animation: none; transform: scale(1) !important; transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-        .eye-icon .icon-label { font-family: 'Ma Shan Zheng', cursive; font-size: 22px; color: rgba(255,255,255,0.85); letter-spacing: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        .eye-icon .icon-label-en { font-family: 'Caveat', cursive; font-size: 15px; color: rgba(255,255,255,0.5); letter-spacing: 2px; }
-        .eye-icon:hover .icon-symbol { filter: brightness(1.3) drop-shadow(0 0 25px rgba(255,215,0,0.6)); }
+    /* === 密码浮层 === */
+    .pw-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(26,0,17,0.6);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
+    .pw-overlay.visible{display:flex;opacity:1;}
+    .pw-modal{background:rgba(74,25,66,0.85);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.2);border-radius:24px;padding:36px 32px;width:340px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.4);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+    @keyframes modalPop{from{transform:scale(0.8) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+    .pw-modal h3{font-family:'Ma Shan Zheng',cursive;font-size:24px;color:#fff;letter-spacing:3px;margin-bottom:20px;}
+    .pw-modal input{width:100%;padding:14px 18px;border-radius:14px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;font-size:18px;font-family:'Quicksand',sans-serif;letter-spacing:4px;text-align:center;outline:none;transition:border-color 0.3s;}
+    .pw-modal input:focus{border-color:rgba(255,215,0,0.6);}
+    .pw-modal input::placeholder{color:rgba(255,255,255,0.3);letter-spacing:1px;font-size:14px;}
+    .pw-modal .pw-error{font-family:'ZCOOL XiaoWei',serif;font-size:14px;color:#ff6b6b;margin-top:10px;min-height:20px;}
+    .pw-modal input.shake{animation:shake 0.4s ease;}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+    .pw-btns{display:flex;gap:12px;margin-top:20px;}
+    .pw-btns button{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:'Ma Shan Zheng',cursive;font-size:17px;letter-spacing:2px;transition:all 0.2s;}
+    .pw-btn-confirm{background:linear-gradient(135deg,#8b3a7a,#d462a6);color:#fff;}
+    .pw-btn-confirm:hover{box-shadow:0 8px 25px rgba(139,58,122,0.5);transform:translateY(-2px);}
+    .pw-btn-cancel{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15)!important;}
+    .pw-btn-cancel:hover{background:rgba(255,255,255,0.18);}
 
-        #meteorContainer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; pointer-events: none; overflow: hidden; }
-        .meteor-particle { position: fixed; border-radius: 50%; pointer-events: none; animation: meteorFly var(--meteor-dur, 0.8s) cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
-        @keyframes meteorFly { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--mx,100px), var(--my,100px)) scale(0.2); opacity: 0; } }
-        .hover-sparkle { position: fixed; pointer-events: none; border-radius: 50%; animation: sparkleLife 1.2s ease-out forwards; }
-        @keyframes sparkleLife { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(0) translateY(-20px); opacity: 0; } }
+    /* === 通用时间线（Phase 3+4 共用）=== */
+    .timeline-view{display:none;width:100%;max-width:560px;animation:fadeSlideUp 0.5s ease;}
+    .timeline-view.active{display:block;}
+    @keyframes fadeSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .timeline-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+    .timeline-back{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:8px 18px;border-radius:20px;cursor:pointer;font-family:'Ma Shan Zheng',cursive;font-size:15px;transition:all 0.2s;}
+    .timeline-back:hover{background:rgba(255,255,255,0.2);}
+    .timeline-name{font-family:'Ma Shan Zheng',cursive;font-size:26px;color:#fff;letter-spacing:4px;}
+    .search-box{position:relative;margin-bottom:24px;}
+    .search-box input{width:100%;padding:14px 18px 14px 44px;border-radius:16px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#fff;font-size:15px;font-family:'ZCOOL XiaoWei',serif;outline:none;transition:all 0.3s;}
+    .search-box input:focus{border-color:rgba(255,215,0,0.5);background:rgba(255,255,255,0.12);}
+    .search-box input::placeholder{color:rgba(255,255,255,0.35);}
+    .search-box .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:16px;color:rgba(255,255,255,0.4);pointer-events:none;}
+    .moment-item{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:20px;margin-bottom:16px;transition:all 0.2s;}
+    .moment-item:hover{background:rgba(255,255,255,0.1);}
+    .moment-top{display:flex;gap:14px;align-items:flex-start;}
+    .moment-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#8b3a7a,#d462a6);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+    .moment-info{flex:1;}
+    .moment-nick{font-family:'Ma Shan Zheng',cursive;font-size:18px;color:#fff;letter-spacing:2px;}
+    .moment-time{font-family:'Caveat',cursive;font-size:13px;color:rgba(255,255,255,0.4);margin-top:2px;}
+    .moment-text{color:rgba(255,255,255,0.85);font-family:'ZCOOL XiaoWei',serif;font-size:16px;line-height:1.7;margin-top:12px;}
+    .moment-text.clamped{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+    .moment-expand{color:rgba(255,215,0,0.7);font-family:'Caveat',cursive;font-size:14px;cursor:pointer;margin-top:4px;display:none;}
+    .moment-expand.show{display:inline;}.moment-expand:hover{color:rgba(255,215,0,1);}
+    .moment-images{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+    .moment-images img{border-radius:8px;object-fit:cover;cursor:pointer;transition:transform 0.2s;max-height:180px;}
+    .moment-images.img-1 img{width:100%;max-height:240px;}
+    .moment-images.img-2 img{width:calc(50% - 3px);height:150px;}
+    .moment-images.img-3 img{width:calc(33.3% - 4px);height:130px;}
+    .moment-images img:hover{transform:scale(1.03);}
+    .moment-actions{display:flex;justify-content:flex-end;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);}
+    .like-btn{display:flex;align-items:center;gap:6px;cursor:pointer;color:rgba(255,255,255,0.45);font-size:14px;transition:all 0.2s;user-select:none;}
+    .like-btn:hover{color:#ff6b6b;}.like-btn.liked{color:#ff6b6b;}
+    .like-btn .like-icon{font-size:16px;transition:transform 0.2s;}
+    .like-btn:hover .like-icon{transform:scale(1.2);}
+    .no-results{text-align:center;padding:60px 20px;color:rgba(255,255,255,0.4);}
+    .no-results .nr-icon{font-size:48px;margin-bottom:16px;}
+    .no-results .nr-text{font-family:'Ma Shan Zheng',cursive;font-size:20px;letter-spacing:3px;}
 
-        .watermark { position: absolute; bottom: 30px; z-index: 10; text-align: center; animation: fadeInUp 2s ease-out 1.5s backwards; }
-        .watermark .wm-text { font-family: 'Shantell Sans', 'Caveat', cursive; font-size: 14px; color: rgba(255,255,255,0.3); letter-spacing: 6px; text-transform: uppercase; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    /* Phase 4: 主题色覆写 */
+    .timeline-view[data-theme="daily"] .moment-avatar{background:linear-gradient(135deg,#FDB813,#FFE4B5);}
+    .timeline-view[data-theme="daily"] .search-box input:focus{border-color:#FDB813;}
+    .timeline-view[data-theme="daily"] .like-btn.liked,.timeline-view[data-theme="daily"] .like-btn:hover{color:#FDB813;}
+    .timeline-view[data-theme="thoughts"] .moment-avatar{background:linear-gradient(135deg,#C084FC,#E8D5F5);}
+    .timeline-view[data-theme="thoughts"] .search-box input:focus{border-color:#C084FC;}
+    .timeline-view[data-theme="thoughts"] .like-btn.liked,.timeline-view[data-theme="thoughts"] .like-btn:hover{color:#C084FC;}
+    .timeline-view[data-theme="study"] .moment-avatar{background:linear-gradient(135deg,#34D399,#D1FAE5);}
+    .timeline-view[data-theme="study"] .search-box input:focus{border-color:#34D399;}
+    .timeline-view[data-theme="study"] .like-btn.liked,.timeline-view[data-theme="study"] .like-btn:hover{color:#34D399;}
 
-        /* ========== 探索页面 ========== */
-        .explore-page {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #1a0011 0%, #4a1942 30%, #8b3a7a 60%, #d462a6 80%, #ff9a9e 100%);
-            background-size: 400% 400%; animation: gradientFlow 12s ease infinite;
-            z-index: 100; overflow-y: auto; opacity: 0; transition: opacity 0.4s ease;
-        }
-        .explore-page.visible { display: flex; flex-direction: column; opacity: 1; }
-        .explore-header { display: flex; align-items: center; gap: 16px; padding: 20px 30px; position: sticky; top: 0; z-index: 110; background: rgba(26,0,17,0.7); backdrop-filter: blur(12px); }
-        .back-btn { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 24px; border-radius: 25px; cursor: pointer; font-family: 'Ma Shan Zheng', cursive; font-size: 17px; letter-spacing: 2px; transition: all 0.3s; }
-        .back-btn:hover { background: rgba(255,255,255,0.25); transform: translateX(-4px); }
-        .explore-content { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 30px 80px; }
-        .explore-title { font-family: 'Ma Shan Zheng', cursive; font-size: 36px; color: #fff; letter-spacing: 6px; margin-bottom: 30px; text-shadow: 0 4px 20px rgba(212,98,166,0.5); }
+    /* === Phase 5: 子模块视图 === */
+    .sub-view{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
+    .sub-view.visible{display:flex;flex-direction:column;opacity:1;}
+    .sub-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;backdrop-filter:blur(12px);}
 
-        /* ========== 模块卡片网格 2x2 ========== */
-        .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; width: 100%; }
-        .module-card {
-            background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.15); border-radius: 20px;
-            padding: 28px 20px; text-align: center; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-            position: relative; overflow: hidden;
-        }
-        .module-card:hover { transform: translateY(-6px) scale(1.03); background: rgba(255,255,255,0.14); box-shadow: 0 20px 60px rgba(139,58,122,0.3); }
-        .module-card .mc-icon { font-size: 42px; margin-bottom: 12px; display: block; }
-        .module-card .mc-title { font-family: 'Ma Shan Zheng', cursive; font-size: 22px; color: #fff; letter-spacing: 3px; }
-        .module-card .mc-sub { font-family: 'Caveat', cursive; font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 4px; }
-        .module-card.locked::after { content: '🔒'; position: absolute; top: 10px; right: 12px; font-size: 16px; }
-        .module-card.wip { opacity: 0.45; cursor: not-allowed; }
-        .module-card.wip:hover { transform: none; background: rgba(255,255,255,0.08); box-shadow: none; }
+    /* 公开课 - 极简时间轴 */
+    .courses-bg{background:#f8f9fa;}
+    .courses-bg .sub-header{background:rgba(248,249,250,0.85);}
+    .courses-bg .back-btn{color:#1a1a2e;background:rgba(0,0,0,0.06);border-color:rgba(0,0,0,0.1);}
+    .courses-bg .back-btn:hover{background:rgba(0,0,0,0.1);}
+    .course-timeline{max-width:600px;margin:0 auto;padding:20px 30px 80px;}
+    .course-title{font-family:'Ma Shan Zheng',cursive;font-size:28px;color:#1a1a2e;letter-spacing:4px;margin-bottom:30px;}
+    .course-item{display:flex;gap:20px;margin-bottom:24px;transition:all 0.2s;}
+    .course-item:hover{transform:translateX(-6px);}
+    .course-date{font-family:'Caveat',cursive;font-size:14px;color:#9ca3af;min-width:60px;padding-top:6px;}
+    .course-card{flex:1;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;transition:all 0.2s;}
+    .course-card:hover{border-color:#3B82F6;box-shadow:0 4px 20px rgba(59,130,246,0.12);}
+    .course-card h4{font-family:'Ma Shan Zheng',cursive;font-size:18px;color:#1a1a2e;letter-spacing:2px;}
+    .course-card .cc-instructor{font-family:'Caveat',cursive;font-size:14px;color:#3B82F6;margin-top:2px;}
+    .course-card .cc-desc{font-family:'ZCOOL XiaoWei',serif;font-size:14px;color:#6b7280;margin-top:8px;line-height:1.6;}
 
-        /* ========== 钥匙行 ========== */
-        .keys-row { display: flex; gap: 16px; justify-content: center; margin-top: 16px; }
-        .key-btn {
-            display: flex; flex-direction: column; align-items: center; gap: 6px;
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 14px; padding: 12px 16px; cursor: pointer;
-            transition: all 0.25s; color: #fff; min-width: 70px;
-        }
-        .key-btn:hover { background: rgba(255,215,0,0.15); border-color: rgba(255,215,0,0.4); transform: translateY(-3px); }
-        .key-btn .key-icon { font-size: 24px; }
-        .key-btn .key-name { font-family: 'Ma Shan Zheng', cursive; font-size: 14px; letter-spacing: 2px; color: rgba(255,255,255,0.7); }
+    /* 书籍 - 木质书架 */
+    .books-bg{background:linear-gradient(180deg,#8B5A2B 0%,#D2B48C 40%,#C4A672 100%);}
+    .books-bg .sub-header{background:rgba(139,90,43,0.75);}
+    .book-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto;padding:20px 30px 80px;}
+    .book-card{perspective:800px;cursor:pointer;}
+    .book-inner{background:#fff;border-radius:8px;padding:20px 16px;text-align:center;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);transform:perspective(800px) rotateY(-5deg);box-shadow:4px 4px 15px rgba(0,0,0,0.2);min-height:200px;display:flex;flex-direction:column;justify-content:center;}
+    .book-card:hover .book-inner{transform:perspective(800px) rotateY(0deg) translateY(-12px);box-shadow:0 15px 40px rgba(0,0,0,0.3);}
+    .book-inner .bk-cover{width:60px;height:80px;border-radius:4px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px;}
+    .book-inner .bk-title{font-family:'Ma Shan Zheng',cursive;font-size:16px;color:#1a1a2e;letter-spacing:2px;}
+    .book-inner .bk-author{font-family:'Caveat',cursive;font-size:13px;color:#9ca3af;margin-top:4px;}
+    .book-inner .bk-stars{margin-top:10px;font-size:14px;letter-spacing:2px;}
 
-        /* ========== 密码浮层 Modal ========== */
-        .pw-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(26,0,17,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            z-index: 200; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-        .pw-overlay.visible { display: flex; opacity: 1; }
-        .pw-modal {
-            background: rgba(74,25,66,0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.2); border-radius: 24px;
-            padding: 36px 32px; width: 340px; text-align: center;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
-            animation: modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);
-        }
-        @keyframes modalPop { from { transform: scale(0.8) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
-        .pw-modal h3 { font-family: 'Ma Shan Zheng', cursive; font-size: 24px; color: #fff; letter-spacing: 3px; margin-bottom: 20px; }
-        .pw-modal input {
-            width: 100%; padding: 14px 18px; border-radius: 14px;
-            border: 1.5px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08);
-            color: #fff; font-size: 18px; font-family: 'Quicksand', sans-serif;
-            letter-spacing: 4px; text-align: center; outline: none;
-            transition: border-color 0.3s;
-        }
-        .pw-modal input:focus { border-color: rgba(255,215,0,0.6); }
-        .pw-modal input::placeholder { color: rgba(255,255,255,0.3); letter-spacing: 1px; font-size: 14px; }
-        .pw-modal .pw-error { font-family: 'ZCOOL XiaoWei', serif; font-size: 14px; color: #ff6b6b; margin-top: 10px; min-height: 20px; }
-        .pw-modal input.shake { animation: shake 0.4s ease; }
-        @keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-8px); } 40%,80% { transform: translateX(8px); } }
-        .pw-btns { display: flex; gap: 12px; margin-top: 20px; }
-        .pw-btns button {
-            flex: 1; padding: 12px; border-radius: 14px; border: none; cursor: pointer;
-            font-family: 'Ma Shan Zheng', cursive; font-size: 17px; letter-spacing: 2px; transition: all 0.2s;
-        }
-        .pw-btn-confirm { background: linear-gradient(135deg, #8b3a7a, #d462a6); color: #fff; }
-        .pw-btn-confirm:hover { box-shadow: 0 8px 25px rgba(139,58,122,0.5); transform: translateY(-2px); }
-        .pw-btn-cancel { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15) !important; }
-        .pw-btn-cancel:hover { background: rgba(255,255,255,0.18); }
+    /* 音乐 - 黑胶唱片 */
+    .music-bg{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);}
+    .music-bg .sub-header{background:rgba(26,26,46,0.85);}
+    .vinyl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:650px;margin:0 auto;padding:20px 30px 80px;}
+    .vinyl-card{text-align:center;cursor:pointer;}
+    .vinyl-disc{width:160px;height:160px;border-radius:50%;margin:0 auto;position:relative;background:radial-gradient(circle,#111 20%,#222 21%,#333 40%,#222 41%,#333 60%,#222 61%,#333 80%,#222 81%,#333 100%);box-shadow:0 0 30px rgba(0,0,0,0.5);transition:transform 0.3s;}
+    .vinyl-disc::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:45px;height:45px;border-radius:50%;border:3px solid rgba(255,255,255,0.1);}
+    .vinyl-sticker{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+    .vinyl-card:hover .vinyl-disc{transform:scale(1.08);}
+    .vinyl-card.playing .vinyl-disc{animation:vinylSpin 3s linear infinite;}
+    @keyframes vinylSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .vinyl-title{font-family:'Ma Shan Zheng',cursive;font-size:16px;color:#fff;margin-top:14px;letter-spacing:2px;}
+    .vinyl-artist{font-family:'Caveat',cursive;font-size:13px;color:rgba(255,255,255,0.45);margin-top:2px;}
+    .vinyl-lyric{font-family:'ZCOOL XiaoWei',serif;font-size:12px;color:rgba(255,255,255,0.3);margin-top:6px;font-style:italic;}
+    .soundwave{position:absolute;bottom:0;left:0;width:100%;height:60px;overflow:hidden;pointer-events:none;opacity:0.15;}
+    .soundwave span{display:inline-block;width:3px;background:linear-gradient(to top,#d462a6,#8b3a7a);margin:0 2px;border-radius:2px;animation:wave 1.5s ease-in-out infinite;}
+    .soundwave span:nth-child(2){animation-delay:0.1s;height:20px!important;}.soundwave span:nth-child(3){animation-delay:0.2s;height:30px!important;}.soundwave span:nth-child(4){animation-delay:0.3s;height:15px!important;}.soundwave span:nth-child(5){animation-delay:0.4s;height:25px!important;}
+    @keyframes wave{0%,100%{height:10px}50%{height:35px}}
 
-        /* ========== 朋友圈时间线 Timeline ========== */
-        .timeline-view { display: none; width: 100%; max-width: 560px; animation: fadeSlideUp 0.5s ease; }
-        .timeline-view.active { display: block; }
-        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    /* 影视 - 电影胶卷 */
+    .movies-bg{background:#0f0f0f;}
+    .movies-bg .sub-header{background:rgba(15,15,15,0.85);}
+    .projector-light{position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:100%;background:linear-gradient(180deg,rgba(255,244,200,0.08) 0%,transparent 70%);pointer-events:none;z-index:0;}
+    .filmstrip-scroll{display:flex;gap:20px;overflow-x:auto;padding:20px 30px 80px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;position:relative;z-index:1;}
+    .filmstrip-scroll::-webkit-scrollbar{height:6px;}.filmstrip-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.05);border-radius:3px;}.filmstrip-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:3px;}
+    .film-card{flex-shrink:0;width:280px;scroll-snap-align:start;cursor:pointer;transition:all 0.3s;}
+    .film-card:hover{transform:scale(1.05);}
+    .film-poster{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;position:relative;}
+    .film-poster img{width:100%;height:100%;object-fit:cover;}
+    .film-poster .film-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(0,0,0,0.85));}
+    .film-poster .film-name{font-family:'Ma Shan Zheng',cursive;font-size:18px;color:#fff;letter-spacing:2px;}
+    .film-poster .film-director{font-family:'Caveat',cursive;font-size:13px;color:rgba(255,255,255,0.5);}
+    .film-poster .film-quote{font-family:'ZCOOL XiaoWei',serif;font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;}
+    .film-poster .film-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+    .film-poster .film-tags span{font-family:'Caveat',cursive;font-size:11px;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:10px;color:rgba(255,255,255,0.6);}
+    .film-card:hover .film-tags span{background:rgba(255,244,200,0.25);color:rgba(255,244,200,0.9);}
 
-        .timeline-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .timeline-back { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-family: 'Ma Shan Zheng', cursive; font-size: 15px; transition: all 0.2s; }
-        .timeline-back:hover { background: rgba(255,255,255,0.2); }
-        .timeline-name { font-family: 'Ma Shan Zheng', cursive; font-size: 26px; color: #fff; letter-spacing: 4px; }
+    /* === 主内容区 === */
+    #main{display:none;background:linear-gradient(135deg,#1a0011 0%,#4a1942 30%,#8b3a7a 60%,#d462a6 80%,#ff9a9e 100%);background-size:400% 400%;animation:gradientFlow 12s ease infinite;min-height:100vh;overflow:auto;}
+    .glass-card{background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.4);box-shadow:0 8px 32px rgba(0,0,0,0.08);}
+    .nav-link{position:relative;cursor:pointer;padding:10px 20px;border-radius:10px;transition:all 0.3s;letter-spacing:0.5px;}
+    .nav-link .nav-cn{font-family:'Ma Shan Zheng',cursive;font-size:17px;}
+    .nav-link .nav-en{font-family:'Caveat',cursive;font-size:12px;opacity:0.6;}
+    .nav-link:hover,.nav-link.active{background:rgba(212,98,166,0.15);color:#d462a6;}
+    .publish-box{background:white;border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.06);}
+    .publish-input{width:100%;border:none;outline:none;resize:none;font-size:16px;line-height:1.7;min-height:80px;font-family:'ZCOOL XiaoWei','Quicksand',sans-serif;}
+    .publish-img{width:85px;height:85px;border-radius:10px;object-fit:cover;}
+    .moments-card{background:white;border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,0.06);transition:transform 0.2s;}
+    .moments-card:hover{transform:translateY(-2px);}
+    .moments-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#8b3a7a,#d462a6);display:flex;align-items:center;justify-content:center;color:white;font-family:'Ma Shan Zheng',cursive;font-size:24px;flex-shrink:0;}
+    .moments-images{display:grid;gap:6px;margin-top:14px;}
+    .moments-images.grid-1{grid-template-columns:1fr;}.moments-images.grid-2{grid-template-columns:repeat(2,1fr);}.moments-images.grid-3{grid-template-columns:repeat(3,1fr);}.moments-images.grid-4{grid-template-columns:repeat(2,1fr);}
+    .moments-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;cursor:pointer;transition:transform 0.3s;}
+    .moments-img:hover{transform:scale(1.03);}
+    .moments-actions{display:flex;justify-content:space-around;margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0;}
+    .moments-action{display:flex;align-items:center;gap:8px;color:#888;cursor:pointer;transition:all 0.2s;font-size:14px;}
+    .moments-action .action-cn{font-family:'ZCOOL XiaoWei',serif;font-weight:500;}
+    .moments-action:hover{color:#d462a6;transform:scale(1.05);}
+    .moments-action.liked{color:#e74c3c;}
+    .checkin-card{background:white;border-radius:20px;padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.08);}
+    .streak-badge{background:linear-gradient(135deg,#d462a6,#ff9a9e);color:white;padding:8px 20px;border-radius:25px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:8px;}
+    .streak-badge .streak-cn{font-family:'Ma Shan Zheng',cursive;}.streak-badge .streak-en{font-family:'Caveat',cursive;font-size:13px;}
+    .checkin-btn{background:linear-gradient(135deg,#8b3a7a,#d462a6);color:white;border:none;padding:14px 40px;border-radius:30px;font-size:17px;font-weight:700;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;}
+    .checkin-btn .btn-cn{font-family:'Ma Shan Zheng',cursive;font-size:19px;}
+    .checkin-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(139,58,122,0.5);}
+    .checkin-btn:disabled{background:linear-gradient(135deg,#a0a0a0,#808080);cursor:not-allowed;transform:none;box-shadow:none;}
+    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:16px;}
+    .calendar-day{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+    .calendar-day.today{border:3px solid #d462a6;font-weight:700;}
+    .calendar-day.checked{background:linear-gradient(135deg,#8b3a7a,#d462a6);color:white;}
+    .calendar-day.future{color:#ddd;}
+    .history-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #f5f5f5;}
+    .history-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+    .history-icon.success{background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#22c55e;}
+    .section-title{display:flex;align-items:center;gap:12px;}
+    .section-title .title-cn{font-family:'Ma Shan Zheng',cursive;font-size:30px;}
+    .section-title .title-en{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;opacity:0.7;}
+    .section-title .icon{font-size:32px;}
+    .quote-cn{font-family:'Liu Jian Mao Cao','Ma Shan Zheng',cursive;font-size:22px;line-height:1.6;}
+    .quote-en{font-family:'Caveat',cursive;font-size:16px;opacity:0.65;}
+    .fade-in{animation:fadeIn 0.6s ease-out;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    .font-cn-brush{font-family:'Zhi Mang Xing','Ma Shan Zheng',cursive;}
+    .font-cn-title{font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;}
+    .font-cn-body{font-family:'ZCOOL XiaoWei','Long Cang',serif;}
+    .font-cn-hand{font-family:'Liu Jian Mao Cao','Long Cang',cursive;}
+    .font-en-hand{font-family:'Caveat',cursive;}
 
-        /* 搜索框 */
-        .search-box { position: relative; margin-bottom: 24px; }
-        .search-box input {
-            width: 100%; padding: 14px 18px 14px 44px; border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08);
-            color: #fff; font-size: 15px; font-family: 'ZCOOL XiaoWei', serif;
-            outline: none; transition: all 0.3s;
-        }
-        .search-box input:focus { border-color: rgba(255,215,0,0.5); background: rgba(255,255,255,0.12); }
-        .search-box input::placeholder { color: rgba(255,255,255,0.35); }
-        .search-box .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; color: rgba(255,255,255,0.4); pointer-events: none; }
-
-        /* 单条动态 */
-        .moment-item {
-            background: rgba(255,255,255,0.06); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 18px;
-            padding: 20px; margin-bottom: 16px; transition: all 0.2s;
-        }
-        .moment-item:hover { background: rgba(255,255,255,0.1); }
-        .moment-top { display: flex; gap: 14px; align-items: flex-start; }
-        .moment-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #8b3a7a, #d462a6); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-        .moment-info { flex: 1; }
-        .moment-nick { font-family: 'Ma Shan Zheng', cursive; font-size: 18px; color: #fff; letter-spacing: 2px; }
-        .moment-time { font-family: 'Caveat', cursive; font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-        .moment-text { color: rgba(255,255,255,0.85); font-family: 'ZCOOL XiaoWei', serif; font-size: 16px; line-height: 1.7; margin-top: 12px; }
-        .moment-text.clamped { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .moment-expand { color: rgba(255,215,0,0.7); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; margin-top: 4px; display: none; }
-        .moment-expand.show { display: inline; }
-        .moment-expand:hover { color: rgba(255,215,0,1); }
-
-        /* 配图 */
-        .moment-images { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
-        .moment-images img { border-radius: 8px; object-fit: cover; cursor: pointer; transition: transform 0.2s; max-height: 180px; }
-        .moment-images.img-1 img { width: 100%; max-height: 240px; }
-        .moment-images.img-2 img { width: calc(50% - 3px); height: 150px; }
-        .moment-images.img-3 img { width: calc(33.3% - 4px); height: 130px; }
-        .moment-images img:hover { transform: scale(1.03); }
-
-        /* 点赞 */
-        .moment-actions { display: flex; justify-content: flex-end; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
-        .like-btn { display: flex; align-items: center; gap: 6px; cursor: pointer; color: rgba(255,255,255,0.45); font-size: 14px; transition: all 0.2s; user-select: none; }
-        .like-btn:hover { color: #ff6b6b; }
-        .like-btn.liked { color: #ff6b6b; }
-        .like-btn .like-icon { font-size: 16px; transition: transform 0.2s; }
-        .like-btn:hover .like-icon { transform: scale(1.2); }
-        .like-btn .like-count { font-family: 'Caveat', cursive; font-size: 14px; }
-
-        /* 空搜索结果 */
-        .no-results { text-align: center; padding: 60px 20px; color: rgba(255,255,255,0.4); }
-        .no-results .nr-icon { font-size: 48px; margin-bottom: 16px; }
-        .no-results .nr-text { font-family: 'Ma Shan Zheng', cursive; font-size: 20px; letter-spacing: 3px; }
-
-        /* ========== 字体 ========== */
-        .font-cn-brush { font-family: 'Zhi Mang Xing', 'Ma Shan Zheng', cursive; }
-        .font-cn-title { font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive; }
-        .font-cn-body { font-family: 'ZCOOL XiaoWei', 'Long Cang', serif; }
-        .font-cn-hand { font-family: 'Liu Jian Mao Cao', 'Long Cang', cursive; }
-        .font-en-hand { font-family: 'Caveat', cursive; }
-
-        /* ========== 主内容区 ========== */
-        #main { display: none; background: linear-gradient(135deg, #1a0011 0%, #4a1942 30%, #8b3a7a 60%, #d462a6 80%, #ff9a9e 100%); background-size: 400% 400%; animation: gradientFlow 12s ease infinite; min-height: 100vh; overflow: auto; }
-        .glass-card { background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
-        .nav-link { position: relative; cursor: pointer; padding: 10px 20px; border-radius: 10px; transition: all 0.3s; letter-spacing: 0.5px; }
-        .nav-link .nav-cn { font-family: 'Ma Shan Zheng', cursive; font-size: 17px; }
-        .nav-link .nav-en { font-family: 'Caveat', cursive; font-size: 12px; opacity: 0.6; }
-        .nav-link:hover, .nav-link.active { background: rgba(212,98,166,0.15); color: #d462a6; }
-        .publish-box { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
-        .publish-input { width: 100%; border: none; outline: none; resize: none; font-size: 16px; line-height: 1.7; min-height: 80px; font-family: 'ZCOOL XiaoWei', 'Quicksand', sans-serif; }
-        .publish-img { width: 85px; height: 85px; border-radius: 10px; object-fit: cover; }
-        .moments-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: transform 0.2s; }
-        .moments-card:hover { transform: translateY(-2px); }
-        .moments-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #8b3a7a, #d462a6); display: flex; align-items: center; justify-content: center; color: white; font-family: 'Ma Shan Zheng', cursive; font-size: 24px; flex-shrink: 0; }
-        .moments-images { display: grid; gap: 6px; margin-top: 14px; }
-        .moments-images.grid-1 { grid-template-columns: 1fr; }
-        .moments-images.grid-2 { grid-template-columns: repeat(2, 1fr); }
-        .moments-images.grid-3 { grid-template-columns: repeat(3, 1fr); }
-        .moments-images.grid-4 { grid-template-columns: repeat(2, 1fr); }
-        .moments-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; cursor: pointer; transition: transform 0.3s; }
-        .moments-img:hover { transform: scale(1.03); }
-        .moments-actions { display: flex; justify-content: space-around; margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0; }
-        .moments-action { display: flex; align-items: center; gap: 8px; color: #888; cursor: pointer; transition: all 0.2s; font-size: 14px; }
-        .moments-action .action-cn { font-family: 'ZCOOL XiaoWei', serif; font-weight: 500; }
-        .moments-action .action-en { font-family: 'Caveat', cursive; font-size: 12px; opacity: 0.6; }
-        .moments-action:hover { color: #d462a6; transform: scale(1.05); }
-        .moments-action.liked { color: #e74c3c; }
-        .checkin-card { background: white; border-radius: 20px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .streak-badge { background: linear-gradient(135deg, #d462a6, #ff9a9e); color: white; padding: 8px 20px; border-radius: 25px; font-size: 15px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
-        .streak-badge .streak-cn { font-family: 'Ma Shan Zheng', cursive; }
-        .streak-badge .streak-en { font-family: 'Caveat', cursive; font-size: 13px; }
-        .checkin-btn { background: linear-gradient(135deg, #8b3a7a, #d462a6); color: white; border: none; padding: 14px 40px; border-radius: 30px; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
-        .checkin-btn .btn-cn { font-family: 'Ma Shan Zheng', cursive; font-size: 19px; }
-        .checkin-btn .btn-en { font-family: 'Caveat', cursive; font-size: 14px; opacity: 0.85; }
-        .checkin-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(139,58,122,0.5); }
-        .checkin-btn:disabled { background: linear-gradient(135deg, #a0a0a0, #808080); cursor: not-allowed; transform: none; box-shadow: none; }
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; }
-        .calendar-day { aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .calendar-day.today { border: 3px solid #d462a6; font-weight: 700; }
-        .calendar-day.checked { background: linear-gradient(135deg, #8b3a7a, #d462a6); color: white; }
-        .calendar-day.future { color: #ddd; }
-        .history-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f5f5f5; }
-        .history-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .history-icon.success { background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #22c55e; }
-        .section-title { display: flex; align-items: center; gap: 12px; }
-        .section-title .title-cn { font-family: 'Ma Shan Zheng', cursive; font-size: 30px; }
-        .section-title .title-en { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; opacity: 0.7; }
-        .section-title .icon { font-size: 32px; }
-        .quote-cn { font-family: 'Liu Jian Mao Cao', 'Ma Shan Zheng', cursive; font-size: 22px; line-height: 1.6; }
-        .quote-en { font-family: 'Caveat', cursive; font-size: 16px; opacity: 0.65; }
-        .fade-in { animation: fadeIn 0.6s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* 探索世界占位 */
-        .explore-icon { font-size: 80px; margin-bottom: 30px; filter: drop-shadow(0 4px 20px rgba(255,215,0,0.5)); }
-        .explore-subtitle { font-family: 'Caveat', cursive; font-size: 24px; color: rgba(255,255,255,0.6); margin-bottom: 40px; }
-        .explore-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 40px; max-width: 600px; width: 100%; color: rgba(255,255,255,0.8); font-family: 'ZCOOL XiaoWei', serif; font-size: 18px; line-height: 2; }
-
-        @media (max-width: 768px) {
-            .home-title .main-title { font-size: 42px; letter-spacing: 4px; }
-            .home-title .sub-title { font-size: 18px; }
-            .sunglasses-entry { gap: 50px; }
-            .eye-icon .icon-symbol { font-size: 44px; }
-            .eye-icon .icon-label { font-size: 18px; }
-            .module-grid { grid-template-columns: 1fr; max-width: 320px; }
-            .keys-row { flex-direction: column; align-items: center; }
-            .moment-images.img-2 img { height: 110px; }
-            .moment-images.img-3 img { height: 100px; }
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(212,98,166,0.3); border-radius: 4px; }
+    @media(max-width:768px){
+        .home-title .main-title{font-size:42px;letter-spacing:4px;}.home-title .sub-title{font-size:18px;}
+        .sunglasses-entry{gap:50px;}.eye-icon .icon-symbol{font-size:44px;}.eye-icon .icon-label{font-size:18px;}
+        .module-grid{grid-template-columns:1fr;max-width:320px;}
+        .keys-row{flex-direction:column;align-items:center;}
+        .book-grid{grid-template-columns:repeat(2,1fr);}
+        .vinyl-grid{grid-template-columns:1fr;}
+        .film-card{width:220px;}
+    }
+    ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(212,98,166,0.3);border-radius:4px;}
     </style>
 </head>
 <body>
 
-    <!-- ==================== 着陆页 ==================== -->
+    <!-- ===== 着陆页 ===== -->
     <section id="home">
         <div class="particles-container" id="particlesContainer"></div>
-        <div class="home-title">
-            <div class="main-title">人生乱套 我睡大觉</div>
-            <div class="sub-title">Life's a mess · I'm going to sleep</div>
-        </div>
+        <div class="home-title"><div class="main-title">人生乱套 我睡大觉</div><div class="sub-title">Life's a mess · I'm going to sleep</div></div>
         <div class="sunglasses-entry">
-            <div class="eye-icon" id="eyeStar" data-target="explore-me">
-                <span class="icon-symbol">✦</span>
-                <span class="icon-label">探索我</span>
-                <span class="icon-label-en">Explore Me</span>
-            </div>
-            <div class="eye-icon" id="eyeMoon" data-target="explore-world">
-                <span class="icon-symbol">☾</span>
-                <span class="icon-label">探索世界</span>
-                <span class="icon-label-en">Explore World</span>
-            </div>
+            <div class="eye-icon" id="eyeStar" data-target="explore-me"><span class="icon-symbol">✦</span><span class="icon-label">探索我</span><span class="icon-label-en">Explore Me</span></div>
+            <div class="eye-icon" id="eyeMoon" data-target="explore-world"><span class="icon-symbol">☾</span><span class="icon-label">探索世界</span><span class="icon-label-en">Explore World</span></div>
         </div>
         <div class="watermark"><div class="wm-text">OUYANGMINGYUE</div></div>
     </section>
-
     <div id="meteorContainer"></div>
 
-    <!-- ==================== 探索我 页面 ==================== -->
+    <!-- ===== 探索我 ===== -->
     <section class="explore-page" id="explore-me">
         <div class="explore-header">
             <button class="back-btn" onclick="navigateBack()">← 返回</button>
-            <span class="font-cn-title" style="color:#fff; font-size:22px; letter-spacing:4px;">✨ 探索我</span>
+            <span class="font-cn-title" style="color:#fff;font-size:22px;letter-spacing:4px;">✨ 探索我</span>
         </div>
         <div class="explore-content">
-
-            <!-- 2x2 模块网格 -->
             <div class="module-grid" id="moduleGrid">
-                <!-- 记录我们 -->
-                <div class="module-card locked" onclick="openRecordUs()">
-                    <span class="mc-icon">💕</span>
-                    <div class="mc-title">记录我们</div>
-                    <div class="mc-sub">Record Us</div>
+                <div class="module-card locked" onclick="openRecordUs()"><span class="mc-icon">💕</span><div class="mc-title">记录我们</div><div class="mc-sub">Record Us</div>
                     <div class="keys-row">
-                        <div class="key-btn" onclick="event.stopPropagation(); openPasswordModal('jiejie')"><span class="key-icon">🔑</span><span class="key-name">姐姐</span></div>
-                        <div class="key-btn" onclick="event.stopPropagation(); openPasswordModal('xiaowei')"><span class="key-icon">🔑</span><span class="key-name">小微</span></div>
-                        <div class="key-btn" onclick="event.stopPropagation(); openPasswordModal('meimei')"><span class="key-icon">🔑</span><span class="key-name">妹妹</span></div>
+                        <div class="key-btn" onclick="event.stopPropagation();openPasswordModal('jiejie')"><span class="key-icon">🔑</span><span class="key-name">姐姐</span></div>
+                        <div class="key-btn" onclick="event.stopPropagation();openPasswordModal('xiaowei')"><span class="key-icon">🔑</span><span class="key-name">小微</span></div>
+                        <div class="key-btn" onclick="event.stopPropagation();openPasswordModal('meimei')"><span class="key-icon">🔑</span><span class="key-name">妹妹</span></div>
                     </div>
                 </div>
-                <!-- 占位 -->
-                <div class="module-card wip" onclick="showWip()"><span class="mc-icon">📝</span><div class="mc-title">记录日常</div><div class="mc-sub">Daily Life</div></div>
-                <div class="module-card wip" onclick="showWip()"><span class="mc-icon">💭</span><div class="mc-title">记录想法</div><div class="mc-sub">Thoughts</div></div>
-                <div class="module-card wip" onclick="showWip()"><span class="mc-icon">📖</span><div class="mc-title">记录学习</div><div class="mc-sub">Study Notes</div></div>
+                <div class="module-card" onclick="openSubTimeline('daily')"><span class="mc-icon">📝</span><div class="mc-title">记录日常</div><div class="mc-sub">Daily Life</div></div>
+                <div class="module-card" onclick="openSubTimeline('thoughts')"><span class="mc-icon">💭</span><div class="mc-title">记录想法</div><div class="mc-sub">Thoughts</div></div>
+                <div class="module-card" onclick="openSubTimeline('study')"><span class="mc-icon">📖</span><div class="mc-title">记录学习</div><div class="mc-sub">Study Notes</div></div>
             </div>
-
-            <!-- 朋友圈时间线（初始隐藏） -->
+            <!-- 记录我们 时间线 -->
             <div class="timeline-view" id="timelineView">
-                <div class="timeline-header">
-                    <button class="timeline-back" onclick="closeTimeline()">← 返回</button>
-                    <span class="timeline-name" id="timelineName"></span>
-                </div>
-                <div class="search-box">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" placeholder="搜索动态内容..." oninput="filterTimeline()">
-                </div>
+                <div class="timeline-header"><button class="timeline-back" onclick="closeTimeline()">← 返回</button><span class="timeline-name" id="timelineName"></span></div>
+                <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索动态内容..." oninput="filterTimeline()"></div>
                 <div id="timelineList"></div>
             </div>
-
+            <!-- Phase 4: 日常/想法/学习 时间线 -->
+            <div class="timeline-view" id="subTimelineView" data-theme="">
+                <div class="timeline-header"><button class="timeline-back" onclick="closeSubTimeline()">← 返回探索我</button><span class="timeline-name" id="subTimelineName"></span></div>
+                <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="subSearchInput" placeholder="搜索动态内容..." oninput="filterSubTimeline()"></div>
+                <div id="subTimelineList"></div>
+            </div>
         </div>
     </section>
 
-    <!-- ==================== 密码浮层 ==================== -->
+    <!-- 密码浮层 -->
     <div class="pw-overlay" id="pwOverlay" onclick="if(event.target===this)closePasswordModal()">
         <div class="pw-modal">
             <h3>请输入密码 🔒</h3>
             <input type="password" id="pwInput" maxlength="20" placeholder="输入密码..." onkeydown="if(event.key==='Enter')verifyPassword()">
             <div class="pw-error" id="pwError"></div>
-            <div class="pw-btns">
-                <button class="pw-btn-cancel" onclick="closePasswordModal()">取消</button>
-                <button class="pw-btn-confirm" onclick="verifyPassword()">确认</button>
-            </div>
+            <div class="pw-btns"><button class="pw-btn-cancel" onclick="closePasswordModal()">取消</button><button class="pw-btn-confirm" onclick="verifyPassword()">确认</button></div>
         </div>
     </div>
 
-    <!-- ==================== 探索世界 ==================== -->
+    <!-- ===== 探索世界 ===== -->
     <section class="explore-page" id="explore-world">
         <div class="explore-header">
             <button class="back-btn" onclick="navigateBack()">← 返回</button>
-            <span class="font-cn-title" style="color:#fff; font-size:22px; letter-spacing:4px;">探索世界</span>
+            <span class="font-cn-title" style="color:#fff;font-size:22px;letter-spacing:4px;">🌍 探索世界</span>
         </div>
         <div class="explore-content">
-            <div class="explore-icon">☾</div>
-            <div class="explore-title">探索世界</div>
-            <div class="explore-subtitle">Explore the World · See What's Out There</div>
-            <div class="explore-card">
-                <p>世界那么大，总要去看看。</p>
-                <p style="font-family:'Caveat',cursive; color:rgba(255,255,255,0.5); margin-top:8px;">The world is so big, always worth exploring.</p>
-                <p style="margin-top: 24px;">去看不同的风景，去遇见不同的人。</p>
-                <p>每一次出发，都是一次新的冒险。</p>
+            <div class="module-grid" id="worldGrid">
+                <div class="module-card" onclick="openWorldSub('courses')"><span class="mc-icon">🎓</span><div class="mc-title">公开课</div><div class="mc-sub">Open Courses</div></div>
+                <div class="module-card" onclick="openWorldSub('books')"><span class="mc-icon">📚</span><div class="mc-title">书籍分享</div><div class="mc-sub">Books</div></div>
+                <div class="module-card" onclick="openWorldSub('music')"><span class="mc-icon">🎵</span><div class="mc-title">音乐分享</div><div class="mc-sub">Music</div></div>
+                <div class="module-card" onclick="openWorldSub('movies')"><span class="mc-icon">🎬</span><div class="mc-title">影视分享</div><div class="mc-sub">Movies</div></div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== 主内容 ==================== -->
+    <!-- Phase 5: 公开课 -->
+    <div class="sub-view courses-bg" id="view-courses">
+        <div class="sub-header"><button class="back-btn" onclick="closeWorldSub()">← 返回</button><span style="font-family:'Ma Shan Zheng',cursive;font-size:22px;color:#1a1a2e;letter-spacing:4px;">🎓 公开课分享</span></div>
+        <div class="course-timeline" id="courseContent"></div>
+    </div>
+
+    <!-- Phase 5: 书籍 -->
+    <div class="sub-view books-bg" id="view-books">
+        <div class="sub-header"><button class="back-btn" onclick="closeWorldSub()">← 返回</button><span style="font-family:'Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">📚 书籍分享</span></div>
+        <div class="book-grid" id="bookContent"></div>
+    </div>
+
+    <!-- Phase 5: 音乐 -->
+    <div class="sub-view music-bg" id="view-music">
+        <div class="sub-header"><button class="back-btn" onclick="closeWorldSub()">← 返回</button><span style="font-family:'Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎵 音乐分享</span></div>
+        <div style="position:relative;min-height:100vh;">
+            <div class="soundwave" id="soundwave"></div>
+            <div class="vinyl-grid" id="vinylContent"></div>
+        </div>
+    </div>
+
+    <!-- Phase 5: 影视 -->
+    <div class="sub-view movies-bg" id="view-movies">
+        <div class="sub-header"><button class="back-btn" onclick="closeWorldSub()">← 返回</button><span style="font-family:'Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎬 影视分享</span></div>
+        <div style="position:relative;min-height:100vh;">
+            <div class="projector-light"></div>
+            <div class="filmstrip-scroll" id="filmContent"></div>
+        </div>
+    </div>
+
+    <!-- ===== 主内容 ===== -->
     <section id="main">
-        <nav style="position: sticky; top: 0; z-index: 50;">
-            <div class="glass-card shadow-lg" style="max-width: 56rem; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="goHome()">
-                    <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #8b3a7a, #d462a6); display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-star"></i></div>
-                    <span class="font-cn-brush" style="font-size: 24px;">我的旅程</span>
+        <nav style="position:sticky;top:0;z-index:50;">
+            <div class="glass-card shadow-lg" style="max-width:56rem;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="goHome()"><div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#8b3a7a,#d462a6);display:flex;align-items:center;justify-content:center;color:white;"><i class="fas fa-star"></i></div><span class="font-cn-brush" style="font-size:24px;">我的旅程</span></div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <button class="nav-link active" onclick="switchTab('life')"><i class="fas fa-heart" style="margin-right:4px;"></i><span class="nav-cn">生活</span></button>
+                    <button class="nav-link" onclick="switchTab('study')"><i class="fas fa-book" style="margin-right:4px;"></i><span class="nav-cn">学习</span></button>
                 </div>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <button class="nav-link active" onclick="switchTab('life')"><i class="fas fa-heart" style="margin-right:4px;"></i><span class="nav-cn">生活</span><span class="nav-en">Life</span></button>
-                    <button class="nav-link" onclick="switchTab('study')"><i class="fas fa-book" style="margin-right:4px;"></i><span class="nav-cn">学习</span><span class="nav-en">Study</span></button>
-                </div>
-                <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="display:flex;align-items:center;gap:12px;">
                     <button onclick="toggleDarkMode()" style="font-size:20px;padding:8px;cursor:pointer;background:none;border:none;"><i id="themeIcon" class="fas fa-moon"></i></button>
-                    <button onclick="goHome()" style="padding:8px 20px;background:linear-gradient(135deg,#8b3a7a,#d462a6);color:white;border:none;border-radius:999px;cursor:pointer;font-size:14px;"><span class="font-cn-body">首页 Home</span></button>
+                    <button onclick="goHome()" style="padding:8px 20px;background:linear-gradient(135deg,#8b3a7a,#d462a6);color:white;border:none;border-radius:999px;cursor:pointer;font-size:14px;">首页</button>
                 </div>
             </div>
         </nav>
-        <div style="max-width: 56rem; margin: 0 auto; padding: 20px 16px 80px;">
+        <div style="max-width:56rem;margin:0 auto;padding:20px 16px 80px;">
             <div id="lifeTab" class="fade-in">
-                <div class="glass-card" style="border-radius:16px;padding:24px;margin-bottom:24px;">
-                    <div style="display:flex;align-items:center;gap:20px;">
-                        <div style="width:96px;height:96px;border-radius:16px;background:linear-gradient(135deg,#8b3a7a,#d462a6,#ff9a9e);display:flex;align-items:center;justify-content:center;font-size:48px;">✦</div>
-                        <div>
-                            <h2 class="font-cn-brush" style="font-size:32px;font-weight:bold;">小可爱</h2>
-                            <p class="font-en-hand" style="font-size:20px;color:#9ca3af;margin-top:4px;">Little Cutie</p>
-                            <p class="font-cn-hand" style="font-size:18px;color:#6b7280;font-style:italic;margin-top:4px;">"保持热爱，奔赴山海"</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="publish-box">
-                    <textarea id="newPost" class="publish-input" placeholder="分享你的生活..."></textarea>
-                    <div id="previewImages" style="display:none;flex-wrap:wrap;gap:8px;margin-top:12px;"></div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;">
-                        <div style="display:flex;gap:16px;">
-                            <label style="cursor:pointer;color:#9ca3af;"><i class="fas fa-camera" style="font-size:20px;"></i><input type="file" id="postImages" style="display:none;" accept="image/*" multiple onchange="previewPostImages(event)"></label>
-                        </div>
-                        <button onclick="publishPost()" style="padding:10px 32px;background:linear-gradient(135deg,#8b3a7a,#d462a6);color:white;border:none;border-radius:999px;cursor:pointer;font-size:15px;"><span class="font-cn-body" style="font-weight:600;">发布</span></button>
-                    </div>
-                </div>
+                <div class="glass-card" style="border-radius:16px;padding:24px;margin-bottom:24px;"><div style="display:flex;align-items:center;gap:20px;"><div style="width:96px;height:96px;border-radius:16px;background:linear-gradient(135deg,#8b3a7a,#d462a6,#ff9a9e);display:flex;align-items:center;justify-content:center;font-size:48px;">✦</div><div><h2 class="font-cn-brush" style="font-size:32px;font-weight:bold;">小可爱</h2><p class="font-en-hand" style="font-size:20px;color:#9ca3af;margin-top:4px;">Little Cutie</p><p class="font-cn-hand" style="font-size:18px;color:#6b7280;font-style:italic;margin-top:4px;">"保持热爱，奔赴山海"</p></div></div></div>
+                <div class="publish-box"><textarea id="newPost" class="publish-input" placeholder="分享你的生活..."></textarea><div id="previewImages" style="display:none;flex-wrap:wrap;gap:8px;margin-top:12px;"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;"><div><label style="cursor:pointer;color:#9ca3af;"><i class="fas fa-camera" style="font-size:20px;"></i><input type="file" id="postImages" style="display:none;" accept="image/*" multiple onchange="previewPostImages(event)"></label></div><button onclick="publishPost()" style="padding:10px 32px;background:linear-gradient(135deg,#8b3a7a,#d462a6);color:white;border:none;border-radius:999px;cursor:pointer;">发布</button></div></div>
                 <div id="momentsList"></div>
             </div>
             <div id="studyTab" style="display:none;" class="fade-in">
-                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:32px;">
-                    <div class="glass-card" style="border-radius:16px;padding:24px;text-align:center;"><div style="font-size:36px;margin-bottom:12px;">📚</div><div class="font-cn-brush" style="font-size:36px;font-weight:bold;color:#8b3a7a;" id="totalEnglish">0</div><div class="font-cn-body" style="font-size:18px;color:#4b5563;">英语打卡天数</div></div>
-                    <div class="glass-card" style="border-radius:16px;padding:24px;text-align:center;"><div style="font-size:36px;margin-bottom:12px;">🎸</div><div class="font-cn-brush" style="font-size:36px;font-weight:bold;color:#d462a6;" id="totalMusic">0</div><div class="font-cn-body" style="font-size:18px;color:#4b5563;">乐器练习天数</div></div>
-                </div>
-                <div class="checkin-card">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:16px;">
-                        <div><h3 class="section-title"><span class="icon">📚</span><span class="title-cn">英语学习</span><span class="title-en">English Learning</span></h3></div>
-                        <div class="streak-badge"><i class="fas fa-fire"></i><span id="englishStreak" class="streak-cn">0</span><span class="streak-cn">天连续</span></div>
-                    </div>
-                    <div style="margin-bottom:24px;">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                            <button onclick="changeMonth('english',-1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-left" style="color:#8b3a7a;"></i></button>
-                            <span class="font-cn-body" style="font-size:20px;font-weight:bold;" id="englishMonth">2026年8月</span>
-                            <button onclick="changeMonth('english',1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-right" style="color:#8b3a7a;"></i></button>
-                        </div>
-                        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:14px;font-weight:600;color:#9ca3af;margin-bottom:12px;"><div class="font-cn-body">一</div><div class="font-cn-body">二</div><div class="font-cn-body">三</div><div class="font-cn-body">四</div><div class="font-cn-body">五</div><div class="font-cn-body">六</div><div class="font-cn-body">日</div></div>
-                        <div id="englishCalendar" class="calendar-grid"></div>
-                    </div>
-                    <div style="text-align:center;margin-bottom:24px;"><button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn"><i class="fas fa-check-circle"></i><span class="btn-cn">今日打卡</span></button></div>
-                    <div style="padding:20px;background:#f9fafb;border-radius:16px;margin-bottom:24px;"><p style="font-weight:600;color:#4b5563;margin-bottom:8px;">学习笔记</p><textarea id="englishNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;font-family:'ZCOOL XiaoWei',sans-serif;" placeholder="今天学了什么？" rows="3"></textarea></div>
-                    <div><h4 style="font-weight:bold;color:#4b5563;margin-bottom:16px;">最近记录</h4><div id="englishHistory"></div></div>
-                </div>
-                <div class="checkin-card">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:16px;">
-                        <div><h3 class="section-title"><span class="icon">🎸</span><span class="title-cn">乐器练习</span><span class="title-en">Instrument Practice</span></h3></div>
-                        <div class="streak-badge"><i class="fas fa-fire"></i><span id="musicStreak" class="streak-cn">0</span><span class="streak-cn">天连续</span></div>
-                    </div>
-                    <div style="margin-bottom:24px;">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                            <button onclick="changeMonth('music',-1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-left" style="color:#d462a6;"></i></button>
-                            <span class="font-cn-body" style="font-size:20px;font-weight:bold;" id="musicMonth">2026年8月</span>
-                            <button onclick="changeMonth('music',1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-right" style="color:#d462a6;"></i></button>
-                        </div>
-                        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:14px;font-weight:600;color:#9ca3af;margin-bottom:12px;"><div class="font-cn-body">一</div><div class="font-cn-body">二</div><div class="font-cn-body">三</div><div class="font-cn-body">四</div><div class="font-cn-body">五</div><div class="font-cn-body">六</div><div class="font-cn-body">日</div></div>
-                        <div id="musicCalendar" class="calendar-grid"></div>
-                    </div>
-                    <div style="text-align:center;margin-bottom:24px;"><button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn"><i class="fas fa-check-circle"></i><span class="btn-cn">今日打卡</span></button></div>
-                    <div style="padding:20px;background:#f9fafb;border-radius:16px;margin-bottom:24px;"><p style="font-weight:600;color:#4b5563;margin-bottom:8px;">练习笔记</p><textarea id="musicNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;font-family:'ZCOOL XiaoWei',sans-serif;" placeholder="今天练习了什么？" rows="3"></textarea></div>
-                    <div><h4 style="font-weight:bold;color:#4b5563;margin-bottom:16px;">最近记录</h4><div id="musicHistory"></div></div>
-                </div>
-                <div class="glass-card" style="border-radius:16px;padding:24px;text-align:center;">
-                    <p class="quote-cn" style="color:#4b5563;">"取得进步的秘诀就是开始行动。"</p>
-                    <p class="quote-en" style="color:#9ca3af;margin-top:4px;">"The secret of getting ahead is getting started."</p>
-                </div>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:32px;"><div class="glass-card" style="border-radius:16px;padding:24px;text-align:center;"><div style="font-size:36px;margin-bottom:12px;">📚</div><div class="font-cn-brush" style="font-size:36px;font-weight:bold;color:#8b3a7a;" id="totalEnglish">0</div><div class="font-cn-body">英语打卡天数</div></div><div class="glass-card" style="border-radius:16px;padding:24px;text-align:center;"><div style="font-size:36px;margin-bottom:12px;">🎸</div><div class="font-cn-brush" style="font-size:36px;font-weight:bold;color:#d462a6;" id="totalMusic">0</div><div class="font-cn-body">乐器练习天数</div></div></div>
+                <div class="checkin-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;"><div><h3 class="section-title"><span class="icon">📚</span><span class="title-cn">英语学习</span></h3></div><div class="streak-badge"><i class="fas fa-fire"></i><span id="englishStreak" class="streak-cn">0</span><span class="streak-cn">天连续</span></div></div><div style="margin-bottom:24px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><button onclick="changeMonth('english',-1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-left" style="color:#8b3a7a;"></i></button><span class="font-cn-body" style="font-size:20px;font-weight:bold;" id="englishMonth">2026年8月</span><button onclick="changeMonth('english',1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-right" style="color:#8b3a7a;"></i></button></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:14px;font-weight:600;color:#9ca3af;margin-bottom:12px;"><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div></div><div id="englishCalendar" class="calendar-grid"></div></div><div style="text-align:center;margin-bottom:24px;"><button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn"><i class="fas fa-check-circle"></i><span class="btn-cn">今日打卡</span></button></div><div style="padding:20px;background:#f9fafb;border-radius:16px;margin-bottom:24px;"><p style="font-weight:600;color:#4b5563;margin-bottom:8px;">学习笔记</p><textarea id="englishNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;" placeholder="今天学了什么？" rows="3"></textarea></div><div><h4 style="font-weight:bold;color:#4b5563;margin-bottom:16px;">最近记录</h4><div id="englishHistory"></div></div></div>
+                <div class="checkin-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;"><div><h3 class="section-title"><span class="icon">🎸</span><span class="title-cn">乐器练习</span></h3></div><div class="streak-badge"><i class="fas fa-fire"></i><span id="musicStreak" class="streak-cn">0</span><span class="streak-cn">天连续</span></div></div><div style="margin-bottom:24px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><button onclick="changeMonth('music',-1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-left" style="color:#d462a6;"></i></button><span class="font-cn-body" style="font-size:20px;font-weight:bold;" id="musicMonth">2026年8月</span><button onclick="changeMonth('music',1)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:none;"><i class="fas fa-chevron-right" style="color:#d462a6;"></i></button></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:14px;font-weight:600;color:#9ca3af;margin-bottom:12px;"><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div></div><div id="musicCalendar" class="calendar-grid"></div></div><div style="text-align:center;margin-bottom:24px;"><button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn"><i class="fas fa-check-circle"></i><span class="btn-cn">今日打卡</span></button></div><div style="padding:20px;background:#f9fafb;border-radius:16px;margin-bottom:24px;"><p style="font-weight:600;color:#4b5563;margin-bottom:8px;">练习笔记</p><textarea id="musicNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;" placeholder="今天练习了什么？" rows="3"></textarea></div><div><h4 style="font-weight:bold;color:#4b5563;margin-bottom:16px;">最近记录</h4><div id="musicHistory"></div></div></div>
+                <div class="glass-card" style="border-radius:16px;padding:24px;text-align:center;"><p class="quote-cn" style="color:#4b5563;">"取得进步的秘诀就是开始行动。"</p><p class="quote-en" style="color:#9ca3af;margin-top:4px;">"The secret of getting ahead is getting started."</p></div>
             </div>
         </div>
     </section>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    // ======================================================================
+    // ═══════════════════════════════════════
     // 1. 粒子
-    // ======================================================================
-    (function(){const c=document.getElementById('particlesContainer');if(!c)return;const s=['✦','☾','✧','✦','✧','☾','★','✧'];const cl=['rgba(255,255,255,','rgba(255,215,0,','rgba(224,176,255,','rgba(255,182,193,','rgba(255,255,255,','rgba(255,215,0,','rgba(200,180,255,','rgba(255,200,220,'];const n=120+Math.floor(Math.random()*30);for(let i=0;i<n;i++){const e=document.createElement('span');e.className='particle';e.textContent=s[Math.floor(Math.random()*s.length)];e.style.fontSize=(14+Math.random()*18)+'px';const o=0.3+Math.random()*0.6;e.style.color=cl[Math.floor(Math.random()*cl.length)]+o+')';e.style.left=(Math.random()*100)+'%';e.style.top=(Math.random()*100)+'%';if(Math.random()<0.3){e.classList.add('floating');e.style.setProperty('--float-duration',(3+Math.random()*3)+'s');e.style.setProperty('--float-delay',(Math.random()*6)+'s');e.style.setProperty('--base-opacity',o.toString());}c.appendChild(e);}})();
+    // ═══════════════════════════════════════
+    (function(){const c=document.getElementById('particlesContainer');if(!c)return;const s=['✦','☾','✧','✦','✧','☾','★','✧'],cl=['rgba(255,255,255,','rgba(255,215,0,','rgba(224,176,255,','rgba(255,182,193,','rgba(255,255,255,','rgba(255,215,0,','rgba(200,180,255,','rgba(255,200,220,'];for(let i=0;i<130;i++){const e=document.createElement('span');e.className='particle';e.textContent=s[Math.floor(Math.random()*s.length)];e.style.fontSize=(14+Math.random()*18)+'px';const o=0.3+Math.random()*0.6;e.style.color=cl[Math.floor(Math.random()*cl.length)]+o+')';e.style.left=(Math.random()*100)+'%';e.style.top=(Math.random()*100)+'%';if(Math.random()<0.3){e.classList.add('floating');e.style.setProperty('--float-duration',(3+Math.random()*3)+'s');e.style.setProperty('--float-delay',(Math.random()*6)+'s');e.style.setProperty('--base-opacity',o.toString());}c.appendChild(e);}})();
 
-    // ======================================================================
-    // 2. 音效
-    // ======================================================================
-    const SoundFX={_ctx:null,_getCtx(){if(!this._ctx)this._ctx=new(window.AudioContext||window.webkitAudioContext)();return this._ctx;},playClick(){try{const c=this._getCtx(),o=c.createGain(),g=c.createGain();o.connect(g);g.connect(c.destination);const osc=c.createOscillator();osc.connect(g);osc.type='sine';osc.frequency.setValueAtTime(880,c.currentTime);osc.frequency.exponentialRampToValueAtTime(1760,c.currentTime+0.08);osc.frequency.exponentialRampToValueAtTime(880,c.currentTime+0.15);g.gain.setValueAtTime(0.35,c.currentTime);g.gain.exponentialRampToValueAtTime(0.01,c.currentTime+0.4);osc.start(c.currentTime);osc.stop(c.currentTime+0.45);}catch(e){}try{navigator.vibrate&&navigator.vibrate(10);}catch(e){}}};
+    // ═══════════════════════════════════════
+    // 2. 音效 + 流星 + 悬停星光
+    // ═══════════════════════════════════════
+    const SoundFX={_ctx:null,_g(){if(!this._ctx)this._ctx=new(window.AudioContext||window.webkitAudioContext)();return this._ctx;},playClick(){try{const c=this._g(),g=c.createGain();g.connect(c.destination);const o=c.createOscillator();o.connect(g);o.type='sine';o.frequency.setValueAtTime(880,c.currentTime);o.frequency.exponentialRampToValueAtTime(1760,c.currentTime+0.08);o.frequency.exponentialRampToValueAtTime(880,c.currentTime+0.15);g.gain.setValueAtTime(0.35,c.currentTime);g.gain.exponentialRampToValueAtTime(0.01,c.currentTime+0.4);o.start(c.currentTime);o.stop(c.currentTime+0.45);}catch(e){}try{navigator.vibrate&&navigator.vibrate(10);}catch(e){}}};
+    const MeteorManager={_p:[],MAX:150,C:['#fff','#FFD700','#E0B0FF','#FFB6C1'],spawn(x,y,n){const c=document.getElementById('meteorContainer');if(!c)return;n=n||12+Math.floor(Math.random()*7);for(let i=0;i<n;i++){if(this._p.length>=this.MAX){const o=this._p.shift();if(o.parentNode)o.parentNode.removeChild(o);}const d=document.createElement('span');d.className='meteor-particle';const sz=4+Math.random()*6;d.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px;background:${this.C[Math.floor(Math.random()*4)]};box-shadow:0 0 ${sz*2}px ${this.C[Math.floor(Math.random()*4)]}`;const a=Math.random()*6.28,di=150+Math.random()*100;d.style.setProperty('--mx',(Math.cos(a)*di)+'px');d.style.setProperty('--my',(Math.sin(a)*di)+'px');d.style.setProperty('--meteor-dur',(0.6+Math.random()*0.3)+'s');c.appendChild(d);this._p.push(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);const i=this._p.indexOf(d);if(i!==-1)this._p.splice(i,1);},900);}}};
+    const HoverSparkle={_t:0,spawn(x,y){const n=Date.now();if(n-this._t<120)return;this._t=n;const d=document.createElement('span');d.className='hover-sparkle';const s=3+Math.random()*4;d.style.cssText=`width:${s}px;height:${s}px;left:${x+(Math.random()-0.5)*30}px;top:${y+(Math.random()-0.5)*30}px;background:${['#fff','#FFD700','#E0B0FF','#FFB6C1'][Math.floor(Math.random()*4)]};box-shadow:0 0 6px #fff`;document.body.appendChild(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);},1200);}};
 
-    // ======================================================================
-    // 3. 流星
-    // ======================================================================
-    const MeteorManager={_pool:[],MAX:150,COLORS:['#ffffff','#FFD700','#E0B0FF','#FFB6C1','#fff'],spawn(x,y,n){const c=document.getElementById('meteorContainer');if(!c)return;n=n||(12+Math.floor(Math.random()*7));for(let i=0;i<n;i++){if(this._pool.length>=this.MAX){const o=this._pool.shift();if(o.parentNode)o.parentNode.removeChild(o);}const d=document.createElement('span');d.className='meteor-particle';const sz=4+Math.random()*6;d.style.width=sz+'px';d.style.height=sz+'px';d.style.left=x+'px';d.style.top=y+'px';d.style.background=this.COLORS[Math.floor(Math.random()*this.COLORS.length)];d.style.boxShadow='0 0 '+(sz*2)+'px '+d.style.background;const a=Math.random()*Math.PI*2,di=150+Math.random()*100;d.style.setProperty('--mx',(Math.cos(a)*di)+'px');d.style.setProperty('--my',(Math.sin(a)*di)+'px');d.style.setProperty('--meteor-dur',(0.6+Math.random()*0.3)+'s');c.appendChild(d);this._pool.push(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);const idx=this._pool.indexOf(d);if(idx!==-1)this._pool.splice(idx,1);},900);}}};
-    const HoverSparkle={_t:0,spawn(x,y){const n=Date.now();if(n-this._t<120)return;this._t=n;const d=document.createElement('span');d.className='hover-sparkle';const s=3+Math.random()*4;d.style.width=s+'px';d.style.height=s+'px';d.style.left=(x+(Math.random()-0.5)*30)+'px';d.style.top=(y+(Math.random()-0.5)*30)+'px';const c=['#fff','#FFD700','#E0B0FF','#FFB6C1'];d.style.background=c[Math.floor(Math.random()*c.length)];d.style.boxShadow='0 0 6px '+d.style.background;document.body.appendChild(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);},1200);}};
-
-    // ======================================================================
-    // 4. 眼睛交互
-    // ======================================================================
+    // ═══════════════════════════════════════
+    // 3. 眼睛交互
+    // ═══════════════════════════════════════
     document.querySelectorAll('.eye-icon').forEach(icon=>{
         icon.addEventListener('mousedown',()=>{icon.classList.add('pressing');icon.classList.remove('bounce');});
         icon.addEventListener('mouseup',()=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);});
         icon.addEventListener('mouseleave',()=>{icon.classList.remove('pressing','bounce');});
         icon.addEventListener('touchstart',()=>{icon.classList.add('pressing');icon.classList.remove('bounce');},{passive:true});
-        icon.addEventListener('touchend',e=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);const t=e.changedTouches[0];if(t)MeteorManager.spawn(t.clientX,t.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.getAttribute('data-target')),400);});
-        icon.addEventListener('click',e=>{MeteorManager.spawn(e.clientX,e.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.getAttribute('data-target')),400);});
+        icon.addEventListener('touchend',e=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);const t=e.changedTouches[0];if(t)MeteorManager.spawn(t.clientX,t.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
+        icon.addEventListener('click',e=>{MeteorManager.spawn(e.clientX,e.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
         icon.addEventListener('mousemove',e=>{HoverSparkle.spawn(e.clientX,e.clientY);});
     });
 
-    // ======================================================================
-    // 5. 路由
-    // ======================================================================
+    // ═══════════════════════════════════════
+    // 4. 路由
+    // ═══════════════════════════════════════
     let currentRoute='home';
-    function navigateTo(target){
-        if(!target)return;const page=document.getElementById(target);if(!page)return;
-        const home=document.getElementById('home');home.style.transition='opacity 0.4s ease';home.style.opacity='0';
-        setTimeout(()=>{home.style.display='none';home.style.opacity='';home.style.transition='';},400);
-        page.classList.add('visible');page.style.opacity='0';
-        requestAnimationFrame(()=>{page.style.transition='opacity 0.4s ease';page.style.opacity='1';});
-        currentRoute=target;window.location.hash=target;document.body.style.overflow='auto';
-    }
-    function navigateBack(){
-        document.querySelectorAll('.explore-page.visible').forEach(p=>{p.style.transition='opacity 0.4s ease';p.style.opacity='0';setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},400);});
-        const home=document.getElementById('home');home.style.display='flex';home.style.opacity='0';
-        requestAnimationFrame(()=>{home.style.transition='opacity 0.4s ease';home.style.opacity='1';});
-        currentRoute='home';history.pushState(null,'',window.location.pathname);document.body.style.overflow='hidden';
-        // 重置探索我页面状态
-        closeTimeline();closePasswordModal();
-    }
+    function navigateTo(target){if(!target)return;const p=document.getElementById(target);if(!p)return;const h=document.getElementById('home');h.style.transition='opacity 0.4s ease';h.style.opacity='0';setTimeout(()=>{h.style.display='none';h.style.opacity='';h.style.transition='';},400);p.classList.add('visible');p.style.opacity='0';requestAnimationFrame(()=>{p.style.transition='opacity 0.4s ease';p.style.opacity='1';});currentRoute=target;window.location.hash=target;document.body.style.overflow='auto';}
+    function navigateBack(){document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.style.transition='opacity 0.4s ease';p.style.opacity='0';setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},400);});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s ease';h.style.opacity='1';});currentRoute='home';history.pushState(null,'',window.location.pathname);document.body.style.overflow='hidden';closeTimeline();closeSubTimeline();closePasswordModal();}
     window.addEventListener('hashchange',()=>{const h=window.location.hash.slice(1);if(h==='explore-me'||h==='explore-world'){if(currentRoute!==h)navigateTo(h);}else{if(currentRoute!=='home')navigateBack();}});
 
-    // ======================================================================
-    // 6. ★ Phase 3: 朋友圈数据
-    // ======================================================================
-    const friendsData = {
-        jiejie: {
-            name: '姐姐', avatar: '👩',
-            posts: [
-                { id: 1, text: '今天和妹妹去吃了火锅，超开心！冬天就应该吃热腾腾的东西～', images: ['https://picsum.photos/seed/jj1/300/200','https://picsum.photos/seed/jj2/300/200'], time: '2026-08-18 12:30', likes: 5 },
-                { id: 2, text: '新买的裙子到了，试穿一下感觉还不错嘿嘿', images: ['https://picsum.photos/seed/jj3/300/400'], time: '2026-08-16 19:20', likes: 12 },
-                { id: 3, text: '加班到凌晨两点，打车回家路上看到月亮好圆。生活虽然辛苦，但还是要努力呀。', images: [], time: '2026-08-14 02:15', likes: 8 },
-                { id: 4, text: '周末和闺蜜去了新开的咖啡店，拿铁拉花是小熊形状的！太可爱了吧！', images: ['https://picsum.photos/seed/jj4/300/200','https://picsum.photos/seed/jj5/300/200','https://picsum.photos/seed/jj6/300/200'], time: '2026-08-10 15:45', likes: 20 },
-                { id: 5, text: '终于把驾照科目二考过了！！！激动得想哭，下次请大家吃饭庆祝🎉', images: [], time: '2026-08-06 11:00', likes: 35 },
-                { id: 6, text: '看了一部超感人的电影，眼泪止不住地流。有些故事就是能触动你心里最柔软的地方。', images: ['https://picsum.photos/seed/jj7/300/200'], time: '2026-08-02 22:30', likes: 9 },
-            ]
-        },
-        xiaowei: {
-            name: '小微', avatar: '🧑',
-            posts: [
-                { id: 1, text: '今天托业模拟考了835分！离目标850越来越近了💪 继续加油！', images: [], time: '2026-08-18 09:00', likes: 15 },
-                { id: 2, text: '整理了一下CAE作品集，12个文件全部更新到V4.0版本。感觉离外企CAE的目标又近了一步。', images: ['https://picsum.photos/seed/xw1/300/200'], time: '2026-08-17 20:30', likes: 8 },
-                { id: 3, text: '遂宁市安居区人民医院的调研资料终于整理完了，注册证适用范围的偏差问题要特别注意。', images: [], time: '2026-08-15 16:45', likes: 6 },
-                { id: 4, text: '下雨天在家练吉他，终于能完整弹一首《小星星》了🎸 虽然简单但很有成就感', images: ['https://picsum.photos/seed/xw2/300/200'], time: '2026-08-12 21:00', likes: 11 },
-                { id: 5, text: '今天帮医院调试了XY-W-4000A，主任说效果很好！作为CAE最有成就感的就是看到产品真正帮助到患者。', images: ['https://picsum.photos/seed/xw3/300/200','https://picsum.photos/seed/xw4/300/200'], time: '2026-08-08 17:20', likes: 22 },
-                { id: 6, text: '给自己定了个小目标：2028年6月前跳槽到外企CAE。美敦力、雅培、波科，等我！', images: [], time: '2026-08-03 23:15', likes: 18 },
-                { id: 7, text: '周末去公园跑步5公里，配速终于破6了🏃‍♀️ 跑完心情超好', images: ['https://picsum.photos/seed/xw5/300/200'], time: '2026-07-28 08:30', likes: 7 },
-            ]
-        },
-        meimei: {
-            name: '妹妹', avatar: '👧',
-            posts: [
-                { id: 1, text: '开学第一天，新学期新气象！这学期一定要好好学习天天向上📚', images: ['https://picsum.photos/seed/mm1/300/200'], time: '2026-08-18 08:00', likes: 10 },
-                { id: 2, text: '和同学去了新开的奶茶店，芋泥波波奶茶绝了！已经连续喝了三天...', images: ['https://picsum.photos/seed/mm2/300/200','https://picsum.photos/seed/mm3/300/200'], time: '2026-08-15 14:20', likes: 16 },
-                { id: 3, text: '终于把暑假作业写完了！！！赶在开学前一天搞定，我真是太厉害了（心虚）', images: [], time: '2026-08-14 23:50', likes: 25 },
-                { id: 4, text: '今天学会了做番茄炒蛋，虽然卖相一般但是味道还不错！以后要学更多菜', images: ['https://picsum.photos/seed/mm4/300/200'], time: '2026-08-11 18:30', likes: 13 },
-                { id: 5, text: '追了一整天的剧，眼睛都快瞎了但是真的好好看啊停不下来', images: [], time: '2026-08-07 22:00', likes: 8 },
-                { id: 6, text: '姐姐带我去吃了烤肉，吃到撑！姐妹时光最开心了💕', images: ['https://picsum.photos/seed/mm5/300/200','https://picsum.photos/seed/mm6/300/200','https://picsum.photos/seed/mm7/300/200'], time: '2026-08-01 19:45', likes: 19 },
-            ]
-        }
+    // ═══════════════════════════════════════
+    // 5. 朋友圈数据（Phase 3）
+    // ═══════════════════════════════════════
+    const friendsData={
+        jiejie:{name:'姐姐',avatar:'👩',posts:[
+            {id:1,text:'今天和妹妹去吃了火锅，超开心！冬天就应该吃热腾腾的东西～',images:['https://picsum.photos/seed/jj1/300/200','https://picsum.photos/seed/jj2/300/200'],time:'2026-08-18 12:30',likes:5},
+            {id:2,text:'新买的裙子到了，试穿一下感觉还不错嘿嘿',images:['https://picsum.photos/seed/jj3/300/400'],time:'2026-08-16 19:20',likes:12},
+            {id:3,text:'加班到凌晨两点，打车回家路上看到月亮好圆。生活虽然辛苦，但还是要努力呀。',images:[],time:'2026-08-14 02:15',likes:8},
+            {id:4,text:'周末和闺蜜去了新开的咖啡店，拿铁拉花是小熊形状的！太可爱了吧！',images:['https://picsum.photos/seed/jj4/300/200','https://picsum.photos/seed/jj5/300/200','https://picsum.photos/seed/jj6/300/200'],time:'2026-08-10 15:45',likes:20},
+            {id:5,text:'终于把驾照科目二考过了！！！激动得想哭🎉',images:[],time:'2026-08-06 11:00',likes:35},
+            {id:6,text:'看了一部超感人的电影，眼泪止不住地流。有些故事就是能触动你心里最柔软的地方。',images:['https://picsum.photos/seed/jj7/300/200'],time:'2026-08-02 22:30',likes:9},
+        ]},
+        xiaowei:{name:'小微',avatar:'🧑',posts:[
+            {id:1,text:'今天托业模拟考了835分！离目标850越来越近了💪',images:[],time:'2026-08-18 09:00',likes:15},
+            {id:2,text:'整理了一下CAE作品集，12个文件全部更新到V4.0版本。',images:['https://picsum.photos/seed/xw1/300/200'],time:'2026-08-17 20:30',likes:8},
+            {id:3,text:'遂宁市安居区人民医院的调研资料终于整理完了。',images:[],time:'2026-08-15 16:45',likes:6},
+            {id:4,text:'下雨天在家练吉他，终于能完整弹一首《小星星》了🎸',images:['https://picsum.photos/seed/xw2/300/200'],time:'2026-08-12 21:00',likes:11},
+            {id:5,text:'今天帮医院调试了XY-W-4000A，主任说效果很好！',images:['https://picsum.photos/seed/xw3/300/200','https://picsum.photos/seed/xw4/300/200'],time:'2026-08-08 17:20',likes:22},
+            {id:6,text:'2028年6月前跳槽外企CAE。美敦力、雅培、波科，等我！',images:[],time:'2026-08-03 23:15',likes:18},
+            {id:7,text:'周末去公园跑步5公里，配速终于破6了🏃‍♀️',images:['https://picsum.photos/seed/xw5/300/200'],time:'2026-07-28 08:30',likes:7},
+        ]},
+        meimei:{name:'妹妹',avatar:'👧',posts:[
+            {id:1,text:'开学第一天，新学期新气象！这学期一定要好好学习📚',images:['https://picsum.photos/seed/mm1/300/200'],time:'2026-08-18 08:00',likes:10},
+            {id:2,text:'和同学去了新开的奶茶店，芋泥波波奶茶绝了！',images:['https://picsum.photos/seed/mm2/300/200','https://picsum.photos/seed/mm3/300/200'],time:'2026-08-15 14:20',likes:16},
+            {id:3,text:'终于把暑假作业写完了！！！赶在开学前一天搞定',images:[],time:'2026-08-14 23:50',likes:25},
+            {id:4,text:'今天学会了做番茄炒蛋，虽然卖相一般但味道不错！',images:['https://picsum.photos/seed/mm4/300/200'],time:'2026-08-11 18:30',likes:13},
+            {id:5,text:'追了一整天的剧，眼睛都快瞎了但是真的好好看',images:[],time:'2026-08-07 22:00',likes:8},
+            {id:6,text:'姐姐带我去吃了烤肉，吃到撑！姐妹时光最开心了💕',images:['https://picsum.photos/seed/mm5/300/200','https://picsum.photos/seed/mm6/300/200','https://picsum.photos/seed/mm7/300/200'],time:'2026-08-01 19:45',likes:19},
+        ]}
     };
 
-    // ======================================================================
-    // 7. ★ Phase 3: SHA-256 密码验证
-    // ======================================================================
-    const HASH_SALT = 'hermes_salt_2026';
-    const passwordHashes = {
-        jiejie:  '7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',  // 1230
-        xiaowei: 'ffcbbbda6b532a2f746b4ace1b9d395b285c24333520a31ad07a508bccadc02b',  // 520
-        meimei:  '6c2f3db183ae2662c40ce7dd0874bcb58dcbae68ae685917c8961b10e1700311',  // 1105
+    // ═══════════════════════════════════════
+    // 6. Phase 4: 日常/想法/学习 数据
+    // ═══════════════════════════════════════
+    const subTimelineData={
+        daily:{name:'📝 记录日常',avatar:'☀️',posts:[
+            {id:1,text:'今天早上六点就自然醒了，拉开窗帘发现日出好美。给自己做了一碗热汤面，开启元气满满的一天～',images:['https://picsum.photos/seed/d1/300/200'],time:'2026-08-18 07:30',likes:8},
+            {id:2,text:'下班路上偶遇一只橘猫，蹲下来摸它居然翻肚皮给我看。好治愈啊，想养猫了。',images:['https://picsum.photos/seed/d2/300/200','https://picsum.photos/seed/d3/300/200'],time:'2026-08-17 18:45',likes:15},
+            {id:3,text:'今天尝试做了芒果千层蛋糕，虽然卖相不太行但是味道居然还不错！下次再接再厉🍰',images:['https://picsum.photos/seed/d4/300/200'],time:'2026-08-15 15:20',likes:12},
+            {id:4,text:'下雨天窝在沙发上看了一下午的书，听着雨声发呆。有时候什么都不做也是一种幸福。',images:[],time:'2026-08-13 16:00',likes:20},
+            {id:5,text:'和朋友去了新开的密室逃脱，差点没被吓死哈哈。不过成功逃脱了，厉害吧！',images:['https://picsum.photos/seed/d5/300/200'],time:'2026-08-10 21:30',likes:18},
+            {id:6,text:'今天天气超好，去公园骑了共享单车，风好大头发全乱了但心情很好🚲',images:['https://picsum.photos/seed/d6/300/200'],time:'2026-08-08 10:15',likes:9},
+            {id:7,text:'深夜emo了，一个人在阳台看了很久的星星。有些话不知道跟谁说，就写在这里吧。',images:[],time:'2026-08-05 01:20',likes:25},
+            {id:8,text:'周末大扫除！把房间从头到尾收拾了一遍，断舍离了好多东西。焕然一新的感觉真好✨',images:['https://picsum.photos/seed/d7/300/200'],time:'2026-08-02 14:00',likes:7},
+        ]},
+        thoughts:{name:'💭 记录想法',avatar:'🌙',posts:[
+            {id:1,text:'最近在想，人与人之间的关系真的很微妙。有些人走着走着就散了，不是因为不在乎，而是各自有了不同的方向。',images:[],time:'2026-08-18 23:15',likes:30},
+            {id:2,text:'看到一句话："你不必成为别人眼中完美的人，你只需要成为自己觉得舒服的人。"突然被治愈了。',images:[],time:'2026-08-16 22:00',likes:42},
+            {id:3,text:'今天突然意识到，焦虑的根源往往是想得太多而做得太少。行动才是最好的解药。',images:[],time:'2026-08-14 20:30',likes:28},
+            {id:4,text:'二十多岁的迷茫是正常的吧？谁的青春不迷茫呢。重要的是在迷茫中也不要停下脚步。',images:[],time:'2026-08-11 23:45',likes:35},
+            {id:5,text:'有时候觉得社交媒体让人变得浮躁，总是在比较。不如放下手机，去感受真实的生活。',images:['https://picsum.photos/seed/t1/300/200'],time:'2026-08-08 19:20',likes:22},
+            {id:6,text:'想通了一件事：不是所有的努力都会有回报，但不努力一定没有回报。所以继续加油吧。',images:[],time:'2026-08-04 21:10',likes:38},
+            {id:7,text:'今天和妈妈打了个电话，聊了一个多小时。长大后才明白，家人永远是最温暖的港湾。',images:[],time:'2026-08-01 20:00',likes:45},
+        ]},
+        study:{name:'📖 记录学习',avatar:'📝',posts:[
+            {id:1,text:'今天背了50个托业单词，用Anki做了一个小时的复习。高频词汇越来越熟练了！📚',images:[],time:'2026-08-18 09:30',likes:12},
+            {id:2,text:'看完了《生物反馈治疗原理与临床应用》第三章，对胃肠起搏的机制理解更深了。',images:['https://picsum.photos/seed/s1/300/200'],time:'2026-08-16 21:00',likes:8},
+            {id:3,text:'今天练习了英语听力Part 3，正确率从60%提升到75%。感觉每天坚持真的有效果！',images:[],time:'2026-08-14 10:45',likes:15},
+            {id:4,text:'学习了Python数据分析基础，pandas的DataFrame操作比想象中简单。',images:['https://picsum.photos/seed/s2/300/200'],time:'2026-08-12 16:30',likes:10},
+            {id:5,text:'整理了XY-W系列产品的技术参数对比表，发给团队参考。效率提升了不少。',images:['https://picsum.photos/seed/s3/300/200'],time:'2026-08-09 14:20',likes:6},
+            {id:6,text:'今天读了一篇关于神经调控的英文文献，虽然很多专业词汇不认识但坚持读完了！',images:[],time:'2026-08-06 22:15',likes:18},
+            {id:7,text:'用费曼学习法给同事讲解了生物反馈的原理，讲的过程中自己也理解得更透彻了。',images:[],time:'2026-08-03 15:00',likes:14},
+            {id:8,text:'这周学习时长统计：英语12h，专业文献5h，Python 3h。下周继续加油💪',images:[],time:'2026-08-01 23:30',likes:20},
+        ]}
     };
 
-    let currentPwTarget = null;
+    // ═══════════════════════════════════════
+    // 7. Phase 5: 探索世界 数据
+    // ═══════════════════════════════════════
+    const worldData={
+        courses:[
+            {date:'08/18',title:'深度学习与神经网络',instructor:'Andrew Ng · Stanford',desc:'从零开始理解神经网络的数学原理，涵盖反向传播、梯度下降和正则化。'},
+            {date:'08/15',title:'量子计算导论',instructor:'Peter Shor · MIT',desc:'量子比特、量子门和量子纠缠的基础概念，适合有线性代数背景的听众。'},
+            {date:'08/10',title:'行为经济学：非理性决策',instructor:'Dan Ariely · Duke',desc:'为什么人类总是做出看似不理性的决策？探索认知偏差和决策陷阱。'},
+            {date:'08/05',title:'天体物理学：黑洞与时空',instructor:'Kip Thorne · Caltech',desc:'从事件视界到引力波，探索宇宙中最神秘的天体。'},
+            {date:'07/28',title:'创意写作工坊',instructor:'Brandon Sanderson · BYU',desc:'构建世界观、设计角色弧光、掌握叙事节奏的系统方法论。'},
+            {date:'07/20',title:'分子生物学：基因编辑革命',instructor:'Jennifer Doudna · UC Berkeley',desc:'CRISPR-Cas9技术的原理、应用和伦理思考。'},
+            {date:'07/12',title:'音乐理论：从零到作曲',instructor:'Adam Neely · YouTube',desc:'和弦进行、调式、节奏型，以及如何用乐理知识创作自己的音乐。'},
+            {date:'07/05',title:'哲学导论：存在的意义',instructor:'Shelly Kagan · Yale',desc:'从苏格拉底到加缪，探索"生命的意义是什么"这个永恒问题。'},
+        ],
+        books:[
+            {title:'三体',author:'刘慈欣',color:'#1a1a2e',emoji:'🌌',stars:'⭐⭐⭐⭐⭐'},
+            {title:'百年孤独',author:'加西亚·马尔克斯',color:'#8B5A2B',emoji:'🦋',stars:'⭐⭐⭐⭐⭐'},
+            {title:'人类简史',author:'尤瓦尔·赫拉利',color:'#2563EB',emoji:'🧬',stars:'⭐⭐⭐⭐'},
+            {title:'小王子',author:'圣埃克苏佩里',color:'#F59E0B',emoji:'🌹',stars:'⭐⭐⭐⭐⭐'},
+            {title:'活着',author:'余华',color:'#6B7280',emoji:'🌾',stars:'⭐⭐⭐⭐⭐'},
+            {title:'思考，快与慢',author:'丹尼尔·卡尼曼',color:'#7C3AED',emoji:'🧠',stars:'⭐⭐⭐⭐'},
+            {title:'月亮与六便士',author:'毛姆',color:'#EC4899',emoji:'🌙',stars:'⭐⭐⭐⭐'},
+            {title:'枪炮、病菌与钢铁',author:'贾雷德·戴蒙德',color:'#059669',emoji:'⚔️',stars:'⭐⭐⭐⭐'},
+            {title:'挪威的森林',author:'村上春树',color:'#10B981',emoji:'🌲',stars:'⭐⭐⭐⭐'},
+        ],
+        music:[
+            {title:'Bohemian Rhapsody',artist:'Queen',color:'#E74C3C',lyric:'Is this the real life? Is this just fantasy?'},
+            {title:'夜曲',artist:'周杰伦',color:'#3498DB',lyric:'为你弹奏肖邦的夜曲，纪念我死去的爱情'},
+            {title:'Hotel California',artist:'Eagles',color:'#F39C12',lyric:'You can check out any time you like, but you can never leave'},
+            {title:'起风了',artist:'买辣椒也用券',color:'#2ECC71',lyric:'我曾将青春翻涌成她，也曾指尖弹出盛夏'},
+            {title:'Imagine',artist:'John Lennon',color:'#9B59B6',lyric:'You may say I\'m a dreamer, but I\'m not the only one'},
+            {title:'晴天',artist:'周杰伦',color:'#E67E22',lyric:'故事的小黄花，从出生那年就飘着'},
+            {title:'Blinding Lights',artist:'The Weeknd',color:'#E74C3C',lyric:'I\'ve been blinded by the lights, no I can\'t sleep until I feel your touch'},
+            {title:'平凡之路',artist:'朴树',color:'#1ABC9C',lyric:'我曾经跨过山和大海，也穿过人山人海'},
+        ],
+        movies:[
+            {title:'星际穿越',director:'Christopher Nolan',img:'https://picsum.photos/seed/mv1/400/225',quote:'爱是唯一可以超越时间与空间的事物',tags:['科幻','烧脑','亲情']},
+            {title:'肖申克的救赎',director:'Frank Darabont',img:'https://picsum.photos/seed/mv2/400/225',quote:'希望是个好东西，也许是世间最好的东西',tags:['经典','自由','信念']},
+            {title:'千与千寻',director:'宫崎骏',img:'https://picsum.photos/seed/mv3/400/225',quote:'不要忘记自己的名字，否则就找不到回家的路',tags:['动画','成长','奇幻']},
+            {title:'盗梦空间',director:'Christopher Nolan',img:'https://picsum.photos/seed/mv4/400/225',quote:'一个念头就像病毒，极具感染力',tags:['科幻','梦境','悬疑']},
+            {title:'泰坦尼克号',director:'James Cameron',img:'https://picsum.photos/seed/mv5/400/225',quote:'你跳，我也跳',tags:['爱情','灾难','经典']},
+            {title:'阿甘正传',director:'Robert Zemeckis',img:'https://picsum.photos/seed/mv6/400/225',quote:'生活就像一盒巧克力，你永远不知道下一颗是什么',tags:['励志','人生','经典']},
+            {title:'寄生虫',director:'奉俊昊',img:'https://picsum.photos/seed/mv7/400/225',quote:'不是有钱却很善良，而是有钱所以善良',tags:['社会','悬疑','黑色幽默']},
+            {title:'你的名字',director:'新海诚',img:'https://picsum.photos/seed/mv8/400/225',quote:'只要记住你的名字，不管你在世界的哪个地方',tags:['动画','爱情','时空']},
+        ],
+    };
 
-    async function sha256(str) {
-        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    // ═══════════════════════════════════════
+    // 8. SHA-256 密码验证
+    // ═══════════════════════════════════════
+    const HASH_SALT='hermes_salt_2026';
+    const passwordHashes={jiejie:'7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',xiaowei:'ffcbbbda6b532a2f746b4ace1b9d395b285c24333520a31ad07a508bccadc02b',meimei:'6c2f3db183ae2662c40ce7dd0874bcb58dcbae68ae685917c8961b10e1700311'};
+    let currentPwTarget=null;
+    async function sha256(str){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+    function openPasswordModal(target){currentPwTarget=target;const o=document.getElementById('pwOverlay'),i=document.getElementById('pwInput'),e=document.getElementById('pwError');i.value='';e.textContent='';o.classList.add('visible');setTimeout(()=>i.focus(),300);}
+    function closePasswordModal(){const o=document.getElementById('pwOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);currentPwTarget=null;}
+    async function verifyPassword(){const i=document.getElementById('pwInput'),e=document.getElementById('pwError'),pw=i.value.trim();if(!pw){e.textContent='请输入密码';return;}const h=await sha256(HASH_SALT+pw);if(h===passwordHashes[currentPwTarget]){closePasswordModal();setTimeout(()=>openTimeline(currentPwTarget),350);}else{e.textContent='密码错误，请重试';i.classList.add('shake');i.value='';setTimeout(()=>i.classList.remove('shake'),400);}}
+    function openRecordUs(){}
+
+    // ═══════════════════════════════════════
+    // 9. 记录我们 时间线（Phase 3）
+    // ═══════════════════════════════════════
+    let currentTimelineUser=null,timelineLikes={};
+    function openTimeline(userId){currentTimelineUser=userId;const d=friendsData[userId];if(!d)return;document.getElementById('moduleGrid').style.display='none';const tv=document.getElementById('timelineView');tv.classList.add('active');document.getElementById('timelineName').textContent=d.name+' 的朋友圈';document.getElementById('searchInput').value='';renderTimeline(d.posts);}
+    function closeTimeline(){document.getElementById('timelineView').classList.remove('active');document.getElementById('moduleGrid').style.display='';currentTimelineUser=null;}
+    function renderTimeline(posts){const c=document.getElementById('timelineList'),d=friendsData[currentTimelineUser];if(!posts||!posts.length){c.innerHTML='<div class="no-results"><div class="nr-icon">✨</div><div class="nr-text">没有找到相关记录</div></div>';return;}c.innerHTML=posts.map(p=>{const lk=currentTimelineUser+'_'+p.id,liked=timelineLikes[lk]||false,lc=p.likes+(liked?1:0),ic=p.images?p.images.length:0;const isLong=p.text.length>60;return`<div class="moment-item"><div class="moment-top"><div class="moment-avatar">${d.avatar}</div><div class="moment-info"><div class="moment-nick">${d.name}</div><div class="moment-time">${fmtTime(p.time)}</div></div></div><div class="moment-text ${isLong?'clamped':''}" id="mtxt_${p.id}">${p.text}</div>${isLong?`<div class="moment-expand" id="mexp_${p.id}" onclick="expandText(${p.id})">...展开</div>`:''}${ic>0?`<div class="moment-images img-${Math.min(ic,3)}">${p.images.map(s=>`<img src="${s}" loading="lazy">`).join('')}</div>`:''}<div class="moment-actions"><div class="like-btn ${liked?'liked':''}" onclick="toggleTL('${currentTimelineUser}',${p.id})"><span class="like-icon">${liked?'❤️':'🤍'}</span><span class="like-count">${lc}</span></div></div></div>`;}).join('');}
+    function expandText(id){const t=document.getElementById('mtxt_'+id),e=document.getElementById('mexp_'+id);if(t)t.classList.remove('clamped');if(e)e.style.display='none';}
+    function toggleTL(uid,pid){const k=uid+'_'+pid;timelineLikes[k]=!timelineLikes[k];const d=friendsData[uid],q=document.getElementById('searchInput').value.trim().toLowerCase();let p=d.posts;if(q)p=p.filter(x=>x.text.toLowerCase().includes(q));renderTimeline(p);}
+    function filterTimeline(){const q=document.getElementById('searchInput').value.trim().toLowerCase(),d=friendsData[currentTimelineUser];if(!d)return;if(!q){renderTimeline(d.posts);return;}renderTimeline(d.posts.filter(p=>p.text.toLowerCase().includes(q)));}
+
+    // ═══════════════════════════════════════
+    // 10. Phase 4: 日常/想法/学习 时间线
+    // ═══════════════════════════════════════
+    let currentSubKey=null,subLikes={};
+    function openSubTimeline(key){currentSubKey=key;const d=subTimelineData[key];if(!d)return;document.getElementById('moduleGrid').style.display='none';const tv=document.getElementById('subTimelineView');tv.dataset.theme=key;tv.classList.add('active');document.getElementById('subTimelineName').textContent=d.name;document.getElementById('subSearchInput').value='';renderSubTimeline(d.posts);}
+    function closeSubTimeline(){document.getElementById('subTimelineView').classList.remove('active');document.getElementById('moduleGrid').style.display='';currentSubKey=null;}
+    function renderSubTimeline(posts){const c=document.getElementById('subTimelineList'),d=subTimelineData[currentSubKey];if(!posts||!posts.length){c.innerHTML='<div class="no-results"><div class="nr-icon">✨</div><div class="nr-text">没有找到相关记录</div></div>';return;}c.innerHTML=posts.map(p=>{const lk=currentSubKey+'_'+p.id,liked=subLikes[lk]||false,lc=p.likes+(liked?1:0),ic=p.images?p.images.length:0;const isLong=p.text.length>60;return`<div class="moment-item"><div class="moment-top"><div class="moment-avatar">${d.avatar}</div><div class="moment-info"><div class="moment-nick">${d.name.split(' ')[1]||d.name}</div><div class="moment-time">${fmtTime(p.time)}</div></div></div><div class="moment-text ${isLong?'clamped':''}" id="smtxt_${p.id}">${p.text}</div>${isLong?`<div class="moment-expand" id="smexp_${p.id}" onclick="expandSubText(${p.id})">...展开</div>`:''}${ic>0?`<div class="moment-images img-${Math.min(ic,3)}">${p.images.map(s=>`<img src="${s}" loading="lazy">`).join('')}</div>`:''}<div class="moment-actions"><div class="like-btn ${liked?'liked':''}" onclick="toggleSub('${currentSubKey}',${p.id})"><span class="like-icon">${liked?'❤️':'🤍'}</span><span class="like-count">${lc}</span></div></div></div>`;}).join('');}
+    function expandSubText(id){const t=document.getElementById('smtxt_'+id),e=document.getElementById('smexp_'+id);if(t)t.classList.remove('clamped');if(e)e.style.display='none';}
+    function toggleSub(key,pid){const k=key+'_'+pid;subLikes[k]=!subLikes[k];const d=subTimelineData[key],q=document.getElementById('subSearchInput').value.trim().toLowerCase();let p=d.posts;if(q)p=p.filter(x=>x.text.toLowerCase().includes(q));renderSubTimeline(p);}
+    function filterSubTimeline(){const q=document.getElementById('subSearchInput').value.trim().toLowerCase(),d=subTimelineData[currentSubKey];if(!d)return;if(!q){renderSubTimeline(d.posts);return;}renderSubTimeline(d.posts.filter(p=>p.text.toLowerCase().includes(q)));}
+
+    // ═══════════════════════════════════════
+    // 11. Phase 5: 探索世界 子模块
+    // ═══════════════════════════════════════
+    function openWorldSub(key){
+        document.getElementById('worldGrid').style.display='none';
+        const v=document.getElementById('view-'+key);if(!v)return;
+        v.classList.add('visible');v.style.opacity='0';
+        requestAnimationFrame(()=>{v.style.transition='opacity 0.4s ease';v.style.opacity='1';});
+        if(key==='courses')renderCourses();
+        if(key==='books')renderBooks();
+        if(key==='music')renderVinyl();
+        if(key==='movies')renderFilms();
+    }
+    function closeWorldSub(){
+        document.querySelectorAll('.sub-view.visible').forEach(v=>{v.style.transition='opacity 0.4s ease';v.style.opacity='0';setTimeout(()=>{v.classList.remove('visible');v.style.opacity='';v.style.transition='';},400);});
+        document.getElementById('worldGrid').style.display='';
     }
 
-    function openPasswordModal(target) {
-        currentPwTarget = target;
-        const overlay = document.getElementById('pwOverlay');
-        const input = document.getElementById('pwInput');
-        const error = document.getElementById('pwError');
-        input.value = ''; error.textContent = '';
-        overlay.classList.add('visible');
-        setTimeout(() => input.focus(), 300);
+    function renderCourses(){
+        document.getElementById('courseContent').innerHTML=`<div class="course-title">🎓 公开课时间轴</div>`+worldData.courses.map(c=>`
+        <div class="course-item"><div class="course-date">${c.date}</div><div class="course-card"><h4>${c.title}</h4><div class="cc-instructor">${c.instructor}</div><div class="cc-desc">${c.desc}</div></div></div>`).join('');
     }
 
-    function closePasswordModal() {
-        const overlay = document.getElementById('pwOverlay');
-        overlay.style.opacity = '0';
-        setTimeout(() => { overlay.classList.remove('visible'); overlay.style.opacity = ''; }, 300);
-        currentPwTarget = null;
+    function renderBooks(){
+        document.getElementById('bookContent').innerHTML=worldData.books.map(b=>`
+        <div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color};"><div class="bk-cover" style="background:${b.color}30;">${b.emoji}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${b.stars}</div></div></div>`).join('');
     }
 
-    async function verifyPassword() {
-        const input = document.getElementById('pwInput');
-        const error = document.getElementById('pwError');
-        const pw = input.value.trim();
-        if (!pw) { error.textContent = '请输入密码'; return; }
-
-        const hash = await sha256(HASH_SALT + pw);
-        if (hash === passwordHashes[currentPwTarget]) {
-            closePasswordModal();
-            setTimeout(() => openTimeline(currentPwTarget), 350);
-        } else {
-            error.textContent = '密码错误，请重试';
-            input.classList.add('shake');
-            input.value = '';
-            setTimeout(() => input.classList.remove('shake'), 400);
-        }
+    function renderVinyl(){
+        const wave=document.getElementById('soundwave');
+        wave.innerHTML=Array.from({length:30},(_,i)=>`<span style="height:${10+Math.random()*25}px;animation-delay:${i*0.05}s;"></span>`).join('');
+        document.getElementById('vinylContent').innerHTML=worldData.music.map((m,i)=>`
+        <div class="vinyl-card" onclick="toggleVinyl(this)" id="vinyl-${i}"><div class="vinyl-disc"><div class="vinyl-sticker" style="background:${m.color};">${m.artist[0]}</div></div><div class="vinyl-title">${m.title}</div><div class="vinyl-artist">${m.artist}</div><div class="vinyl-lyric">"${m.lyric}"</div></div>`).join('');
     }
 
-    function openRecordUs() {
-        // 点击卡片本身不做任何事，钥匙才是入口
+    function toggleVinyl(el){el.classList.toggle('playing');}
+
+    function renderFilms(){
+        document.getElementById('filmContent').innerHTML=worldData.movies.map(m=>`
+        <div class="film-card"><div class="film-poster"><img src="${m.img}" loading="lazy"><div class="film-overlay"><div class="film-name">${m.title}</div><div class="film-director">${m.director}</div><div class="film-quote">${m.quote}</div><div class="film-tags">${m.tags.map(t=>`<span>${t}</span>`).join('')}</div></div></div></div>`).join('');
     }
 
-    // ======================================================================
-    // 8. ★ Phase 3: 朋友圈时间线
-    // ======================================================================
-    let currentTimelineUser = null;
-    let timelineLikes = {}; // { 'jiejie_1': true, ... }
+    // ═══════════════════════════════════════
+    // 12. 工具函数
+    // ═══════════════════════════════════════
+    function fmtTime(ts){const now=new Date(),then=new Date(ts.replace(' ','T')),dm=now-then,m=Math.floor(dm/60000),h=Math.floor(dm/3600000),d=Math.floor(dm/86400000);if(m<1)return'刚刚';if(m<60)return m+'分钟前';if(h<24)return h+'小时前';if(d<7)return d+'天前';if(d<30)return Math.floor(d/7)+'周前';return ts.split(' ')[0];}
 
-    function openTimeline(userId) {
-        currentTimelineUser = userId;
-        const data = friendsData[userId];
-        if (!data) return;
-
-        // 隐藏模块网格，显示时间线
-        document.getElementById('moduleGrid').style.display = 'none';
-        const tv = document.getElementById('timelineView');
-        tv.classList.add('active');
-
-        document.getElementById('timelineName').textContent = data.name + ' 的朋友圈';
-        document.getElementById('searchInput').value = '';
-
-        renderTimeline(data.posts);
-    }
-
-    function closeTimeline() {
-        document.getElementById('timelineView').classList.remove('active');
-        document.getElementById('moduleGrid').style.display = '';
-        currentTimelineUser = null;
-    }
-
-    function renderTimeline(posts) {
-        const container = document.getElementById('timelineList');
-        const data = friendsData[currentTimelineUser];
-        if (!posts || posts.length === 0) {
-            container.innerHTML = '<div class="no-results"><div class="nr-icon">✨</div><div class="nr-text">没有找到相关记录</div></div>';
-            return;
-        }
-        container.innerHTML = posts.map(p => {
-            const likeKey = currentTimelineUser + '_' + p.id;
-            const liked = timelineLikes[likeKey] || false;
-            const likeCount = p.likes + (liked ? 1 : 0);
-            const imgCount = p.images ? p.images.length : 0;
-            const imgClass = imgCount > 0 ? 'moment-images img-' + Math.min(imgCount, 3) : '';
-            const isLong = p.text.length > 60;
-            return `
-            <div class="moment-item">
-                <div class="moment-top">
-                    <div class="moment-avatar">${data.avatar}</div>
-                    <div class="moment-info">
-                        <div class="moment-nick">${data.name}</div>
-                        <div class="moment-time">${formatRelativeTime(p.time)}</div>
-                    </div>
-                </div>
-                <div class="moment-text ${isLong ? 'clamped' : ''}" id="mtxt_${p.id}">${p.text}</div>
-                ${isLong ? `<div class="moment-expand" id="mexp_${p.id}" onclick="expandText(${p.id})">...展开</div>` : ''}
-                ${imgCount > 0 ? `<div class="${imgClass}">${p.images.map(src => `<img src="${src}" loading="lazy">`).join('')}</div>` : ''}
-                <div class="moment-actions">
-                    <div class="like-btn ${liked ? 'liked' : ''}" onclick="toggleTimelineLike('${currentTimelineUser}', ${p.id})">
-                        <span class="like-icon">${liked ? '❤️' : '🤍'}</span>
-                        <span class="like-count">${likeCount}</span>
-                    </div>
-                </div>
-            </div>`;
-        }).join('');
-    }
-
-    function expandText(id) {
-        const txt = document.getElementById('mtxt_' + id);
-        const exp = document.getElementById('mexp_' + id);
-        if (txt) txt.classList.remove('clamped');
-        if (exp) exp.style.display = 'none';
-    }
-
-    function toggleTimelineLike(userId, postId) {
-        const key = userId + '_' + postId;
-        timelineLikes[key] = !timelineLikes[key];
-        // 重新渲染
-        const data = friendsData[userId];
-        const query = document.getElementById('searchInput').value.trim().toLowerCase();
-        let posts = data.posts;
-        if (query) posts = posts.filter(p => p.text.toLowerCase().includes(query));
-        renderTimeline(posts);
-    }
-
-    function filterTimeline() {
-        const query = document.getElementById('searchInput').value.trim().toLowerCase();
-        const data = friendsData[currentTimelineUser];
-        if (!data) return;
-        if (!query) { renderTimeline(data.posts); return; }
-        const filtered = data.posts.filter(p => p.text.toLowerCase().includes(query));
-        renderTimeline(filtered);
-    }
-
-    function formatRelativeTime(timeStr) {
-        const now = new Date();
-        const then = new Date(timeStr.replace(' ', 'T'));
-        const diffMs = now - then;
-        const diffMin = Math.floor(diffMs / 60000);
-        const diffHr = Math.floor(diffMs / 3600000);
-        const diffDay = Math.floor(diffMs / 86400000);
-        if (diffMin < 1) return '刚刚';
-        if (diffMin < 60) return diffMin + '分钟前';
-        if (diffHr < 24) return diffHr + '小时前';
-        if (diffDay < 7) return diffDay + '天前';
-        if (diffDay < 30) return Math.floor(diffDay / 7) + '周前';
-        return timeStr.split(' ')[0]; // 超过30天显示日期
-    }
-
-    function showWip() {
-        alert('✨ 该模块正在建设中，敬请期待！');
-    }
-
-    // ======================================================================
-    // 9. 原有功能
-    // ======================================================================
+    // ═══════════════════════════════════════
+    // 13. 原有功能
+    // ═══════════════════════════════════════
     let appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};
     const monthNamesCN=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-    function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData.moments=[{id:1,content:'今天夕阳好美！🌅',contentEn:'Beautiful sunset!',images:[],time:'2026-08-17 19:30',likes:5,liked:false,location:'城市公园',locationEn:'City Park'},{id:2,content:'终于学会弹吉他了！🎸✨',contentEn:'Learned guitar!',images:[],time:'2026-08-16 21:15',likes:8,liked:true,location:'家',locationEn:'Home'}];saveData();}}
+    function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData.moments=[{id:1,content:'今天夕阳好美！🌅',contentEn:'Beautiful sunset!',images:[],time:'2026-08-17 19:30',likes:5,liked:false,location:'城市公园'},{id:2,content:'终于学会弹吉他了！🎸✨',contentEn:'Learned guitar!',images:[],time:'2026-08-16 21:15',likes:8,liked:true,location:'家'}];saveData();}}
     function saveData(){localStorage.setItem('myLifeJourney',JSON.stringify(appData));}
     function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
-    function goHome(){document.getElementById('main').style.display='none';document.querySelectorAll('.explore-page.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s ease';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTimeline();closePasswordModal();}
+    function goHome(){document.getElementById('main').style.display='none';document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s ease';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTimeline();closeSubTimeline();closePasswordModal();}
     function switchTab(tab){document.querySelectorAll('.nav-link').forEach(el=>el.classList.remove('active'));event.target.closest('.nav-link').classList.add('active');document.getElementById('lifeTab').style.display=tab==='life'?'block':'none';document.getElementById('studyTab').style.display=tab==='study'?'block':'none';}
     function toggleDarkMode(){const i=document.getElementById('themeIcon');i.classList.contains('fa-moon')?i.classList.replace('fa-moon','fa-sun'):i.classList.replace('fa-sun','fa-moon');}
     let selectedImages=[];
