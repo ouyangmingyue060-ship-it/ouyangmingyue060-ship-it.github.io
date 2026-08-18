@@ -132,10 +132,10 @@
     .moment-text.clamped{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
     .moment-expand{color:var(--accent-s);font-family:'Caveat',cursive;font-size:13px;cursor:pointer;margin-top:4px;display:none;}
     .moment-images{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
-    .moment-images img{border-radius:8px;object-fit:cover;cursor:pointer;transition:transform 0.2s;max-height:180px;}
-    .moment-images.img-1 img{width:100%;max-height:240px;}
-    .moment-images.img-2 img{width:calc(50% - 3px);height:140px;}
-    .moment-images.img-3 img{width:calc(33.3% - 4px);height:120px;}
+    .moment-images img{border-radius:8px;object-fit:contain;cursor:pointer;transition:transform 0.2s;max-height:220px;background:rgba(255,255,255,0.3);}
+    .moment-images.img-1 img{width:100%;max-height:300px;}
+    .moment-images.img-2 img{width:calc(50% - 3px);height:auto;max-height:180px;}
+    .moment-images.img-3 img{width:calc(33.3% - 4px);height:auto;max-height:140px;}
     .moment-images img:hover{transform:scale(1.03);}
     .moment-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:1px solid rgba(200,180,255,0.1);}
     .moment-crud{display:flex;gap:8px;}
@@ -201,7 +201,7 @@
     .upload-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(200,180,255,0.15);border:1px solid var(--card-border);padding:8px 16px;border-radius:12px;cursor:pointer;font-family:'ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-secondary);transition:all 0.2s;margin-top:8px;}
     .upload-btn:hover{background:rgba(200,180,255,0.25);}
     .upload-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
-    .upload-preview img{width:60px;height:60px;object-fit:cover;border-radius:8px;border:1px solid var(--card-border);}
+    .upload-preview img{width:60px;height:60px;object-fit:contain;border-radius:8px;border:1px solid var(--card-border);background:rgba(255,255,255,0.3);}
 
     /* === Phase 5 子模块 === */
     .sub-view{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
@@ -218,6 +218,9 @@
     .book-inner .bk-title{font-family:'Ma Shan Zheng',cursive;font-size:16px;color:#1a1a2e;letter-spacing:2px;}
     .book-inner .bk-author{font-family:'Caveat',cursive;font-size:13px;color:#9ca3af;margin-top:4px;}
     .book-inner .bk-stars{margin-top:10px;font-size:14px;letter-spacing:2px;}
+    .book-images{display:flex;gap:6px;margin-top:10px;overflow-x:auto;padding-bottom:4px;}
+    .book-images img{height:100px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,0.3);cursor:pointer;transition:transform 0.2s;}
+    .book-images img:hover{transform:scale(1.05);}
 
     .music-bg{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e1b4b 100%);}
     .music-bg .sub-header{background:rgba(30,27,75,0.85);}
@@ -265,7 +268,7 @@
     .moments-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:22px;flex-shrink:0;}
     .moments-images{display:grid;gap:6px;margin-top:12px;}
     .moments-images.grid-1{grid-template-columns:1fr;}.moments-images.grid-2{grid-template-columns:repeat(2,1fr);}.moments-images.grid-3{grid-template-columns:repeat(3,1fr);}
-    .moments-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;cursor:pointer;transition:transform 0.3s;}
+    .moments-img{width:100%;aspect-ratio:auto;max-height:200px;object-fit:contain;border-radius:12px;cursor:pointer;transition:transform 0.3s;background:rgba(255,255,255,0.3);}
     .moments-img:hover{transform:scale(1.03);}
     .moments-actions{display:flex;justify-content:space-around;margin-top:12px;padding-top:12px;border-top:1px solid var(--card-border);}
     .moments-action{display:flex;align-items:center;gap:8px;color:var(--text-light);cursor:pointer;transition:all 0.2s;font-size:14px;}
@@ -474,7 +477,7 @@ function seedData(){
     setData('xiaowei',[{id:n+1,text:'托业模拟考了835分！离目标850越来越近了💪',images:[],time:'2026-08-18 09:00',likes:15,liked:false,avatar:'🧑',nick:'小微'}]);
     setData('meimei',[{id:n+1,text:'开学第一天，新学期新气象！📚',images:['https://picsum.photos/seed/mm1/300/200'],time:'2026-08-18 08:00',likes:10,liked:false,avatar:'👧',nick:'妹妹'}]);
     setData('thoughts',[{id:n+1,text:'人与人之间的关系真的很微妙。有些人走着走着就散了。',images:[],time:'2026-08-18 23:15',likes:30,liked:false,avatar:'🌙',nick:'想法'}]);
-    setData('books',[{id:n+1,title:'三体',author:'刘慈欣',color:'#1a1a2e',emoji:'🌌',stars:5,review:'中国科幻的巅峰之作，硬核与人文的完美结合',reflection:'读完三体，我对宇宙的敬畏感加深了无数倍。黑暗森林法则让我重新审视人与人之间的信任关系。叶文洁的选择让我思考：当文明遭遇绝望时，我们会做出怎样的抉择？大刘用宏大的宇宙叙事，写出了最深沉的人性寓言。'}]);
+    setData('books',[{id:n+1,title:'三体',author:'刘慈欣',color:'#1a1a2e',emoji:'🌌',stars:5,reflection:'读完三体，我对宇宙的敬畏感加深了无数倍。黑暗森林法则让我重新审视人与人之间的信任关系。叶文洁的选择让我思考：当文明遭遇绝望时，我们会做出怎样的抉择？',images:[]}]);
     setData('music',[{id:n+1,title:'Bohemian Rhapsody',artist:'Queen',color:'#E74C3C',lyric:'Is this the real life? Is this just fantasy?'}]);
     setData('movies',[{id:n+1,title:'星际穿越',director:'Christopher Nolan',img:'https://picsum.photos/seed/mv1/400/225',review:'这部电影让我重新思考了时间和爱的关系。库珀穿越黑洞的那一刻，我泪流满面。',tags:['科幻','烧脑','亲情']}]);
     setData('studyCheckin',{});
@@ -484,7 +487,7 @@ seedData();
 
 // ═══ 图片压缩+上传 ═══
 function compressImage(file,maxW,quality){return new Promise((resolve)=>{const reader=new FileReader();reader.onload=function(e){const img=new Image();img.onload=function(){const canvas=document.createElement('canvas');let w=img.width,h=img.height;if(w>maxW){h=h*maxW/w;w=maxW;}canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',quality));};img.src=e.target.result;};reader.readAsDataURL(file);});}
-async function handleImageUpload(inputId,previewId){const input=document.getElementById(inputId);if(!input.files.length)return[];const imgs=[];for(const file of input.files){const b64=await compressImage(file,800,0.7);imgs.push(b64);}if(previewId){const pre=document.getElementById(previewId);pre.innerHTML=imgs.map(s=>`<img src="${s}">`).join('');pre.style.display='flex';}return imgs;}
+async function handleImageUpload(inputId,previewId){const input=document.getElementById(inputId);if(!input.files.length)return[];const imgs=[];for(const file of input.files){if(imgs.length>=9)break;const b64=await compressImage(file,800,0.8);imgs.push(b64);}if(previewId){const pre=document.getElementById(previewId);pre.innerHTML=imgs.map(s=>`<img src="${s}">`).join('');pre.style.display='flex';}return imgs;}
 
 // ═══ 密码验证 ═══
 const HASH_SALT='hermes_salt_2026';
@@ -560,7 +563,7 @@ let formMode='add',formKey='',formEditId=null,formUploadImgs=[];
 const formConfigs={
     recordus:{title:'添加动态',fields:[{name:'text',label:'正文',type:'textarea'}]},
     thoughts:{title:'添加想法',fields:[{name:'text',label:'正文',type:'textarea'}]},
-    books:{title:'添加书籍',fields:[{name:'title',label:'书名',type:'text'},{name:'author',label:'作者',type:'text'},{name:'stars',label:'评分(1-5)',type:'text'},{name:'emoji',label:'图标emoji',type:'text'},{name:'review',label:'📝 书评（简短评价）',type:'text'},{name:'reflection',label:'📖 读后感（个人感悟）',type:'textarea6'}]},
+    books:{title:'添加书籍',fields:[{name:'title',label:'书名',type:'text'},{name:'author',label:'作者',type:'text'},{name:'stars',label:'评分(1-5)',type:'text'},{name:'emoji',label:'图标emoji',type:'text'},{name:'reflection',label:'📖 读后感',type:'textarea6'}]},
     music:{title:'添加歌曲',fields:[{name:'title',label:'歌名',type:'text'},{name:'artist',label:'歌手',type:'text'},{name:'lyric',label:'一句歌词',type:'textarea'},{name:'color',label:'颜色(#hex)',type:'text'}]},
     movies:{title:'添加电影',fields:[{name:'title',label:'片名',type:'text'},{name:'director',label:'导演',type:'text'},{name:'review',label:'观后感',type:'textarea4'},{name:'tags',label:'标签（逗号分隔）',type:'text'},{name:'img',label:'海报URL',type:'text'}]},
 };
@@ -578,12 +581,12 @@ function renderForm(key,item){
         if(t==='textarea6')return`<label>${f.label}</label><textarea id="f_${f.name}" rows="6">${val}</textarea>`;
         return`<label>${f.label}</label><input type="text" id="f_${f.name}" value="${val}">`;
     }).join('');
-    const needsImg=['recordus','thoughts'].includes(key);
-    const imgHtml=needsImg?`<label>📷 上传图片</label><label class="upload-btn" for="formImgInput">选择图片<input type="file" id="formImgInput" accept="image/*" multiple style="display:none;" onchange="onFormImgUpload(this)"></label><div class="upload-preview" id="formImgPreview"></div><div style="font-size:11px;color:var(--text-light);margin-top:4px;">图片将压缩至800px宽，过多可能超出存储上限</div>`:'';
+    const needsImg=['recordus','thoughts','books'].includes(key);
+    const imgHtml=needsImg?`<label>📷 上传图片（最多9张）</label><label class="upload-btn" for="formImgInput">选择图片<input type="file" id="formImgInput" accept="image/*" multiple style="display:none;" onchange="onFormImgUpload(this)"></label><div class="upload-preview" id="formImgPreview"></div><div style="font-size:11px;color:var(--text-light);margin-top:4px;">图片自动压缩，过多可能超出存储上限</div>`:'';
     document.getElementById('formFields').innerHTML=fields+imgHtml;
     document.getElementById('formOverlay').classList.add('visible');
 }
-async function onFormImgUpload(input){formUploadImgs=[];for(const f of input.files){const b64=await compressImage(f,800,0.7);formUploadImgs.push(b64);}document.getElementById('formImgPreview').innerHTML=formUploadImgs.map(s=>`<img src="${s}">`).join('');}
+async function onFormImgUpload(input){formUploadImgs=[];for(const f of input.files){if(formUploadImgs.length>=9)break;const b64=await compressImage(f,800,0.8);formUploadImgs.push(b64);}document.getElementById('formImgPreview').innerHTML=formUploadImgs.map(s=>`<img src="${s}">`).join('');}
 function closeForm(){const o=document.getElementById('formOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
 function saveForm(){
     const cfg=formConfigs[formKey];if(!cfg)return;
@@ -594,14 +597,14 @@ function saveForm(){
         if(['recordus','thoughts'].includes(formKey)){
             const avatars={recordus:pwAvatars[curPwTarget]||'✦',thoughts:'🌙'};
             const nicks={recordus:pwNames[curPwTarget]||'我',thoughts:'想法'};
-            item.time=new Date().toISOString().replace('T',' ').slice(0,16);item.likes=0;item.liked=false;item.avatar=avatars[formKey]||'✦';item.nick=nicks[formKey]||'匿名';
-            item.images=formUploadImgs.length?formUploadImgs:[];
+            const now=new Date();item.time=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');item.likes=0;item.liked=false;item.avatar=avatars[formKey]||'✦';item.nick=nicks[formKey]||'匿名';
+            item.images=formUploadImgs.length?formUploadImgs.slice(0,9):[];
         }
-        if(formKey==='books'){item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');if(!item.emoji)item.emoji='📖';}
+        if(formKey==='books'){item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');if(!item.emoji)item.emoji='📖';item.images=formUploadImgs.length?formUploadImgs.slice(0,9):[];}
         if(formKey==='music'){if(!item.color)item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');}
         try{addItem(formKey,item);}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足，请删除部分旧图片');return;}}
     }else{
-        if(formUploadImgs.length&&['recordus','thoughts'].includes(formKey)){item.images=formUploadImgs;}
+        if(formUploadImgs.length&&['recordus','thoughts','books'].includes(formKey)){item.images=formUploadImgs.slice(0,9);}
         try{updateItem(formKey,formEditId,item);}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足');return;}}
     }
     closeForm();refreshAfterSave();
@@ -612,13 +615,18 @@ function refreshAfterSave(){if(curTLKey)refreshCurrentTL();if(document.getElemen
 // ═══ 探索世界子模块 ═══
 function openWorldSub(key){document.getElementById('worldGrid').style.display='none';const v=document.getElementById('view-'+key);if(!v)return;v.classList.add('visible');v.style.opacity='0';requestAnimationFrame(()=>{v.style.transition='opacity 0.4s';v.style.opacity='1';});if(key==='books')renderBooks();if(key==='music')renderVinyl();if(key==='movies')renderFilms();}
 function closeWorldSub(){document.querySelectorAll('.sub-view.visible').forEach(v=>{v.style.transition='opacity 0.4s';v.style.opacity='0';setTimeout(()=>{v.classList.remove('visible');v.style.opacity='';v.style.transition='';},400);});document.getElementById('worldGrid').style.display='';}
-function renderBooks(){const data=getData('books')||[];document.getElementById('bookContent').innerHTML=data.map(b=>{
-    const review=b.review||'';
+function renderBooks(){const data=getData('books')||[];let migrated=false;
+document.getElementById('bookContent').innerHTML=data.map(b=>{
+    // 旧数据迁移：review→reflection
+    if(!b.reflection&&b.review){b.reflection=b.review;delete b.review;migrated=true;}
     const ref=b.reflection||'';
     const refShort=ref.length>80?ref.slice(0,80)+'...':ref;
     const refId='ref_'+b.id;
-    return`<div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color||'#ccc'};"><div class="bk-cover" style="background:${b.color||'#ccc'}20;">${b.emoji||'📖'}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${'⭐'.repeat(b.stars||3)}</div>${review?`<div style="border-top:1px dashed rgba(150,100,200,0.2);margin-top:10px;padding-top:8px;"><span style="font-size:12px;color:var(--text-light);">📝 书评：</span><span style="font-size:12px;color:var(--text-light);">${review}</span></div>`:''}${ref?`<div style="margin-top:6px;text-align:left;"><span style="font-size:13px;color:var(--accent-s);font-weight:bold;">💭 读后感：</span><p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:4px;" id="${refId}">${ref.length>120?refShort:ref}</p>${ref.length>120?`<span style="font-size:12px;color:var(--accent-s);cursor:pointer;" onclick="var e=document.getElementById('${refId}');if(e.dataset.expanded==='1'){e.textContent='${refShort.replace(/'/g,"\\'")}';this.textContent='...展开';e.dataset.expanded='0';}else{e.textContent='${ref.replace(/'/g,"\\'").replace(/\n/g," ")}';this.textContent='收起';e.dataset.expanded='1';}">...展开</span>`:''}</div>`:`<div style="margin-top:6px;font-size:12px;color:var(--text-light);">暂无读后感 📝</div>`}</div><div class="item-crud" style="position:absolute;top:-8px;right:-8px;"><button onclick="openEditForm('books',${b.id})">✏️</button><button onclick="confirmDelete('books',${b.id})">🗑️</button></div></div>`;
-}).join('');}
+    const imgs=b.images||[];
+    return`<div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color||'#ccc'};"><div class="bk-cover" style="background:${b.color||'#ccc'}20;">${b.emoji||'📖'}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${'⭐'.repeat(b.stars||3)}</div>${ref?`<div style="border-top:1px dashed rgba(150,100,200,0.2);margin-top:10px;padding-top:8px;text-align:left;"><span style="font-size:13px;color:var(--accent-s);font-weight:bold;">📖 读后感：</span><p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:4px;" id="${refId}">${ref.length>120?refShort:ref}</p>${ref.length>120?`<span style="font-size:12px;color:var(--accent-s);cursor:pointer;" onclick="var e=document.getElementById('${refId}');if(e.dataset.expanded==='1'){e.textContent='${refShort.replace(/'/g,"\\'")}';this.textContent='...展开';e.dataset.expanded='0';}else{e.textContent='${ref.replace(/'/g,"\\'").replace(/\n/g," ")}';this.textContent='收起';e.dataset.expanded='1';}">...展开</span>`:''}</div>`:'<div style="margin-top:6px;font-size:12px;color:var(--text-light);">暂无读后感 📝</div>'}${imgs.length>0?`<div class="book-images">${imgs.map(s=>`<img src="${s}">`).join('')}</div>`:''}</div><div class="item-crud" style="position:absolute;top:-8px;right:-8px;"><button onclick="openEditForm('books',${b.id})">✏️</button><button onclick="confirmDelete('books',${b.id})">🗑️</button></div></div>`;
+}).join('');
+if(migrated)setData('books',data);
+}
 function renderVinyl(){const data=getData('music')||[];document.getElementById('soundwave').innerHTML=Array.from({length:30},(_,i)=>`<span style="height:${10+Math.random()*25}px;animation-delay:${i*0.05}s;"></span>`).join('');document.getElementById('vinylContent').innerHTML=data.map(m=>`<div class="vinyl-card" onclick="this.classList.toggle('playing')"><div class="vinyl-disc"><div class="vinyl-sticker" style="background:${m.color||'#888'};">${(m.artist||'?')[0]}</div></div><div class="vinyl-title">${m.title}</div><div class="vinyl-artist">${m.artist}</div><div class="vinyl-lyric">"${m.lyric||''}"</div><div class="item-crud" style="position:absolute;top:0;right:0;"><button onclick="event.stopPropagation();openEditForm('music',${m.id})">✏️</button><button onclick="event.stopPropagation();confirmDelete('music',${m.id})">🗑️</button></div></div>`).join('');}
 function renderFilms(){const data=getData('movies')||[];document.getElementById('filmContent').innerHTML=data.map(m=>`<div class="film-card"><div class="film-poster"><img src="${m.img||'https://picsum.photos/seed/mv/400/225'}" loading="lazy"><div class="film-overlay"><div class="film-name">${m.title}</div><div class="film-director">${m.director}</div><div class="film-review">${m.review||''}</div><div class="film-tags">${(m.tags||[]).map(t=>`<span>${t}</span>`).join('')}</div></div></div><div class="item-crud" style="position:absolute;top:8px;right:8px;z-index:2;"><button onclick="openEditForm('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">✏️</button><button onclick="confirmDelete('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">🗑️</button></div></div>`).join('');}
 
