@@ -515,7 +515,7 @@ function seedData(){
 seedData();
 
 // ═══ 图片压缩+上传 ═══
-function compressImage(file,maxW,quality){return new Promise((resolve)=>{const reader=new FileReader();reader.onload=function(e){const img=new Image();img.onload=function(){const canvas=document.createElement('canvas');let w=img.width,h=img.height;if(w>maxW){h=h*maxW/w;w=maxW;}canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',quality));};img.src=e.target.result;};reader.readAsDataURL(file);});}
+function compressImage(file,maxW,quality){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=function(){reject(new Error('文件读取失败'));};reader.onload=function(e){const img=new Image();img.onerror=function(){reject(new Error('图片加载失败'));};img.onload=function(){try{const canvas=document.createElement('canvas');let w=img.width,h=img.height;if(w>maxW){h=h*maxW/w;w=maxW;}canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',quality));}catch(err){reject(err);}};img.src=e.target.result;};reader.readAsDataURL(file);});}
 async function handleImageUpload(inputId,previewId){const input=document.getElementById(inputId);if(!input.files.length)return[];const imgs=[];for(const file of input.files){if(imgs.length>=9)break;const b64=await compressImage(file,800,0.8);imgs.push(b64);}if(previewId){const pre=document.getElementById(previewId);pre.innerHTML=imgs.map(s=>`<img src="${s}">`).join('');pre.style.display='flex';}return imgs;}
 
 // ═══ 密码验证 ═══
@@ -611,11 +611,32 @@ function renderForm(key,item){
         return`<label>${f.label}</label><input type="text" id="f_${f.name}" value="${val}">`;
     }).join('');
     const needsImg=['recordus','thoughts','books'].includes(key);
-    const imgHtml=needsImg?`<label>📷 上传图片（最多9张）</label><label class="upload-btn" for="formImgInput">选择图片<input type="file" id="formImgInput" accept="image/*" multiple style="display:none;" onchange="onFormImgUpload(this)"></label><div class="upload-preview" id="formImgPreview"></div><div style="font-size:11px;color:var(--text-light);margin-top:4px;">图片自动压缩，过多可能超出存储上限</div>`:'';
+    const imgHtml=needsImg?`<label>📷 上传图片（最多9张）</label><div class="upload-btn" onclick="document.getElementById('formImgInput').click()">📷 选择图片</div><input type="file" id="formImgInput" accept="image/*" multiple style="display:none;" onchange="onFormImgUpload(this)"><div class="upload-preview" id="formImgPreview"></div><div style="font-size:11px;color:var(--text-light);margin-top:4px;">图片自动压缩，过多可能超出存储上限</div>`:'';
     document.getElementById('formFields').innerHTML=fields+imgHtml;
     document.getElementById('formOverlay').classList.add('visible');
 }
-async function onFormImgUpload(input){formUploadImgs=[];for(const f of input.files){if(formUploadImgs.length>=9)break;const b64=await compressImage(f,800,0.8);formUploadImgs.push(b64);}document.getElementById('formImgPreview').innerHTML=formUploadImgs.map(s=>`<img src="${s}">`).join('');}
+async function onFormImgUpload(input){
+    try{
+        formUploadImgs=[];
+        const files=Array.from(input.files);
+        if(files.length>9){alert('最多选择9张图片');input.value='';return;}
+        const pre=document.getElementById('formImgPreview');
+        pre.innerHTML='<div style="color:var(--text-light);font-size:12px;">压缩中...</div>';
+        for(const f of files){
+            if(formUploadImgs.length>=9)break;
+            const b64=await compressImage(f,800,0.8);
+            formUploadImgs.push(b64);
+        }
+        pre.innerHTML=formUploadImgs.map(s=>`<img src="${s}">`).join('');
+    }catch(e){
+        console.error('图片上传失败:',e);
+        alert('图片上传失败：'+e.message);
+        formUploadImgs=[];
+        const pre=document.getElementById('formImgPreview');
+        if(pre)pre.innerHTML='';
+    }
+    input.value='';
+}
 function closeForm(){const o=document.getElementById('formOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
 function saveForm(){
     const cfg=formConfigs[formKey];if(!cfg)return;
