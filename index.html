@@ -27,17 +27,17 @@
 
     /* === 着陆页 === */
     #home{min-height:100vh;position:relative;overflow:hidden;}
-    .bg-layer{position:absolute;top:-10px;left:-10px;right:-10px;bottom:-10px;background-image:url('/assets/images/bg-home.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0;}
+    .bg-layer{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/assets/images/bg-home.jpg');background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#1a1a2e;z-index:0;}
     .bg-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.15);z-index:1;}
-    .content-layer{position:relative;z-index:10;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    .content-layer{position:relative;z-index:10;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:30vh;}
     @keyframes gradientFlow{0%{background-position:0% 50%}25%{background-position:50% 0%}50%{background-position:100% 50%}75%{background-position:50% 100%}100%{background-position:0% 50%}}
     .particles-container{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden;}
     .particle{position:absolute;pointer-events:none;user-select:none;will-change:transform;}
     .particle.floating{animation:starFloat var(--float-duration,4s) ease-in-out infinite;animation-delay:var(--float-delay,0s);}
     @keyframes starFloat{0%,100%{transform:translateY(0) rotate(0deg);opacity:var(--base-opacity,0.3)}50%{transform:translateY(-18px) rotate(8deg);opacity:calc(var(--base-opacity,0.3) + 0.15)}}
-    .home-title{position:relative;z-index:10;text-align:center;margin-bottom:50px;}
-    .home-title .main-title{font-family:'Ma Shan Zheng','Zhi Mang Xing',cursive;font-size:64px;color:#FFFFFF;letter-spacing:8px;line-height:1.3;text-shadow:0 4px 20px rgba(0,0,0,0.8);}
-    .home-title .sub-title{font-family:'Caveat','Dancing Script',cursive;font-size:22px;color:#FFEAA7;margin-top:12px;letter-spacing:3px;text-shadow:0 2px 12px rgba(0,0,0,0.7);}
+    .home-title{position:absolute;top:12%;left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%;max-width:700px;}
+    .home-title .main-title{font-family:'Ma Shan Zheng','Zhi Mang Xing',cursive;font-size:64px;color:#FFFFFF;letter-spacing:8px;line-height:1.3;text-shadow:0 4px 20px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.5);}
+    .home-title .sub-title{font-family:'Caveat','Dancing Script',cursive;font-size:30px;color:#FFEAA7;margin-top:16px;letter-spacing:4px;text-shadow:0 2px 15px rgba(0,0,0,0.8),0 0 30px rgba(0,0,0,0.4);}
     .sunglasses-entry{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:130px;margin-bottom:30px;}
     .eye-icon{display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
     .eye-icon .icon-symbol{font-size:76px;color:#FFFFFF;line-height:1;animation:pulse 2.5s ease-in-out infinite;transition:transform 0.1s ease;text-shadow:0 2px 15px rgba(0,0,0,0.6);}
@@ -58,7 +58,8 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
     /* === 探索页面 === */
-    .explore-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);background-size:400% 400%;animation:gradientFlow 12s ease infinite;z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
+    .explore-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url('/assets/images/bg-home.jpg');background-size:cover;background-position:center;z-index:0;filter:blur(12px);transform:scale(1.05);}
+    .explore-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
     .explore-page.visible{display:flex;flex-direction:column;opacity:1;}
     .explore-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;background:rgba(253,242,248,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);}
     .back-btn{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);padding:10px 24px;border-radius:25px;cursor:pointer;font-family:'Ma Shan Zheng',cursive;font-size:17px;letter-spacing:2px;transition:all 0.3s;}
@@ -208,7 +209,7 @@
     .sub-view.visible{display:flex;flex-direction:column;opacity:1;}
     .sub-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);}
 
-    .books-bg{background:#faf5f0;}.books-bg .sub-header{background:rgba(250,245,240,0.85);}
+    .books-bg{background:rgba(250,245,240,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}.books-bg .sub-header{background:rgba(250,245,240,0.85);}
     .books-bg .back-btn{color:var(--text-primary);background:rgba(255,255,255,0.6);}
     .book-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto;padding:20px 30px 80px;}
     .book-card{perspective:800px;cursor:pointer;position:relative;}
@@ -302,11 +303,12 @@
 
     @media(min-width:769px) and (max-width:1023px){
         .home-title .main-title{font-size:52px;letter-spacing:6px;}
+        .home-title .sub-title{font-size:26px;}
         .sunglasses-entry{gap:100px;}.eye-icon .icon-symbol{font-size:64px;}
         .module-grid{max-width:520px;}
     }
     @media(max-width:768px){
-        .home-title .main-title{font-size:32px;letter-spacing:4px;}.home-title .sub-title{font-size:16px;}.home-title{margin-bottom:30px;}
+        .home-title .main-title{font-size:36px;letter-spacing:4px;}.home-title .sub-title{font-size:22px;}.home-title{top:8%;}
         .sunglasses-entry{gap:60px;}.eye-icon .icon-symbol{font-size:50px;}.eye-icon .icon-label{font-size:16px;letter-spacing:2px;}.eye-icon .icon-label-en{font-size:12px;}
         .module-grid{max-width:100%;gap:12px;}
         .module-card .mc-left{width:50px;padding:16px 0 16px 16px;}
@@ -345,6 +347,9 @@
     </div>
 </section>
 <div id="meteorContainer"></div>
+
+<!-- 探索页面虚化背景 -->
+<div class="explore-bg" id="exploreBg" style="display:none;"></div>
 
 <!-- 探索我 -->
 <section class="explore-page" id="explore-me">
@@ -458,8 +463,8 @@ document.querySelectorAll('.eye-icon').forEach(icon=>{
 
 // ═══ 路由 ═══
 let currentRoute='home';
-function navigateTo(t){if(!t)return;const p=document.getElementById(t);if(!p)return;const h=document.getElementById('home');h.style.transition='opacity 0.4s';h.style.opacity='0';setTimeout(()=>{h.style.display='none';h.style.opacity='';h.style.transition='';},400);p.classList.add('visible');p.style.opacity='0';requestAnimationFrame(()=>{p.style.transition='opacity 0.4s';p.style.opacity='1';});currentRoute=t;window.location.hash=t;document.body.style.overflow='auto';}
-function navigateBack(){document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.style.transition='opacity 0.4s';p.style.opacity='0';setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},400);});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});currentRoute='home';history.pushState(null,'',window.location.pathname);document.body.style.overflow='hidden';closePwModal();closeForm();}
+function navigateTo(t){if(!t)return;const p=document.getElementById(t);if(!p)return;const h=document.getElementById('home');h.style.transition='opacity 0.4s';h.style.opacity='0';setTimeout(()=>{h.style.display='none';h.style.opacity='';h.style.transition='';},400);document.getElementById('exploreBg').style.display='block';p.classList.add('visible');p.style.opacity='0';requestAnimationFrame(()=>{p.style.transition='opacity 0.4s';p.style.opacity='1';});currentRoute=t;window.location.hash=t;document.body.style.overflow='auto';}
+function navigateBack(){document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.style.transition='opacity 0.4s';p.style.opacity='0';setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},400);});document.getElementById('exploreBg').style.display='none';const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});currentRoute='home';history.pushState(null,'',window.location.pathname);document.body.style.overflow='hidden';closePwModal();closeForm();}
 window.addEventListener('hashchange',()=>{const h=window.location.hash.slice(1);if(h==='explore-me'||h==='explore-world'){if(currentRoute!==h)navigateTo(h);}else if(!h&&currentRoute!=='home'){navigateBack();}});
 
 // ═══ localStorage ═══
@@ -635,7 +640,7 @@ let appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[
 function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData.moments=[{id:1,content:'今天夕阳好美！🌅',images:[],time:'2026-08-17 19:30',likes:5,liked:false}];saveData();}}
 function saveData(){localStorage.setItem('myLifeJourney',JSON.stringify(appData));}
 function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
-function goHome(){document.getElementById('main').style.display='none';document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();}
+function goHome(){document.getElementById('main').style.display='none';document.getElementById('exploreBg').style.display='none';document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();}
 function switchTab(tab){document.querySelectorAll('.nav-link').forEach(el=>el.classList.remove('active'));event.target.closest('.nav-link').classList.add('active');document.getElementById('lifeTab').style.display=tab==='life'?'block':'none';document.getElementById('studyTab').style.display=tab==='study'?'block':'none';}
 let selectedImages=[];
 function previewPostImages(e){const f=Array.from(e.target.files),c=document.getElementById('previewImages');c.innerHTML='';c.style.display='flex';selectedImages=[];f.forEach(file=>{const r=new FileReader();r.onload=function(ev){selectedImages.push(ev.target.result);const img=document.createElement('img');img.src=ev.target.result;img.style.cssText='width:70px;height:70px;border-radius:8px;object-fit:cover;';c.appendChild(img);};r.readAsDataURL(file);});}
