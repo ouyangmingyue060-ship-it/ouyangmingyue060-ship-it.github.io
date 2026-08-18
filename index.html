@@ -183,8 +183,10 @@
     .auth-fab .fab-dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse-dot 1.5s infinite;}
     .auth-fab.guest .fab-dot{background:#fbbf24;}
     @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
-    .auth-hidden{display:none!important;}
-    .auth-tip{font-size:12px;color:var(--text-light);text-align:center;padding:8px;font-family:'KBai','ZCOOL XiaoWei',serif;}
+    .auth-ctrl{display:none;}
+    body[data-author="true"] .auth-ctrl{display:flex;}
+    .auth-tip{display:block;font-size:12px;color:var(--text-light);text-align:center;padding:8px;font-family:'KBai','ZCOOL XiaoWei',serif;}
+    body[data-author="true"] .auth-tip{display:none;}
     .task-add{display:flex;gap:8px;margin-top:12px;}
     .task-add input{flex:1;padding:10px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;outline:none;}
     .task-add input:focus{border-color:var(--c-study);}
@@ -710,10 +712,9 @@ let isAuthor=sessionStorage.getItem('isAuthor')==='true';
 function updateAuthUI(){
     const fab=document.getElementById('authFab');
     const txt=document.getElementById('authFabText');
+    document.body.dataset.author=isAuthor?'true':'false';
     if(isAuthor){fab.classList.remove('guest');txt.textContent='🔓 退出编辑模式';}
     else{fab.classList.add('guest');txt.textContent='🔐 进入编辑模式';}
-    document.querySelectorAll('.auth-ctrl').forEach(el=>{isAuthor?el.classList.remove('auth-hidden'):el.classList.add('auth-hidden');});
-    document.querySelectorAll('.auth-tip').forEach(el=>{isAuthor?el.classList.add('auth-hidden'):el.classList.remove('auth-hidden');});
 }
 function toggleAuth(){if(isAuthor){isAuthor=false;sessionStorage.removeItem('isAuthor');updateAuthUI();}else{document.getElementById('authOverlay').classList.add('visible');document.getElementById('authPwInput').value='';document.getElementById('authPwError').textContent='';setTimeout(()=>document.getElementById('authPwInput').focus(),300);}}
 function closeAuthModal(){const o=document.getElementById('authOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
