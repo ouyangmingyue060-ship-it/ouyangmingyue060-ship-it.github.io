@@ -519,7 +519,7 @@ function renderTL(cid,dk,posts){
     }).join('');
 }
 function toggleLike(key,id){const arr=getData(key)||[];const p=arr.find(x=>x.id===id);if(p){p.liked=!p.liked;p.likes+=p.liked?1:-1;setData(key,arr);}refreshCurrentTL();}
-function openFriendTL(fk){curTLKey=fk;document.getElementById('moduleGrid').style.display='none';document.getElementById('timelineView').classList.add('active');document.getElementById('timelineName').textContent=pwNames[fk]+' 的朋友圈';document.getElementById('searchInput').value='';renderTL('timelineList',fk,getData(fk)||[]);}
+function openFriendTL(fk){curTLKey=fk;authenticatedFriend=fk;document.getElementById('moduleGrid').style.display='none';document.getElementById('timelineView').classList.add('active');document.getElementById('timelineName').textContent=pwNames[fk]+' 的朋友圈';document.getElementById('searchInput').value='';renderTL('timelineList',fk,getData(fk)||[]);}
 function filterTL(){const q=(document.getElementById('searchInput').value||'').trim().toLowerCase();const arr=getData(curTLKey)||[];renderTL('timelineList',curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
 function openSubTL(key){curTLKey=key;document.getElementById('moduleGrid').style.display='none';const tv=document.getElementById('subTimelineView');tv.dataset.theme=key;tv.classList.add('active');document.getElementById('subTimelineName').textContent='💭 记录想法';document.getElementById('subSearchInput').value='';document.getElementById('subAddBtn').onclick=()=>openAddForm(key);renderTL('subTimelineList',key,getData(key)||[]);}
 function filterSubTL(){const q=(document.getElementById('subSearchInput').value||'').trim().toLowerCase();const arr=getData(curTLKey)||[];renderTL('subTimelineList',curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
@@ -564,7 +564,7 @@ function deleteStudyTask(idx){const data=getData('studyCheckin')||{};if(!data[se
 function editStudyTask(idx){const data=getData('studyCheckin')||{};const tasks=data[selectedStudyDay]||[];const newTxt=prompt('编辑任务',tasks[idx]);if(newTxt===null)return;const trimmed=newTxt.trim();if(!trimmed){deleteStudyTask(idx);return;}tasks[idx]=trimmed;setData('studyCheckin',data);renderStudyCal();}
 
 // ═══ 表单弹窗（含图片上传）═══
-let formMode='add',formKey='',formEditId=null,formUploadImgs=[];
+let formMode='add',formKey='',formEditId=null,formUploadImgs=[],formDataKey='';
 const formConfigs={
     recordus:{title:'添加动态',fields:[{name:'text',label:'正文',type:'textarea'}]},
     thoughts:{title:'添加想法',fields:[{name:'text',label:'正文',type:'textarea'}]},
@@ -572,8 +572,8 @@ const formConfigs={
     music:{title:'添加歌曲',fields:[{name:'title',label:'歌名',type:'text'},{name:'artist',label:'歌手',type:'text'},{name:'lyric',label:'一句歌词',type:'textarea'},{name:'color',label:'颜色(#hex)',type:'text'}]},
     movies:{title:'添加电影',fields:[{name:'title',label:'片名',type:'text'},{name:'director',label:'导演',type:'text'},{name:'review',label:'观后感',type:'textarea4'},{name:'tags',label:'标签（逗号分隔）',type:'text'},{name:'img',label:'海报URL',type:'text'}]},
 };
-function openAddForm(key){formMode='add';formKey=key;formEditId=null;formUploadImgs=[];renderForm(key,null);}
-function openEditForm(key,id){formMode='edit';formKey=key;formEditId=id;formUploadImgs=[];const arr=getData(key)||[];renderForm(key,arr.find(x=>x.id===id));}
+function openAddForm(key){formMode='add';formKey=key;formEditId=null;formUploadImgs=[];formDataKey=(key==='recordus')?(authenticatedFriend||curTLKey):key;renderForm(key,null);}
+function openEditForm(key,id){const fk=['jiejie','xiaowei','meimei'].includes(key)?'recordus':key;formMode='edit';formKey=fk;formEditId=id;formUploadImgs=[];formDataKey=key;renderForm(fk,getData(key).find(x=>x.id===id));}
 function renderForm(key,item){
     const cfg=formConfigs[key];if(!cfg)return;
     document.getElementById('formTitle').textContent=(formMode==='edit'?'编辑':'添加')+' '+cfg.title.replace('添加 ','');
@@ -608,10 +608,12 @@ function saveForm(){
         }
         if(formKey==='books'){item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');if(!item.emoji)item.emoji='📖';item.images=formUploadImgs.length?formUploadImgs.slice(0,9):[];}
         if(formKey==='music'){if(!item.color)item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');}
-        try{addItem(formKey,item);if(formKey==='recordus')alert('✅ 动态添加成功！');}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足，请删除部分旧图片');return;}else{alert('添加失败：'+e.message);return;}}
+        const saveKey=formDataKey||formKey;
+        try{addItem(saveKey,item);if(formKey==='recordus')alert('✅ 动态添加成功！');}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足，请删除部分旧图片');return;}else{alert('添加失败：'+e.message);return;}}
     }else{
+        const updateKey=formDataKey||formKey;
         if(formUploadImgs.length&&['recordus','thoughts','books'].includes(formKey)){item.images=formUploadImgs.slice(0,9);}
-        try{updateItem(formKey,formEditId,item);}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足');return;}}
+        try{updateItem(updateKey,formEditId,item);}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足');return;}}
     }
     closeForm();refreshAfterSave();
 }
