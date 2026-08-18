@@ -5,50 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>人生乱套 我睡大觉</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&family=Long+Cang&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ========== 本地字体加载 Local Font Loading ========== */
-        @font-face {
-            font-family: 'GBai';
-            src: url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Shantell Sans';
-            src: url('/assets/fonts/ShantellSans-Italic-VariableFont_BNCE,INFM,SPAC,wght.ttf') format('truetype');
-            font-weight: normal;
-            font-style: italic;
-        }
+        /* ========== 本地字体 ========== */
+        @font-face { font-family: 'GBai'; src: url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype'); font-weight: normal; }
+        @font-face { font-family: 'Shantell Sans'; src: url('/assets/fonts/ShantellSans-Italic-VariableFont_BNCE,INFM,SPAC,wght.ttf') format('truetype'); font-weight: normal; font-style: italic; }
 
-        /* ========== 全局重置 Global Reset ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ========== 全局重置 ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { min-height: 100vh; overflow: hidden; }
 
-        body {
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        /* ========== 着陆页 - 紫粉宇宙渐变背景 ========== */
+        /* ========== 着陆页 - 紫粉宇宙渐变 ========== */
         #home {
             min-height: 100vh;
             background: linear-gradient(135deg, #1a0011 0%, #4a1942 30%, #8b3a7a 60%, #d462a6 80%, #ff9a9e 100%);
             background-size: 400% 400%;
             animation: gradientFlow 12s ease infinite;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             position: relative;
         }
-
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             25% { background-position: 50% 0%; }
@@ -57,506 +33,349 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ========== 星星月亮粒子层 Star & Moon Particle Layer ========== */
+        /* ========== 星星月亮粒子层 ========== */
         .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none; overflow: hidden;
         }
-
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            user-select: none;
-            will-change: transform;
-        }
-
-        .particle.floating {
-            animation: starFloat var(--float-duration, 4s) ease-in-out infinite;
-            animation-delay: var(--float-delay, 0s);
-        }
-
+        .particle { position: absolute; pointer-events: none; user-select: none; will-change: transform; }
+        .particle.floating { animation: starFloat var(--float-duration, 4s) ease-in-out infinite; animation-delay: var(--float-delay, 0s); }
         @keyframes starFloat {
             0%, 100% { transform: translateY(0) rotate(0deg); opacity: var(--base-opacity, 0.6); }
             50% { transform: translateY(-18px) rotate(8deg); opacity: calc(var(--base-opacity, 0.6) + 0.2); }
         }
 
-        /* ========== 着陆页标题 Landing Title ========== */
-        .home-title {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
+        /* ========== 着陆页标题 ========== */
+        .home-title { position: relative; z-index: 10; text-align: center; margin-bottom: 50px; }
         .home-title .main-title {
             font-family: 'Ma Shan Zheng', 'Zhi Mang Xing', cursive;
-            font-size: 64px;
-            color: #fff;
-            text-shadow: 0 4px 30px rgba(212, 98, 166, 0.6), 0 0 60px rgba(139, 58, 122, 0.3);
-            letter-spacing: 8px;
-            line-height: 1.3;
+            font-size: 64px; color: #fff;
+            text-shadow: 0 4px 30px rgba(212,98,166,0.6), 0 0 60px rgba(139,58,122,0.3);
+            letter-spacing: 8px; line-height: 1.3;
         }
-
         .home-title .sub-title {
             font-family: 'Caveat', 'Dancing Script', cursive;
-            font-size: 22px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 12px;
-            letter-spacing: 3px;
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            font-size: 22px; color: rgba(255,255,255,0.6); margin-top: 12px;
+            letter-spacing: 3px; text-shadow: 0 2px 15px rgba(0,0,0,0.3);
         }
 
-        /* ========== 墨镜双入口图标 Sunglasses Entry Icons ========== */
-        .entry-container {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            gap: 80px;
-            align-items: center;
-            justify-content: center;
+        /* ========== ★ 墨镜双入口（核心交互）========== */
+        .sunglasses-entry {
+            position: relative; z-index: 10;
+            display: flex; align-items: center; justify-content: center; gap: 100px;
+            margin-bottom: 30px;
         }
 
-        .entry-card {
-            width: 180px;
-            height: 220px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            border-radius: 28px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            color: white;
-            text-decoration: none;
-            animation: floatIn 1s ease-out backwards;
+        .eye-icon {
+            display: flex; flex-direction: column; align-items: center; gap: 14px;
+            cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .entry-card:nth-child(1) { animation-delay: 0.3s; }
-        .entry-card:nth-child(2) { animation-delay: 0.6s; }
-
-        @keyframes floatIn {
-            from { opacity: 0; transform: translateY(50px) scale(0.7); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        .eye-icon .icon-symbol {
+            font-size: 56px; color: #fff; line-height: 1;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(224,176,255,0.5), 0 0 60px rgba(255,182,193,0.3);
+            animation: pulse 2.5s ease-in-out infinite;
+            transition: transform 0.1s ease;
+        }
+        .eye-icon:nth-child(2) .icon-symbol {
+            text-shadow: 0 0 20px rgba(224,176,255,0.8), 0 0 40px rgba(255,215,0,0.5), 0 0 60px rgba(255,182,193,0.3);
+            animation-delay: 0.6s;
         }
 
-        .entry-card:hover {
-            transform: translateY(-24px) scale(1.12);
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 30px 80px rgba(212, 98, 166, 0.35), 0 0 40px rgba(139, 58, 122, 0.2);
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
         }
 
-        .entry-card .icon-wrap {
-            font-size: 60px;
-            margin-bottom: 16px;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-            transition: transform 0.4s;
-            position: relative;
+        /* 按压反弹 */
+        .eye-icon.pressing .icon-symbol {
+            animation: none;
+            transform: scale(0.85) !important;
+            transition: transform 0.1s ease;
+        }
+        .eye-icon.bounce .icon-symbol {
+            animation: none;
+            transform: scale(1) !important;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .entry-card:hover .icon-wrap {
-            transform: scale(1.15) rotate(-5deg);
+        .eye-icon .icon-label {
+            font-family: 'Ma Shan Zheng', cursive; font-size: 22px; color: rgba(255,255,255,0.85);
+            letter-spacing: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .eye-icon .icon-label-en {
+            font-family: 'Caveat', cursive; font-size: 15px; color: rgba(255,255,255,0.5);
+            letter-spacing: 2px;
         }
 
-        .entry-card .cn {
-            font-family: 'Ma Shan Zheng', 'Zhi Mang Xing', cursive;
-            font-size: 26px;
-            letter-spacing: 6px;
-            text-shadow: 0 3px 10px rgba(0,0,0,0.4);
-            margin-bottom: 6px;
+        /* 悬停时的光晕 */
+        .eye-icon:hover .icon-symbol {
+            filter: brightness(1.3) drop-shadow(0 0 25px rgba(255,215,0,0.6));
         }
 
-        .entry-card .en {
-            font-family: 'Caveat', 'Dancing Script', cursive;
-            font-size: 16px;
-            opacity: 0.65;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            font-weight: 500;
+        /* ========== 拖尾流星容器 ========== */
+        #meteorContainer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 999; pointer-events: none; overflow: hidden;
+        }
+        .meteor-particle {
+            position: fixed; border-radius: 50%; pointer-events: none;
+            animation: meteorFly var(--meteor-dur, 0.8s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        @keyframes meteorFly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--mx, 100px), var(--my, 100px)) scale(0.2); opacity: 0; }
         }
 
-        /* ========== 底部水印 Bottom Watermark ========== */
+        /* ========== 鼠标悬停星光微粒 ========== */
+        .hover-sparkle {
+            position: fixed; pointer-events: none; border-radius: 50%;
+            animation: sparkleLife 1.2s ease-out forwards;
+        }
+        @keyframes sparkleLife {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(0) translateY(-20px); opacity: 0; }
+        }
+
+        /* ========== 底部水印 ========== */
         .watermark {
-            position: absolute;
-            bottom: 30px;
-            z-index: 10;
-            text-align: center;
+            position: absolute; bottom: 30px; z-index: 10; text-align: center;
             animation: fadeInUp 2s ease-out 1.5s backwards;
         }
-
         .watermark .wm-text {
             font-family: 'Shantell Sans', 'Caveat', cursive;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 6px;
-            text-transform: uppercase;
+            font-size: 14px; color: rgba(255,255,255,0.3); letter-spacing: 6px; text-transform: uppercase;
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== 中文艺术字体 Chinese Artistic Fonts ========== */
+        /* ========== 探索页面（路由目标）========== */
+        .explore-page {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #1a0011 0%, #4a1942 30%, #8b3a7a 60%, #d462a6 80%, #ff9a9e 100%);
+            background-size: 400% 400%; animation: gradientFlow 12s ease infinite;
+            z-index: 100; overflow-y: auto;
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .explore-page.visible { display: flex; flex-direction: column; opacity: 1; }
+        .explore-page.fade-in { opacity: 1; }
+
+        .explore-header {
+            display: flex; align-items: center; gap: 16px; padding: 20px 30px;
+            position: sticky; top: 0; z-index: 110;
+            background: rgba(26,0,17,0.7); backdrop-filter: blur(12px);
+        }
+        .back-btn {
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; padding: 10px 24px; border-radius: 25px; cursor: pointer;
+            font-family: 'Ma Shan Zheng', cursive; font-size: 17px; letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.25); transform: translateX(-4px); }
+
+        .explore-content {
+            flex: 1; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 60px 30px; text-align: center;
+        }
+        .explore-icon { font-size: 80px; margin-bottom: 30px; filter: drop-shadow(0 4px 20px rgba(255,215,0,0.5)); }
+        .explore-title {
+            font-family: 'Ma Shan Zheng', cursive; font-size: 48px; color: #fff;
+            letter-spacing: 8px; margin-bottom: 16px;
+            text-shadow: 0 4px 20px rgba(212,98,166,0.5);
+        }
+        .explore-subtitle {
+            font-family: 'Caveat', cursive; font-size: 24px; color: rgba(255,255,255,0.6);
+            margin-bottom: 40px;
+        }
+        .explore-card {
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 24px;
+            padding: 40px; max-width: 600px; width: 100%; color: rgba(255,255,255,0.8);
+            font-family: 'ZCOOL XiaoWei', serif; font-size: 18px; line-height: 2;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* ========== 字体工具类 ========== */
         .font-cn-brush { font-family: 'Zhi Mang Xing', 'Ma Shan Zheng', cursive; }
         .font-cn-title { font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive; }
         .font-cn-body { font-family: 'ZCOOL XiaoWei', 'Long Cang', serif; }
         .font-cn-hand { font-family: 'Liu Jian Mao Cao', 'Long Cang', cursive; }
-
-        /* ========== 英文艺术字体 English Artistic Fonts ========== */
         .font-en-script { font-family: 'Dancing Script', cursive; }
         .font-en-hand { font-family: 'Caveat', cursive; }
         .font-en-display { font-family: 'Playfair Display', serif; }
         .font-en-body { font-family: 'Quicksand', sans-serif; }
 
-        /* ========== 主内容区 Main Content ========== */
+        /* ========== 主内容区 ========== */
         #main {
             display: none;
             background: linear-gradient(135deg, #1a0011 0%, #4a1942 30%, #8b3a7a 60%, #d462a6 80%, #ff9a9e 100%);
-            background-size: 400% 400%;
-            animation: gradientFlow 12s ease infinite;
-            min-height: 100vh;
-            overflow: auto;
+            background-size: 400% 400%; animation: gradientFlow 12s ease infinite;
+            min-height: 100vh; overflow: auto;
         }
-
         .glass-card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
 
-        /* ========== 导航栏 Navbar ========== */
-        .nav-link {
-            position: relative;
-            cursor: pointer;
-            padding: 10px 20px;
-            border-radius: 10px;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
+        /* ========== 导航栏 ========== */
+        .nav-link { position: relative; cursor: pointer; padding: 10px 20px; border-radius: 10px; transition: all 0.3s; letter-spacing: 0.5px; }
+        .nav-link .nav-cn { font-family: 'Ma Shan Zheng', cursive; font-size: 17px; }
+        .nav-link .nav-en { font-family: 'Caveat', cursive; font-size: 12px; opacity: 0.6; }
+        .nav-link:hover, .nav-link.active { background: rgba(212,98,166,0.15); color: #d462a6; }
 
-        .nav-link .nav-cn {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 17px;
-        }
+        /* ========== 发布框 ========== */
+        .publish-box { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+        .publish-input { width: 100%; border: none; outline: none; resize: none; font-size: 16px; line-height: 1.7; min-height: 80px; font-family: 'ZCOOL XiaoWei', 'Quicksand', sans-serif; }
+        .publish-img { width: 85px; height: 85px; border-radius: 10px; object-fit: cover; }
 
-        .nav-link .nav-en {
-            font-family: 'Caveat', cursive;
-            font-size: 12px;
-            opacity: 0.6;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            background: rgba(212, 98, 166, 0.15);
-            color: #d462a6;
-        }
-
-        /* ========== 发布框 Post Box ========== */
-        .publish-box {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-
-        .publish-input {
-            width: 100%;
-            border: none;
-            outline: none;
-            resize: none;
-            font-size: 16px;
-            line-height: 1.7;
-            min-height: 80px;
-            font-family: 'ZCOOL XiaoWei', 'Quicksand', sans-serif;
-        }
-
-        .publish-img {
-            width: 85px;
-            height: 85px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        /* ========== 朋友圈卡片 Moments Card ========== */
-        .moments-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            transition: transform 0.2s;
-        }
-
+        /* ========== 朋友圈 ========== */
+        .moments-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: transform 0.2s; }
         .moments-card:hover { transform: translateY(-2px); }
-
-        .moments-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #8b3a7a, #d462a6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .moments-images {
-            display: grid;
-            gap: 6px;
-            margin-top: 14px;
-        }
-
+        .moments-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #8b3a7a, #d462a6); display: flex; align-items: center; justify-content: center; color: white; font-family: 'Ma Shan Zheng', cursive; font-size: 24px; flex-shrink: 0; }
+        .moments-images { display: grid; gap: 6px; margin-top: 14px; }
         .moments-images.grid-1 { grid-template-columns: 1fr; }
         .moments-images.grid-2 { grid-template-columns: repeat(2, 1fr); }
         .moments-images.grid-3 { grid-template-columns: repeat(3, 1fr); }
         .moments-images.grid-4 { grid-template-columns: repeat(2, 1fr); }
-
-        .moments-img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
+        .moments-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; cursor: pointer; transition: transform 0.3s; }
         .moments-img:hover { transform: scale(1.03); }
-
-        .moments-actions {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .moments-action {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #888;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .moments-action .action-cn {
-            font-family: 'ZCOOL XiaoWei', serif;
-            font-weight: 500;
-        }
-
-        .moments-action .action-en {
-            font-family: 'Caveat', cursive;
-            font-size: 12px;
-            opacity: 0.6;
-        }
-
+        .moments-actions { display: flex; justify-content: space-around; margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0; }
+        .moments-action { display: flex; align-items: center; gap: 8px; color: #888; cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .moments-action .action-cn { font-family: 'ZCOOL XiaoWei', serif; font-weight: 500; }
+        .moments-action .action-en { font-family: 'Caveat', cursive; font-size: 12px; opacity: 0.6; }
         .moments-action:hover { color: #d462a6; transform: scale(1.05); }
         .moments-action.liked { color: #e74c3c; }
 
-        /* ========== 打卡卡片 Checkin Card ========== */
-        .checkin-card {
-            background: white;
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-
-        .streak-badge {
-            background: linear-gradient(135deg, #d462a6, #ff9a9e);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 15px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(212, 98, 166, 0.4);
-        }
-
+        /* ========== 打卡 ========== */
+        .checkin-card { background: white; border-radius: 20px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .streak-badge { background: linear-gradient(135deg, #d462a6, #ff9a9e); color: white; padding: 8px 20px; border-radius: 25px; font-size: 15px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(212,98,166,0.4); }
         .streak-badge .streak-cn { font-family: 'Ma Shan Zheng', cursive; }
         .streak-badge .streak-en { font-family: 'Caveat', cursive; font-size: 13px; }
-
-        .checkin-btn {
-            background: linear-gradient(135deg, #8b3a7a, #d462a6);
-            color: white;
-            border: none;
-            padding: 14px 40px;
-            border-radius: 30px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 0.5px;
-        }
-
+        .checkin-btn { background: linear-gradient(135deg, #8b3a7a, #d462a6); color: white; border: none; padding: 14px 40px; border-radius: 30px; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.5px; }
         .checkin-btn .btn-cn { font-family: 'Ma Shan Zheng', cursive; font-size: 19px; }
         .checkin-btn .btn-en { font-family: 'Caveat', cursive; font-size: 14px; opacity: 0.85; }
+        .checkin-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(139,58,122,0.5); }
+        .checkin-btn:disabled { background: linear-gradient(135deg, #a0a0a0, #808080); cursor: not-allowed; transform: none; box-shadow: none; }
 
-        .checkin-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(139, 58, 122, 0.5);
-        }
-
-        .checkin-btn:disabled {
-            background: linear-gradient(135deg, #a0a0a0, #808080);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* ========== 日历 Calendar ========== */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .calendar-day {
-            aspect-ratio: 1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
+        /* ========== 日历 ========== */
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; }
+        .calendar-day { aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         .calendar-day.today { border: 3px solid #d462a6; font-weight: 700; }
-
-        .calendar-day.checked {
-            background: linear-gradient(135deg, #8b3a7a, #d462a6);
-            color: white;
-            box-shadow: 0 4px 10px rgba(139, 58, 122, 0.4);
-        }
-
+        .calendar-day.checked { background: linear-gradient(135deg, #8b3a7a, #d462a6); color: white; box-shadow: 0 4px 10px rgba(139,58,122,0.4); }
         .calendar-day.future { color: #ddd; }
 
-        /* ========== 历史记录 History ========== */
-        .history-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 0;
-            border-bottom: 1px solid #f5f5f5;
-        }
+        /* ========== 历史记录 ========== */
+        .history-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f5f5f5; }
+        .history-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .history-icon.success { background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #22c55e; }
 
-        .history-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .history-icon.success {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: #22c55e;
-        }
-
-        /* ========== 标题装饰 Section Title ========== */
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        /* ========== 标题装饰 ========== */
+        .section-title { display: flex; align-items: center; gap: 12px; }
         .section-title .title-cn { font-family: 'Ma Shan Zheng', cursive; font-size: 30px; }
         .section-title .title-en { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; opacity: 0.7; }
         .section-title .icon { font-size: 32px; }
 
-        /* ========== 名言 Quote ========== */
         .quote-cn { font-family: 'Liu Jian Mao Cao', 'Ma Shan Zheng', cursive; font-size: 22px; line-height: 1.6; }
         .quote-en { font-family: 'Caveat', cursive; font-size: 16px; opacity: 0.65; }
 
-        /* ========== 渐入动画 Fade In ========== */
         .fade-in { animation: fadeIn 0.6s ease-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ========== 响应式 Responsive ========== */
+        /* ========== 响应式 ========== */
         @media (max-width: 768px) {
             .home-title .main-title { font-size: 42px; letter-spacing: 4px; }
             .home-title .sub-title { font-size: 18px; }
-            .entry-container { flex-direction: column; gap: 30px; }
-            .entry-card { width: 150px; height: 185px; }
-            .entry-card .icon-wrap { font-size: 48px; }
-            .entry-card .cn { font-size: 22px; }
-            .entry-card .en { font-size: 14px; }
+            .sunglasses-entry { gap: 50px; }
+            .eye-icon .icon-symbol { font-size: 44px; }
+            .eye-icon .icon-label { font-size: 18px; }
+            .explore-title { font-size: 36px; }
+            .explore-card { padding: 24px; font-size: 16px; }
         }
 
-        /* ========== 滚动条美化 Scrollbar ========== */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(212, 98, 166, 0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(212, 98, 166, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(212,98,166,0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(212,98,166,0.5); }
     </style>
 </head>
 <body>
 
-    <!-- ==================== 着陆页 Landing Page ==================== -->
+    <!-- ==================== 着陆页 ==================== -->
     <section id="home">
-
-        <!-- 星星月亮粒子层 Star & Moon Particle Layer -->
         <div class="particles-container" id="particlesContainer"></div>
 
-        <!-- 主标题 Main Title -->
         <div class="home-title">
             <div class="main-title">人生乱套 我睡大觉</div>
             <div class="sub-title">Life's a mess · I'm going to sleep</div>
         </div>
 
-        <!-- 墨镜双入口 Sunglasses Dual Entry -->
-        <div class="entry-container">
-            <div class="entry-card" onclick="enterSite('star')">
-                <div class="icon-wrap">✦</div>
-                <span class="cn">探索我</span>
-                <span class="en">Explore Me</span>
+        <!-- ★ 墨镜双入口 ★ -->
+        <div class="sunglasses-entry">
+            <div class="eye-icon" id="eyeStar" data-target="explore-me">
+                <span class="icon-symbol">✦</span>
+                <span class="icon-label">探索我</span>
+                <span class="icon-label-en">Explore Me</span>
             </div>
-            <div class="entry-card" onclick="enterSite('moon')">
-                <div class="icon-wrap">☾</div>
-                <span class="cn">探索世界</span>
-                <span class="en">Explore World</span>
+            <div class="eye-icon" id="eyeMoon" data-target="explore-world">
+                <span class="icon-symbol">☾</span>
+                <span class="icon-label">探索世界</span>
+                <span class="icon-label-en">Explore World</span>
             </div>
         </div>
 
-        <!-- 底部水印 Bottom Watermark -->
         <div class="watermark">
             <div class="wm-text">OUYANGMINGYUE</div>
         </div>
-
     </section>
 
-    <!-- ==================== 主内容 Main Content ==================== -->
+    <!-- ★ 拖尾流星容器 ★ -->
+    <div id="meteorContainer"></div>
+
+    <!-- ==================== 探索我 页面 ==================== -->
+    <section class="explore-page" id="explore-me">
+        <div class="explore-header">
+            <button class="back-btn" onclick="navigateBack()">← 返回</button>
+            <span class="font-cn-title" style="color:#fff; font-size:22px; letter-spacing:4px;">探索我</span>
+        </div>
+        <div class="explore-content">
+            <div class="explore-icon">✦</div>
+            <div class="explore-title">探索我</div>
+            <div class="explore-subtitle">Explore Me · Discover Who I Am</div>
+            <div class="explore-card">
+                <p>这里是我的内心世界。</p>
+                <p style="font-family:'Caveat',cursive; color:rgba(255,255,255,0.5); margin-top:8px;">This is where my inner world lives.</p>
+                <p style="margin-top: 24px;">热爱生活、热爱学习、热爱音乐。</p>
+                <p>每一天都在成为更好的自己。</p>
+                <p style="font-family:'Caveat',cursive; color:rgba(255,255,255,0.5); margin-top:8px;">Every day, becoming a better version of myself.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 探索世界 页面 ==================== -->
+    <section class="explore-page" id="explore-world">
+        <div class="explore-header">
+            <button class="back-btn" onclick="navigateBack()">← 返回</button>
+            <span class="font-cn-title" style="color:#fff; font-size:22px; letter-spacing:4px;">探索世界</span>
+        </div>
+        <div class="explore-content">
+            <div class="explore-icon">☾</div>
+            <div class="explore-title">探索世界</div>
+            <div class="explore-subtitle">Explore the World · See What's Out There</div>
+            <div class="explore-card">
+                <p>世界那么大，总要去看看。</p>
+                <p style="font-family:'Caveat',cursive; color:rgba(255,255,255,0.5); margin-top:8px;">The world is so big, always worth exploring.</p>
+                <p style="margin-top: 24px;">去看不同的风景，去遇见不同的人。</p>
+                <p>每一次出发，都是一次新的冒险。</p>
+                <p style="font-family:'Caveat',cursive; color:rgba(255,255,255,0.5); margin-top:8px;">Every departure is a new adventure.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 主内容 ==================== -->
     <section id="main">
-        <!-- 导航栏 Navbar -->
         <nav style="position: sticky; top: 0; z-index: 50;">
             <div class="glass-card shadow-lg" style="max-width: 56rem; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;">
                 <div style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="goHome()">
@@ -565,20 +384,16 @@
                     </div>
                     <span class="font-cn-brush" style="font-size: 24px;">我的旅程</span>
                 </div>
-
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <button class="nav-link active" onclick="switchTab('life')">
                         <i class="fas fa-heart" style="margin-right: 4px;"></i>
-                        <span class="nav-cn">生活</span>
-                        <span class="nav-en">Life</span>
+                        <span class="nav-cn">生活</span><span class="nav-en">Life</span>
                     </button>
                     <button class="nav-link" onclick="switchTab('study')">
                         <i class="fas fa-book" style="margin-right: 4px;"></i>
-                        <span class="nav-cn">学习</span>
-                        <span class="nav-en">Study</span>
+                        <span class="nav-cn">学习</span><span class="nav-en">Study</span>
                     </button>
                 </div>
-
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <button onclick="toggleDarkMode()" style="font-size: 20px; padding: 8px; cursor: pointer; background: none; border: none;">
                         <i id="themeIcon" class="fas fa-moon"></i>
@@ -591,41 +406,26 @@
         </nav>
 
         <div style="max-width: 56rem; margin: 0 auto; padding: 20px 16px 80px;">
-
-            <!-- ========== 生活页签 Life Tab ========== -->
+            <!-- 生活页签 -->
             <div id="lifeTab" class="fade-in">
-                <!-- 个人资料头部 Profile Header -->
                 <div class="glass-card" style="border-radius: 16px; padding: 24px; margin-bottom: 24px;">
                     <div style="display: flex; align-items: center; gap: 20px;">
                         <div style="width: 96px; height: 96px; border-radius: 16px; background: linear-gradient(135deg, #8b3a7a, #d462a6, #ff9a9e); display: flex; align-items: center; justify-content: center; font-size: 48px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">✦</div>
                         <div>
                             <h2 class="font-cn-brush" style="font-size: 32px; font-weight: bold;">小可爱</h2>
                             <p class="font-en-hand" style="font-size: 20px; color: #9ca3af; margin-top: 4px;">Little Cutie</p>
-                            <p class="font-cn-hand" style="font-size: 18px; color: #6b7280; font-style: italic; margin-top: 4px;">
-                                "保持热爱，奔赴山海"
-                            </p>
-                            <p class="font-en-hand" style="font-size: 14px; color: #9ca3af;">
-                                "Stay passionate, chase the horizon"
-                            </p>
+                            <p class="font-cn-hand" style="font-size: 18px; color: #6b7280; font-style: italic; margin-top: 4px;">"保持热爱，奔赴山海"</p>
+                            <p class="font-en-hand" style="font-size: 14px; color: #9ca3af;">"Stay passionate, chase the horizon"</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- 发布框 New Post Box -->
                 <div class="publish-box">
                     <textarea id="newPost" class="publish-input" placeholder="分享你的生活... Share your moments..."></textarea>
-
                     <div id="previewImages" style="display: none; flex-wrap: wrap; gap: 8px; margin-top: 12px;"></div>
-
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
                         <div style="display: flex; gap: 16px;">
-                            <label style="cursor: pointer; color: #9ca3af;" title="添加照片 Add Photos">
-                                <i class="fas fa-camera" style="font-size: 20px;"></i>
-                                <input type="file" id="postImages" style="display: none;" accept="image/*" multiple onchange="previewPostImages(event)">
-                            </label>
-                            <label style="cursor: pointer; color: #9ca3af;" title="添加位置 Add Location">
-                                <i class="fas fa-map-marker-alt" style="font-size: 20px;"></i>
-                            </label>
+                            <label style="cursor: pointer; color: #9ca3af;" title="添加照片"><i class="fas fa-camera" style="font-size: 20px;"></i><input type="file" id="postImages" style="display: none;" accept="image/*" multiple onchange="previewPostImages(event)"></label>
+                            <label style="cursor: pointer; color: #9ca3af;" title="添加位置"><i class="fas fa-map-marker-alt" style="font-size: 20px;"></i></label>
                         </div>
                         <button onclick="publishPost()" style="padding: 10px 32px; background: linear-gradient(135deg, #8b3a7a, #d462a6); color: white; border: none; border-radius: 999px; cursor: pointer; font-size: 15px;">
                             <span class="font-cn-body" style="font-weight: 600;">发布 Post</span>
@@ -633,14 +433,11 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- 动态列表 Moments Feed -->
                 <div id="momentsList"></div>
             </div>
 
-            <!-- ========== 学习页签 Study Tab ========== -->
+            <!-- 学习页签 -->
             <div id="studyTab" style="display: none;" class="fade-in">
-                <!-- 统计卡片 Stats Cards -->
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 32px;">
                     <div class="glass-card" style="border-radius: 16px; padding: 24px; text-align: center;">
                         <div style="font-size: 36px; margin-bottom: 12px;">📚</div>
@@ -656,168 +453,75 @@
                     </div>
                 </div>
 
-                <!-- 英语学习 English Learning -->
+                <!-- 英语学习 -->
                 <div class="checkin-card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
                         <div>
-                            <h3 class="section-title">
-                                <span class="icon">📚</span>
-                                <span class="title-cn">英语学习</span>
-                                <span class="title-en">English Learning</span>
-                            </h3>
-                            <p style="color: #6b7280; margin-top: 4px;">
-                                <span class="font-cn-body">每天进步一点点</span>
-                                <span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Every day is a step forward</span>
-                            </p>
+                            <h3 class="section-title"><span class="icon">📚</span><span class="title-cn">英语学习</span><span class="title-en">English Learning</span></h3>
+                            <p style="color: #6b7280; margin-top: 4px;"><span class="font-cn-body">每天进步一点点</span><span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Every day is a step forward</span></p>
                         </div>
-                        <div class="streak-badge">
-                            <i class="fas fa-fire"></i>
-                            <span id="englishStreak" class="streak-cn">0</span>
-                            <span class="streak-cn">天连续</span>
-                            <span class="streak-en">Day Streak</span>
-                        </div>
+                        <div class="streak-badge"><i class="fas fa-fire"></i><span id="englishStreak" class="streak-cn">0</span><span class="streak-cn">天连续</span><span class="streak-en">Day Streak</span></div>
                     </div>
-
-                    <!-- 日历 Calendar -->
                     <div style="margin-bottom: 24px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                            <button onclick="changeMonth('english', -1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;">
-                                <i class="fas fa-chevron-left" style="color: #8b3a7a;"></i>
-                            </button>
+                            <button onclick="changeMonth('english', -1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;"><i class="fas fa-chevron-left" style="color: #8b3a7a;"></i></button>
                             <span class="font-cn-body" style="font-size: 20px; font-weight: bold;" id="englishMonth">2026年8月</span>
-                            <button onclick="changeMonth('english', 1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;">
-                                <i class="fas fa-chevron-right" style="color: #8b3a7a;"></i>
-                            </button>
+                            <button onclick="changeMonth('english', 1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;"><i class="fas fa-chevron-right" style="color: #8b3a7a;"></i></button>
                         </div>
-
                         <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 14px; font-weight: 600; color: #9ca3af; margin-bottom: 12px;">
-                            <div class="font-cn-body">一</div>
-                            <div class="font-cn-body">二</div>
-                            <div class="font-cn-body">三</div>
-                            <div class="font-cn-body">四</div>
-                            <div class="font-cn-body">五</div>
-                            <div class="font-cn-body">六</div>
-                            <div class="font-cn-body">日</div>
+                            <div class="font-cn-body">一</div><div class="font-cn-body">二</div><div class="font-cn-body">三</div><div class="font-cn-body">四</div><div class="font-cn-body">五</div><div class="font-cn-body">六</div><div class="font-cn-body">日</div>
                         </div>
-
                         <div id="englishCalendar" class="calendar-grid"></div>
                     </div>
-
-                    <!-- 打卡按钮 -->
                     <div style="text-align: center; margin-bottom: 24px;">
-                        <button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn">
-                            <i class="fas fa-check-circle"></i>
-                            <span class="btn-cn">今日打卡</span>
-                            <span class="btn-en">Check In Today</span>
-                        </button>
+                        <button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn"><i class="fas fa-check-circle"></i><span class="btn-cn">今日打卡</span><span class="btn-en">Check In Today</span></button>
                     </div>
-
-                    <!-- 笔记输入 -->
                     <div style="padding: 20px; background: #f9fafb; border-radius: 16px; margin-bottom: 24px;">
-                        <p style="font-weight: 600; color: #4b5563; margin-bottom: 8px;">
-                            <i class="fas fa-pen" style="margin-right: 8px;"></i>
-                            <span class="font-cn-body" style="font-size: 16px;">学习笔记</span>
-                            <span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Today's Notes</span>
-                        </p>
+                        <p style="font-weight: 600; color: #4b5563; margin-bottom: 8px;"><i class="fas fa-pen" style="margin-right: 8px;"></i><span class="font-cn-body" style="font-size: 16px;">学习笔记</span><span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Today's Notes</span></p>
                         <textarea id="englishNote" style="width: 100%; background: transparent; outline: none; resize: none; border: none; font-family: 'ZCOOL XiaoWei', sans-serif;" placeholder="今天学了什么？ What did you learn today?" rows="3"></textarea>
                     </div>
-
-                    <!-- 历史记录 -->
                     <div>
-                        <h4 style="font-weight: bold; color: #4b5563; margin-bottom: 16px;">
-                            <i class="fas fa-history" style="margin-right: 8px;"></i>
-                            <span class="font-cn-body">最近记录</span>
-                            <span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Recent Activity</span>
-                        </h4>
+                        <h4 style="font-weight: bold; color: #4b5563; margin-bottom: 16px;"><i class="fas fa-history" style="margin-right: 8px;"></i><span class="font-cn-body">最近记录</span><span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Recent Activity</span></h4>
                         <div id="englishHistory"></div>
                     </div>
                 </div>
 
-                <!-- 乐器练习 Music Learning -->
+                <!-- 乐器练习 -->
                 <div class="checkin-card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
                         <div>
-                            <h3 class="section-title">
-                                <span class="icon">🎸</span>
-                                <span class="title-cn">乐器练习</span>
-                                <span class="title-en">Instrument Practice</span>
-                            </h3>
-                            <p style="color: #6b7280; margin-top: 4px;">
-                                <span class="font-cn-body">享受音乐的美好</span>
-                                <span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Embrace the beauty of music</span>
-                            </p>
+                            <h3 class="section-title"><span class="icon">🎸</span><span class="title-cn">乐器练习</span><span class="title-en">Instrument Practice</span></h3>
+                            <p style="color: #6b7280; margin-top: 4px;"><span class="font-cn-body">享受音乐的美好</span><span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Embrace the beauty of music</span></p>
                         </div>
-                        <div class="streak-badge">
-                            <i class="fas fa-fire"></i>
-                            <span id="musicStreak" class="streak-cn">0</span>
-                            <span class="streak-cn">天连续</span>
-                            <span class="streak-en">Day Streak</span>
-                        </div>
+                        <div class="streak-badge"><i class="fas fa-fire"></i><span id="musicStreak" class="streak-cn">0</span><span class="streak-cn">天连续</span><span class="streak-en">Day Streak</span></div>
                     </div>
-
-                    <!-- 日历 Calendar -->
                     <div style="margin-bottom: 24px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                            <button onclick="changeMonth('music', -1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;">
-                                <i class="fas fa-chevron-left" style="color: #d462a6;"></i>
-                            </button>
+                            <button onclick="changeMonth('music', -1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;"><i class="fas fa-chevron-left" style="color: #d462a6;"></i></button>
                             <span class="font-cn-body" style="font-size: 20px; font-weight: bold;" id="musicMonth">2026年8月</span>
-                            <button onclick="changeMonth('music', 1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;">
-                                <i class="fas fa-chevron-right" style="color: #d462a6;"></i>
-                            </button>
+                            <button onclick="changeMonth('music', 1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; background: none;"><i class="fas fa-chevron-right" style="color: #d462a6;"></i></button>
                         </div>
-
                         <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 14px; font-weight: 600; color: #9ca3af; margin-bottom: 12px;">
-                            <div class="font-cn-body">一</div>
-                            <div class="font-cn-body">二</div>
-                            <div class="font-cn-body">三</div>
-                            <div class="font-cn-body">四</div>
-                            <div class="font-cn-body">五</div>
-                            <div class="font-cn-body">六</div>
-                            <div class="font-cn-body">日</div>
+                            <div class="font-cn-body">一</div><div class="font-cn-body">二</div><div class="font-cn-body">三</div><div class="font-cn-body">四</div><div class="font-cn-body">五</div><div class="font-cn-body">六</div><div class="font-cn-body">日</div>
                         </div>
-
                         <div id="musicCalendar" class="calendar-grid"></div>
                     </div>
-
-                    <!-- 打卡按钮 -->
                     <div style="text-align: center; margin-bottom: 24px;">
-                        <button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn">
-                            <i class="fas fa-check-circle"></i>
-                            <span class="btn-cn">今日打卡</span>
-                            <span class="btn-en">Check In Today</span>
-                        </button>
+                        <button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn"><i class="fas fa-check-circle"></i><span class="btn-cn">今日打卡</span><span class="btn-en">Check In Today</span></button>
                     </div>
-
-                    <!-- 笔记输入 -->
                     <div style="padding: 20px; background: #f9fafb; border-radius: 16px; margin-bottom: 24px;">
-                        <p style="font-weight: 600; color: #4b5563; margin-bottom: 8px;">
-                            <i class="fas fa-pen" style="margin-right: 8px;"></i>
-                            <span class="font-cn-body" style="font-size: 16px;">练习笔记</span>
-                            <span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Today's Notes</span>
-                        </p>
+                        <p style="font-weight: 600; color: #4b5563; margin-bottom: 8px;"><i class="fas fa-pen" style="margin-right: 8px;"></i><span class="font-cn-body" style="font-size: 16px;">练习笔记</span><span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Today's Notes</span></p>
                         <textarea id="musicNote" style="width: 100%; background: transparent; outline: none; resize: none; border: none; font-family: 'ZCOOL XiaoWei', sans-serif;" placeholder="今天练习了什么？ What did you practice today?" rows="3"></textarea>
                     </div>
-
-                    <!-- 历史记录 -->
                     <div>
-                        <h4 style="font-weight: bold; color: #4b5563; margin-bottom: 16px;">
-                            <i class="fas fa-history" style="margin-right: 8px;"></i>
-                            <span class="font-cn-body">最近记录</span>
-                            <span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Recent Activity</span>
-                        </h4>
+                        <h4 style="font-weight: bold; color: #4b5563; margin-bottom: 16px;"><i class="fas fa-history" style="margin-right: 8px;"></i><span class="font-cn-body">最近记录</span><span class="font-en-hand" style="font-size: 14px; margin-left: 8px; opacity: 0.6;">Recent Activity</span></h4>
                         <div id="musicHistory"></div>
                     </div>
                 </div>
 
-                <!-- 名言 Tips -->
                 <div class="glass-card" style="border-radius: 16px; padding: 24px; text-align: center;">
-                    <p class="quote-cn" style="color: #4b5563;">
-                        "取得进步的秘诀就是开始行动。"
-                    </p>
-                    <p class="quote-en" style="color: #9ca3af; margin-top: 4px;">
-                        "The secret of getting ahead is getting started."
-                    </p>
+                    <p class="quote-cn" style="color: #4b5563;">"取得进步的秘诀就是开始行动。"</p>
+                    <p class="quote-en" style="color: #9ca3af; margin-top: 4px;">"The secret of getting ahead is getting started."</p>
                     <p class="font-cn-hand" style="color: #6b7280; margin-top: 12px;">—— 马克·吐温</p>
                     <p class="font-en-hand" style="font-size: 14px; color: #9ca3af;">Mark Twain</p>
                 </div>
@@ -827,415 +531,415 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // ========== 星星月亮粒子生成器 Star & Moon Particle Generator ==========
-        (function initParticles() {
-            const container = document.getElementById('particlesContainer');
+    // ======================================================================
+    // 1. 星星月亮粒子生成器
+    // ======================================================================
+    (function initParticles() {
+        const container = document.getElementById('particlesContainer');
+        if (!container) return;
+        const symbols = ['✦', '☾', '✧', '✦', '✧', '☾', '★', '✧'];
+        const colors = ['rgba(255,255,255,','rgba(255,215,0,','rgba(224,176,255,','rgba(255,182,193,','rgba(255,255,255,','rgba(255,215,0,','rgba(200,180,255,','rgba(255,200,220,'];
+        const count = 120 + Math.floor(Math.random() * 30);
+        for (let i = 0; i < count; i++) {
+            const el = document.createElement('span');
+            el.className = 'particle';
+            el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            el.style.fontSize = (14 + Math.random() * 18) + 'px';
+            const opacity = 0.3 + Math.random() * 0.6;
+            el.style.color = colors[Math.floor(Math.random() * colors.length)] + opacity + ')';
+            el.style.left = (Math.random() * 100) + '%';
+            el.style.top = (Math.random() * 100) + '%';
+            if (Math.random() < 0.3) {
+                el.classList.add('floating');
+                el.style.setProperty('--float-duration', (3 + Math.random() * 3) + 's');
+                el.style.setProperty('--float-delay', (Math.random() * 6) + 's');
+                el.style.setProperty('--base-opacity', opacity.toString());
+            }
+            container.appendChild(el);
+        }
+    })();
+
+    // ======================================================================
+    // 2. 音效工具 — Web Audio API 合成短促叮声
+    // ======================================================================
+    const SoundFX = {
+        _ctx: null,
+        _getCtx() {
+            if (!this._ctx) this._ctx = new (window.AudioContext || window.webkitAudioContext)();
+            return this._ctx;
+        },
+        playClick() {
+            try {
+                const ctx = this._getCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, ctx.currentTime);          // A5
+                osc.frequency.exponentialRampToValueAtTime(1760, ctx.currentTime + 0.08); // 升到 A6
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15);  // 回落
+                gain.gain.setValueAtTime(0.35, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.45);
+            } catch(e) {}
+            // 移动端震动
+            try { navigator.vibrate && navigator.vibrate(10); } catch(e) {}
+        }
+    };
+
+    // ======================================================================
+    // 3. 拖尾流星特效管理器
+    // ======================================================================
+    const MeteorManager = {
+        _pool: [],
+        MAX: 150,
+        COLORS: ['#ffffff', '#FFD700', '#E0B0FF', '#FFB6C1', '#fff'],
+
+        spawn(x, y, count) {
+            const container = document.getElementById('meteorContainer');
             if (!container) return;
-
-            const symbols = ['✦', '☾', '✧', '✦', '✧', '☾', '★', '✧'];
-            const colors = [
-                'rgba(255, 255, 255, ',      // 白色
-                'rgba(255, 215, 0, ',         // 淡金 #FFD700
-                'rgba(224, 176, 255, ',       // 淡紫 #E0B0FF
-                'rgba(255, 182, 193, ',       // 淡粉 #FFB6C1
-                'rgba(255, 255, 255, ',
-                'rgba(255, 215, 0, ',
-                'rgba(200, 180, 255, ',
-                'rgba(255, 200, 220, '
-            ];
-
-            const particleCount = 120 + Math.floor(Math.random() * 30); // 120~150个
-
-            for (let i = 0; i < particleCount; i++) {
-                const el = document.createElement('span');
-                el.className = 'particle';
-
-                // 随机符号
-                const symIndex = Math.floor(Math.random() * symbols.length);
-                el.textContent = symbols[symIndex];
-
-                // 随机大小 14px ~ 32px
-                const size = 14 + Math.random() * 18;
-                el.style.fontSize = size + 'px';
-
-                // 随机颜色 + 透明度 0.3 ~ 0.9
-                const opacity = 0.3 + Math.random() * 0.6;
-                const colorBase = colors[Math.floor(Math.random() * colors.length)];
-                el.style.color = colorBase + opacity + ')';
-
-                // 随机位置（均匀散落整个视口）
-                el.style.left = (Math.random() * 100) + '%';
-                el.style.top = (Math.random() * 100) + '%';
-
-                // 30% 的元素添加浮动动画
-                if (Math.random() < 0.3) {
-                    el.classList.add('floating');
-                    const duration = 3 + Math.random() * 3; // 3~6秒
-                    const delay = Math.random() * 6;
-                    el.style.setProperty('--float-duration', duration + 's');
-                    el.style.setProperty('--float-delay', delay + 's');
-                    el.style.setProperty('--base-opacity', opacity.toString());
+            count = count || (12 + Math.floor(Math.random() * 7)); // 12~18
+            for (let i = 0; i < count; i++) {
+                // 超出上限提前销毁最早的
+                if (this._pool.length >= this.MAX) {
+                    const old = this._pool.shift();
+                    if (old.parentNode) old.parentNode.removeChild(old);
                 }
-
-                container.appendChild(el);
-            }
-        })();
-
-        // ========== 数据存储 Data Storage ==========
-        let appData = {
-            moments: [],
-            english: { checkedDates: [], notes: {} },
-            music: { checkedDates: [], notes: {} }
-        };
-
-        const monthNamesCN = ['1月', '2月', '3月', '4月', '5月', '6月',
-                              '7月', '8月', '9月', '10月', '11月', '12月'];
-
-        function loadData() {
-            const saved = localStorage.getItem('myLifeJourney');
-            if (saved) {
-                appData = JSON.parse(saved);
-            } else {
-                appData.moments = [
-                    {
-                        id: 1,
-                        content: '今天夕阳好美！大自然总是知道如何描绘天空。🌅',
-                        contentEn: 'Beautiful sunset today! Nature always knows how to paint the sky.',
-                        images: [],
-                        time: '2026-08-17 19:30',
-                        likes: 5,
-                        liked: false,
-                        location: '城市公园',
-                        locationEn: 'City Park'
-                    },
-                    {
-                        id: 2,
-                        content: '终于学会弹吉他版《小星星》了！小小的胜利也很重要。🎸✨',
-                        contentEn: 'Finally learned to play "Twinkle Twinkle Little Star" on guitar! Small wins matter.',
-                        images: [],
-                        time: '2026-08-16 21:15',
-                        likes: 8,
-                        liked: true,
-                        location: '家',
-                        locationEn: 'Home'
-                    }
-                ];
-                saveData();
+                const dot = document.createElement('span');
+                dot.className = 'meteor-particle';
+                const size = 4 + Math.random() * 6;
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.left = x + 'px';
+                dot.style.top = y + 'px';
+                dot.style.background = this.COLORS[Math.floor(Math.random() * this.COLORS.length)];
+                dot.style.boxShadow = '0 0 ' + (size * 2) + 'px ' + dot.style.background;
+                // 360° 随机飞散 150~250px
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 150 + Math.random() * 100;
+                dot.style.setProperty('--mx', (Math.cos(angle) * dist) + 'px');
+                dot.style.setProperty('--my', (Math.sin(angle) * dist) + 'px');
+                dot.style.setProperty('--meteor-dur', (0.6 + Math.random() * 0.3) + 's');
+                container.appendChild(dot);
+                this._pool.push(dot);
+                // 800ms 后自动清理
+                setTimeout(() => {
+                    if (dot.parentNode) dot.parentNode.removeChild(dot);
+                    const idx = this._pool.indexOf(dot);
+                    if (idx !== -1) this._pool.splice(idx, 1);
+                }, 900);
             }
         }
+    };
 
-        function saveData() {
-            localStorage.setItem('myLifeJourney', JSON.stringify(appData));
+    // ======================================================================
+    // 4. 鼠标悬停星光微粒（可选增强）
+    // ======================================================================
+    const HoverSparkle = {
+        _lastTime: 0,
+        _throttle: 120, // 120ms 一颗，不卡顿
+        spawn(x, y) {
+            const now = Date.now();
+            if (now - this._lastTime < this._throttle) return;
+            this._lastTime = now;
+            const dot = document.createElement('span');
+            dot.className = 'hover-sparkle';
+            const size = 3 + Math.random() * 4;
+            dot.style.width = size + 'px';
+            dot.style.height = size + 'px';
+            dot.style.left = (x + (Math.random() - 0.5) * 30) + 'px';
+            dot.style.top = (y + (Math.random() - 0.5) * 30) + 'px';
+            const colors = ['#fff', '#FFD700', '#E0B0FF', '#FFB6C1'];
+            dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+            dot.style.boxShadow = '0 0 6px ' + dot.style.background;
+            document.body.appendChild(dot);
+            setTimeout(() => { if (dot.parentNode) dot.parentNode.removeChild(dot); }, 1200);
         }
+    };
 
-        // ========== 导航 Navigation ==========
-        function enterSite(entry) {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('main').style.display = 'block';
-            document.body.style.overflow = 'auto';
+    // ======================================================================
+    // 5. 墨镜图标交互绑定
+    // ======================================================================
+    (function initEyeIcons() {
+        document.querySelectorAll('.eye-icon').forEach(icon => {
+            const symbol = icon.querySelector('.icon-symbol');
 
-            loadData();
-            renderMoments();
-            renderCalendar('english');
-            renderCalendar('music');
-            updateStats();
-            checkTodayStatus();
-            renderHistory('english');
-            renderHistory('music');
-        }
-
-        function goHome() {
-            document.getElementById('home').style.display = 'flex';
-            document.getElementById('main').style.display = 'none';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-            event.target.closest('.nav-link').classList.add('active');
-
-            document.getElementById('lifeTab').style.display = tab === 'life' ? 'block' : 'none';
-            document.getElementById('studyTab').style.display = tab === 'study' ? 'block' : 'none';
-        }
-
-        function toggleDarkMode() {
-            const icon = document.getElementById('themeIcon');
-            if (icon.classList.contains('fa-moon')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-            }
-        }
-
-        // ========== 动态 Moments ==========
-        let selectedImages = [];
-
-        function previewPostImages(event) {
-            const files = Array.from(event.target.files);
-            const container = document.getElementById('previewImages');
-            container.innerHTML = '';
-            container.style.display = 'flex';
-
-            selectedImages = [];
-
-            files.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    selectedImages.push(e.target.result);
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'publish-img';
-                    container.appendChild(img);
-                }
-                reader.readAsDataURL(file);
+            // 按压反馈
+            icon.addEventListener('mousedown', () => {
+                icon.classList.add('pressing');
+                icon.classList.remove('bounce');
             });
-        }
-
-        function publishPost() {
-            const content = document.getElementById('newPost').value.trim();
-            if (!content && selectedImages.length === 0) {
-                alert('请写点什么或添加照片！\nPlease write something or add photos!');
-                return;
-            }
-
-            const now = new Date();
-            const timeStr = now.getFullYear() + '-' +
-                           String(now.getMonth() + 1).padStart(2, '0') + '-' +
-                           String(now.getDate()).padStart(2, '0') + ' ' +
-                           String(now.getHours()).padStart(2, '0') + ':' +
-                           String(now.getMinutes()).padStart(2, '0');
-
-            appData.moments.unshift({
-                id: Date.now(),
-                content: content,
-                contentEn: '',
-                images: [...selectedImages],
-                time: timeStr,
-                likes: 0,
-                liked: false,
-                location: '',
-                locationEn: ''
+            icon.addEventListener('mouseup', () => {
+                icon.classList.remove('pressing');
+                icon.classList.add('bounce');
+                setTimeout(() => icon.classList.remove('bounce'), 250);
             });
-            saveData();
+            icon.addEventListener('mouseleave', () => {
+                icon.classList.remove('pressing', 'bounce');
+            });
 
-            document.getElementById('newPost').value = '';
-            document.getElementById('previewImages').innerHTML = '';
-            document.getElementById('previewImages').style.display = 'none';
-            document.getElementById('postImages').value = '';
-            selectedImages = [];
+            // 触摸端
+            icon.addEventListener('touchstart', (e) => {
+                icon.classList.add('pressing');
+                icon.classList.remove('bounce');
+            }, { passive: true });
+            icon.addEventListener('touchend', (e) => {
+                icon.classList.remove('pressing');
+                icon.classList.add('bounce');
+                setTimeout(() => icon.classList.remove('bounce'), 250);
+                // 从触摸点发射流星
+                const touch = e.changedTouches[0];
+                if (touch) MeteorManager.spawn(touch.clientX, touch.clientY);
+                SoundFX.playClick();
+                // 路由跳转（延迟让特效播放）
+                const target = icon.getAttribute('data-target');
+                setTimeout(() => navigateTo(target), 400);
+            });
 
-            renderMoments();
-        }
+            // 鼠标点击 → 流星 + 音效 + 路由
+            icon.addEventListener('click', (e) => {
+                MeteorManager.spawn(e.clientX, e.clientY);
+                SoundFX.playClick();
+                const target = icon.getAttribute('data-target');
+                setTimeout(() => navigateTo(target), 400);
+            });
 
-        function renderMoments() {
-            const container = document.getElementById('momentsList');
-            container.innerHTML = appData.moments.map(post => `
-                <div class="moments-card fade-in">
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                        <div class="moments-avatar">萌</div>
-                        <div>
-                            <div class="font-cn-body" style="font-size: 18px; font-weight: bold;">小可爱</div>
-                            <div style="font-size: 14px; color: #9ca3af;" class="font-en-hand">${post.time} ${post.location ? '· ' + post.location : ''}</div>
-                        </div>
-                    </div>
+            // 鼠标悬停星光
+            icon.addEventListener('mousemove', (e) => {
+                HoverSparkle.spawn(e.clientX, e.clientY);
+            });
+        });
+    })();
 
-                    <div style="color: #374151; font-size: 18px; line-height: 1.7;">
-                        <p class="font-cn-body">${post.content}</p>
-                        ${post.contentEn ? `<p class="font-en-hand" style="font-size: 16px; color: #9ca3af; margin-top: 4px;">${post.contentEn}</p>` : ''}
-                    </div>
+    // ======================================================================
+    // 6. 页面路由（hash-based + fade 转场）
+    // ======================================================================
+    let currentRoute = 'home';
 
-                    ${post.images.length > 0 ? `
-                        <div class="moments-images grid-${Math.min(post.images.length, 4)}">
-                            ${post.images.map(img => `
-                                <img src="${img}" class="moments-img" onclick="window.open('${img}')">
-                            `).join('')}
-                        </div>
-                    ` : ''}
+    function navigateTo(target) {
+        if (!target) return;
+        const page = document.getElementById(target);
+        if (!page) return;
 
-                    <div class="moments-actions">
-                        <div class="moments-action ${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
-                            <i class="fas fa-heart"></i>
-                            <span class="action-cn">点赞</span>
-                            <span class="action-en">Like</span>
-                            <span>${post.likes}</span>
-                        </div>
-                        <div class="moments-action">
-                            <i class="far fa-comment"></i>
-                            <span class="action-cn">评论</span>
-                            <span class="action-en">Comment</span>
-                        </div>
-                        <div class="moments-action">
-                            <i class="fas fa-share"></i>
-                            <span class="action-cn">分享</span>
-                            <span class="action-en">Share</span>
-                        </div>
-                    </div>
-                </div>
-            `).join('') || '<div style="text-align: center; color: #9ca3af; padding: 40px;" class="font-cn-body">还没有动态，快分享吧！<br><span class="font-en-hand" style="font-size: 14px;">No moments yet. Share something!</span></div>';
-        }
+        // 隐藏着陆页
+        const home = document.getElementById('home');
+        home.style.transition = 'opacity 0.4s ease';
+        home.style.opacity = '0';
+        setTimeout(() => {
+            home.style.display = 'none';
+            home.style.opacity = '';
+            home.style.transition = '';
+        }, 400);
 
-        function toggleLike(postId) {
-            const post = appData.moments.find(p => p.id === postId);
-            if (post) {
-                post.liked = !post.liked;
-                post.likes += post.liked ? 1 : -1;
-                saveData();
-                renderMoments();
-            }
-        }
+        // 显示目标页
+        page.classList.add('visible');
+        page.style.opacity = '0';
+        requestAnimationFrame(() => {
+            page.style.transition = 'opacity 0.4s ease';
+            page.style.opacity = '1';
+        });
 
-        // ========== 日历 & 打卡 Calendar & Checkin ==========
-        let currentMonths = {
-            english: new Date().getMonth(),
-            music: new Date().getMonth()
-        };
+        currentRoute = target;
+        window.location.hash = target;
+        document.body.style.overflow = 'auto';
+    }
 
-        function changeMonth(type, delta) {
-            currentMonths[type] += delta;
-            if (currentMonths[type] > 11) currentMonths[type] = 0;
-            else if (currentMonths[type] < 0) currentMonths[type] = 11;
-            renderCalendar(type);
-        }
-
-        function renderCalendar(type) {
-            const data = appData[type];
-            const month = currentMonths[type];
-            const year = new Date().getFullYear();
-
-            document.getElementById(type + 'Month').textContent = year + '年' + monthNamesCN[month];
-
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            let startWeekday = firstDay.getDay();
-            if (startWeekday === 0) startWeekday = 7;
-
-            const today = new Date();
-            const todayStr = formatDate(today);
-
-            let html = '';
-
-            for (let i = 1; i < startWeekday; i++) {
-                html += '<div class="calendar-day"></div>';
-            }
-
-            for (let day = 1; day <= lastDay.getDate(); day++) {
-                const date = new Date(year, month, day);
-                const dateStr = formatDate(date);
-                const isToday = dateStr === todayStr;
-                const isChecked = data.checkedDates.includes(dateStr);
-                const isFuture = date > today;
-
-                let classes = 'calendar-day';
-                if (isToday) classes += ' today';
-                if (isChecked) classes += ' checked';
-                if (isFuture) classes += ' future';
-
-                html += `<div class="${classes}" title="${dateStr}">${day}</div>`;
-            }
-
-            document.getElementById(type + 'Calendar').innerHTML = html;
-        }
-
-        function formatDate(date) {
-            return date.getFullYear() + '-' +
-                   String(date.getMonth() + 1).padStart(2, '0') + '-' +
-                   String(date.getDate()).padStart(2, '0');
-        }
-
-        function checkin(type) {
-            const today = formatDate(new Date());
-            const data = appData[type];
-
-            if (data.checkedDates.includes(today)) {
-                alert('今天已经打过卡啦！\nAlready checked in today!');
-                return;
-            }
-
-            const note = document.getElementById(type + 'Note').value.trim();
-
-            data.checkedDates.push(today);
-            if (note) data.notes[today] = note;
-
-            saveData();
-            renderCalendar(type);
-            updateStats();
-            checkTodayStatus();
-            renderHistory(type);
-
-            document.getElementById(type + 'Note').value = '';
-
-            const btn = document.getElementById(type + 'CheckinBtn');
-            const original = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> <span class="btn-cn">打卡成功！</span> <span class="btn-en">Checked In!</span>';
-            btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-
+    function navigateBack() {
+        // 隐藏当前探索页
+        const page = document.querySelector('.explore-page.visible');
+        if (page) {
+            page.style.transition = 'opacity 0.4s ease';
+            page.style.opacity = '0';
             setTimeout(() => {
-                btn.innerHTML = original;
-                btn.style.background = '';
-            }, 2500);
+                page.classList.remove('visible', 'fade-in');
+                page.style.opacity = '';
+                page.style.transition = '';
+            }, 400);
         }
 
-        function checkTodayStatus() {
-            const today = formatDate(new Date());
+        // 显示着陆页
+        const home = document.getElementById('home');
+        home.style.display = 'flex';
+        home.style.opacity = '0';
+        requestAnimationFrame(() => {
+            home.style.transition = 'opacity 0.4s ease';
+            home.style.opacity = '1';
+        });
 
-            ['english', 'music'].forEach(type => {
-                const btn = document.getElementById(type + 'CheckinBtn');
-                const isChecked = appData[type].checkedDates.includes(today);
+        currentRoute = 'home';
+        history.pushState(null, '', window.location.pathname);
+        document.body.style.overflow = 'hidden';
+    }
 
-                if (isChecked) {
-                    btn.disabled = true;
-                    btn.innerHTML = '<i class="fas fa-check-double"></i> <span class="btn-cn">今日已完成</span> <span class="btn-en">Done for Today</span>';
-                } else {
-                    btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-check-circle"></i> <span class="btn-cn">今日打卡</span> <span class="btn-en">Check In Today</span>';
-                }
-            });
+    // ======================================================================
+    // 7. 原有功能（数据存储、动态、打卡等）
+    // ======================================================================
+    let appData = { moments: [], english: { checkedDates: [], notes: {} }, music: { checkedDates: [], notes: {} } };
+    const monthNamesCN = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+    function loadData() {
+        const saved = localStorage.getItem('myLifeJourney');
+        if (saved) { appData = JSON.parse(saved); }
+        else {
+            appData.moments = [
+                { id: 1, content: '今天夕阳好美！大自然总是知道如何描绘天空。🌅', contentEn: 'Beautiful sunset today!', images: [], time: '2026-08-17 19:30', likes: 5, liked: false, location: '城市公园', locationEn: 'City Park' },
+                { id: 2, content: '终于学会弹吉他版《小星星》了！🎸✨', contentEn: 'Finally learned "Twinkle Twinkle Little Star" on guitar!', images: [], time: '2026-08-16 21:15', likes: 8, liked: true, location: '家', locationEn: 'Home' }
+            ];
+            saveData();
         }
+    }
+    function saveData() { localStorage.setItem('myLifeJourney', JSON.stringify(appData)); }
 
-        function updateStats() {
-            document.getElementById('totalEnglish').textContent = appData.english.checkedDates.length;
-            document.getElementById('totalMusic').textContent = appData.music.checkedDates.length;
+    function enterSite(entry) {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('main').style.display = 'block';
+        document.body.style.overflow = 'auto';
+        loadData(); renderMoments(); renderCalendar('english'); renderCalendar('music');
+        updateStats(); checkTodayStatus(); renderHistory('english'); renderHistory('music');
+    }
+    function goHome() {
+        // 隐藏主内容
+        document.getElementById('main').style.display = 'none';
+        // 隐藏探索页
+        document.querySelectorAll('.explore-page.visible').forEach(p => {
+            p.classList.remove('visible', 'fade-in');
+            p.style.opacity = '';
+            p.style.transition = '';
+        });
+        // 显示着陆页
+        const home = document.getElementById('home');
+        home.style.display = 'flex';
+        home.style.opacity = '0';
+        requestAnimationFrame(() => {
+            home.style.transition = 'opacity 0.4s ease';
+            home.style.opacity = '1';
+        });
+        document.body.style.overflow = 'hidden';
+        history.pushState(null, '', window.location.pathname);
+        currentRoute = 'home';
+    }
+    function switchTab(tab) {
+        document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+        event.target.closest('.nav-link').classList.add('active');
+        document.getElementById('lifeTab').style.display = tab === 'life' ? 'block' : 'none';
+        document.getElementById('studyTab').style.display = tab === 'study' ? 'block' : 'none';
+    }
+    function toggleDarkMode() {
+        const icon = document.getElementById('themeIcon');
+        icon.classList.contains('fa-moon') ? icon.classList.replace('fa-moon', 'fa-sun') : icon.classList.replace('fa-sun', 'fa-moon');
+    }
 
-            ['english', 'music'].forEach(type => {
-                const dates = appData[type].checkedDates.sort().reverse();
-                let streak = 0;
-                const today = new Date();
-
-                for (let i = 0; i < 365; i++) {
-                    const checkDate = new Date(today);
-                    checkDate.setDate(checkDate.getDate() - i);
-                    if (dates.includes(formatDate(checkDate))) {
-                        streak++;
-                    } else if (i > 0) {
-                        break;
-                    }
-                }
-
-                document.getElementById(type + 'Streak').textContent = streak;
-            });
-        }
-
-        function renderHistory(type) {
-            const container = document.getElementById(type + 'History');
-            const data = appData[type];
-            const recent = data.checkedDates.sort().reverse().slice(0, 7);
-
-            container.innerHTML = recent.map(date => `
-                <div class="history-item">
-                    <div class="history-icon success">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div style="flex: 1;">
-                        <div class="font-cn-body" style="font-weight: 600;">${date}</div>
-                        ${data.notes[date] ? `<div style="font-size: 14px; color: #6b7280; margin-top: 4px;" class="font-cn-body">${data.notes[date]}</div>` : ''}
-                    </div>
-                    <div style="color: #22c55e; font-weight: bold;">✓</div>
+    let selectedImages = [];
+    function previewPostImages(event) {
+        const files = Array.from(event.target.files);
+        const container = document.getElementById('previewImages');
+        container.innerHTML = ''; container.style.display = 'flex'; selectedImages = [];
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) { selectedImages.push(e.target.result); const img = document.createElement('img'); img.src = e.target.result; img.className = 'publish-img'; container.appendChild(img); }
+            reader.readAsDataURL(file);
+        });
+    }
+    function publishPost() {
+        const content = document.getElementById('newPost').value.trim();
+        if (!content && selectedImages.length === 0) { alert('请写点什么或添加照片！'); return; }
+        const now = new Date();
+        const timeStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + ' ' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+        appData.moments.unshift({ id: Date.now(), content, contentEn: '', images: [...selectedImages], time: timeStr, likes: 0, liked: false, location: '', locationEn: '' });
+        saveData();
+        document.getElementById('newPost').value = '';
+        document.getElementById('previewImages').innerHTML = '';
+        document.getElementById('previewImages').style.display = 'none';
+        document.getElementById('postImages').value = '';
+        selectedImages = []; renderMoments();
+    }
+    function renderMoments() {
+        const c = document.getElementById('momentsList');
+        c.innerHTML = appData.moments.map(p => `
+            <div class="moments-card fade-in">
+                <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;"><div class="moments-avatar">萌</div><div><div class="font-cn-body" style="font-size:18px;font-weight:bold;">小可爱</div><div style="font-size:14px;color:#9ca3af;" class="font-en-hand">${p.time} ${p.location?'· '+p.location:''}</div></div></div>
+                <div style="color:#374151;font-size:18px;line-height:1.7;"><p class="font-cn-body">${p.content}</p>${p.contentEn?`<p class="font-en-hand" style="font-size:16px;color:#9ca3af;margin-top:4px;">${p.contentEn}</p>`:''}</div>
+                ${p.images.length>0?`<div class="moments-images grid-${Math.min(p.images.length,4)}">${p.images.map(i=>`<img src="${i}" class="moments-img" onclick="window.open('${i}')">`).join('')}</div>`:''}
+                <div class="moments-actions">
+                    <div class="moments-action ${p.liked?'liked':''}" onclick="toggleLike(${p.id})"><i class="fas fa-heart"></i><span class="action-cn">点赞</span><span class="action-en">Like</span><span>${p.likes}</span></div>
+                    <div class="moments-action"><i class="far fa-comment"></i><span class="action-cn">评论</span><span class="action-en">Comment</span></div>
+                    <div class="moments-action"><i class="fas fa-share"></i><span class="action-cn">分享</span><span class="action-en">Share</span></div>
                 </div>
-            `).join('') || '<div style="text-align: center; color: #9ca3af; padding: 24px;" class="font-cn-body">暂无记录 <span class="font-en-hand" style="font-size: 14px;">No records yet</span></div>';
-        }
+            </div>`).join('') || '<div style="text-align:center;color:#9ca3af;padding:40px;" class="font-cn-body">还没有动态，快分享吧！</div>';
+    }
+    function toggleLike(id) { const p = appData.moments.find(m=>m.id===id); if(p){p.liked=!p.liked;p.likes+=p.liked?1:-1;saveData();renderMoments();} }
 
-        // 初始化
-        loadData();
+    let currentMonths = { english: new Date().getMonth(), music: new Date().getMonth() };
+    function changeMonth(t,d) { currentMonths[t]+=d; if(currentMonths[t]>11)currentMonths[t]=0; else if(currentMonths[t]<0)currentMonths[t]=11; renderCalendar(t); }
+    function renderCalendar(type) {
+        const data=appData[type], month=currentMonths[type], year=new Date().getFullYear();
+        document.getElementById(type+'Month').textContent = year+'年'+monthNamesCN[month];
+        const first=new Date(year,month,1), last=new Date(year,month+1,0);
+        let sw=first.getDay(); if(sw===0)sw=7;
+        const today=new Date(), todayStr=formatDate(today);
+        let html='';
+        for(let i=1;i<sw;i++) html+='<div class="calendar-day"></div>';
+        for(let d=1;d<=last.getDate();d++){
+            const date=new Date(year,month,d), ds=formatDate(date);
+            let cls='calendar-day';
+            if(ds===todayStr) cls+=' today';
+            if(data.checkedDates.includes(ds)) cls+=' checked';
+            if(date>today) cls+=' future';
+            html+=`<div class="${cls}" title="${ds}">${d}</div>`;
+        }
+        document.getElementById(type+'Calendar').innerHTML=html;
+    }
+    function formatDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+    function checkin(type){
+        const today=formatDate(new Date()), data=appData[type];
+        if(data.checkedDates.includes(today)){alert('今天已经打过卡啦！');return;}
+        const note=document.getElementById(type+'Note').value.trim();
+        data.checkedDates.push(today); if(note)data.notes[today]=note;
+        saveData(); renderCalendar(type); updateStats(); checkTodayStatus(); renderHistory(type);
+        document.getElementById(type+'Note').value='';
+        const btn=document.getElementById(type+'CheckinBtn'), orig=btn.innerHTML;
+        btn.innerHTML='<i class="fas fa-check"></i> <span class="btn-cn">打卡成功！</span> <span class="btn-en">Checked In!</span>';
+        btn.style.background='linear-gradient(135deg,#22c55e,#16a34a)';
+        setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';},2500);
+    }
+    function checkTodayStatus(){
+        const today=formatDate(new Date());
+        ['english','music'].forEach(t=>{
+            const btn=document.getElementById(t+'CheckinBtn');
+            if(appData[t].checkedDates.includes(today)){btn.disabled=true;btn.innerHTML='<i class="fas fa-check-double"></i> <span class="btn-cn">今日已完成</span> <span class="btn-en">Done for Today</span>';}
+            else{btn.disabled=false;btn.innerHTML='<i class="fas fa-check-circle"></i> <span class="btn-cn">今日打卡</span> <span class="btn-en">Check In Today</span>';}
+        });
+    }
+    function updateStats(){
+        document.getElementById('totalEnglish').textContent=appData.english.checkedDates.length;
+        document.getElementById('totalMusic').textContent=appData.music.checkedDates.length;
+        ['english','music'].forEach(t=>{
+            const dates=appData[t].checkedDates.sort().reverse(); let streak=0; const today=new Date();
+            for(let i=0;i<365;i++){const cd=new Date(today);cd.setDate(cd.getDate()-i);if(dates.includes(formatDate(cd)))streak++;else if(i>0)break;}
+            document.getElementById(t+'Streak').textContent=streak;
+        });
+    }
+    function renderHistory(type){
+        const c=document.getElementById(type+'History'), data=appData[type], recent=data.checkedDates.sort().reverse().slice(0,7);
+        c.innerHTML=recent.map(d=>`<div class="history-item"><div class="history-icon success"><i class="fas fa-check"></i></div><div style="flex:1;"><div class="font-cn-body" style="font-weight:600;">${d}</div>${data.notes[d]?`<div style="font-size:14px;color:#6b7280;margin-top:4px;" class="font-cn-body">${data.notes[d]}</div>`:''}</div><div style="color:#22c55e;font-weight:bold;">✓</div></div>`).join('')||'<div style="text-align:center;color:#9ca3af;padding:24px;" class="font-cn-body">暂无记录</div>';
+    }
+
+    // ======================================================================
+    // 8. Hash 路由初始化（支持浏览器前进后退）
+    // ======================================================================
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.slice(1);
+        if (hash === 'explore-me' || hash === 'explore-world') {
+            if (currentRoute !== hash) navigateTo(hash);
+        } else {
+            if (currentRoute !== 'home') navigateBack();
+        }
+    });
+
+    // 初始化
+    loadData();
     </script>
 </body>
 </html>
