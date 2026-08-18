@@ -453,7 +453,7 @@ function seedData(){
     setData('xiaowei',[{id:n+1,text:'托业模拟考了835分！离目标850越来越近了💪',images:[],time:'2026-08-18 09:00',likes:15,liked:false,avatar:'🧑',nick:'小微'}]);
     setData('meimei',[{id:n+1,text:'开学第一天，新学期新气象！📚',images:['https://picsum.photos/seed/mm1/300/200'],time:'2026-08-18 08:00',likes:10,liked:false,avatar:'👧',nick:'妹妹'}]);
     setData('thoughts',[{id:n+1,text:'人与人之间的关系真的很微妙。有些人走着走着就散了。',images:[],time:'2026-08-18 23:15',likes:30,liked:false,avatar:'🌙',nick:'想法'}]);
-    setData('books',[{id:n+1,title:'三体',author:'刘慈欣',color:'#1a1a2e',emoji:'🌌',stars:5}]);
+    setData('books',[{id:n+1,title:'三体',author:'刘慈欣',color:'#1a1a2e',emoji:'🌌',stars:5,review:'中国科幻的巅峰之作，硬核与人文的完美结合',reflection:'读完三体，我对宇宙的敬畏感加深了无数倍。黑暗森林法则让我重新审视人与人之间的信任关系。叶文洁的选择让我思考：当文明遭遇绝望时，我们会做出怎样的抉择？大刘用宏大的宇宙叙事，写出了最深沉的人性寓言。'}]);
     setData('music',[{id:n+1,title:'Bohemian Rhapsody',artist:'Queen',color:'#E74C3C',lyric:'Is this the real life? Is this just fantasy?'}]);
     setData('movies',[{id:n+1,title:'星际穿越',director:'Christopher Nolan',img:'https://picsum.photos/seed/mv1/400/225',review:'这部电影让我重新思考了时间和爱的关系。库珀穿越黑洞的那一刻，我泪流满面。',tags:['科幻','烧脑','亲情']}]);
     setData('studyCheckin',{});
@@ -539,7 +539,7 @@ let formMode='add',formKey='',formEditId=null,formUploadImgs=[];
 const formConfigs={
     recordus:{title:'添加动态',fields:[{name:'text',label:'正文',type:'textarea'}]},
     thoughts:{title:'添加想法',fields:[{name:'text',label:'正文',type:'textarea'}]},
-    books:{title:'添加书籍',fields:[{name:'title',label:'书名',type:'text'},{name:'author',label:'作者',type:'text'},{name:'stars',label:'评分(1-5)',type:'text'},{name:'emoji',label:'图标emoji',type:'text'}]},
+    books:{title:'添加书籍',fields:[{name:'title',label:'书名',type:'text'},{name:'author',label:'作者',type:'text'},{name:'stars',label:'评分(1-5)',type:'text'},{name:'emoji',label:'图标emoji',type:'text'},{name:'review',label:'📝 书评（简短评价）',type:'text'},{name:'reflection',label:'📖 读后感（个人感悟）',type:'textarea6'}]},
     music:{title:'添加歌曲',fields:[{name:'title',label:'歌名',type:'text'},{name:'artist',label:'歌手',type:'text'},{name:'lyric',label:'一句歌词',type:'textarea'},{name:'color',label:'颜色(#hex)',type:'text'}]},
     movies:{title:'添加电影',fields:[{name:'title',label:'片名',type:'text'},{name:'director',label:'导演',type:'text'},{name:'review',label:'观后感',type:'textarea4'},{name:'tags',label:'标签（逗号分隔）',type:'text'},{name:'img',label:'海报URL',type:'text'}]},
 };
@@ -554,6 +554,7 @@ function renderForm(key,item){
         const t=f.type;
         if(t==='textarea')return`<label>${f.label}</label><textarea id="f_${f.name}" rows="3">${val}</textarea>`;
         if(t==='textarea4')return`<label>${f.label}</label><textarea id="f_${f.name}" rows="4">${val}</textarea>`;
+        if(t==='textarea6')return`<label>${f.label}</label><textarea id="f_${f.name}" rows="6">${val}</textarea>`;
         return`<label>${f.label}</label><input type="text" id="f_${f.name}" value="${val}">`;
     }).join('');
     const needsImg=['recordus','thoughts'].includes(key);
@@ -590,7 +591,13 @@ function refreshAfterSave(){if(curTLKey)refreshCurrentTL();if(document.getElemen
 // ═══ 探索世界子模块 ═══
 function openWorldSub(key){document.getElementById('worldGrid').style.display='none';const v=document.getElementById('view-'+key);if(!v)return;v.classList.add('visible');v.style.opacity='0';requestAnimationFrame(()=>{v.style.transition='opacity 0.4s';v.style.opacity='1';});if(key==='books')renderBooks();if(key==='music')renderVinyl();if(key==='movies')renderFilms();}
 function closeWorldSub(){document.querySelectorAll('.sub-view.visible').forEach(v=>{v.style.transition='opacity 0.4s';v.style.opacity='0';setTimeout(()=>{v.classList.remove('visible');v.style.opacity='';v.style.transition='';},400);});document.getElementById('worldGrid').style.display='';}
-function renderBooks(){const data=getData('books')||[];document.getElementById('bookContent').innerHTML=data.map(b=>`<div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color||'#ccc'};"><div class="bk-cover" style="background:${b.color||'#ccc'}20;">${b.emoji||'📖'}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${'⭐'.repeat(b.stars||3)}</div></div><div class="item-crud" style="position:absolute;top:-8px;right:-8px;"><button onclick="openEditForm('books',${b.id})">✏️</button><button onclick="confirmDelete('books',${b.id})">🗑️</button></div></div>`).join('');}
+function renderBooks(){const data=getData('books')||[];document.getElementById('bookContent').innerHTML=data.map(b=>{
+    const review=b.review||'';
+    const ref=b.reflection||'';
+    const refShort=ref.length>80?ref.slice(0,80)+'...':ref;
+    const refId='ref_'+b.id;
+    return`<div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color||'#ccc'};"><div class="bk-cover" style="background:${b.color||'#ccc'}20;">${b.emoji||'📖'}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${'⭐'.repeat(b.stars||3)}</div>${review?`<div style="border-top:1px dashed rgba(150,100,200,0.2);margin-top:10px;padding-top:8px;"><span style="font-size:12px;color:var(--text-light);">📝 书评：</span><span style="font-size:12px;color:var(--text-light);">${review}</span></div>`:''}${ref?`<div style="margin-top:6px;text-align:left;"><span style="font-size:13px;color:var(--accent-s);font-weight:bold;">💭 读后感：</span><p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:4px;" id="${refId}">${ref.length>120?refShort:ref}</p>${ref.length>120?`<span style="font-size:12px;color:var(--accent-s);cursor:pointer;" onclick="var e=document.getElementById('${refId}');if(e.dataset.expanded==='1'){e.textContent='${refShort.replace(/'/g,"\\'")}';this.textContent='...展开';e.dataset.expanded='0';}else{e.textContent='${ref.replace(/'/g,"\\'").replace(/\n/g," ")}';this.textContent='收起';e.dataset.expanded='1';}">...展开</span>`:''}</div>`:`<div style="margin-top:6px;font-size:12px;color:var(--text-light);">暂无读后感 📝</div>`}</div><div class="item-crud" style="position:absolute;top:-8px;right:-8px;"><button onclick="openEditForm('books',${b.id})">✏️</button><button onclick="confirmDelete('books',${b.id})">🗑️</button></div></div>`;
+}).join('');}
 function renderVinyl(){const data=getData('music')||[];document.getElementById('soundwave').innerHTML=Array.from({length:30},(_,i)=>`<span style="height:${10+Math.random()*25}px;animation-delay:${i*0.05}s;"></span>`).join('');document.getElementById('vinylContent').innerHTML=data.map(m=>`<div class="vinyl-card" onclick="this.classList.toggle('playing')"><div class="vinyl-disc"><div class="vinyl-sticker" style="background:${m.color||'#888'};">${(m.artist||'?')[0]}</div></div><div class="vinyl-title">${m.title}</div><div class="vinyl-artist">${m.artist}</div><div class="vinyl-lyric">"${m.lyric||''}"</div><div class="item-crud" style="position:absolute;top:0;right:0;"><button onclick="event.stopPropagation();openEditForm('music',${m.id})">✏️</button><button onclick="event.stopPropagation();confirmDelete('music',${m.id})">🗑️</button></div></div>`).join('');}
 function renderFilms(){const data=getData('movies')||[];document.getElementById('filmContent').innerHTML=data.map(m=>`<div class="film-card"><div class="film-poster"><img src="${m.img||'https://picsum.photos/seed/mv/400/225'}" loading="lazy"><div class="film-overlay"><div class="film-name">${m.title}</div><div class="film-director">${m.director}</div><div class="film-review">${m.review||''}</div><div class="film-tags">${(m.tags||[]).map(t=>`<span>${t}</span>`).join('')}</div></div></div><div class="item-crud" style="position:absolute;top:8px;right:8px;z-index:2;"><button onclick="openEditForm('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">✏️</button><button onclick="confirmDelete('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">🗑️</button></div></div>`).join('');}
 
