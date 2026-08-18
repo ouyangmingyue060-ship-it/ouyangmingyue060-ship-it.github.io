@@ -176,6 +176,15 @@
     .task-item .task-actions{display:flex;gap:6px;}
     .task-item .task-actions button{background:none;border:none;cursor:pointer;font-size:12px;opacity:0.3;transition:all 0.2s;padding:2px;}
     .task-item .task-actions button:hover{opacity:1;}
+
+    /* === 权限系统 === */
+    .auth-fab{position:fixed;bottom:24px;right:24px;z-index:150;background:var(--accent);color:#fff;border:none;padding:12px 24px;border-radius:40px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;letter-spacing:2px;box-shadow:0 4px 20px rgba(192,132,252,0.3);transition:all 0.3s;display:flex;align-items:center;gap:8px;}
+    .auth-fab:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,132,252,0.5);}
+    .auth-fab .fab-dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse-dot 1.5s infinite;}
+    .auth-fab.guest .fab-dot{background:#fbbf24;}
+    @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
+    .auth-hidden{display:none!important;}
+    .auth-tip{font-size:12px;color:var(--text-light);text-align:center;padding:8px;font-family:'KBai','ZCOOL XiaoWei',serif;}
     .task-add{display:flex;gap:8px;margin-top:12px;}
     .task-add input{flex:1;padding:10px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;outline:none;}
     .task-add input:focus{border-color:var(--c-study);}
@@ -368,13 +377,13 @@
         </div>
         <div class="timeline-view" id="timelineView">
             <div class="timeline-header"><button class="timeline-back" onclick="closeTL('timelineView','moduleGrid')">← 返回</button><span class="timeline-name" id="timelineName"></span></div>
-            <div style="margin-bottom:14px;"><button class="add-btn" onclick="openAddForm('recordus')">➕ 添加动态</button></div>
+            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('recordus')">➕ 添加动态</button><div class="auth-tip">当前为浏览模式，点击右下角 🔐 进入编辑</div></div>
             <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索..." oninput="filterTL()"></div>
             <div id="timelineList"></div>
         </div>
         <div class="timeline-view" id="subTimelineView" data-theme="thoughts">
             <div class="timeline-header"><button class="timeline-back" onclick="closeTL('subTimelineView','moduleGrid')">← 返回探索我</button><span class="timeline-name" id="subTimelineName"></span></div>
-            <div style="margin-bottom:14px;"><button class="add-btn" id="subAddBtn" onclick="openAddForm('thoughts')">➕ 添加想法</button></div>
+            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" id="subAddBtn" onclick="openAddForm('thoughts')">➕ 添加想法</button></div>
             <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="subSearchInput" placeholder="搜索..." oninput="filterSubTL()"></div>
             <div id="subTimelineList"></div>
         </div>
@@ -382,7 +391,7 @@
             <div class="timeline-header"><button class="timeline-back" onclick="closeStudyCal()">← 返回探索我</button><span class="timeline-name">📖 学习打卡</span></div>
             <div class="study-month-nav"><button onclick="changeStudyMonth(-1)">‹</button><span class="month-label" id="studyMonthLabel"></span><button onclick="changeStudyMonth(1)">›</button></div>
             <div class="study-grid" id="studyGrid"></div>
-            <div class="study-tasks"><h4 id="taskTitle">📋 今日任务</h4><div id="taskList"></div><div class="task-add"><input type="text" id="newTaskInput" placeholder="添加新任务..." onkeydown="if(event.key==='Enter')addStudyTask()"><button onclick="addStudyTask()">➕</button></div></div>
+            <div class="study-tasks"><h4 id="taskTitle">📋 今日任务</h4><div id="taskList"></div><div class="task-add auth-ctrl"><input type="text" id="newTaskInput" placeholder="添加新任务..." onkeydown="if(event.key==='Enter')addStudyTask()"><button onclick="addStudyTask()">➕</button></div></div>
             <div class="study-stats" id="studyStats"></div>
         </div>
     </div>
@@ -410,17 +419,17 @@
 
 <div class="sub-view books-bg" id="view-books">
     <div class="sub-header"><button class="back-btn" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:4px;">📚 书籍分享</span></div>
-    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn" onclick="openAddForm('books')">📚 添加书籍</button></div>
+    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('books')">📚 添加书籍</button></div>
     <div class="book-grid" id="bookContent"></div>
 </div>
 <div class="sub-view music-bg" id="view-music">
     <div class="sub-header"><button class="back-btn" style="color:#fff;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15);" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎵 音乐分享</span></div>
-    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn" onclick="openAddForm('music')">🎵 添加歌曲</button></div>
+    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('music')">🎵 添加歌曲</button></div>
     <div style="position:relative;"><div class="soundwave" id="soundwave"></div><div class="vinyl-grid" id="vinylContent"></div></div>
 </div>
 <div class="sub-view movies-bg" id="view-movies">
     <div class="sub-header"><button class="back-btn" style="color:#fff;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15);" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎬 影视分享</span></div>
-    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn" onclick="openAddForm('movies')">🎬 添加电影</button></div>
+    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('movies')">🎬 添加电影</button></div>
     <div style="position:relative;"><div class="projector-light"></div><div class="filmstrip-scroll" id="filmContent"></div></div>
 </div>
 
@@ -440,6 +449,21 @@
         </div>
     </div>
 </section>
+
+<!-- 权限浮动按钮 -->
+<button class="auth-fab guest" id="authFab" onclick="toggleAuth()">
+    <span class="fab-dot"></span>
+    <span id="authFabText">🔐 进入编辑模式</span>
+</button>
+
+<!-- 权限密码弹窗 -->
+<div class="pw-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()">
+    <div class="pw-modal"><h3>请输入作者密码 🔐</h3>
+        <input type="password" id="authPwInput" maxlength="30" placeholder="输入密码..." onkeydown="if(event.key==='Enter')verifyAuth()">
+        <div class="pw-error" id="authPwError"></div>
+        <div class="pw-btns"><button class="pw-btn-cancel" onclick="closeAuthModal()">取消</button><button class="pw-btn-confirm" onclick="verifyAuth()">确认</button></div>
+    </div>
+</div>
 
 <script>
 // ═══ 粒子（浅色版透明度降低）═══
@@ -515,7 +539,7 @@ function renderTL(cid,dk,posts){
     c.innerHTML=posts.map(p=>{
         const lk=dk+'_'+p.id,liked=tlLikes[lk]||false,lc=p.likes+(liked?1:0),ic=p.images?p.images.length:0;
         const isLong=p.text.length>60;
-        return`<div class="moment-item"><div class="moment-top"><div class="moment-avatar">${p.avatar||'✦'}</div><div class="moment-info"><div class="moment-nick">${p.nick||'匿名'}</div><div class="moment-time">${fmtTime(p.time)}</div></div></div><div class="moment-text ${isLong?'clamped':''}" id="mt_${cid}_${p.id}">${p.text}</div>${isLong?`<div class="moment-expand" onclick="document.getElementById('mt_${cid}_${p.id}').classList.remove('clamped');this.style.display='none'">...展开</div>`:''}${ic>0?`<div class="moment-images img-${Math.min(ic,3)}">${p.images.map(s=>`<img src="${s}" loading="lazy">`).join('')}</div>`:''}<div class="moment-actions"><div class="like-btn ${liked?'liked':''}" onclick="toggleLike('${dk}',${p.id})"><span>${liked?'❤️':'🤍'}</span><span>${lc}</span></div><div class="moment-crud"><button onclick="openEditForm('${dk}',${p.id})">✏️</button><button onclick="confirmDelete('${dk}',${p.id})">🗑️</button></div></div></div>`;
+        return`<div class="moment-item"><div class="moment-top"><div class="moment-avatar">${p.avatar||'✦'}</div><div class="moment-info"><div class="moment-nick">${p.nick||'匿名'}</div><div class="moment-time">${fmtTime(p.time)}</div></div></div><div class="moment-text ${isLong?'clamped':''}" id="mt_${cid}_${p.id}">${p.text}</div>${isLong?`<div class="moment-expand" onclick="document.getElementById('mt_${cid}_${p.id}').classList.remove('clamped');this.style.display='none'">...展开</div>`:''}${ic>0?`<div class="moment-images img-${Math.min(ic,3)}">${p.images.map(s=>`<img src="${s}" loading="lazy">`).join('')}</div>`:''}<div class="moment-actions"><div class="like-btn ${liked?'liked':''}" onclick="toggleLike('${dk}',${p.id})"><span>${liked?'❤️':'🤍'}</span><span>${lc}</span></div><div class="moment-crud auth-ctrl"><button onclick="openEditForm('${dk}',${p.id})">✏️</button><button onclick="confirmDelete('${dk}',${p.id})">🗑️</button></div></div></div>`;
     }).join('');
 }
 function toggleLike(key,id){const arr=getData(key)||[];const p=arr.find(x=>x.id===id);if(p){p.liked=!p.liked;p.likes+=p.liked?1:-1;setData(key,arr);}refreshCurrentTL();}
@@ -553,7 +577,7 @@ function renderStudyCal(){
     // 任务列表
     const tasks=data[selectedStudyDay]||[];
     document.getElementById('taskTitle').textContent=`📋 ${selectedStudyDay===today?'今日':selectedStudyDay} 任务`;
-    document.getElementById('taskList').innerHTML=tasks.length?tasks.map((t,i)=>`<div class="task-item"><div class="task-text">${t}</div><div class="task-actions"><button onclick="editStudyTask(${i})">✏️</button><button onclick="deleteStudyTask(${i})">🗑️</button></div></div>`).join(''):'<div style="color:var(--text-light);font-size:13px;padding:8px 0;">暂无任务，添加一个吧 ✨</div>';
+    document.getElementById('taskList').innerHTML=tasks.length?tasks.map((t,i)=>`<div class="task-item"><div class="task-text">${t}</div><div class="task-actions auth-ctrl"><button onclick="editStudyTask(${i})">✏️</button><button onclick="deleteStudyTask(${i})">🗑️</button></div></div>`).join(''):'<div style="color:var(--text-light);font-size:13px;padding:8px 0;">暂无任务，添加一个吧 ✨</div>';
     // 统计
     const rate=totalDays>0?Math.round(doneDays/totalDays*100):0;
     document.getElementById('studyStats').innerHTML=`<div class="study-stat"><div class="ss-num">${doneDays}</div><div class="ss-label">本月打卡</div></div><div class="study-stat"><div class="ss-num">${rate}%</div><div class="ss-label">完成率</div></div>`;
@@ -631,12 +655,12 @@ document.getElementById('bookContent').innerHTML=data.map(b=>{
     const refShort=ref.length>80?ref.slice(0,80)+'...':ref;
     const refId='ref_'+b.id;
     const imgs=b.images||[];
-    return`<div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color||'#ccc'};"><div class="bk-cover" style="background:${b.color||'#ccc'}20;">${b.emoji||'📖'}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${'⭐'.repeat(b.stars||3)}</div>${ref?`<div style="border-top:1px dashed rgba(150,100,200,0.2);margin-top:10px;padding-top:8px;text-align:left;"><span style="font-size:13px;color:var(--accent-s);font-weight:bold;">📖 读后感：</span><p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:4px;" id="${refId}">${ref.length>120?refShort:ref}</p>${ref.length>120?`<span style="font-size:12px;color:var(--accent-s);cursor:pointer;" onclick="var e=document.getElementById('${refId}');if(e.dataset.expanded==='1'){e.textContent='${refShort.replace(/'/g,"\\'")}';this.textContent='...展开';e.dataset.expanded='0';}else{e.textContent='${ref.replace(/'/g,"\\'").replace(/\n/g," ")}';this.textContent='收起';e.dataset.expanded='1';}">...展开</span>`:''}</div>`:'<div style="margin-top:6px;font-size:12px;color:var(--text-light);">暂无读后感 📝</div>'}${imgs.length>0?`<div class="book-images">${imgs.map(s=>`<img src="${s}">`).join('')}</div>`:''}</div><div class="item-crud" style="position:absolute;top:-8px;right:-8px;"><button onclick="openEditForm('books',${b.id})">✏️</button><button onclick="confirmDelete('books',${b.id})">🗑️</button></div></div>`;
+    return`<div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color||'#ccc'};"><div class="bk-cover" style="background:${b.color||'#ccc'}20;">${b.emoji||'📖'}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${'⭐'.repeat(b.stars||3)}</div>${ref?`<div style="border-top:1px dashed rgba(150,100,200,0.2);margin-top:10px;padding-top:8px;text-align:left;"><span style="font-size:13px;color:var(--accent-s);font-weight:bold;">📖 读后感：</span><p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:4px;" id="${refId}">${ref.length>120?refShort:ref}</p>${ref.length>120?`<span style="font-size:12px;color:var(--accent-s);cursor:pointer;" onclick="var e=document.getElementById('${refId}');if(e.dataset.expanded==='1'){e.textContent='${refShort.replace(/'/g,"\\'")}';this.textContent='...展开';e.dataset.expanded='0';}else{e.textContent='${ref.replace(/'/g,"\\'").replace(/\n/g," ")}';this.textContent='收起';e.dataset.expanded='1';}">...展开</span>`:''}</div>`:'<div style="margin-top:6px;font-size:12px;color:var(--text-light);">暂无读后感 📝</div>'}${imgs.length>0?`<div class="book-images">${imgs.map(s=>`<img src="${s}">`).join('')}</div>`:''}</div><div class="item-crud auth-ctrl" style="position:absolute;top:-8px;right:-8px;"><button onclick="openEditForm('books',${b.id})">✏️</button><button onclick="confirmDelete('books',${b.id})">🗑️</button></div></div>`;
 }).join('');
 if(migrated)setData('books',data);
 }
-function renderVinyl(){const data=getData('music')||[];document.getElementById('soundwave').innerHTML=Array.from({length:30},(_,i)=>`<span style="height:${10+Math.random()*25}px;animation-delay:${i*0.05}s;"></span>`).join('');document.getElementById('vinylContent').innerHTML=data.map(m=>`<div class="vinyl-card" onclick="this.classList.toggle('playing')"><div class="vinyl-disc"><div class="vinyl-sticker" style="background:${m.color||'#888'};">${(m.artist||'?')[0]}</div></div><div class="vinyl-title">${m.title}</div><div class="vinyl-artist">${m.artist}</div><div class="vinyl-lyric">"${m.lyric||''}"</div><div class="item-crud" style="position:absolute;top:0;right:0;"><button onclick="event.stopPropagation();openEditForm('music',${m.id})">✏️</button><button onclick="event.stopPropagation();confirmDelete('music',${m.id})">🗑️</button></div></div>`).join('');}
-function renderFilms(){const data=getData('movies')||[];document.getElementById('filmContent').innerHTML=data.map(m=>`<div class="film-card"><div class="film-poster"><img src="${m.img||'https://picsum.photos/seed/mv/400/225'}" loading="lazy"><div class="film-overlay"><div class="film-name">${m.title}</div><div class="film-director">${m.director}</div><div class="film-review">${m.review||''}</div><div class="film-tags">${(m.tags||[]).map(t=>`<span>${t}</span>`).join('')}</div></div></div><div class="item-crud" style="position:absolute;top:8px;right:8px;z-index:2;"><button onclick="openEditForm('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">✏️</button><button onclick="confirmDelete('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">🗑️</button></div></div>`).join('');}
+function renderVinyl(){const data=getData('music')||[];document.getElementById('soundwave').innerHTML=Array.from({length:30},(_,i)=>`<span style="height:${10+Math.random()*25}px;animation-delay:${i*0.05}s;"></span>`).join('');document.getElementById('vinylContent').innerHTML=data.map(m=>`<div class="vinyl-card" onclick="this.classList.toggle('playing')"><div class="vinyl-disc"><div class="vinyl-sticker" style="background:${m.color||'#888'};">${(m.artist||'?')[0]}</div></div><div class="vinyl-title">${m.title}</div><div class="vinyl-artist">${m.artist}</div><div class="vinyl-lyric">"${m.lyric||''}"</div><div class="item-crud auth-ctrl" style="position:absolute;top:0;right:0;"><button onclick="event.stopPropagation();openEditForm('music',${m.id})">✏️</button><button onclick="event.stopPropagation();confirmDelete('music',${m.id})">🗑️</button></div></div>`).join('');}
+function renderFilms(){const data=getData('movies')||[];document.getElementById('filmContent').innerHTML=data.map(m=>`<div class="film-card"><div class="film-poster"><img src="${m.img||'https://picsum.photos/seed/mv/400/225'}" loading="lazy"><div class="film-overlay"><div class="film-name">${m.title}</div><div class="film-director">${m.director}</div><div class="film-review">${m.review||''}</div><div class="film-tags">${(m.tags||[]).map(t=>`<span>${t}</span>`).join('')}</div></div></div><div class="item-crud auth-ctrl" style="position:absolute;top:8px;right:8px;z-index:2;"><button onclick="openEditForm('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">✏️</button><button onclick="confirmDelete('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">🗑️</button></div></div>`).join('');}
 
 // ═══ 主页原有功能 ═══
 let appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};
@@ -660,10 +684,25 @@ function renderHistory(type){const c=document.getElementById(type+'History'),dat
 
 loadData();
 
+// ═══ 权限系统 ═══
+let isAuthor=sessionStorage.getItem('isAuthor')==='true';
+function updateAuthUI(){
+    const fab=document.getElementById('authFab');
+    const txt=document.getElementById('authFabText');
+    if(isAuthor){fab.classList.remove('guest');txt.textContent='🔓 退出编辑模式';}
+    else{fab.classList.add('guest');txt.textContent='🔐 进入编辑模式';}
+    document.querySelectorAll('.auth-ctrl').forEach(el=>{isAuthor?el.classList.remove('auth-hidden'):el.classList.add('auth-hidden');});
+    document.querySelectorAll('.auth-tip').forEach(el=>{isAuthor?el.classList.add('auth-hidden'):el.classList.remove('auth-hidden');});
+}
+function toggleAuth(){if(isAuthor){isAuthor=false;sessionStorage.removeItem('isAuthor');updateAuthUI();}else{document.getElementById('authOverlay').classList.add('visible');document.getElementById('authPwInput').value='';document.getElementById('authPwError').textContent='';setTimeout(()=>document.getElementById('authPwInput').focus(),300);}}
+function closeAuthModal(){const o=document.getElementById('authOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
+function verifyAuth(){const pw=document.getElementById('authPwInput').value.trim();if(pw==='ouyang2026'){isAuthor=true;sessionStorage.setItem('isAuthor','true');closeAuthModal();updateAuthUI();}else{document.getElementById('authPwError').textContent='密码错误';document.getElementById('authPwInput').classList.add('shake');document.getElementById('authPwInput').value='';setTimeout(()=>document.getElementById('authPwInput').classList.remove('shake'),400);}}
+updateAuthUI();
+
 // ═══ 全局点击波纹 ═══
 document.addEventListener('click',function(e){
     const t=e.target;
-    if(t.closest('.eye-icon')||t.closest('.pw-overlay')||t.closest('.form-overlay'))return;
+    if(t.closest('.eye-icon')||t.closest('.pw-overlay')||t.closest('.form-overlay')||t.closest('#authOverlay')||t.closest('.auth-fab'))return;
     if(t.closest('button')||t.closest('a')||t.closest('[role="button"]')||t.closest('.module-card')||t.closest('.key-btn')||t.closest('.add-btn')||t.closest('.back-btn')||t.closest('.moment-crud')||t.closest('.like-btn')||t.closest('.task-item')||t.closest('.study-day')||t.closest('.checkin-btn')||t.closest('.nav-link')){
         SoundFX.playClick();
         const r=document.createElement('div');r.className='click-ripple';
