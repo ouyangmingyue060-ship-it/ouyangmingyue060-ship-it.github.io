@@ -508,17 +508,12 @@ function updateItem(k,id,u){const a=getData(k)||[];const idx=a.findIndex(x=>x.id
 function deleteItem(k,id){const a=getData(k)||[];setData(k,a.filter(x=>x.id!==id));}
 
 function seedData(){
-    if(getData('_seeded'))return;
-    const n=Date.now();
-    setData('jiejie',[{id:n+1,text:'今天和妹妹去吃了火锅，超开心！',images:['https://picsum.photos/seed/jj1/300/200'],time:'2026-08-18 12:30',likes:5,liked:false,avatar:'👩',nick:'姐姐'}]);
-    setData('xiaowei',[{id:n+1,text:'托业模拟考了835分！离目标850越来越近了💪',images:[],time:'2026-08-18 09:00',likes:15,liked:false,avatar:'🧑',nick:'小微'}]);
-    setData('meimei',[{id:n+1,text:'开学第一天，新学期新气象！📚',images:['https://picsum.photos/seed/mm1/300/200'],time:'2026-08-18 08:00',likes:10,liked:false,avatar:'👧',nick:'妹妹'}]);
-    setData('thoughts',[{id:n+1,text:'人与人之间的关系真的很微妙。有些人走着走着就散了。',images:[],time:'2026-08-18 23:15',likes:30,liked:false,avatar:'🌙',nick:'想法'}]);
-    setData('books',[{id:n+1,title:'三体',author:'刘慈欣',color:'#1a1a2e',emoji:'🌌',stars:5,reflection:'读完三体，我对宇宙的敬畏感加深了无数倍。黑暗森林法则让我重新审视人与人之间的信任关系。叶文洁的选择让我思考：当文明遭遇绝望时，我们会做出怎样的抉择？',images:[]}]);
-    setData('music',[{id:n+1,title:'Bohemian Rhapsody',artist:'Queen',color:'#E74C3C',lyric:'Is this the real life? Is this just fantasy?'}]);
-    setData('movies',[{id:n+1,title:'星际穿越',director:'Christopher Nolan',img:'https://picsum.photos/seed/mv1/400/225',review:'这部电影让我重新思考了时间和爱的关系。库珀穿越黑洞的那一刻，我泪流满面。',tags:['科幻','烧脑','亲情']}]);
+    if(getData('_seeded_v2'))return;
+    localStorage.removeItem(LS_KEY);
+    setData('jiejie',[]);setData('xiaowei',[]);setData('meimei',[]);
+    setData('thoughts',[]);setData('books',[]);setData('music',[]);setData('movies',[]);
     setData('studyCheckin',{});
-    setData('_seeded',true);
+    setData('_seeded_v2',true);
 }
 seedData();
 
@@ -725,7 +720,7 @@ function renderFilms(){const data=getData('movies')||[];document.getElementById(
 
 // ═══ 主页原有功能 ═══
 let appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};
-function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData.moments=[{id:1,content:'今天夕阳好美！🌅',images:[],time:'2026-08-17 19:30',likes:5,liked:false}];saveData();}}
+function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};saveData();}}
 function saveData(){localStorage.setItem('myLifeJourney',JSON.stringify(appData));}
 function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
 function goHome(){document.getElementById('main').style.display='none';document.getElementById('exploreBg').style.display='none';document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();}
