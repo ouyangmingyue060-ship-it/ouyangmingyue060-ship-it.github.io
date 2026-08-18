@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>人生乱套 我睡大觉</title>
+    <title>人生乱套 我睡大觉 | OUYANGMINGYUE</title>
+    <meta name="description" content="欧阳明月的个人网站 — 探索我，探索世界">
+    <meta name="theme-color" content="#4a1942">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&family=Long+Cang&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-    @font-face{font-family:'GBai';src:url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype');font-weight:normal;}
-    @font-face{font-family:'Shantell Sans';src:url('/assets/fonts/ShantellSans-Italic-VariableFont_BNCE,INFM,SPAC,wght.ttf') format('truetype');font-weight:normal;font-style:italic;}
+    @font-face{font-family:'GBai';src:url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype');font-weight:normal;font-display:swap;}
+    @font-face{font-family:'Shantell Sans';src:url('/assets/fonts/ShantellSans-Italic-VariableFont_BNCE,INFM,SPAC,wght.ttf') format('truetype');font-weight:normal;font-style:italic;font-display:swap;}
     *{margin:0;padding:0;box-sizing:border-box;}body{min-height:100vh;overflow:hidden;}
 
     /* === 着陆页 === */
@@ -254,14 +260,66 @@
     .font-cn-hand{font-family:'Liu Jian Mao Cao','Long Cang',cursive;}
     .font-en-hand{font-family:'Caveat',cursive;}
 
+    /* === 平板端 768-1023px === */
+    @media(min-width:769px) and (max-width:1023px){
+        .home-title .main-title{font-size:52px;letter-spacing:6px;}
+        .sunglasses-entry{gap:70px;}
+        .eye-icon .icon-symbol{font-size:48px;}
+        .module-grid{gap:16px;max-width:500px;}
+        .book-grid{grid-template-columns:repeat(3,1fr);gap:16px;}
+        .vinyl-grid{gap:24px;}
+        .film-card{width:250px;}
+        .moment-avatar{width:44px;height:44px;font-size:20px;}
+    }
+    /* === 手机端 ≤768px === */
     @media(max-width:768px){
-        .home-title .main-title{font-size:42px;letter-spacing:4px;}.home-title .sub-title{font-size:18px;}
-        .sunglasses-entry{gap:50px;}.eye-icon .icon-symbol{font-size:44px;}.eye-icon .icon-label{font-size:18px;}
-        .module-grid{grid-template-columns:1fr;max-width:320px;}
-        .keys-row{flex-direction:column;align-items:center;}
-        .book-grid{grid-template-columns:repeat(2,1fr);}
-        .vinyl-grid{grid-template-columns:1fr;}
-        .film-card{width:220px;}
+        .home-title .main-title{font-size:32px;letter-spacing:4px;}
+        .home-title .sub-title{font-size:16px;}
+        .home-title{margin-bottom:30px;}
+        .sunglasses-entry{gap:40px;}
+        .eye-icon .icon-symbol{font-size:36px;}
+        .eye-icon .icon-label{font-size:16px;letter-spacing:2px;}
+        .eye-icon .icon-label-en{font-size:12px;}
+        .watermark .wm-text{font-size:11px;opacity:0.15;letter-spacing:4px;}
+        .module-grid{grid-template-columns:1fr;max-width:300px;gap:14px;}
+        .module-card{padding:20px 16px;}
+        .module-card .mc-icon{font-size:34px;}
+        .module-card .mc-title{font-size:18px;}
+        .keys-row{flex-direction:column;align-items:center;gap:10px;}
+        .key-btn{padding:10px 14px;min-width:60px;}
+        .explore-title{font-size:28px;letter-spacing:4px;}
+        .explore-content{padding:24px 16px 60px;}
+        .timeline-name{font-size:20px;}
+        .search-box input{padding:10px 14px 10px 38px;font-size:13px;}
+        .moment-item{padding:14px;}
+        .moment-avatar{width:36px;height:36px;font-size:16px;}
+        .moment-nick{font-size:15px;}
+        .moment-text{font-size:14px;}
+        .moment-images.img-2 img{height:100px;}
+        .moment-images.img-3 img{height:80px;}
+        .pw-modal{width:300px;padding:28px 24px;}
+        .pw-modal h3{font-size:20px;}
+        .pw-modal input{font-size:16px;padding:12px 14px;}
+        .course-timeline{padding:16px;}
+        .course-title{font-size:22px;}
+        .book-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;}
+        .book-inner{min-height:160px;padding:14px 10px;}
+        .book-inner .bk-cover{width:48px;height:64px;font-size:22px;}
+        .book-inner .bk-title{font-size:13px;}
+        .vinyl-grid{grid-template-columns:1fr;gap:24px;padding:16px;}
+        .vinyl-disc{width:130px;height:130px;}
+        .vinyl-sticker{width:30px;height:30px;font-size:14px;}
+        .vinyl-title{font-size:14px;}
+        .film-card{width:200px;}
+        .film-poster .film-name{font-size:14px;}
+        .film-poster .film-quote{font-size:11px;}
+        .sub-header{padding:14px 16px;}
+        .explore-header{padding:14px 16px;}
+        .back-btn{padding:8px 16px;font-size:14px;}
+        /* 主内容区 */
+        .moments-card{padding:14px;}
+        .publish-box{padding:14px;}
+        .checkin-card{padding:16px;}
     }
     ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(212,98,166,0.3);border-radius:4px;}
     </style>
