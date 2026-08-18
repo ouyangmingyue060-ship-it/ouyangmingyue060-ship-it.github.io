@@ -173,6 +173,8 @@
     .task-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(200,180,255,0.08);}
     .task-item:last-child{border-bottom:none;}
     .task-text{flex:1;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:var(--text-secondary);}
+    .task-media{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;}
+    .task-media img,.task-media video{max-height:80px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,0.2);cursor:pointer;}
     .task-item .task-actions{display:flex;gap:6px;}
     .task-item .task-actions button{background:none;border:none;cursor:pointer;font-size:12px;opacity:0.3;transition:all 0.2s;padding:2px;}
     .task-item .task-actions button:hover{opacity:1;}
@@ -187,10 +189,14 @@
     body[data-author="true"] .auth-ctrl{display:flex!important;}
     .auth-tip{display:block;font-size:12px;color:var(--text-light);text-align:center;padding:8px;font-family:'KBai','ZCOOL XiaoWei',serif;}
     body[data-author="true"] .auth-tip{display:none;}
-    .task-add{display:flex;gap:8px;margin-top:12px;}
-    .task-add input{flex:1;padding:10px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;outline:none;}
-    .task-add input:focus{border-color:var(--c-study);}
-    .task-add button{background:var(--c-study);color:#fff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;}
+    .task-add{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center;}
+    .task-add input[type="text"]{flex:1;min-width:120px;padding:10px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;outline:none;}
+    .task-add input[type="text"]:focus{border-color:var(--c-study);}
+    .task-add .task-add-btn{background:var(--c-study);color:#fff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;}
+    .task-add .task-media-btn{background:rgba(200,180,255,0.15);border:1px solid var(--card-border);padding:8px 12px;border-radius:12px;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all 0.2s;}
+    .task-add .task-media-btn:hover{background:rgba(200,180,255,0.25);}
+    .task-add-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+    .task-add-preview img,.task-add-preview video{max-height:60px;border-radius:8px;object-fit:contain;}
 
     .study-stats{display:flex;gap:14px;justify-content:center;}
     .study-stat{background:var(--card-bg);backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:14px;padding:14px 22px;text-align:center;flex:1;max-width:150px;}
@@ -393,7 +399,7 @@
             <div class="timeline-header"><button class="timeline-back" onclick="closeStudyCal()">← 返回探索我</button><span class="timeline-name">📖 学习打卡</span></div>
             <div class="study-month-nav"><button onclick="changeStudyMonth(-1)">‹</button><span class="month-label" id="studyMonthLabel"></span><button onclick="changeStudyMonth(1)">›</button></div>
             <div class="study-grid" id="studyGrid"></div>
-            <div class="study-tasks"><h4 id="taskTitle">📋 今日任务</h4><div id="taskList"></div><div class="task-add auth-ctrl"><input type="text" id="newTaskInput" placeholder="添加新任务..." onkeydown="if(event.key==='Enter')addStudyTask()"><button onclick="addStudyTask()">➕</button></div></div>
+            <div class="study-tasks"><h4 id="taskTitle">📋 今日完成情况</h4><div id="taskList"></div><div class="task-add auth-ctrl"><input type="text" id="newTaskInput" placeholder="记录完成内容..." onkeydown="if(event.key==='Enter')addStudyTask()"><button class="task-media-btn" onclick="document.getElementById('taskMediaInput').click()">📷</button><button class="task-add-btn" onclick="addStudyTask()">➕</button><input type="file" id="taskMediaInput" accept="image/*,video/*" multiple style="display:none;" onchange="previewTaskMedia(this)"><div class="task-add-preview" id="taskMediaPreview"></div></div></div>
             <div class="study-stats" id="studyStats"></div>
         </div>
     </div>
@@ -578,16 +584,48 @@ function renderStudyCal(){
     document.getElementById('studyGrid').innerHTML=html;
     // 任务列表
     const tasks=data[selectedStudyDay]||[];
-    document.getElementById('taskTitle').textContent=`📋 ${selectedStudyDay===today?'今日':selectedStudyDay} 任务`;
-    document.getElementById('taskList').innerHTML=tasks.length?tasks.map((t,i)=>`<div class="task-item"><div class="task-text">${t}</div><div class="task-actions auth-ctrl"><button onclick="editStudyTask(${i})">✏️</button><button onclick="deleteStudyTask(${i})">🗑️</button></div></div>`).join(''):'<div style="color:var(--text-light);font-size:13px;padding:8px 0;">暂无任务，添加一个吧 ✨</div>';
+    const today2=todayStr();
+    document.getElementById('taskTitle').textContent=`📋 ${selectedStudyDay===today2?'今日':selectedStudyDay} 完成情况`;
+    document.getElementById('taskList').innerHTML=tasks.length?tasks.map((t,i)=>{
+        const txt=typeof t==='string'?t:t.text;
+        const imgs=typeof t==='string'?[]:(t.images||[]);
+        const vids=typeof t==='string'?[]:(t.videos||[]);
+        let mediaHtml='';
+        if(imgs.length||vids.length){
+            mediaHtml='<div class="task-media">';
+            imgs.forEach(s=>{mediaHtml+=`<img src="${s}">`;});
+            vids.forEach(s=>{mediaHtml+=`<video src="${s}" muted></video>`;});
+            mediaHtml+='</div>';
+        }
+        return`<div class="task-item"><div><div class="task-text">${txt}</div>${mediaHtml}</div><div class="task-actions auth-ctrl"><button onclick="editStudyTask(${i})">✏️</button><button onclick="deleteStudyTask(${i})">🗑️</button></div></div>`;
+    }).join(''):'<div style="color:var(--text-light);font-size:13px;padding:8px 0;">暂无记录，添加一个吧 ✨</div>';
     // 统计
     const rate=totalDays>0?Math.round(doneDays/totalDays*100):0;
     document.getElementById('studyStats').innerHTML=`<div class="study-stat"><div class="ss-num">${doneDays}</div><div class="ss-label">本月打卡</div></div><div class="study-stat"><div class="ss-num">${rate}%</div><div class="ss-label">完成率</div></div>`;
 }
 function selectStudyDay(ds){selectedStudyDay=ds;renderStudyCal();}
-function addStudyTask(){const input=document.getElementById('newTaskInput');const text=input.value.trim();if(!text)return;const data=getData('studyCheckin')||{};if(!data[selectedStudyDay])data[selectedStudyDay]=[];data[selectedStudyDay].push(text);setData('studyCheckin',data);input.value='';renderStudyCal();}
-function deleteStudyTask(idx){const data=getData('studyCheckin')||{};if(!data[selectedStudyDay])return;if(!confirm('删除这个任务？'))return;data[selectedStudyDay].splice(idx,1);setData('studyCheckin',data);renderStudyCal();}
-function editStudyTask(idx){const data=getData('studyCheckin')||{};const tasks=data[selectedStudyDay]||[];const newTxt=prompt('编辑任务',tasks[idx]);if(newTxt===null)return;const trimmed=newTxt.trim();if(!trimmed){deleteStudyTask(idx);return;}tasks[idx]=trimmed;setData('studyCheckin',data);renderStudyCal();}
+// ═══ 学习打卡媒体 ═══
+let taskMediaImgs=[],taskMediaVids=[];
+async function previewTaskMedia(input){
+    taskMediaImgs=[];taskMediaVids=[];
+    const pre=document.getElementById('taskMediaPreview');
+    pre.innerHTML='<span style="color:var(--text-light);font-size:12px;">处理中...</span>';
+    for(const f of input.files){
+        if(f.type.startsWith('video/')){
+            const reader=new FileReader();
+            reader.onload=function(e){taskMediaVids.push(e.target.result);pre.innerHTML=taskMediaImgs.map(s=>`<img src="${s}">`).join('')+taskMediaVids.map(s=>`<video src="${s}" muted style="max-height:60px;border-radius:8px;"></video>`).join('');};
+            reader.readAsDataURL(f);
+        }else{
+            try{const b64=await compressImage(f,600,0.7);taskMediaImgs.push(b64);}catch(e){console.error(e);}
+        }
+    }
+    pre.innerHTML=taskMediaImgs.map(s=>`<img src="${s}">`).join('')+taskMediaVids.map(s=>`<video src="${s}" muted style="max-height:60px;border-radius:8px;"></video>`).join('');
+    input.value='';
+}
+
+function addStudyTask(){const input=document.getElementById('newTaskInput');const text=input.value.trim();if(!text&&!taskMediaImgs.length&&!taskMediaVids.length)return;const data=getData('studyCheckin')||{};if(!data[selectedStudyDay])data[selectedStudyDay]=[];const item={text:text||'📷 记录',images:[...taskMediaImgs],videos:[...taskMediaVids]};data[selectedStudyDay].push(item);setData('studyCheckin',data);input.value='';taskMediaImgs=[];taskMediaVids=[];document.getElementById('taskMediaPreview').innerHTML='';renderStudyCal();}
+function deleteStudyTask(idx){const data=getData('studyCheckin')||{};if(!data[selectedStudyDay])return;if(!confirm('删除这条记录？'))return;data[selectedStudyDay].splice(idx,1);setData('studyCheckin',data);renderStudyCal();}
+function editStudyTask(idx){const data=getData('studyCheckin')||{};const tasks=data[selectedStudyDay]||[];const old=tasks[idx];const oldTxt=typeof old==='string'?old:old.text;const newTxt=prompt('编辑内容',oldTxt);if(newTxt===null)return;const trimmed=newTxt.trim();if(!trimmed){deleteStudyTask(idx);return;}if(typeof old==='string'){tasks[idx]=trimmed;}else{tasks[idx].text=trimmed;}setData('studyCheckin',data);renderStudyCal();}
 
 // ═══ 表单弹窗（含图片上传）═══
 let formMode='add',formKey='',formEditId=null,formUploadImgs=[],formDataKey='';
