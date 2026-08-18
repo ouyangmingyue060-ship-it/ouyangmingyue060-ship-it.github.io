@@ -499,11 +499,11 @@ const HASH_SALT='hermes_salt_2026';
 const pwHashes={jiejie:'7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',xiaowei:'ffcbbbda6b532a2f746b4ace1b9d395b285c24333520a31ad07a508bccadc02b',meimei:'6c2f3db183ae2662c40ce7dd0874bcb58dcbae68ae685917c8961b10e1700311'};
 const pwNames={jiejie:'姐姐',xiaowei:'小微',meimei:'妹妹'};
 const pwAvatars={jiejie:'👩',xiaowei:'🧑',meimei:'👧'};
-let curPwTarget=null;
+let curPwTarget=null,authenticatedFriend=null;
 async function sha256(s){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
 function openPwModal(t){curPwTarget=t;document.getElementById('pwOverlay').classList.add('visible');document.getElementById('pwInput').value='';document.getElementById('pwError').textContent='';setTimeout(()=>document.getElementById('pwInput').focus(),300);}
 function closePwModal(){const o=document.getElementById('pwOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);curPwTarget=null;}
-async function verifyPw(){const i=document.getElementById('pwInput'),e=document.getElementById('pwError'),pw=i.value.trim();if(!pw){e.textContent='请输入密码';return;}const h=await sha256(HASH_SALT+pw);if(h===pwHashes[curPwTarget]){const t=curPwTarget;closePwModal();setTimeout(()=>openFriendTL(t),350);}else{e.textContent='密码错误，请重试';i.classList.add('shake');i.value='';setTimeout(()=>i.classList.remove('shake'),400);}}
+async function verifyPw(){const i=document.getElementById('pwInput'),e=document.getElementById('pwError'),pw=i.value.trim();if(!pw){e.textContent='请输入密码';return;}const h=await sha256(HASH_SALT+pw);if(h===pwHashes[curPwTarget]){const t=curPwTarget;authenticatedFriend=t;closePwModal();setTimeout(()=>openFriendTL(t),350);}else{e.textContent='密码错误，请重试';i.classList.add('shake');i.value='';setTimeout(()=>i.classList.remove('shake'),400);}}
 function openRecordUs(){}
 
 // ═══ 时间线渲染 ═══
@@ -524,7 +524,7 @@ function filterTL(){const q=(document.getElementById('searchInput').value||'').t
 function openSubTL(key){curTLKey=key;document.getElementById('moduleGrid').style.display='none';const tv=document.getElementById('subTimelineView');tv.dataset.theme=key;tv.classList.add('active');document.getElementById('subTimelineName').textContent='💭 记录想法';document.getElementById('subSearchInput').value='';document.getElementById('subAddBtn').onclick=()=>openAddForm(key);renderTL('subTimelineList',key,getData(key)||[]);}
 function filterSubTL(){const q=(document.getElementById('subSearchInput').value||'').trim().toLowerCase();const arr=getData(curTLKey)||[];renderTL('subTimelineList',curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
 function refreshCurrentTL(){if(!curTLKey)return;const isSub=curTLKey==='thoughts';const cid=isSub?'subTimelineList':'timelineList';const q=isSub?(document.getElementById('subSearchInput').value||'').toLowerCase():(document.getElementById('searchInput')?.value||'').toLowerCase();const arr=getData(curTLKey)||[];renderTL(cid,curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
-function closeTL(vid,gid){document.getElementById(vid).classList.remove('active');document.getElementById(gid).style.display='';curTLKey=null;}
+function closeTL(vid,gid){document.getElementById(vid).classList.remove('active');document.getElementById(gid).style.display='';curTLKey=null;authenticatedFriend=null;}
 
 // ═══ 学习打卡（可编辑任务）═══
 const monthNamesCN=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
@@ -600,14 +600,15 @@ function saveForm(){
     if(!item.text&&!item.title){alert('请填写内容');return;}
     if(formMode==='add'){
         if(['recordus','thoughts'].includes(formKey)){
-            const avatars={recordus:pwAvatars[curPwTarget]||'✦',thoughts:'🌙'};
-            const nicks={recordus:pwNames[curPwTarget]||'我',thoughts:'想法'};
+            const af=authenticatedFriend||curTLKey;
+            const avatars={recordus:pwAvatars[af]||'✦',thoughts:'🌙'};
+            const nicks={recordus:pwNames[af]||'我',thoughts:'想法'};
             const now=new Date();item.time=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');item.likes=0;item.liked=false;item.avatar=avatars[formKey]||'✦';item.nick=nicks[formKey]||'匿名';
             item.images=formUploadImgs.length?formUploadImgs.slice(0,9):[];
         }
         if(formKey==='books'){item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');if(!item.emoji)item.emoji='📖';item.images=formUploadImgs.length?formUploadImgs.slice(0,9):[];}
         if(formKey==='music'){if(!item.color)item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');}
-        try{addItem(formKey,item);}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足，请删除部分旧图片');return;}}
+        try{addItem(formKey,item);if(formKey==='recordus')alert('✅ 动态添加成功！');}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足，请删除部分旧图片');return;}else{alert('添加失败：'+e.message);return;}}
     }else{
         if(formUploadImgs.length&&['recordus','thoughts','books'].includes(formKey)){item.images=formUploadImgs.slice(0,9);}
         try{updateItem(formKey,formEditId,item);}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足');return;}}
