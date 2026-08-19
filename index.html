@@ -712,6 +712,22 @@
 
     .module-page-content{padding:30px;max-width:800px;margin:0 auto;}
 
+    /* 发布按钮 */
+    .publish-btn{padding:10px 20px;border-radius:20px;border:1px solid rgba(200,180,255,0.3);background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;cursor:pointer;transition:all 0.3s;}
+    .publish-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,132,252,0.3);}
+
+    /* 发布表单 */
+    .publish-form-container{padding:20px 30px;max-width:800px;margin:0 auto;}
+    .publish-form{background:rgba(255,255,255,0.1);border-radius:16px;padding:20px;border:1px solid rgba(200,180,255,0.2);}
+    .publish-form textarea{width:100%;padding:15px;border-radius:12px;border:1px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:15px;resize:vertical;outline:none;transition:all 0.3s;}
+    .publish-form textarea:focus{border-color:var(--accent-s);background:rgba(255,255,255,0.15);}
+    .publish-form textarea::placeholder{color:rgba(255,255,255,0.4);}
+    .publish-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px;}
+    .publish-cancel{padding:10px 20px;border-radius:12px;border:1px solid rgba(200,180,255,0.2);background:transparent;color:rgba(255,255,255,0.6);font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;cursor:pointer;transition:all 0.3s;}
+    .publish-cancel:hover{background:rgba(255,255,255,0.1);}
+    .publish-submit{padding:10px 20px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;cursor:pointer;transition:all 0.3s;}
+    .publish-submit:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,132,252,0.3);}
+
     @media(max-width:768px){
         .login-modal{width:90%;padding:32px 24px;}
         .login-modal h2{font-size:24px;}
@@ -819,9 +835,9 @@
 <div class="dashboard-page" id="dashboardPage">
     <div class="starry-bg" id="dashboardStarryBg"></div>
 
-    <button class="back-to-home" onclick="logout()">← 返回首页</button>
+    <button class="back-to-home" onclick="goHome()">← 返回首页</button>
     
-    <!-- 右上角登录按钮 -->
+    <!-- 右上角登录/用户区域 -->
     <div class="login-area" id="loginArea">
         <button class="login-btn-header" id="loginBtnHeader" onclick="showLoginModal()">
             <span class="login-icon">👤</span>
@@ -855,9 +871,9 @@
                     <div class="card-body">
                         <div class="card-desc">记录属于我们的点点滴滴，每一条动态都是珍贵的回忆。</div>
                         <div class="card-modules">
-                            <span class="card-module-tag">👩 姐姐</span>
-                            <span class="card-module-tag">🧑 小微</span>
-                            <span class="card-module-tag">👧 妹妹</span>
+                            <span class="card-module-tag" onclick="event.stopPropagation(); openModulePage('record-jiejie')">👩 姐姐</span>
+                            <span class="card-module-tag" onclick="event.stopPropagation(); openModulePage('record-xiaowei')">🧑 小微</span>
+                            <span class="card-module-tag" onclick="event.stopPropagation(); openModulePage('record-meimei')">👧 妹妹</span>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -947,7 +963,18 @@
     <div class="module-page-header">
         <button class="back-to-dashboard" onclick="closeModulePage()">← 返回</button>
         <h1 class="module-page-title" id="modulePageTitle">模块标题</h1>
-        <div class="module-page-spacer"></div>
+        <button class="publish-btn" id="publishBtn" onclick="openPublishForm()" style="display:none;">✏️ 发布</button>
+    </div>
+    
+    <!-- 发布表单 -->
+    <div class="publish-form-container" id="publishFormContainer" style="display:none;">
+        <div class="publish-form">
+            <textarea id="publishContent" placeholder="写下你想分享的内容..." rows="4"></textarea>
+            <div class="publish-actions">
+                <button class="publish-cancel" onclick="closePublishForm()">取消</button>
+                <button class="publish-submit" onclick="submitPublish()">发布</button>
+            </div>
+        </div>
     </div>
     
     <div class="module-page-content" id="modulePageContent">
@@ -1722,6 +1749,28 @@ function logout() {
     }, 500);
 }
 
+// 返回首页（不退出登录）
+function goHome() {
+    const dashboard = document.getElementById('dashboardPage');
+    dashboard.style.transition = 'opacity 0.5s';
+    dashboard.style.opacity = '0';
+
+    setTimeout(() => {
+        dashboard.classList.remove('visible');
+        dashboard.style.opacity = '';
+
+        const home = document.getElementById('home');
+        home.style.display = 'flex';
+        home.style.opacity = '0';
+        requestAnimationFrame(() => {
+            home.style.transition = 'opacity 0.5s';
+            home.style.opacity = '1';
+        });
+
+        document.body.style.overflow = 'hidden';
+    }, 500);
+}
+
 // ═══ 示例数据 ═══
 const sampleData = {
     'record-us': {
@@ -1738,6 +1787,48 @@ const sampleData = {
                     { user: '小微', avatar: '🧑', content: '好开心！下次还要一起去！', time: '2026-08-19 20:00' },
                     { user: '妹妹', avatar: '👧', content: '照片好好看！', time: '2026-08-19 20:15' }
                 ]
+            }
+        ]
+    },
+    'record-jiejie': {
+        title: '👩 姐姐的记录',
+        items: [
+            {
+                id: 101,
+                user: '姐姐',
+                avatar: '👩',
+                time: '2026-08-19 18:00',
+                content: '今天工作好累，但是很开心完成了项目～',
+                likes: 5,
+                comments: []
+            }
+        ]
+    },
+    'record-xiaowei': {
+        title: '🧑 小微的记录',
+        items: [
+            {
+                id: 102,
+                user: '小微',
+                avatar: '🧑',
+                time: '2026-08-19 17:00',
+                content: '学习了一天的托业，感觉有进步！',
+                likes: 8,
+                comments: []
+            }
+        ]
+    },
+    'record-meimei': {
+        title: '👧 妹妹的记录',
+        items: [
+            {
+                id: 103,
+                user: '妹妹',
+                avatar: '👧',
+                time: '2026-08-19 16:00',
+                content: '今天画了一幅画，好开心！',
+                likes: 10,
+                comments: []
             }
         ]
     },
@@ -1792,9 +1883,13 @@ const sampleData = {
 };
 
 // 打开模块详情页面
+let currentModuleKey = null; // 当前打开的模块
+
 function openModulePage(module) {
     const data = sampleData[module];
     if (!data) return;
+
+    currentModuleKey = module;
 
     // 设置标题
     document.getElementById('modulePageTitle').textContent = data.title;
@@ -1802,6 +1897,15 @@ function openModulePage(module) {
     // 渲染内容
     const contentContainer = document.getElementById('modulePageContent');
     renderModulePageContent(contentContainer, data);
+
+    // 显示/隐藏发布按钮
+    const publishBtn = document.getElementById('publishBtn');
+    if (publishBtn) {
+        publishBtn.style.display = currentUser ? 'block' : 'none';
+    }
+
+    // 隐藏发布表单
+    closePublishForm();
 
     // 显示页面
     const modulePage = document.getElementById('modulePage');
@@ -1823,6 +1927,68 @@ function closeModulePage() {
     // 显示仪表盘
     const dashboard = document.getElementById('dashboardPage');
     dashboard.style.display = 'block';
+    currentModuleKey = null;
+}
+
+// 打开发布表单
+function openPublishForm() {
+    if (!currentUser) {
+        showLoginModal(() => {
+            openPublishForm();
+        });
+        return;
+    }
+    document.getElementById('publishFormContainer').style.display = 'block';
+    document.getElementById('publishContent').value = '';
+    document.getElementById('publishContent').focus();
+}
+
+// 关闭发布表单
+function closePublishForm() {
+    document.getElementById('publishFormContainer').style.display = 'none';
+}
+
+// 提交发布
+function submitPublish() {
+    if (!currentUser) {
+        showLoginModal(() => {
+            submitPublish();
+        });
+        return;
+    }
+
+    const content = document.getElementById('publishContent').value.trim();
+    if (!content) {
+        alert('请输入内容');
+        return;
+    }
+
+    if (!currentModuleKey || !sampleData[currentModuleKey]) {
+        alert('模块不存在');
+        return;
+    }
+
+    // 添加新内容
+    const newItem = {
+        id: Date.now(),
+        user: currentUser.name,
+        avatar: '👤',
+        time: new Date().toLocaleString('zh-CN'),
+        content: content,
+        likes: 0,
+        comments: []
+    };
+
+    sampleData[currentModuleKey].items.unshift(newItem);
+
+    // 重新渲染
+    const contentContainer = document.getElementById('modulePageContent');
+    renderModulePageContent(contentContainer, sampleData[currentModuleKey]);
+
+    // 关闭发布表单
+    closePublishForm();
+
+    alert('发布成功！');
 }
 
 // 渲染模块详情页面内容
