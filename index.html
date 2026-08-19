@@ -437,6 +437,92 @@
     @media(prefers-reduced-motion: reduce){
         *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
     }
+
+    /* === 登录覆盖层 === */
+    .login-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s ease;}
+    .login-overlay.visible{display:flex;opacity:1;}
+
+    .login-modal{background:rgba(255,255,255,0.95);backdrop-filter:blur(30px);border:1px solid rgba(200,180,255,0.3);border-radius:28px;padding:40px 36px;width:380px;text-align:center;box-shadow:0 40px 100px rgba(150,100,200,0.25);animation:modalPop 0.4s cubic-bezier(0.34,1.56,0.64,1);}
+    .login-modal .login-icon{font-size:56px;margin-bottom:20px;display:block;}
+    .login-modal h2{font-family:'KBai','Ma Shan Zheng',cursive;font-size:28px;color:var(--text-primary);letter-spacing:4px;margin-bottom:8px;}
+    .login-modal .login-subtitle{font-family:'GBai','Caveat',cursive;font-size:16px;color:var(--text-light);margin-bottom:30px;}
+
+    .login-field{position:relative;margin-bottom:18px;}
+    .login-field input{width:100%;padding:14px 18px 14px 48px;border-radius:16px;border:2px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.8);color:var(--text-primary);font-size:16px;font-family:'KBai','ZCOOL XiaoWei',serif;outline:none;transition:all 0.3s;}
+    .login-field input:focus{border-color:var(--accent-s);background:rgba(255,255,255,1);box-shadow:0 0 0 4px rgba(192,132,252,0.15);}
+    .login-field input::placeholder{color:var(--text-light);font-size:14px;}
+    .login-field .field-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--text-light);pointer-events:none;}
+
+    .login-error{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:#ef4444;min-height:20px;margin-bottom:10px;}
+
+    .login-btn{width:100%;padding:16px;border-radius:16px;border:none;background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:20px;letter-spacing:4px;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 25px rgba(192,132,252,0.3);}
+    .login-btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(192,132,252,0.4);}
+    .login-btn:active{transform:scale(0.98);}
+
+    .login-footer{margin-top:24px;font-family:'GBai','Caveat',cursive;font-size:13px;color:var(--text-light);}
+
+    /* === 仪表盘页面 === */
+    .dashboard-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;overflow-y:auto;}
+    .dashboard-page.visible{display:block;}
+
+    .dashboard-bg{position:fixed;top:0;left:0;width:100%;height:100%;background-image:url('/assets/images/bg-home.jpg');background-size:cover;background-position:center;z-index:0;filter:blur(20px) brightness(0.7);transform:scale(1.1);}
+    .dashboard-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.75);z-index:1;}
+
+    .dashboard-content{position:relative;z-index:10;min-height:100vh;padding:30px 20px 100px;}
+
+    .dashboard-header{text-align:center;padding:40px 20px 50px;}
+    .dashboard-header .welcome-icon{font-size:64px;margin-bottom:16px;display:block;animation:pulse 2.5s ease-in-out infinite;}
+    .dashboard-header h1{font-family:'KBai','Ma Shan Zheng',cursive;font-size:42px;color:var(--text-primary);letter-spacing:6px;margin-bottom:12px;}
+    .dashboard-header .welcome-sub{font-family:'GBai','Caveat',cursive;font-size:20px;color:var(--text-light);letter-spacing:2px;}
+
+    .dashboard-nav{display:flex;justify-content:center;gap:16px;margin-bottom:40px;}
+    .nav-tab{padding:12px 32px;border-radius:25px;border:2px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.6);backdrop-filter:blur(10px);font-family:'KBai','Ma Shan Zheng',cursive;font-size:18px;color:var(--text-secondary);cursor:pointer;transition:all 0.3s;letter-spacing:3px;}
+    .nav-tab:hover{background:rgba(255,255,255,0.8);border-color:rgba(200,180,255,0.4);}
+    .nav-tab.active{background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;border-color:transparent;box-shadow:0 8px 25px rgba(192,132,252,0.3);}
+
+    .dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:24px;max-width:1000px;margin:0 auto;padding:0 20px;}
+
+    .dashboard-card{background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);border:1px solid rgba(200,180,255,0.2);border-radius:24px;padding:0;cursor:pointer;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 8px 32px rgba(150,100,200,0.1);overflow:hidden;position:relative;}
+    .dashboard-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(150,100,200,0.2);}
+    .dashboard-card:active{transform:scale(0.98);}
+
+    .card-header{padding:28px 28px 20px;display:flex;align-items:center;gap:20px;}
+    .card-icon-wrap{width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;}
+    .card-icon-wrap.record{background:linear-gradient(135deg,rgba(192,132,252,0.2),rgba(244,114,182,0.2));}
+    .card-icon-wrap.share{background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(252,211,77,0.2));}
+
+    .card-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:26px;color:var(--text-primary);letter-spacing:4px;}
+    .card-subtitle{font-family:'GBai','Caveat',cursive;font-size:15px;color:var(--text-light);margin-top:4px;}
+
+    .card-body{padding:0 28px 28px;}
+    .card-desc{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:15px;color:var(--text-secondary);line-height:1.8;}
+
+    .card-modules{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+    .card-module-tag{padding:8px 16px;border-radius:12px;background:rgba(200,180,255,0.1);border:1px solid rgba(200,180,255,0.15);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-secondary);transition:all 0.2s;}
+    .card-module-tag:hover{background:rgba(200,180,255,0.2);transform:translateY(-2px);}
+
+    .card-footer{padding:16px 28px;border-top:1px solid rgba(200,180,255,0.1);display:flex;justify-content:space-between;align-items:center;}
+    .card-count{font-family:'GBai','Caveat',cursive;font-size:13px;color:var(--text-light);}
+    .card-arrow{font-size:24px;color:var(--text-light);transition:transform 0.2s;}
+    .dashboard-card:hover .card-arrow{transform:translateX(4px);color:var(--accent-s);}
+
+    .back-to-home{position:fixed;top:24px;left:24px;z-index:120;padding:12px 24px;border-radius:25px;border:1px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:var(--text-primary);cursor:pointer;transition:all 0.3s;letter-spacing:2px;}
+    .back-to-home:hover{background:rgba(255,255,255,0.95);transform:translateX(-4px);}
+
+    .logout-btn{position:fixed;top:24px;right:24px;z-index:120;padding:12px 24px;border-radius:25px;border:1px solid rgba(239,68,68,0.2);background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:#ef4444;cursor:pointer;transition:all 0.3s;}
+    .logout-btn:hover{background:rgba(239,68,68,0.1);transform:translateY(-2px);}
+
+    @media(max-width:768px){
+        .login-modal{width:90%;padding:32px 24px;}
+        .login-modal h2{font-size:24px;}
+        .dashboard-header h1{font-size:32px;letter-spacing:4px;}
+        .dashboard-grid{grid-template-columns:1fr;padding:0 10px;}
+        .nav-tab{padding:10px 20px;font-size:16px;}
+        .back-to-home,.logout-btn{top:16px;padding:10px 18px;font-size:14px;}
+        .back-to-home{left:16px;}
+        .logout-btn{right:16px;}
+    }
+
     </style>
 </head>
 <body>
@@ -447,14 +533,205 @@
     <div class="particles-container" id="particlesContainer"></div>
     <div class="content-layer">
     <div class="home-title"><div class="main-title">人生乱套 我睡大觉</div><div class="sub-title">Life's a mess · I'm going to sleep</div></div>
-    <div class="sunglasses-entry">
-        <div class="eye-icon" id="eyeStar" data-target="explore-me"><span class="icon-symbol">✦</span><span class="icon-label">探索我</span><span class="icon-label-en">Explore Me</span></div>
-        <div class="eye-icon" id="eyeMoon" data-target="explore-world"><span class="icon-symbol">☾</span><span class="icon-label">探索世界</span><span class="icon-label-en">Explore World</span></div>
+    <div class="sunglasses-entry" style="flex-direction:column;gap:24px;">
+        <div class="eye-icon" id="enterBtn" onclick="openLoginModal()" style="cursor:pointer;">
+            <span class="icon-symbol" style="animation:pulse 2s ease-in-out infinite;">✦</span>
+            <span class="icon-label">进入我的世界</span>
+            <span class="icon-label-en">Enter My World</span>
+        </div>
+        <div style="font-family:'GBai','Caveat',cursive;font-size:14px;color:rgba(255,255,255,0.5);margin-top:-10px;">点击星星进入 ✨</div>
     </div>
     <div class="watermark"><div class="wm-text">OUYANGMINGYUE</div></div>
     </div>
 </section>
 <div id="meteorContainer"></div>
+<!-- 登录覆盖层 -->
+<div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLoginModal()">
+    <div class="login-modal">
+        <span class="login-icon">🔐</span>
+        <h2>欢迎回来</h2>
+        <p class="login-subtitle">Welcome Back · 登录探索更多</p>
+
+        <div class="login-field">
+            <span class="field-icon">👤</span>
+            <input type="text" id="loginUsername" placeholder="输入用户名..." onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
+        </div>
+
+        <div class="login-field">
+            <span class="field-icon">🔑</span>
+            <input type="password" id="loginPassword" placeholder="输入密码..." onkeydown="if(event.key==='Enter')handleLogin()">
+        </div>
+
+        <div class="login-error" id="loginError"></div>
+
+        <button class="login-btn" onclick="handleLogin()">✦ 登 录 ✦</button>
+
+        <p class="login-footer">没有账号？联系管理员获取 🔐</p>
+    </div>
+</div>
+
+<!-- 仪表盘页面 -->
+<div class="dashboard-page" id="dashboardPage">
+    <div class="dashboard-bg"></div>
+    <div class="dashboard-overlay"></div>
+
+    <button class="back-to-home" onclick="logout()">← 返回首页</button>
+    <button class="logout-btn" onclick="logout()">退出登录</button>
+
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <span class="welcome-icon">✦</span>
+            <h1 id="welcomeTitle">欢迎回来</h1>
+            <p class="welcome-sub" id="welcomeSubtitle">Welcome back · 开始探索吧</p>
+        </div>
+
+        <div class="dashboard-nav">
+            <button class="nav-tab active" onclick="switchDashboardTab('records')">📝 记录</button>
+            <button class="nav-tab" onclick="switchDashboardTab('shares')">🌍 分享</button>
+        </div>
+
+        <div id="recordsSection">
+            <div class="dashboard-grid">
+                <div class="dashboard-card" onclick="openModule('record-us')">
+                    <div class="card-header">
+                        <div class="card-icon-wrap record">💕</div>
+                        <div>
+                            <div class="card-title">记录我们</div>
+                            <div class="card-subtitle">Record Us · 我们的专属记忆</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-desc">记录属于我们的点点滴滴，每一条动态都是珍贵的回忆。</div>
+                        <div class="card-modules">
+                            <span class="card-module-tag">👩 姐姐</span>
+                            <span class="card-module-tag">🧑 小微</span>
+                            <span class="card-module-tag">👧 妹妹</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-count">💕 私密空间</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card" onclick="openModule('thoughts')">
+                    <div class="card-header">
+                        <div class="card-icon-wrap record">💭</div>
+                        <div>
+                            <div class="card-title">记录想法</div>
+                            <div class="card-subtitle">Thoughts · 碎碎念与感悟</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-desc">随手记录灵感、感悟、碎碎念，让思绪有迹可循。</div>
+                        <div class="card-modules">
+                            <span class="card-module-tag">✨ 灵感</span>
+                            <span class="card-module-tag">📝 日记</span>
+                            <span class="card-module-tag">💡 感悟</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-count">💭 随心记录</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card" onclick="openModule('study')">
+                    <div class="card-header">
+                        <div class="card-icon-wrap record">📖</div>
+                        <div>
+                            <div class="card-title">记录学习</div>
+                            <div class="card-subtitle">Study · 每日打卡追踪</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-desc">记录学习进度，打卡追踪，见证自己的成长。</div>
+                        <div class="card-modules">
+                            <span class="card-module-tag">📚 英语</span>
+                            <span class="card-module-tag">🎸 乐器</span>
+                            <span class="card-module-tag">✅ 打卡</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-count">📖 学习追踪</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sharesSection" style="display:none;">
+            <div class="dashboard-grid">
+                <div class="dashboard-card" onclick="openModule('books')">
+                    <div class="card-header">
+                        <div class="card-icon-wrap share">📚</div>
+                        <div>
+                            <div class="card-title">书籍分享</div>
+                            <div class="card-subtitle">Books · 阅读与感悟</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-desc">分享读过的好书，记录阅读感悟，传递知识的力量。</div>
+                        <div class="card-modules">
+                            <span class="card-module-tag">📖 书评</span>
+                            <span class="card-module-tag">⭐ 推荐</span>
+                            <span class="card-module-tag">📌 笔记</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-count">📚 知识海洋</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card" onclick="openModule('music')">
+                    <div class="card-header">
+                        <div class="card-icon-wrap share">🎵</div>
+                        <div>
+                            <div class="card-title">音乐分享</div>
+                            <div class="card-subtitle">Music · 黑胶与旋律</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-desc">分享喜欢的音乐，用旋律记录心情，让耳朵去旅行。</div>
+                        <div class="card-modules">
+                            <span class="card-module-tag">🎤 歌曲</span>
+                            <span class="card-module-tag">💿 专辑</span>
+                            <span class="card-module-tag">🎧 歌单</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-count">🎵 旋律之旅</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card" onclick="openModule('movies')">
+                    <div class="card-header">
+                        <div class="card-icon-wrap share">🎬</div>
+                        <div>
+                            <div class="card-title">影视分享</div>
+                            <div class="card-subtitle">Movies · 光影与故事</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-desc">分享看过的电影电视剧，记录观影感受，分享好故事。</div>
+                        <div class="card-modules">
+                            <span class="card-module-tag">🎥 电影</span>
+                            <span class="card-module-tag">📺 剧集</span>
+                            <span class="card-module-tag">⭐ 评分</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-count">🎬 光影世界</span>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- 探索页面虚化背景 -->
 <div class="explore-bg" id="exploreBg" style="display:none;"></div>
@@ -1069,6 +1346,187 @@ setTimeout(() => {
         fab.style.transform = 'scale(1)';
     }
 }, 2000);
+
+// ═══ 登录系统 ═══
+const USERS = {
+    'admin': { password: 'admin123', name: '管理员', role: 'admin' },
+    'jiejie': { password: 'jiejie123', name: '姐姐', role: 'user' },
+    'xiaowei': { password: 'xiaowei123', name: '小微', role: 'user' },
+    'meimei': { password: 'meimei123', name: '妹妹', role: 'user' }
+};
+
+let currentUser = null;
+
+function openLoginModal() {
+    document.getElementById('loginOverlay').classList.add('visible');
+    document.getElementById('loginUsername').value = '';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginError').textContent = '';
+    setTimeout(() => document.getElementById('loginUsername').focus(), 300);
+}
+
+function closeLoginModal() {
+    const overlay = document.getElementById('loginOverlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+        overlay.classList.remove('visible');
+        overlay.style.opacity = '';
+    }, 400);
+}
+
+async function handleLogin() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    const errorEl = document.getElementById('loginError');
+
+    if (!username || !password) {
+        errorEl.textContent = '请输入用户名和密码';
+        return;
+    }
+
+    // 检查用户
+    const user = USERS[username];
+    if (!user) {
+        errorEl.textContent = '用户不存在';
+        document.getElementById('loginPassword').value = '';
+        return;
+    }
+
+    // 使用 SHA-256 验证密码
+    const hash = await sha256('hermes_salt_2026' + password);
+    const storedHashes = {
+        'admin': '7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',
+        'jiejie': '7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',
+        'xiaowei': 'ffcbbbda6b532a2f746b4ace1b9d395b285c24333520a31ad07a508bccadc02b',
+        'meimei': '6c2f3db183ae2662c40ce7dd0874bcb58dcbae68ae685917c8961b10e1700311'
+    };
+
+    if (hash !== storedHashes[username]) {
+        errorEl.textContent = '密码错误，请重试';
+        document.getElementById('loginPassword').value = '';
+        document.getElementById('loginPassword').classList.add('shake');
+        setTimeout(() => document.getElementById('loginPassword').classList.remove('shake'), 400);
+        return;
+    }
+
+    // 登录成功
+    currentUser = { ...user, username };
+    closeLoginModal();
+
+    // 保存登录状态
+    localStorage.setItem('oym_current_user', JSON.stringify(currentUser));
+
+    // 显示仪表盘
+    setTimeout(() => showDashboard(), 400);
+}
+
+function showDashboard() {
+    const home = document.getElementById('home');
+    home.style.transition = 'opacity 0.5s';
+    home.style.opacity = '0';
+
+    setTimeout(() => {
+        home.style.display = 'none';
+        home.style.opacity = '';
+
+        const dashboard = document.getElementById('dashboardPage');
+        dashboard.classList.add('visible');
+        dashboard.style.opacity = '0';
+        requestAnimationFrame(() => {
+            dashboard.style.transition = 'opacity 0.5s';
+            dashboard.style.opacity = '1';
+        });
+
+        // 更新欢迎信息
+        if (currentUser) {
+            document.getElementById('welcomeTitle').textContent = `欢迎回来，${currentUser.name}`;
+            document.getElementById('welcomeSubtitle').textContent = 'Welcome back · 今天想记录什么？';
+        }
+
+        document.body.style.overflow = 'auto';
+    }, 500);
+}
+
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('oym_current_user');
+
+    const dashboard = document.getElementById('dashboardPage');
+    dashboard.style.transition = 'opacity 0.5s';
+    dashboard.style.opacity = '0';
+
+    setTimeout(() => {
+        dashboard.classList.remove('visible');
+        dashboard.style.opacity = '';
+
+        const home = document.getElementById('home');
+        home.style.display = 'flex';
+        home.style.opacity = '0';
+        requestAnimationFrame(() => {
+            home.style.transition = 'opacity 0.5s';
+            home.style.opacity = '1';
+        });
+
+        document.body.style.overflow = 'hidden';
+    }, 500);
+}
+
+function switchDashboardTab(tab) {
+    // 更新标签样式
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // 切换内容
+    document.getElementById('recordsSection').style.display = tab === 'records' ? 'block' : 'none';
+    document.getElementById('sharesSection').style.display = tab === 'shares' ? 'block' : 'none';
+}
+
+function openModule(module) {
+    // 关闭仪表盘
+    const dashboard = document.getElementById('dashboardPage');
+    dashboard.style.transition = 'opacity 0.4s';
+    dashboard.style.opacity = '0';
+
+    setTimeout(() => {
+        dashboard.classList.remove('visible');
+        dashboard.style.opacity = '';
+
+        // 根据模块类型打开对应页面
+        switch(module) {
+            case 'record-us':
+                openRecordUs();
+                break;
+            case 'thoughts':
+                openSubTL('thoughts');
+                break;
+            case 'study':
+                openStudyCal();
+                break;
+            case 'books':
+            case 'music':
+            case 'movies':
+                openWorldSub(module);
+                break;
+        }
+    }, 400);
+}
+
+// 检查登录状态
+function checkLoginState() {
+    const saved = localStorage.getItem('oym_current_user');
+    if (saved) {
+        try {
+            currentUser = JSON.parse(saved);
+            showDashboard();
+        } catch(e) {
+            localStorage.removeItem('oym_current_user');
+        }
+    }
+}
+
+// 页面加载时检查登录状态
+setTimeout(checkLoginState, 500);
+
 </script>
 </body>
 </html>
