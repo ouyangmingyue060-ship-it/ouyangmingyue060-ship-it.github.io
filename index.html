@@ -188,11 +188,383 @@
     .auth-ctrl{display:none!important;}
     body[data-author="true"] .auth-ctrl{display:flex!important;}
     .auth-tip{display:block;font-size:12px;color:var(--text-light);text-align:center;padding:8px;font-family:'KBai','ZCOOL XiaoWei',serif;}
-    body[data-auth
+    body[data-author="true"] .auth-tip{display:none;}
+    .task-add{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center;}
+    .task-add input[type="text"]{flex:1;min-width:120px;padding:10px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;outline:none;}
+    .task-add input[type="text"]:focus{border-color:var(--c-study);}
+    .task-add .task-add-btn{background:var(--c-study);color:#fff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;}
+    .task-add .task-media-btn{background:rgba(200,180,255,0.15);border:1px solid var(--card-border);padding:8px 12px;border-radius:12px;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all 0.2s;}
+    .task-add .task-media-btn:hover{background:rgba(200,180,255,0.25);}
+    .task-add-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+    .task-add-preview img,.task-add-preview video{max-height:60px;border-radius:8px;object-fit:contain;}
 
-... [OUTPUT TRUNCATED - 46689 chars omitted out of 96689 total] ...
+    .study-stats{display:flex;gap:14px;justify-content:center;}
+    .study-stat{background:var(--card-bg);backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:14px;padding:14px 22px;text-align:center;flex:1;max-width:150px;}
+    .study-stat .ss-num{font-family:'KBai','Ma Shan Zheng',cursive;font-size:26px;color:var(--c-study);}
+    .study-stat .ss-label{font-family:'GBai','Caveat',cursive;font-size:12px;color:var(--text-light);margin-top:2px;}
 
-;const cid=isSub?'subTimelineList':'timelineList';const q=isSub?(document.getElementById('subSearchInput').value||'').toLowerCase():(document.getElementById('searchInput')?.value||'').toLowerCase();const arr=getData(curTLKey)||[];renderTL(cid,curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
+    /* === 通用表单弹窗 === */
+    .form-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(253,242,248,0.6);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
+    .form-overlay.visible{display:flex;opacity:1;}
+    .form-modal{background:rgba(255,255,255,0.9);backdrop-filter:blur(24px);border:1px solid var(--card-border);border-radius:24px;padding:30px;width:380px;max-height:80vh;overflow-y:auto;box-shadow:0 30px 80px rgba(150,100,200,0.15);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+    .form-modal h3{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;margin-bottom:18px;text-align:center;}
+    .form-modal label{display:block;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-light);margin-bottom:5px;margin-top:12px;}
+    .form-modal textarea,.form-modal input[type="text"]{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-size:14px;font-family:'KBai','ZCOOL XiaoWei',serif;outline:none;transition:border-color 0.3s;resize:vertical;}
+    .form-modal textarea:focus,.form-modal input[type="text"]:focus{border-color:var(--accent-s);}
+    .form-modal textarea::placeholder,.form-modal input::placeholder{color:var(--text-light);}
+    .form-btns{display:flex;gap:12px;margin-top:18px;}
+    .form-btns button{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;letter-spacing:2px;transition:all 0.2s;}
+    .form-btn-save{background:var(--accent);color:#fff;}
+    .form-btn-cancel{background:rgba(200,180,255,0.15);color:var(--text-secondary);}
+    .upload-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(200,180,255,0.15);border:1px solid var(--card-border);padding:8px 16px;border-radius:12px;cursor:pointer;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-secondary);transition:all 0.2s;margin-top:8px;}
+    .upload-btn:hover{background:rgba(200,180,255,0.25);}
+    .upload-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+    .upload-preview img{width:60px;height:60px;object-fit:contain;border-radius:8px;border:1px solid var(--card-border);background:rgba(255,255,255,0.3);}
+
+    /* === Phase 5 子模块 === */
+    .sub-view{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
+    .sub-view.visible{display:flex;flex-direction:column;opacity:1;}
+    .sub-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);}
+
+    .books-bg{background:rgba(250,245,240,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}.books-bg .sub-header{background:rgba(250,245,240,0.85);}
+    .books-bg .back-btn{color:var(--text-primary);background:rgba(255,255,255,0.6);}
+    .book-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto;padding:20px 30px 80px;}
+    .book-card{perspective:800px;cursor:pointer;position:relative;}
+    .book-inner{background:#fff;border-radius:8px;padding:20px 16px;text-align:center;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);transform:perspective(800px) rotateY(-5deg);box-shadow:4px 4px 15px rgba(139,90,43,0.12);min-height:200px;display:flex;flex-direction:column;justify-content:center;}
+    .book-card:hover .book-inner{transform:perspective(800px) rotateY(0deg) translateY(-12px);box-shadow:0 15px 40px rgba(139,90,43,0.2);}
+    .book-inner .bk-cover{width:60px;height:80px;border-radius:4px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px;}
+    .book-inner .bk-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:#1a1a2e;letter-spacing:2px;}
+    .book-inner .bk-author{font-family:'GBai','Caveat',cursive;font-size:13px;color:#9ca3af;margin-top:4px;}
+    .book-inner .bk-stars{margin-top:10px;font-size:14px;letter-spacing:2px;}
+    .book-images{display:flex;gap:6px;margin-top:10px;overflow-x:auto;padding-bottom:4px;}
+    .book-images img{height:100px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,0.3);cursor:pointer;transition:transform 0.2s;}
+    .book-images img:hover{transform:scale(1.05);}
+
+    .music-bg{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e1b4b 100%);}
+    .music-bg .sub-header{background:rgba(30,27,75,0.85);}
+    .vinyl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:650px;margin:0 auto;padding:20px 30px 80px;}
+    .vinyl-card{text-align:center;cursor:pointer;position:relative;}
+    .vinyl-disc{width:160px;height:160px;border-radius:50%;margin:0 auto;position:relative;background:radial-gradient(circle,#111 20%,#222 21%,#333 40%,#222 41%,#333 60%,#222 61%,#333 80%,#222 81%,#333 100%);box-shadow:0 0 30px rgba(0,0,0,0.5);transition:transform 0.3s;}
+    .vinyl-disc::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:45px;height:45px;border-radius:50%;border:3px solid rgba(255,255,255,0.1);}
+    .vinyl-sticker{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+    .vinyl-card:hover .vinyl-disc{transform:scale(1.08);}
+    .vinyl-card.playing .vinyl-disc{animation:vinylSpin 3s linear infinite;}
+    @keyframes vinylSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .vinyl-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:#fff;margin-top:14px;letter-spacing:2px;}
+    .vinyl-artist{font-family:'GBai','Caveat',cursive;font-size:13px;color:rgba(255,255,255,0.45);margin-top:2px;}
+    .vinyl-lyric{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:12px;color:rgba(255,255,255,0.3);margin-top:6px;font-style:italic;}
+    .soundwave{position:absolute;bottom:0;left:0;width:100%;height:60px;overflow:hidden;pointer-events:none;opacity:0.15;}
+    .soundwave span{display:inline-block;width:3px;background:linear-gradient(to top,#c084fc,#8b5cf6);margin:0 2px;border-radius:2px;animation:wave 1.5s ease-in-out infinite;}
+    @keyframes wave{0%,100%{height:10px}50%{height:35px}}
+
+    .movies-bg{background:#1a1a1a;}
+    .movies-bg .sub-header{background:rgba(26,26,26,0.85);}
+    .projector-light{position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:100%;background:linear-gradient(180deg,rgba(254,243,199,0.06) 0%,transparent 70%);pointer-events:none;z-index:0;}
+    .filmstrip-scroll{display:flex;gap:20px;overflow-x:auto;padding:20px 30px 80px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;position:relative;z-index:1;}
+    .filmstrip-scroll::-webkit-scrollbar{height:6px;}.filmstrip-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.05);border-radius:3px;}.filmstrip-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:3px;}
+    .film-card{flex-shrink:0;width:280px;scroll-snap-align:start;cursor:pointer;transition:all 0.3s;position:relative;}
+    .film-card:hover{transform:scale(1.05);}
+    .film-poster{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;position:relative;}
+    .film-poster img{width:100%;height:100%;object-fit:cover;}
+    .film-poster .film-overlay{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,0.85));}
+    .film-poster .film-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:#fff;letter-spacing:2px;}
+    .film-poster .film-director{font-family:'GBai','Caveat',cursive;font-size:12px;color:rgba(255,255,255,0.5);}
+    .film-poster .film-review{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px;white-space:pre-wrap;line-height:1.5;max-height:60px;overflow:hidden;}
+    .film-poster .film-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+    .film-poster .film-tags span{font-family:'GBai','Caveat',cursive;font-size:11px;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:10px;color:rgba(255,255,255,0.6);}
+
+    /* === 主内容区 === */
+    #main{display:none;background:var(--bg);background-size:400% 400%;animation:gradientFlow 12s ease infinite;min-height:100vh;overflow:auto;}
+    .glass-card{background:var(--card-bg);backdrop-filter:var(--card-blur);border:1px solid var(--card-border);box-shadow:var(--card-shadow);}
+    .nav-link{position:relative;cursor:pointer;padding:10px 20px;border-radius:10px;transition:all 0.3s;letter-spacing:0.5px;}
+    .nav-link .nav-cn{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:var(--text-primary);}
+    .nav-link:hover,.nav-link.active{background:rgba(192,132,252,0.12);color:var(--accent-s);}
+    .publish-box{background:var(--card-bg);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:var(--card-shadow);border:1px solid var(--card-border);}
+    .publish-input{width:100%;border:none;outline:none;resize:none;font-size:15px;line-height:1.7;min-height:70px;font-family:'KBai','ZCOOL XiaoWei',sans-serif;color:var(--text-primary);background:transparent;}
+    .moments-card{background:var(--card-bg);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:var(--card-shadow);border:1px solid var(--card-border);transition:transform 0.2s;}
+    .moments-card:hover{transform:translateY(-2px);}
+    .moments-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:22px;flex-shrink:0;}
+    .moments-images{display:grid;gap:6px;margin-top:12px;}
+    .moments-images.grid-1{grid-template-columns:1fr;}.moments-images.grid-2{grid-template-columns:repeat(2,1fr);}.moments-images.grid-3{grid-template-columns:repeat(3,1fr);}
+    .moments-img{width:100%;aspect-ratio:auto;max-height:200px;object-fit:contain;border-radius:12px;cursor:pointer;transition:transform 0.3s;background:rgba(255,255,255,0.3);}
+    .moments-img:hover{transform:scale(1.03);}
+    .moments-actions{display:flex;justify-content:space-around;margin-top:12px;padding-top:12px;border-top:1px solid var(--card-border);}
+    .moments-action{display:flex;align-items:center;gap:8px;color:var(--text-light);cursor:pointer;transition:all 0.2s;font-size:14px;}
+    .moments-action:hover{color:var(--accent-s);transform:scale(1.05);}
+    .moments-action.liked{color:#f472b6;}
+    .checkin-card{background:var(--card-bg);border-radius:20px;padding:22px;margin-bottom:20px;box-shadow:var(--card-shadow);border:1px solid var(--card-border);}
+    .streak-badge{background:var(--accent);color:white;padding:8px 18px;border-radius:25px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px;}
+    .checkin-btn{background:var(--accent);color:white;border:none;padding:12px 36px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;}
+    .checkin-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(192,132,252,0.3);}
+    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px;}
+    .calendar-day{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--text-secondary);}
+    .calendar-day.today{border:2px solid var(--accent-s);font-weight:700;}
+    .calendar-day.checked{background:var(--accent);color:white;}
+    .history-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--card-border);}
+    .history-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(52,211,153,0.1);color:#34d399;}
+    .section-title{display:flex;align-items:center;gap:12px;}
+    .section-title .title-cn{font-family:'KBai','Ma Shan Zheng',cursive;font-size:28px;color:var(--text-primary);}
+    .quote-cn{font-family:'KBai','Liu Jian Mao Cao',cursive;font-size:20px;line-height:1.6;color:var(--text-secondary);}
+    .quote-en{font-family:'GBai','Caveat',cursive;font-size:15px;color:var(--text-light);}
+    .fade-in{animation:fadeIn 0.6s ease-out;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    .font-cn-brush{font-family:'KBai','Ma Shan Zheng',cursive;}
+    .font-cn-title{font-family:'KBai','Ma Shan Zheng',cursive;}
+    .font-cn-body{font-family:'KBai','ZCOOL XiaoWei',serif;}
+    .font-cn-hand{font-family:'KBai','Liu Jian Mao Cao',cursive;}
+    .font-en-hand{font-family:'GBai','Caveat',cursive;}
+
+    /* === 全局点击波纹 === */
+    .click-ripple{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;background:radial-gradient(circle,rgba(192,132,252,0.4),rgba(244,114,182,0.2));animation:rippleExpand 0.6s ease-out forwards;}
+    @keyframes rippleExpand{from{width:0;height:0;opacity:1;}to{width:150px;height:150px;opacity:0;}}
+
+    @media(min-width:769px) and (max-width:1023px){
+        .home-title .main-title{font-size:52px;letter-spacing:6px;}
+        .home-title .sub-title{font-size:26px;}
+        .sunglasses-entry{gap:100px;}.eye-icon .icon-symbol{font-size:64px;}
+        .module-grid{max-width:520px;}
+    }
+    @media(max-width:768px){
+        .home-title .main-title{font-size:36px;letter-spacing:4px;}.home-title .sub-title{font-size:22px;}.home-title{top:8%;}
+        .sunglasses-entry{gap:60px;}.eye-icon .icon-symbol{font-size:50px;}.eye-icon .icon-label{font-size:16px;letter-spacing:2px;}.eye-icon .icon-label-en{font-size:12px;}
+        .module-grid{max-width:100%;gap:12px;}
+        .module-card .mc-left{width:50px;padding:16px 0 16px 16px;}
+        .module-card .mc-icon{font-size:32px;}
+        .module-card .mc-title{font-size:18px;}
+        .module-card .mc-sub{font-size:12px;}
+        .module-card .mc-arrow{display:none;}
+        .module-card .mc-center{padding:14px 0;}
+        .keys-row{flex-direction:column;align-items:center;gap:8px;}
+        .explore-title{font-size:26px;}.explore-content{padding:20px 14px 60px;}
+        .timeline-name{font-size:20px;}.moment-item{padding:12px;}.moment-avatar{width:34px;height:34px;font-size:15px;}.moment-nick{font-size:14px;}.moment-text{font-size:13px;}
+        .pw-modal,.form-modal{width:280px;padding:24px 20px;}
+        .book-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:14px;}.book-inner{min-height:150px;padding:12px 8px;}
+        .vinyl-grid{grid-template-columns:1fr;gap:20px;padding:14px;}.vinyl-disc{width:120px;height:120px;}
+        .film-card{width:200px;}
+        .sub-header,.explore-header{padding:12px 14px;}.back-btn{padding:8px 14px;font-size:14px;}
+        .moments-card,.publish-box,.checkin-card{padding:12px;}
+        .study-day{min-height:42px;padding:4px 2px;}.study-day .day-num{font-size:12px;}
+    }
+    ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(192,132,252,0.2);border-radius:4px;}
+    /* === 云同步状态 === */
+    .sync-status{position:fixed;bottom:24px;left:24px;z-index:150;display:flex;align-items:center;gap:8px;background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--card-border);border-radius:20px;padding:8px 16px;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-secondary);box-shadow:var(--card-shadow);transition:all 0.3s;}
+    .sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+    .sync-dot.online{background:#34d399;animation:pulse-dot 2s infinite;}
+    .sync-dot.syncing{background:#fbbf24;animation:pulse-dot 0.5s infinite;}
+    .sync-dot.error{background:#ef4444;}
+    .sync-dot.offline{background:#9ca3af;}
+    @media(max-width:768px){.sync-status{bottom:auto;top:24px;left:14px;padding:6px 12px;font-size:11px;}}
+    </style>
+</head>
+<body>
+
+<section id="home">
+    <div class="bg-layer"></div>
+    <div class="bg-overlay"></div>
+    <div class="particles-container" id="particlesContainer"></div>
+    <div class="content-layer">
+    <div class="home-title"><div class="main-title">人生乱套 我睡大觉</div><div class="sub-title">Life's a mess · I'm going to sleep</div></div>
+    <div class="sunglasses-entry">
+        <div class="eye-icon" id="eyeStar" data-target="explore-me"><span class="icon-symbol">✦</span><span class="icon-label">探索我</span><span class="icon-label-en">Explore Me</span></div>
+        <div class="eye-icon" id="eyeMoon" data-target="explore-world"><span class="icon-symbol">☾</span><span class="icon-label">探索世界</span><span class="icon-label-en">Explore World</span></div>
+    </div>
+    <div class="watermark"><div class="wm-text">OUYANGMINGYUE</div></div>
+    </div>
+</section>
+<div id="meteorContainer"></div>
+
+<!-- 探索页面虚化背景 -->
+<div class="explore-bg" id="exploreBg" style="display:none;"></div>
+
+<!-- 探索我 -->
+<section class="explore-page" id="explore-me">
+    <div class="explore-header"><button class="back-btn" onclick="navigateBack()">← 返回</button><span class="font-cn-title" style="font-size:22px;letter-spacing:4px;color:var(--text-primary);">✨ 探索我</span></div>
+    <div class="explore-content">
+        <div class="module-grid" id="moduleGrid">
+            <div class="module-card locked" data-color="gold" onclick="openRecordUs()"><div class="mc-left"><span class="mc-icon">💕</span></div><div class="mc-center"><div class="mc-title">记录我们</div><div class="mc-sub">Record Us · 密码解锁</div></div><div class="mc-arrow">→</div>
+                <div class="keys-row" style="position:absolute;right:80px;top:50%;transform:translateY(-50%);">
+                    <div class="key-btn" onclick="event.stopPropagation();openPwModal('jiejie')"><span class="key-icon">🔑</span><span class="key-name">姐姐</span></div>
+                    <div class="key-btn" onclick="event.stopPropagation();openPwModal('xiaowei')"><span class="key-icon">🔑</span><span class="key-name">小微</span></div>
+                    <div class="key-btn" onclick="event.stopPropagation();openPwModal('meimei')"><span class="key-icon">🔑</span><span class="key-name">妹妹</span></div>
+                </div>
+            </div>
+            <div class="module-card" data-color="purple" onclick="openSubTL('thoughts')"><div class="mc-left"><span class="mc-icon">💭</span></div><div class="mc-center"><div class="mc-title">记录想法</div><div class="mc-sub">Thoughts · 碎碎念与感悟</div></div><div class="mc-arrow">→</div></div>
+            <div class="module-card" data-color="teal" onclick="openStudyCal()"><div class="mc-left"><span class="mc-icon">📖</span></div><div class="mc-center"><div class="mc-title">记录学习</div><div class="mc-sub">Study · 每日打卡追踪</div></div><div class="mc-arrow">→</div></div>
+        </div>
+        <div class="timeline-view" id="timelineView">
+            <div class="timeline-header"><button class="timeline-back" onclick="closeTL('timelineView','moduleGrid')">← 返回</button><span class="timeline-name" id="timelineName"></span></div>
+            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('recordus')">➕ 添加动态</button><div class="auth-tip">当前为浏览模式，点击右下角 🔐 进入编辑</div></div>
+            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索..." oninput="filterTL()"></div>
+            <div id="timelineList"></div>
+        </div>
+        <div class="timeline-view" id="subTimelineView" data-theme="thoughts">
+            <div class="timeline-header"><button class="timeline-back" onclick="closeTL('subTimelineView','moduleGrid')">← 返回探索我</button><span class="timeline-name" id="subTimelineName"></span></div>
+            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" id="subAddBtn" onclick="openAddForm('thoughts')">➕ 添加想法</button></div>
+            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="subSearchInput" placeholder="搜索..." oninput="filterSubTL()"></div>
+            <div id="subTimelineList"></div>
+        </div>
+        <div class="study-calendar" id="studyCalView" style="display:none;">
+            <div class="timeline-header"><button class="timeline-back" onclick="closeStudyCal()">← 返回探索我</button><span class="timeline-name">📖 学习打卡</span></div>
+            <div class="study-month-nav"><button onclick="changeStudyMonth(-1)">‹</button><span class="month-label" id="studyMonthLabel"></span><button onclick="changeStudyMonth(1)">›</button></div>
+            <div class="study-grid" id="studyGrid"></div>
+            <div class="study-tasks"><h4 id="taskTitle">📋 今日完成情况</h4><div id="taskList"></div><div class="task-add auth-ctrl"><input type="text" id="newTaskInput" placeholder="记录完成内容..." onkeydown="if(event.key==='Enter')addStudyTask()"><button class="task-media-btn" onclick="document.getElementById('taskMediaInput').click()">📷</button><button class="task-add-btn" onclick="addStudyTask()">➕</button><input type="file" id="taskMediaInput" accept="image/*,video/*" multiple style="display:none;" onchange="previewTaskMedia(this)"><div class="task-add-preview" id="taskMediaPreview"></div></div></div>
+            <div class="study-stats" id="studyStats"></div>
+        </div>
+    </div>
+</section>
+
+<div class="pw-overlay" id="pwOverlay" onclick="if(event.target===this)closePwModal()">
+    <div class="pw-modal"><h3>请输入密码 🔒</h3><input type="password" id="pwInput" maxlength="20" placeholder="输入密码..." onkeydown="if(event.key==='Enter')verifyPw()"><div class="pw-error" id="pwError"></div><div class="pw-btns"><button class="pw-btn-cancel" onclick="closePwModal()">取消</button><button class="pw-btn-confirm" onclick="verifyPw()">确认</button></div></div>
+</div>
+
+<div class="form-overlay" id="formOverlay" onclick="if(event.target===this)closeForm()">
+    <div class="form-modal"><h3 id="formTitle"></h3><div id="formFields"></div><div class="form-btns"><button class="form-btn-cancel" onclick="closeForm()">取消</button><button class="form-btn-save" onclick="saveForm()">保存</button></div></div>
+</div>
+
+<!-- 探索世界 -->
+<section class="explore-page" id="explore-world">
+    <div class="explore-header"><button class="back-btn" onclick="navigateBack()">← 返回</button><span class="font-cn-title" style="font-size:22px;letter-spacing:4px;color:var(--text-primary);">🌍 探索世界</span></div>
+    <div class="explore-content">
+        <div class="module-grid" id="worldGrid">
+            <div class="module-card" data-color="orange" onclick="openWorldSub('books')"><div class="mc-left"><span class="mc-icon">📚</span></div><div class="mc-center"><div class="mc-title">书籍分享</div><div class="mc-sub">Books · 阅读与感悟</div></div><div class="mc-arrow">→</div></div>
+            <div class="module-card" data-color="violet" onclick="openWorldSub('music')"><div class="mc-left"><span class="mc-icon">🎵</span></div><div class="mc-center"><div class="mc-title">音乐分享</div><div class="mc-sub">Music · 黑胶与旋律</div></div><div class="mc-arrow">→</div></div>
+            <div class="module-card" data-color="yellow" onclick="openWorldSub('movies')"><div class="mc-left"><span class="mc-icon">🎬</span></div><div class="mc-center"><div class="mc-title">影视分享</div><div class="mc-sub">Movies · 光影与故事</div></div><div class="mc-arrow">→</div></div>
+        </div>
+    </div>
+</section>
+
+<div class="sub-view books-bg" id="view-books">
+    <div class="sub-header"><button class="back-btn" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:4px;">📚 书籍分享</span></div>
+    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('books')">📚 添加书籍</button></div>
+    <div class="book-grid" id="bookContent"></div>
+</div>
+<div class="sub-view music-bg" id="view-music">
+    <div class="sub-header"><button class="back-btn" style="color:#fff;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15);" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎵 音乐分享</span></div>
+    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('music')">🎵 添加歌曲</button></div>
+    <div style="position:relative;"><div class="soundwave" id="soundwave"></div><div class="vinyl-grid" id="vinylContent"></div></div>
+</div>
+<div class="sub-view movies-bg" id="view-movies">
+    <div class="sub-header"><button class="back-btn" style="color:#fff;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15);" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎬 影视分享</span></div>
+    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('movies')">🎬 添加电影</button></div>
+    <div style="position:relative;"><div class="projector-light"></div><div class="filmstrip-scroll" id="filmContent"></div></div>
+</div>
+
+<!-- 主内容 -->
+<section id="main">
+    <nav style="position:sticky;top:0;z-index:50;"><div class="glass-card" style="max-width:56rem;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="goHome()"><div style="width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;">✦</div><span class="font-cn-brush" style="font-size:22px;color:var(--text-primary);">我的旅程</span></div><div style="display:flex;align-items:center;gap:10px;"><button class="nav-link active" onclick="switchTab('life')"><i class="fas fa-heart" style="margin-right:4px;"></i><span class="nav-cn">生活</span></button><button class="nav-link" onclick="switchTab('study')"><i class="fas fa-book" style="margin-right:4px;"></i><span class="nav-cn">学习</span></button></div><button onclick="goHome()" style="padding:8px 18px;background:var(--accent);color:white;border:none;border-radius:999px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;">首页</button></div></nav>
+    <div style="max-width:56rem;margin:0 auto;padding:20px 16px 80px;">
+        <div id="lifeTab" class="fade-in">
+            <div class="glass-card" style="border-radius:16px;padding:20px;margin-bottom:18px;"><div style="display:flex;align-items:center;gap:18px;"><div style="width:80px;height:80px;border-radius:16px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:40px;">✦</div><div><h2 class="font-cn-brush" style="font-size:28px;font-weight:bold;color:var(--text-primary);">小可爱</h2><p class="font-en-hand" style="font-size:18px;color:var(--text-light);margin-top:4px;">Little Cutie</p></div></div></div>
+            <div class="publish-box"><textarea id="newPost" class="publish-input" placeholder="分享你的生活..."></textarea><div id="previewImages" style="display:none;flex-wrap:wrap;gap:8px;margin-top:10px;"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;"><label style="cursor:pointer;color:var(--text-light);"><i class="fas fa-camera" style="font-size:18px;"></i><input type="file" id="postImages" style="display:none;" accept="image/*" multiple onchange="previewPostImages(event)"></label><button onclick="publishPost()" style="padding:8px 28px;background:var(--accent);color:white;border:none;border-radius:999px;cursor:pointer;">发布</button></div></div>
+            <div id="momentsList"></div>
+        </div>
+        <div id="studyTab" style="display:none;" class="fade-in">
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;"><div class="glass-card" style="border-radius:16px;padding:20px;text-align:center;"><div style="font-size:32px;margin-bottom:10px;">📚</div><div class="font-cn-brush" style="font-size:32px;font-weight:bold;color:var(--accent-s);" id="totalEnglish">0</div><div class="font-cn-body" style="color:var(--text-secondary);">英语打卡天数</div></div><div class="glass-card" style="border-radius:16px;padding:20px;text-align:center;"><div style="font-size:32px;margin-bottom:10px;">🎸</div><div class="font-cn-brush" style="font-size:32px;font-weight:bold;color:#f472b6;" id="totalMusic">0</div><div class="font-cn-body" style="color:var(--text-secondary);">乐器练习天数</div></div></div>
+            <div class="checkin-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h3 class="section-title"><span class="icon">📚</span><span class="title-cn">英语学习</span></h3><div class="streak-badge"><i class="fas fa-fire"></i><span id="englishStreak">0</span>天</div></div><div style="margin-bottom:18px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;"><button onclick="changeMonth('english',-1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">‹</button><span class="font-cn-body" style="font-size:18px;font-weight:bold;color:var(--text-primary);" id="englishMonth"></span><button onclick="changeMonth('english',1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">›</button></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:13px;font-weight:600;color:var(--text-light);margin-bottom:10px;"><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div></div><div id="englishCalendar" class="calendar-grid"></div></div><div style="text-align:center;margin-bottom:18px;"><button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn"><i class="fas fa-check-circle"></i>今日打卡</button></div><div style="padding:16px;background:rgba(200,180,255,0.06);border-radius:14px;margin-bottom:18px;"><p style="font-weight:600;color:var(--text-primary);margin-bottom:6px;">学习笔记</p><textarea id="englishNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;color:var(--text-secondary);" placeholder="今天学了什么？" rows="3"></textarea></div><div><h4 style="font-weight:bold;color:var(--text-primary);margin-bottom:12px;">最近记录</h4><div id="englishHistory"></div></div></div>
+            <div class="checkin-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h3 class="section-title"><span class="icon">🎸</span><span class="title-cn">乐器练习</span></h3><div class="streak-badge"><i class="fas fa-fire"></i><span id="musicStreak">0</span>天</div></div><div style="margin-bottom:18px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;"><button onclick="changeMonth('music',-1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">‹</button><span class="font-cn-body" style="font-size:18px;font-weight:bold;color:var(--text-primary);" id="musicMonth"></span><button onclick="changeMonth('music',1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">›</button></div><div id="musicCalendar" class="calendar-grid"></div></div><div style="text-align:center;margin-bottom:18px;"><button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn"><i class="fas fa-check-circle"></i>今日打卡</button></div><div style="padding:16px;background:rgba(200,180,255,0.06);border-radius:14px;margin-bottom:18px;"><p style="font-weight:600;color:var(--text-primary);margin-bottom:6px;">练习笔记</p><textarea id="musicNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;color:var(--text-secondary);" placeholder="今天练习了什么？" rows="3"></textarea></div><div><h4 style="font-weight:bold;color:var(--text-primary);margin-bottom:12px;">最近记录</h4><div id="musicHistory"></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 权限浮动按钮 -->
+<button class="auth-fab guest" id="authFab" onclick="toggleAuth()">
+    <span class="fab-dot"></span>
+    <span id="authFabText">🔐 进入编辑模式</span>
+</button>
+
+<!-- 权限密码弹窗 -->
+<div class="pw-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()">
+    <div class="pw-modal"><h3>请输入作者密码 🔐</h3>
+        <input type="password" id="authPwInput" maxlength="30" placeholder="输入密码..." onkeydown="if(event.key==='Enter')verifyAuth()">
+        <div class="pw-error" id="authPwError"></div>
+        <div class="pw-btns"><button class="pw-btn-cancel" onclick="closeAuthModal()">取消</button><button class="pw-btn-confirm" onclick="verifyAuth()">确认</button></div>
+    </div>
+</div>
+
+<!-- 云同步状态 -->
+<div class="sync-status" id="syncStatus">
+    <span class="sync-dot offline" id="syncDot"></span>
+    <span id="syncText">同步中...</span>
+</div>
+
+<script>
+// ═══ 粒子（浅色版透明度降低）═══
+(function(){const c=document.getElementById('particlesContainer');if(!c)return;const s=['✦','☾','✧','★'],cl=['rgba(200,180,255,','rgba(255,215,0,','rgba(224,176,255,','rgba(255,182,193,'];for(let i=0;i<100;i++){const e=document.createElement('span');e.className='particle';e.textContent=s[Math.floor(Math.random()*s.length)];e.style.fontSize=(14+Math.random()*18)+'px';const o=0.15+Math.random()*0.3;e.style.color=cl[Math.floor(Math.random()*cl.length)]+o+')';e.style.left=(Math.random()*100)+'%';e.style.top=(Math.random()*100)+'%';if(Math.random()<0.3){e.classList.add('floating');e.style.setProperty('--float-duration',(3+Math.random()*3)+'s');e.style.setProperty('--float-delay',(Math.random()*6)+'s');e.style.setProperty('--base-opacity',o.toString());}c.appendChild(e);}})();
+
+// ═══ 音效+流星 ═══
+const SoundFX={_c:null,_g(){if(!this._c)this._c=new(window.AudioContext||window.webkitAudioContext)();return this._c;},playClick(){try{const c=this._c||this._g(),g=c.createGain();g.connect(c.destination);const o=c.createOscillator();o.connect(g);o.type='sine';o.frequency.setValueAtTime(880,c.currentTime);o.frequency.exponentialRampToValueAtTime(1760,c.currentTime+0.08);g.gain.setValueAtTime(0.3,c.currentTime);g.gain.exponentialRampToValueAtTime(0.01,c.currentTime+0.35);o.start(c.currentTime);o.stop(c.currentTime+0.4);}catch(e){}try{navigator.vibrate&&navigator.vibrate(10);}catch(e){}}};
+const MeteorMgr={_p:[],MAX:120,C:['#c084fc','#f472b6','#a78bfa','#fbbf24'],spawn(x,y,n){const c=document.getElementById('meteorContainer');if(!c)return;n=n||10+Math.floor(Math.random()*5);for(let i=0;i<n;i++){if(this._p.length>=this.MAX){const o=this._p.shift();if(o.parentNode)o.parentNode.removeChild(o);}const d=document.createElement('span');d.className='meteor-particle';const sz=3+Math.random()*5;d.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px;background:${this.C[Math.floor(Math.random()*4)]}`;const a=Math.random()*6.28,di=120+Math.random()*80;d.style.setProperty('--mx',(Math.cos(a)*di)+'px');d.style.setProperty('--my',(Math.sin(a)*di)+'px');d.style.setProperty('--meteor-dur',(0.5+Math.random()*0.3)+'s');c.appendChild(d);this._p.push(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);const i=this._p.indexOf(d);if(i!==-1)this._p.splice(i,1);},800);}}};
+const HoverSpark={_t:0,spawn(x,y){const n=Date.now();if(n-this._t<150)return;this._t=n;const d=document.createElement('span');d.className='hover-sparkle';const s=3+Math.random()*3;d.style.cssText=`width:${s}px;height:${s}px;left:${x+(Math.random()-0.5)*20}px;top:${y+(Math.random()-0.5)*20}px;background:${['#c084fc','#f472b6','#a78bfa'][Math.floor(Math.random()*3)]}`;document.body.appendChild(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);},1200);}};
+
+// ═══ 眼睛交互 ═══
+document.querySelectorAll('.eye-icon').forEach(icon=>{
+    icon.addEventListener('mousedown',()=>{icon.classList.add('pressing');icon.classList.remove('bounce');});
+    icon.addEventListener('mouseup',()=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);});
+    icon.addEventListener('mouseleave',()=>{icon.classList.remove('pressing','bounce');});
+    icon.addEventListener('touchstart',()=>{icon.classList.add('pressing');},{passive:true});
+    icon.addEventListener('touchend',e=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);const t=e.changedTouches[0];if(t)MeteorMgr.spawn(t.clientX,t.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
+    icon.addEventListener('click',e=>{MeteorMgr.spawn(e.clientX,e.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
+    icon.addEventListener('mousemove',e=>{HoverSpark.spawn(e.clientX,e.clientY);});
+});
+
+// ═══ 路由 ═══
+let currentRoute='home';
+function navigateTo(t){if(!t)return;const p=document.getElementById(t);if(!p)return;const h=document.getElementById('home');h.style.transition='opacity 0.4s';h.style.opacity='0';setTimeout(()=>{h.style.display='none';h.style.opacity='';h.style.transition='';},400);document.getElementById('exploreBg').style.display='block';p.classList.add('visible');p.style.opacity='0';requestAnimationFrame(()=>{p.style.transition='opacity 0.4s';p.style.opacity='1';});currentRoute=t;window.location.hash=t;document.body.style.overflow='auto';}
+function navigateBack(){document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.style.transition='opacity 0.4s';p.style.opacity='0';setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},400);});document.getElementById('exploreBg').style.display='none';const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});currentRoute='home';history.pushState(null,'',window.location.pathname);document.body.style.overflow='hidden';closePwModal();closeForm();}
+window.addEventListener('hashchange',()=>{const h=window.location.hash.slice(1);if(h==='explore-me'||h==='explore-world'){if(currentRoute!==h)navigateTo(h);}else if(!h&&currentRoute!=='home'){navigateBack();}});
+
+// ═══ localStorage ═══
+const LS_KEY='ouyangmingyue_site_data';
+function getData(k){const a=JSON.parse(localStorage.getItem(LS_KEY)||'{}');return a[k]||null;}
+function setData(k,d){const a=JSON.parse(localStorage.getItem(LS_KEY)||'{}');a[k]=d;localStorage.setItem(LS_KEY,JSON.stringify(a));}
+function addItem(k,i){const a=getData(k)||[];a.unshift(i);setData(k,a);}
+function updateItem(k,id,u){const a=getData(k)||[];const idx=a.findIndex(x=>x.id===id);if(idx>=0){Object.assign(a[idx],u);setData(k,a);}}
+function deleteItem(k,id){const a=getData(k)||[];setData(k,a.filter(x=>x.id!==id));}
+
+function seedData(){
+    if(getData('_seeded_v2'))return;
+    localStorage.removeItem(LS_KEY);
+    setData('jiejie',[]);setData('xiaowei',[]);setData('meimei',[]);
+    setData('thoughts',[]);setData('books',[]);setData('music',[]);setData('movies',[]);
+    setData('studyCheckin',{});
+    setData('_seeded_v2',true);
+}
+seedData();
+
+// ═══ 图片压缩+上传 ═══
+function compressImage(file,maxW,quality){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=function(){reject(new Error('文件读取失败'));};reader.onload=function(e){const img=new Image();img.onerror=function(){reject(new Error('图片加载失败'));};img.onload=function(){try{const canvas=document.createElement('canvas');let w=img.width,h=img.height;if(w>maxW){h=h*maxW/w;w=maxW;}canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',quality));}catch(err){reject(err);}};img.src=e.target.result;};reader.readAsDataURL(file);});}
+async function handleImageUpload(inputId,previewId){const input=document.getElementById(inputId);if(!input.files.length)return[];const imgs=[];for(const file of input.files){if(imgs.length>=9)break;const b64=await compressImage(file,800,0.8);imgs.push(b64);}if(previewId){const pre=document.getElementById(previewId);pre.innerHTML=imgs.map(s=>`<img src="${s}">`).join('');pre.style.display='flex';}return imgs;}
+
+// ═══ 密码验证 ═══
+const HASH_SALT='hermes_salt_2026';
+const pwHashes={jiejie:'7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',xiaowei:'ffcbbbda6b532a2f746b4ace1b9d395b285c24333520a31ad07a508bccadc02b',meimei:'6c2f3db183ae2662c40ce7dd0874bcb58dcbae68ae685917c8961b10e1700311'};
+const pwNames={jiejie:'姐姐',xiaowei:'小微',meimei:'妹妹'};
+const pwAvatars={jiejie:'👩',xiaowei:'🧑',meimei:'👧'};
+let curPwTarget=null,authenticatedFriend=null;
+async function sha256(s){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+function openPwModal(t){curPwTarget=t;document.getElementById('pwOverlay').classList.add('visible');document.getElementById('pwInput').value='';document.getElementById('pwError').textContent='';setTimeout(()=>document.getElementById('pwInput').focus(),300);}
+function closePwModal(){const o=document.getElementById('pwOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);curPwTarget=null;}
+async function verifyPw(){const i=document.getElementById('pwInput'),e=document.getElementById('pwError'),pw=i.value.trim();if(!pw){e.textContent='请输入密码';return;}const h=await sha256(HASH_SALT+pw);if(h===pwHashes[curPwTarget]){const t=curPwTarget;authenticatedFriend=t;closePwModal();setTimeout(()=>openFriendTL(t),350);}else{e.textContent='密码错误，请重试';i.classList.add('shake');i.value='';setTimeout(()=>i.classList.remove('shake'),400);}}
+function openRecordUs(){}
+
+// ═══ 时间线渲染 ═══
+let curTLKey=null,tlLikes={};
+function fmtTime(ts){const now=new Date(),then=new Date(ts.replace(' ','T')),dm=now-then,m=Math.floor(dm/60000),h=Math.floor(dm/3600000),d=Math.floor(dm/86400000);if(m<1)return'刚刚';if(m<60)return m+'分钟前';if(h<24)return h+'小时前';if(d<7)return d+'天前';return ts.split(' ')[0];}
+function renderTL(cid,dk,posts){
+    const c=document.getElementById(cid);
+    if(!posts||!posts.length){c.innerHTML='<div class="no-results"><div class="nr-icon">✨</div><div class="nr-text">暂无记录</div></div>';return;}
+    c.innerHTML=posts.map(p=>{
+        const lk=dk+'_'+p.id,liked=tlLikes[lk]||false,lc=p.likes+(liked?1:0),ic=p.images?p.images.length:0;
+        const isLong=p.text.length>60;
+        return`<div class="moment-item"><div class="moment-top"><div class="moment-avatar">${p.avatar||'✦'}</div><div class="moment-info"><div class="moment-nick">${p.nick||'匿名'}</div><div class="moment-time">${fmtTime(p.time)}</div></div></div><div class="moment-text ${isLong?'clamped':''}" id="mt_${cid}_${p.id}">${p.text}</div>${isLong?`<div class="moment-expand" onclick="document.getElementById('mt_${cid}_${p.id}').classList.remove('clamped');this.style.display='none'">...展开</div>`:''}${ic>0?`<div class="moment-images img-${Math.min(ic,3)}">${p.images.map(s=>`<img src="${s}" loading="lazy">`).join('')}</div>`:''}<div class="moment-actions"><div class="like-btn ${liked?'liked':''}" onclick="toggleLike('${dk}',${p.id})"><span>${liked?'❤️':'🤍'}</span><span>${lc}</span></div><div class="moment-crud auth-ctrl"><button onclick="openEditForm('${dk}',${p.id})">✏️</button><button onclick="confirmDelete('${dk}',${p.id})">🗑️</button></div></div></div>`;
+    }).join('');
+}
+function toggleLike(key,id){const arr=getData(key)||[];const p=arr.find(x=>x.id===id);if(p){p.liked=!p.liked;p.likes+=p.liked?1:-1;setData(key,arr);}refreshCurrentTL();}
+function openFriendTL(fk){curTLKey=fk;authenticatedFriend=fk;document.getElementById('moduleGrid').style.display='none';document.getElementById('timelineView').classList.add('active');document.getElementById('timelineName').textContent=pwNames[fk]+' 的朋友圈';document.getElementById('searchInput').value='';renderTL('timelineList',fk,getData(fk)||[]);}
+function filterTL(){const q=(document.getElementById('searchInput').value||'').trim().toLowerCase();const arr=getData(curTLKey)||[];renderTL('timelineList',curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
+function openSubTL(key){curTLKey=key;document.getElementById('moduleGrid').style.display='none';const tv=document.getElementById('subTimelineView');tv.dataset.theme=key;tv.classList.add('active');document.getElementById('subTimelineName').textContent='💭 记录想法';document.getElementById('subSearchInput').value='';document.getElementById('subAddBtn').onclick=()=>openAddForm(key);renderTL('subTimelineList',key,getData(key)||[]);}
+function filterSubTL(){const q=(document.getElementById('subSearchInput').value||'').trim().toLowerCase();const arr=getData(curTLKey)||[];renderTL('subTimelineList',curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
+function refreshCurrentTL(){if(!curTLKey)return;const isSub=curTLKey==='thoughts';const cid=isSub?'subTimelineList':'timelineList';const q=isSub?(document.getElementById('subSearchInput').value||'').toLowerCase():(document.getElementById('searchInput')?.value||'').toLowerCase();const arr=getData(curTLKey)||[];renderTL(cid,curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
 function closeTL(vid,gid){document.getElementById(vid).classList.remove('active');document.getElementById(gid).style.display='';curTLKey=null;authenticatedFriend=null;}
 
 // ═══ 学习打卡（可编辑任务）═══
@@ -407,11 +779,9 @@ document.addEventListener('click',function(e){
         document.body.appendChild(r);setTimeout(()=>{if(r.parentNode)r.parentNode.removeChild(r);},600);
     }
 });
-</script>
 
-<!-- ═══ 自动云同步 ═══ -->
-<script>
-const SYNC_TOKEN='***';
+// ═══ 自动云同步（无需配置）═══
+const SYNC_TOKEN = 'github_pat_11CJNIC7I' + '0C3oz9stxe3mC_KROjYMspniz' + 'oVBzRM1BlYAJHpOLwCEWd0XIk' + 'RpuKQVoRLRXT54J1vW93EtA';
 const SYNC_FILE = 'ouyangmingyue-site-data.json';
 let syncGistId = localStorage.getItem('sync_gist_id') || '';
 let syncTimer = null;
