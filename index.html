@@ -1735,6 +1735,7 @@ function logout() {
 
     setTimeout(() => {
         dashboard.classList.remove('visible');
+        dashboard.style.display = 'none';
         dashboard.style.opacity = '';
 
         const home = document.getElementById('home');
@@ -1757,6 +1758,7 @@ function goHome() {
 
     setTimeout(() => {
         dashboard.classList.remove('visible');
+        dashboard.style.display = 'none';
         dashboard.style.opacity = '';
 
         const home = document.getElementById('home');
