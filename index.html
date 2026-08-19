@@ -1983,6 +1983,7 @@ function submitComment(itemId) {
     }
 
     // 已登录：添加评论
+    let currentModule = null;
     Object.keys(sampleData).forEach(key => {
         const item = sampleData[key].items.find(i => i.id === itemId);
         if (item) {
@@ -1992,14 +1993,17 @@ function submitComment(itemId) {
                 content: content,
                 time: new Date().toLocaleString()
             });
-
-            // 重新渲染
-            const container = document.getElementById(`${key}-content`);
-            if (container) {
-                renderSampleContent(container, sampleData[key]);
-            }
+            currentModule = key;
         }
     });
+
+    // 重新渲染模块详情页面
+    if (currentModule) {
+        const contentContainer = document.getElementById('modulePageContent');
+        if (contentContainer) {
+            renderModulePageContent(contentContainer, sampleData[currentModule]);
+        }
+    }
 
     input.value = '';
 }
