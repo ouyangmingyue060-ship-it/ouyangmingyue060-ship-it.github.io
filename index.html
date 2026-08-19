@@ -1058,16 +1058,17 @@ const SoundFX={_c:null,_g(){if(!this._c)this._c=new(window.AudioContext||window.
 const MeteorMgr={_p:[],MAX:120,C:['#c084fc','#f472b6','#a78bfa','#fbbf24'],spawn(x,y,n){const c=document.getElementById('meteorContainer');if(!c)return;n=n||10+Math.floor(Math.random()*5);for(let i=0;i<n;i++){if(this._p.length>=this.MAX){const o=this._p.shift();if(o.parentNode)o.parentNode.removeChild(o);}const d=document.createElement('span');d.className='meteor-particle';const sz=3+Math.random()*5;d.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px;background:${this.C[Math.floor(Math.random()*4)]}`;const a=Math.random()*6.28,di=120+Math.random()*80;d.style.setProperty('--mx',(Math.cos(a)*di)+'px');d.style.setProperty('--my',(Math.sin(a)*di)+'px');d.style.setProperty('--meteor-dur',(0.5+Math.random()*0.3)+'s');c.appendChild(d);this._p.push(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);const i=this._p.indexOf(d);if(i!==-1)this._p.splice(i,1);},800);}}};
 const HoverSpark={_t:0,spawn(x,y){const n=Date.now();if(n-this._t<150)return;this._t=n;const d=document.createElement('span');d.className='hover-sparkle';const s=3+Math.random()*3;d.style.cssText=`width:${s}px;height:${s}px;left:${x+(Math.random()-0.5)*20}px;top:${y+(Math.random()-0.5)*20}px;background:${['#c084fc','#f472b6','#a78bfa'][Math.floor(Math.random()*3)]}`;document.body.appendChild(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);},1200);}};
 
-// ═══ 眼睛交互 ═══
-document.querySelectorAll('.eye-icon').forEach(icon=>{
-    icon.addEventListener('mousedown',()=>{icon.classList.add('pressing');icon.classList.remove('bounce');});
-    icon.addEventListener('mouseup',()=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);});
-    icon.addEventListener('mouseleave',()=>{icon.classList.remove('pressing','bounce');});
-    icon.addEventListener('touchstart',()=>{icon.classList.add('pressing');},{passive:true});
-    icon.addEventListener('touchend',e=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);const t=e.changedTouches[0];if(t)MeteorMgr.spawn(t.clientX,t.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
-    icon.addEventListener('click',e=>{MeteorMgr.spawn(e.clientX,e.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
-    icon.addEventListener('mousemove',e=>{HoverSpark.spawn(e.clientX,e.clientY);});
-});
+// ═══ 眼睛交互（已禁用）═══
+// 注意：主页面的星星按钮使用enterWorld()函数，不需要这些交互
+// document.querySelectorAll('.eye-icon').forEach(icon=>{
+//     icon.addEventListener('mousedown',()=>{icon.classList.add('pressing');icon.classList.remove('bounce');});
+//     icon.addEventListener('mouseup',()=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);});
+//     icon.addEventListener('mouseleave',()=>{icon.classList.remove('pressing','bounce');});
+//     icon.addEventListener('touchstart',()=>{icon.classList.add('pressing');},{passive:true});
+//     icon.addEventListener('touchend',e=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);const t=e.changedTouches[0];if(t)MeteorMgr.spawn(t.clientX,t.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
+//     icon.addEventListener('click',e=>{MeteorMgr.spawn(e.clientX,e.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
+//     icon.addEventListener('mousemove',e=>{HoverSpark.spawn(e.clientX,e.clientY);});
+// });
 
 // ═══ 路由 ═══
 let currentRoute='home';
