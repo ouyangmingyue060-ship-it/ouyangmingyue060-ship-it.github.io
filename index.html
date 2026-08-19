@@ -1846,9 +1846,9 @@ function renderModulePageContent(container, data) {
                 <div class="content-body">${item.content}</div>
                 <div class="content-actions">
                     <span class="action-btn like-btn" onclick="toggleLike(${item.id})">❤️ ${item.likes}</span>
-                    <span class="action-btn comment-btn" onclick="toggleComments(${item.id})">💬 ${item.comments.length}</span>
+                    <span class="action-btn comment-btn" onclick="event.stopPropagation(); toggleComments(${item.id})">💬 ${item.comments.length}</span>
                 </div>
-                <div class="comments-section" id="comments-${item.id}" style="display:none;">
+                <div class="comments-section" id="comments-${item.id}" style="display:block;">
                     <div class="comments-title">评论 (${item.comments.length})</div>
                     <div class="comment-list">
                         ${item.comments.map(c => `
