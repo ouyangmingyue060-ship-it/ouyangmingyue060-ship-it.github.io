@@ -1317,19 +1317,20 @@ function renderHistory(type){const c=document.getElementById(type+'History'),dat
 
 loadData();
 
-// ═══ 权限系统 ═══
-let isAuthor=sessionStorage.getItem('isAuthor')==='true';
-function updateAuthUI(){
-    const fab=document.getElementById('authFab');
-    const txt=document.getElementById('authFabText');
-    document.body.dataset.author=isAuthor?'true':'false';
-    if(isAuthor){fab.classList.remove('guest');txt.textContent='🔓 退出编辑模式';}
-    else{fab.classList.add('guest');txt.textContent='🔐 进入编辑模式';}
-}
-function toggleAuth(){if(isAuthor){isAuthor=false;sessionStorage.removeItem('isAuthor');updateAuthUI();}else{document.getElementById('authOverlay').classList.add('visible');document.getElementById('authPwInput').value='';document.getElementById('authPwError').textContent='';setTimeout(()=>document.getElementById('authPwInput').focus(),300);}}
-function closeAuthModal(){const o=document.getElementById('authOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
-function verifyAuth(){const pw=document.getElementById('authPwInput').value.trim();if(pw==='ouyang2026'){isAuthor=true;sessionStorage.setItem('isAuthor','true');closeAuthModal();updateAuthUI();}else{document.getElementById('authPwError').textContent='密码错误';document.getElementById('authPwInput').classList.add('shake');document.getElementById('authPwInput').value='';setTimeout(()=>document.getElementById('authPwInput').classList.remove('shake'),400);}}
-updateAuthUI();
+// ═══ 权限系统（已禁用）═══
+// 注意：编辑模式按钮已删除，权限系统不再需要
+// let isAuthor=sessionStorage.getItem('isAuthor')==='true';
+// function updateAuthUI(){
+//     const fab=document.getElementById('authFab');
+//     const txt=document.getElementById('authFabText');
+//     document.body.dataset.author=isAuthor?'true':'false';
+//     if(isAuthor){fab.classList.remove('guest');txt.textContent='🔓 退出编辑模式';}
+//     else{fab.classList.add('guest');txt.textContent='🔐 进入编辑模式';}
+// }
+// function toggleAuth(){if(isAuthor){isAuthor=false;sessionStorage.removeItem('isAuthor');updateAuthUI();}else{document.getElementById('authOverlay').classList.add('visible');document.getElementById('authPwInput').value='';document.getElementById('authPwError').textContent='';setTimeout(()=>document.getElementById('authPwInput').focus(),300);}}
+// function closeAuthModal(){const o=document.getElementById('authOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
+// function verifyAuth(){const pw=document.getElementById('authPwInput').value.trim();if(pw==='ouyang2026'){isAuthor=true;sessionStorage.setItem('isAuthor','true');closeAuthModal();updateAuthUI();}else{document.getElementById('authPwError').textContent='密码错误';document.getElementById('authPwInput').classList.add('shake');document.getElementById('authPwInput').value='';setTimeout(()=>document.getElementById('authPwInput').classList.remove('shake'),400);}}
+// updateAuthUI(); // 已禁用
 
 // ═══ 全局点击波纹 ═══
 document.addEventListener('click',function(e){
