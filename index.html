@@ -1049,41 +1049,6 @@
     </div>
 </section>
 
-<!-- 登录弹窗 -->
-<div class="sync-status" id="syncStatus">
-    <span class="sync-dot offline" id="syncDot"></span>
-    <span id="syncText">同步中...</span>
-</div>
-
-<!-- 评论浮动按钮 -->
-<button class="comment-fab" id="commentFab" onclick="openComments()" title="查看评论">
-    💬
-</button>
-
-<!-- 评论模态框 -->
-<div class="comment-overlay" id="commentOverlay" onclick="if(event.target===this)closeComments()">
-    <div class="comment-modal">
-        <div class="comment-header">
-            <h3>💬 大家的评论</h3>
-            <button class="comment-close" onclick="closeComments()">✕</button>
-        </div>
-        <div class="comment-tabs">
-            <button class="comment-tab active" onclick="switchCommentTab('general')">💭 闲聊区</button>
-            <button class="comment-tab" onclick="switchCommentTab('thoughts')">📝 想法评论</button>
-            <button class="comment-tab" onclick="switchCommentTab('books')">📚 书籍评论</button>
-            <button class="comment-tab" onclick="switchCommentTab('music')">🎵 音乐评论</button>
-        </div>
-        <div class="comment-body" id="commentBody">
-            <div class="loading-spinner" id="commentLoading"></div>
-            <!-- Giscus 评论将在这里加载 -->
-            <div id="giscus-general" class="giscus-container"></div>
-            <div id="giscus-thoughts" class="giscus-container" style="display:none;"></div>
-            <div id="giscus-books" class="giscus-container" style="display:none;"></div>
-            <div id="giscus-music" class="giscus-container" style="display:none;"></div>
-        </div>
-    </div>
-</div>
-
 <script>
 // ═══ 粒子（浅色版透明度降低）═══
 (function(){const c=document.getElementById('particlesContainer');if(!c)return;const s=['✦','☾','✧','★'],cl=['rgba(200,180,255,','rgba(255,215,0,','rgba(224,176,255,','rgba(255,182,193,'];for(let i=0;i<100;i++){const e=document.createElement('span');e.className='particle';e.textContent=s[Math.floor(Math.random()*s.length)];e.style.fontSize=(14+Math.random()*18)+'px';const o=0.15+Math.random()*0.3;e.style.color=cl[Math.floor(Math.random()*cl.length)]+o+')';e.style.left=(Math.random()*100)+'%';e.style.top=(Math.random()*100)+'%';if(Math.random()<0.3){e.classList.add('floating');e.style.setProperty('--float-duration',(3+Math.random()*3)+'s');e.style.setProperty('--float-delay',(Math.random()*6)+'s');e.style.setProperty('--base-opacity',o.toString());}c.appendChild(e);}})();
