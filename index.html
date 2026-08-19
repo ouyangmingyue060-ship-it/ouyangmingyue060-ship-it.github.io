@@ -1,501 +1,500 @@
-     1|     1|<!DOCTYPE html>
-     2|     2|<html lang="zh-CN">
-     3|     3|<head>
-     4|     4|    <meta charset="UTF-8">
-     5|     5|    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     6|     6|    <title>人生乱套 我睡大觉 | OUYANGMINGYUE</title>
-     7|     7|    <meta name="description" content="欧阳明月的个人网站 — 探索我，探索世界">
-     8|     8|    <meta name="theme-color" content="#fdf2f8">
-     9|     9|    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
-    10|    10|    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    11|    11|    <link rel="preconnect" href="https://fonts.googleapis.com">
-    12|    12|    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    13|    13|    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&family=Long+Cang&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    14|    14|    <style>
-    15|    15|    @font-face{font-family:'KBai';src:url('/assets/fonts/演示魁本楷书.ttf') format('truetype');font-weight:normal;font-display:swap;}
-    16|    16|    @font-face{font-family:'GBai';src:url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype');font-weight:normal;font-display:swap;}
-    17|    17|    *{margin:0;padding:0;box-sizing:border-box;}body{min-height:100vh;overflow:hidden;}
-    18|    18|
-    19|    19|    :root{
-    20|    20|        --bg-start:#fdf2f8;--bg-end:#f0f0ff;
-    21|    21|        --bg:linear-gradient(135deg,var(--bg-start),var(--bg-end));
-    22|    22|        --card-bg:rgba(255,255,255,0.55);--card-border:rgba(200,180,255,0.2);--card-shadow:0 8px 32px rgba(150,100,200,0.10);--card-blur:blur(20px);
-    23|    23|        --text-primary:#2d1b69;--text-secondary:#5b3b8c;--text-light:#8a7aaa;
-    24|    24|        --accent-s:#c084fc;--accent-e:#f472b6;--accent:linear-gradient(135deg,var(--accent-s),var(--accent-e));
-    25|    25|        --c-thoughts:#c084fc;--c-study:#34d399;--c-books:#f59e0b;--c-music:#8b5cf6;--c-movies:#f59e0b;
-    26|    26|    }
-    27|    27|
-    28|    28|    /* === 着陆页 === */
-    29|    29|    #home{min-height:100vh;position:relative;overflow:hidden;}
-    30|    30|    .bg-layer{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/assets/images/bg-home.jpg');background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#1a1a2e;z-index:0;}
-    31|    31|    .bg-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.15);z-index:1;}
-    32|    32|    .content-layer{position:relative;z-index:10;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:30vh;}
-    33|    33|    @keyframes gradientFlow{0%{background-position:0% 50%}25%{background-position:50% 0%}50%{background-position:100% 50%}75%{background-position:50% 100%}100%{background-position:0% 50%}}
-    34|    34|    .particles-container{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden;}
-    35|    35|    .particle{position:absolute;pointer-events:none;user-select:none;will-change:transform;}
-    36|    36|    .particle.floating{animation:starFloat var(--float-duration,4s) ease-in-out infinite;animation-delay:var(--float-delay,0s);}
-    37|    37|    @keyframes starFloat{0%,100%{transform:translateY(0) rotate(0deg);opacity:var(--base-opacity,0.3)}50%{transform:translateY(-18px) rotate(8deg);opacity:calc(var(--base-opacity,0.3) + 0.15)}}
-    38|    38|    .home-title{position:absolute;top:12%;left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%;max-width:700px;}
-    39|    39|    .home-title .main-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:64px;color:#FFFFFF;letter-spacing:8px;line-height:1.3;text-shadow:0 4px 20px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.5);}
-    40|    40|    .home-title .sub-title{font-family:'GBai','Caveat',cursive;font-size:30px;color:#FFEAA7;margin-top:16px;letter-spacing:4px;text-shadow:0 2px 15px rgba(0,0,0,0.8),0 0 30px rgba(0,0,0,0.4);}
-    41|    41|    .sunglasses-entry{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:130px;margin-bottom:30px;}
-    42|    42|    .eye-icon{display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
-    43|    43|    .eye-icon .icon-symbol{font-size:76px;color:#FFFFFF;line-height:1;animation:pulse 2.5s ease-in-out infinite;transition:transform 0.1s ease;text-shadow:0 2px 15px rgba(0,0,0,0.6);}
-    44|    44|    .eye-icon:nth-child(2) .icon-symbol{animation-delay:0.6s;}
-    45|    45|    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-    46|    46|    .eye-icon.pressing .icon-symbol{animation:none;transform:scale(0.85)!important;transition:transform 0.1s ease;}
-    47|    47|    .eye-icon.bounce .icon-symbol{animation:none;transform:scale(1)!important;transition:transform 0.2s cubic-bezier(0.34,1.56,0.64,1);}
-    48|    48|    .eye-icon .icon-label{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:rgba(255,255,255,0.85);letter-spacing:4px;}
-    49|    49|    .eye-icon .icon-label-en{font-family:'GBai','Caveat',cursive;font-size:15px;color:rgba(255,255,255,0.5);letter-spacing:2px;}
-    50|    50|    .eye-icon:hover .icon-symbol{filter:brightness(1.1) drop-shadow(0 0 15px rgba(192,132,252,0.4));}
-    51|    51|    #meteorContainer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;pointer-events:none;overflow:hidden;}
-    52|    52|    .meteor-particle{position:fixed;border-radius:50%;pointer-events:none;animation:meteorFly var(--meteor-dur,0.8s) cubic-bezier(0.25,0.46,0.45,0.94) forwards;}
-    53|    53|    @keyframes meteorFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--mx,100px),var(--my,100px)) scale(0.2);opacity:0}}
-    54|    54|    .hover-sparkle{position:fixed;pointer-events:none;border-radius:50%;animation:sparkleLife 1.2s ease-out forwards;}
-    55|    55|    @keyframes sparkleLife{0%{transform:scale(1);opacity:0.5}100%{transform:scale(0) translateY(-20px);opacity:0}}
-    56|    56|    .watermark{position:absolute;bottom:30px;z-index:10;text-align:center;animation:fadeInUp 2s ease-out 1.5s backwards;}
-    57|    57|    .watermark .wm-text{font-family:'GBai','Caveat',cursive;font-size:14px;color:var(--accent-s);opacity:0.08;letter-spacing:6px;text-transform:uppercase;background:var(--accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0.15;}
-    58|    58|    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    59|    59|
-    60|    60|    /* === 探索页面 === */
-    61|    61|    .explore-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url('/assets/images/bg-home.jpg');background-size:cover;background-position:center;z-index:0;filter:blur(12px);transform:scale(1.05);}
-    62|    62|    .explore-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
-    63|    63|    .explore-page.visible{display:flex;flex-direction:column;opacity:1;}
-    64|    64|    .explore-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;background:rgba(253,242,248,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);}
-    65|    65|    .back-btn{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);padding:10px 24px;border-radius:25px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;letter-spacing:2px;transition:all 0.3s;}
-    66|    66|    .back-btn:hover{background:rgba(192,132,252,0.1);transform:translateX(-4px);}
-    67|    67|    .explore-content{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 30px 80px;}
-    68|    68|    .explore-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:36px;color:var(--text-primary);letter-spacing:6px;margin-bottom:30px;}
-    69|    69|
-    70|    70|    /* === 模块卡片网格（三行叠放）=== */
-    71|    71|    .module-grid{display:flex;flex-direction:column;gap:16px;max-width:600px;width:100%;}
-    72|    72|    .module-card{background:var(--card-bg);backdrop-filter:var(--card-blur);-webkit-backdrop-filter:var(--card-blur);border:1px solid var(--card-border);border-radius:20px;padding:0;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;box-shadow:var(--card-shadow);display:flex;align-items:center;gap:20px;height:auto;}
-    73|    73|    .module-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 16px 50px rgba(150,100,200,0.18);}
-    74|    74|    .module-card:active{transform:scale(0.98);transition:transform 0.1s;}
-    75|    75|    .module-card .mc-left{display:flex;align-items:center;justify-content:center;width:80px;padding:24px 0 24px 24px;flex-shrink:0;}
-    76|    76|    .module-card .mc-icon{font-size:42px;}
-    77|    77|    .module-card .mc-center{flex:1;padding:20px 0;}
-    78|    78|    .module-card .mc-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;}
-    79|    79|    .module-card .mc-sub{font-family:'GBai','Caveat',cursive;font-size:14px;color:var(--text-light);margin-top:4px;}
-    80|    80|    .module-card .mc-arrow{padding:20px 24px 20px 0;font-size:28px;color:var(--text-light);flex-shrink:0;transition:transform 0.2s;}
-    81|    81|    .module-card:hover .mc-arrow{transform:translateX(4px);color:var(--accent-s);}
-    82|    82|    .module-card.locked::after{content:'🔒';position:absolute;top:12px;right:60px;font-size:14px;}
-    83|    83|    .module-card[data-color="gold"]{border-left:4px solid #f59e0b;}
-    84|    84|    .module-card[data-color="purple"]{border-left:4px solid #c084fc;}
-    85|    85|    .module-card[data-color="teal"]{border-left:4px solid #34d399;}
-    86|    86|    .module-card[data-color="orange"]{border-left:4px solid #f59e0b;}
-    87|    87|    .module-card[data-color="violet"]{border-left:4px solid #8b5cf6;}
-    88|    88|    .module-card[data-color="yellow"]{border-left:4px solid #fcd34d;}
-    89|    89|
-    90|    90|    .keys-row{display:flex;gap:14px;justify-content:center;margin-top:14px;}
-    91|    91|    .key-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,0.4);border:1px solid var(--card-border);border-radius:14px;padding:10px 14px;cursor:pointer;transition:all 0.25s;color:var(--text-primary);min-width:65px;}
-    92|    92|    .key-btn:hover{background:rgba(192,132,252,0.12);transform:translateY(-3px);}
-    93|    93|    .key-btn .key-icon{font-size:22px;}.key-btn .key-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:13px;letter-spacing:2px;color:var(--text-secondary);}
-    94|    94|
-    95|    95|    /* === 密码浮层 === */
-    96|    96|    .pw-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(253,242,248,0.6);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
-    97|    97|    .pw-overlay.visible{display:flex;opacity:1;}
-    98|    98|    .pw-modal{background:rgba(255,255,255,0.85);backdrop-filter:blur(24px);border:1px solid var(--card-border);border-radius:24px;padding:36px 32px;width:340px;text-align:center;box-shadow:0 30px 80px rgba(150,100,200,0.15);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
-    99|    99|    @keyframes modalPop{from{transform:scale(0.8) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
-   100|   100|    .pw-modal h3{font-family:'KBai','Ma Shan Zheng',cursive;font-size:24px;color:var(--text-primary);letter-spacing:3px;margin-bottom:20px;}
-   101|   101|    .pw-modal input{width:100%;padding:14px 18px;border-radius:14px;border:1.5px solid var(--card-border);background:rgba(255,255,255,0.6);color:var(--text-primary);font-size:18px;font-family:'GBai','Quicksand',sans-serif;letter-spacing:4px;text-align:center;outline:none;transition:border-color 0.3s;}
-   102|   102|    .pw-modal input:focus{border-color:var(--accent-s);}
-   103|   103|    .pw-modal input::placeholder{color:var(--text-light);letter-spacing:1px;font-size:14px;}
-   104|   104|    .pw-modal .pw-error{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:#ef4444;margin-top:10px;min-height:20px;}
-   105|   105|    .pw-modal input.shake{animation:shake 0.4s ease;}
-   106|   106|    @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-   107|   107|    .pw-btns{display:flex;gap:12px;margin-top:20px;}
-   108|   108|    .pw-btns button{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;letter-spacing:2px;transition:all 0.2s;}
-   109|   109|    .pw-btn-confirm{background:var(--accent);color:#fff;}
-   110|   110|    .pw-btn-cancel{background:rgba(200,180,255,0.15);color:var(--text-secondary);}
-   111|   111|
-   112|   112|    /* === 通用时间线 === */
-   113|   113|    .timeline-view{display:none;width:100%;max-width:560px;animation:fadeSlideUp 0.5s ease;}
-   114|   114|    .timeline-view.active{display:block;}
-   115|   115|    @keyframes fadeSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-   116|   116|    .timeline-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
-   117|   117|    .timeline-back{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);padding:8px 18px;border-radius:20px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:15px;transition:all 0.2s;}
-   118|   118|    .timeline-back:hover{background:rgba(192,132,252,0.1);}
-   119|   119|    .timeline-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:26px;color:var(--text-primary);letter-spacing:4px;}
-   120|   120|    .search-box{position:relative;margin-bottom:20px;}
-   121|   121|    .search-box input{width:100%;padding:12px 16px 12px 42px;border-radius:16px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--text-primary);font-size:15px;font-family:'KBai','ZCOOL XiaoWei',serif;outline:none;transition:all 0.3s;}
-   122|   122|    .search-box input:focus{border-color:var(--accent-s);}
-   123|   123|    .search-box input::placeholder{color:var(--text-light);}
-   124|   124|    .search-box .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-light);pointer-events:none;}
-   125|   125|    .moment-item{background:var(--card-bg);backdrop-filter:var(--card-blur);border:1px solid var(--card-border);border-radius:18px;padding:18px;margin-bottom:14px;transition:all 0.2s;position:relative;box-shadow:var(--card-shadow);}
-   126|   126|    .moment-item:hover{background:rgba(255,255,255,0.7);}
-   127|   127|    .moment-top{display:flex;gap:12px;align-items:flex-start;}
-   128|   128|    .moment-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-   129|   129|    .moment-info{flex:1;}
-   130|   130|    .moment-nick{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:var(--text-primary);letter-spacing:2px;}
-   131|   131|    .moment-time{font-family:'GBai','Caveat',cursive;font-size:12px;color:var(--text-light);margin-top:2px;}
-   132|   132|    .moment-text{color:var(--text-secondary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:15px;line-height:1.7;margin-top:10px;}
-   133|   133|    .moment-text.clamped{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-   134|   134|    .moment-expand{color:var(--accent-s);font-family:'GBai','Caveat',cursive;font-size:13px;cursor:pointer;margin-top:4px;display:none;}
-   135|   135|    .moment-images{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
-   136|   136|    .moment-images img{border-radius:8px;object-fit:contain;cursor:pointer;transition:transform 0.2s;max-height:220px;background:rgba(255,255,255,0.3);}
-   137|   137|    .moment-images.img-1 img{width:100%;max-height:300px;}
-   138|   138|    .moment-images.img-2 img{width:calc(50% - 3px);height:auto;max-height:180px;}
-   139|   139|    .moment-images.img-3 img{width:calc(33.3% - 4px);height:auto;max-height:140px;}
-   140|   140|    .moment-images img:hover{transform:scale(1.03);}
-   141|   141|    .moment-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:1px solid rgba(200,180,255,0.1);}
-   142|   142|    .moment-crud{display:flex;gap:8px;}
-   143|   143|    .moment-crud button{background:none;border:none;cursor:pointer;font-size:13px;opacity:0.35;transition:all 0.2s;padding:4px;}
-   144|   144|    .moment-crud button:hover{opacity:1;transform:scale(1.2);}
-   145|   145|    .like-btn{display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--text-light);font-size:14px;transition:all 0.2s;user-select:none;}
-   146|   146|    .like-btn:hover,.like-btn.liked{color:#f472b6;}
-   147|   147|    .no-results{text-align:center;padding:60px 20px;color:var(--text-light);}
-   148|   148|    .no-results .nr-icon{font-size:48px;margin-bottom:16px;}
-   149|   149|    .no-results .nr-text{font-family:'KBai','Ma Shan Zheng',cursive;font-size:20px;letter-spacing:3px;color:var(--text-secondary);}
-   150|   150|
-   151|   151|    .add-btn{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:20px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:15px;letter-spacing:2px;transition:all 0.3s;margin-bottom:18px;display:inline-flex;align-items:center;gap:8px;}
-   152|   152|    .add-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(192,132,252,0.3);}
-   153|   153|
-   154|   154|    .timeline-view[data-theme="thoughts"] .moment-avatar{background:linear-gradient(135deg,#c084fc,#e8d5f5);}
-   155|   155|
-   156|   156|    /* === 学习打卡 === */
-   157|   157|    .study-calendar{width:100%;max-width:560px;animation:fadeSlideUp 0.5s ease;}
-   158|   158|    .study-month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
-   159|   159|    .study-month-nav button{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;transition:all 0.2s;}
-   160|   160|    .study-month-nav button:hover{background:rgba(52,211,153,0.1);}
-   161|   161|    .study-month-nav .month-label{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;}
-   162|   162|    .study-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:20px;}
-   163|   163|    .study-grid .weekday{text-align:center;font-family:'GBai','Caveat',cursive;font-size:13px;color:var(--text-light);padding:6px 0;}
-   164|   164|    .study-day{background:var(--card-bg);backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:12px;padding:8px 4px;text-align:center;min-height:56px;transition:all 0.2s;cursor:pointer;}
-   165|   165|    .study-day:hover{background:rgba(255,255,255,0.7);}
-   166|   166|    .study-day.today{border:2px solid var(--c-study);box-shadow:0 0 12px rgba(52,211,153,0.15);}
-   167|   167|    .study-day .day-num{font-family:'GBai','Caveat',cursive;font-size:15px;color:var(--text-secondary);}
-   168|   168|    .study-day .day-count{font-family:'GBai','Caveat',cursive;font-size:11px;color:var(--text-light);margin-top:2px;}
-   169|   169|    .study-day.empty{background:transparent;border-color:transparent;}
-   170|   170|
-   171|   171|    .study-tasks{background:var(--card-bg);backdrop-filter:var(--card-blur);border:1px solid var(--card-border);border-radius:18px;padding:18px;margin-bottom:18px;box-shadow:var(--card-shadow);}
-   172|   172|    .study-tasks h4{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:var(--text-primary);letter-spacing:3px;margin-bottom:12px;}
-   173|   173|    .task-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(200,180,255,0.08);}
-   174|   174|    .task-item:last-child{border-bottom:none;}
-   175|   175|    .task-text{flex:1;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:var(--text-secondary);}
-   176|   176|    .task-media{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;}
-   177|   177|    .task-media img,.task-media video{max-height:80px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,0.2);cursor:pointer;}
-   178|   178|    .task-item .task-actions{display:flex;gap:6px;}
-   179|   179|    .task-item .task-actions button{background:none;border:none;cursor:pointer;font-size:12px;opacity:0.3;transition:all 0.2s;padding:2px;}
-   180|   180|    .task-item .task-actions button:hover{opacity:1;}
-   181|   181|
-   182|   182|    /* === 权限系统 === */
-   183|   183|    .auth-fab{position:fixed;bottom:24px;right:24px;z-index:150;background:var(--accent);color:#fff;border:none;padding:12px 24px;border-radius:40px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;letter-spacing:2px;box-shadow:0 4px 20px rgba(192,132,252,0.3);transition:all 0.3s;display:flex;align-items:center;gap:8px;}
-   184|   184|    .auth-fab:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,132,252,0.5);}
-   185|   185|    .auth-fab .fab-dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse-dot 1.5s infinite;}
-   186|   186|    .auth-fab.guest .fab-dot{background:#fbbf24;}
-   187|   187|    @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
-   188|   188|    .auth-ctrl{display:none!important;}
-   189|   189|    body[data-author="true"] .auth-ctrl{display:flex!important;}
-   190|   190|    .auth-tip{display:block;font-size:12px;color:var(--text-light);text-align:center;padding:8px;font-family:'KBai','ZCOOL XiaoWei',serif;}
-   191|   191|    body[data-author="true"] .auth-tip{display:none;}
-   192|   192|    .task-add{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center;}
-   193|   193|    .task-add input[type="text"]{flex:1;min-width:120px;padding:10px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;outline:none;}
-   194|   194|    .task-add input[type="text"]:focus{border-color:var(--c-study);}
-   195|   195|    .task-add .task-add-btn{background:var(--c-study);color:#fff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;}
-   196|   196|    .task-add .task-media-btn{background:rgba(200,180,255,0.15);border:1px solid var(--card-border);padding:8px 12px;border-radius:12px;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all 0.2s;}
-   197|   197|    .task-add .task-media-btn:hover{background:rgba(200,180,255,0.25);}
-   198|   198|    .task-add-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
-   199|   199|    .task-add-preview img,.task-add-preview video{max-height:60px;border-radius:8px;object-fit:contain;}
-   200|   200|
-   201|   201|    .study-stats{display:flex;gap:14px;justify-content:center;}
-   202|   202|    .study-stat{background:var(--card-bg);backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:14px;padding:14px 22px;text-align:center;flex:1;max-width:150px;}
-   203|   203|    .study-stat .ss-num{font-family:'KBai','Ma Shan Zheng',cursive;font-size:26px;color:var(--c-study);}
-   204|   204|    .study-stat .ss-label{font-family:'GBai','Caveat',cursive;font-size:12px;color:var(--text-light);margin-top:2px;}
-   205|   205|
-   206|   206|    /* === 通用表单弹窗 === */
-   207|   207|    .form-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(253,242,248,0.6);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
-   208|   208|    .form-overlay.visible{display:flex;opacity:1;}
-   209|   209|    .form-modal{background:rgba(255,255,255,0.9);backdrop-filter:blur(24px);border:1px solid var(--card-border);border-radius:24px;padding:30px;width:380px;max-height:80vh;overflow-y:auto;box-shadow:0 30px 80px rgba(150,100,200,0.15);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
-   210|   210|    .form-modal h3{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;margin-bottom:18px;text-align:center;}
-   211|   211|    .form-modal label{display:block;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-light);margin-bottom:5px;margin-top:12px;}
-   212|   212|    .form-modal textarea,.form-modal input[type="text"]{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-size:14px;font-family:'KBai','ZCOOL XiaoWei',serif;outline:none;transition:border-color 0.3s;resize:vertical;}
-   213|   213|    .form-modal textarea:focus,.form-modal input[type="text"]:focus{border-color:var(--accent-s);}
-   214|   214|    .form-modal textarea::placeholder,.form-modal input::placeholder{color:var(--text-light);}
-   215|   215|    .form-btns{display:flex;gap:12px;margin-top:18px;}
-   216|   216|    .form-btns button{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;letter-spacing:2px;transition:all 0.2s;}
-   217|   217|    .form-btn-save{background:var(--accent);color:#fff;}
-   218|   218|    .form-btn-cancel{background:rgba(200,180,255,0.15);color:var(--text-secondary);}
-   219|   219|    .upload-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(200,180,255,0.15);border:1px solid var(--card-border);padding:8px 16px;border-radius:12px;cursor:pointer;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-secondary);transition:all 0.2s;margin-top:8px;}
-   220|   220|    .upload-btn:hover{background:rgba(200,180,255,0.25);}
-   221|   221|    .upload-preview{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
-   222|   222|    .upload-preview img{width:60px;height:60px;object-fit:contain;border-radius:8px;border:1px solid var(--card-border);background:rgba(255,255,255,0.3);}
-   223|   223|
-   224|   224|    /* === Phase 5 子模块 === */
-   225|   225|    .sub-view{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
-   226|   226|    .sub-view.visible{display:flex;flex-direction:column;opacity:1;}
-   227|   227|    .sub-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);}
-   228|   228|
-   229|   229|    .books-bg{background:rgba(250,245,240,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}.books-bg .sub-header{background:rgba(250,245,240,0.85);}
-   230|   230|    .books-bg .back-btn{color:var(--text-primary);background:rgba(255,255,255,0.6);}
-   231|   231|    .book-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto;padding:20px 30px 80px;}
-   232|   232|    .book-card{perspective:800px;cursor:pointer;position:relative;}
-   233|   233|    .book-inner{background:#fff;border-radius:8px;padding:20px 16px;text-align:center;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);transform:perspective(800px) rotateY(-5deg);box-shadow:4px 4px 15px rgba(139,90,43,0.12);min-height:200px;display:flex;flex-direction:column;justify-content:center;}
-   234|   234|    .book-card:hover .book-inner{transform:perspective(800px) rotateY(0deg) translateY(-12px);box-shadow:0 15px 40px rgba(139,90,43,0.2);}
-   235|   235|    .book-inner .bk-cover{width:60px;height:80px;border-radius:4px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px;}
-   236|   236|    .book-inner .bk-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:#1a1a2e;letter-spacing:2px;}
-   237|   237|    .book-inner .bk-author{font-family:'GBai','Caveat',cursive;font-size:13px;color:#9ca3af;margin-top:4px;}
-   238|   238|    .book-inner .bk-stars{margin-top:10px;font-size:14px;letter-spacing:2px;}
-   239|   239|    .book-images{display:flex;gap:6px;margin-top:10px;overflow-x:auto;padding-bottom:4px;}
-   240|   240|    .book-images img{height:100px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,0.3);cursor:pointer;transition:transform 0.2s;}
-   241|   241|    .book-images img:hover{transform:scale(1.05);}
-   242|   242|
-   243|   243|    .music-bg{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e1b4b 100%);}
-   244|   244|    .music-bg .sub-header{background:rgba(30,27,75,0.85);}
-   245|   245|    .vinyl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:650px;margin:0 auto;padding:20px 30px 80px;}
-   246|   246|    .vinyl-card{text-align:center;cursor:pointer;position:relative;}
-   247|   247|    .vinyl-disc{width:160px;height:160px;border-radius:50%;margin:0 auto;position:relative;background:radial-gradient(circle,#111 20%,#222 21%,#333 40%,#222 41%,#333 60%,#222 61%,#333 80%,#222 81%,#333 100%);box-shadow:0 0 30px rgba(0,0,0,0.5);transition:transform 0.3s;}
-   248|   248|    .vinyl-disc::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:45px;height:45px;border-radius:50%;border:3px solid rgba(255,255,255,0.1);}
-   249|   249|    .vinyl-sticker{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
-   250|   250|    .vinyl-card:hover .vinyl-disc{transform:scale(1.08);}
-   251|   251|    .vinyl-card.playing .vinyl-disc{animation:vinylSpin 3s linear infinite;}
-   252|   252|    @keyframes vinylSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-   253|   253|    .vinyl-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:#fff;margin-top:14px;letter-spacing:2px;}
-   254|   254|    .vinyl-artist{font-family:'GBai','Caveat',cursive;font-size:13px;color:rgba(255,255,255,0.45);margin-top:2px;}
-   255|   255|    .vinyl-lyric{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:12px;color:rgba(255,255,255,0.3);margin-top:6px;font-style:italic;}
-   256|   256|    .soundwave{position:absolute;bottom:0;left:0;width:100%;height:60px;overflow:hidden;pointer-events:none;opacity:0.15;}
-   257|   257|    .soundwave span{display:inline-block;width:3px;background:linear-gradient(to top,#c084fc,#8b5cf6);margin:0 2px;border-radius:2px;animation:wave 1.5s ease-in-out infinite;}
-   258|   258|    @keyframes wave{0%,100%{height:10px}50%{height:35px}}
-   259|   259|
-   260|   260|    .movies-bg{background:#1a1a1a;}
-   261|   261|    .movies-bg .sub-header{background:rgba(26,26,26,0.85);}
-   262|   262|    .projector-light{position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:100%;background:linear-gradient(180deg,rgba(254,243,199,0.06) 0%,transparent 70%);pointer-events:none;z-index:0;}
-   263|   263|    .filmstrip-scroll{display:flex;gap:20px;overflow-x:auto;padding:20px 30px 80px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;position:relative;z-index:1;}
-   264|   264|    .filmstrip-scroll::-webkit-scrollbar{height:6px;}.filmstrip-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.05);border-radius:3px;}.filmstrip-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:3px;}
-   265|   265|    .film-card{flex-shrink:0;width:280px;scroll-snap-align:start;cursor:pointer;transition:all 0.3s;position:relative;}
-   266|   266|    .film-card:hover{transform:scale(1.05);}
-   267|   267|    .film-poster{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;position:relative;}
-   268|   268|    .film-poster img{width:100%;height:100%;object-fit:cover;}
-   269|   269|    .film-poster .film-overlay{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,0.85));}
-   270|   270|    .film-poster .film-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:#fff;letter-spacing:2px;}
-   271|   271|    .film-poster .film-director{font-family:'GBai','Caveat',cursive;font-size:12px;color:rgba(255,255,255,0.5);}
-   272|   272|    .film-poster .film-review{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px;white-space:pre-wrap;line-height:1.5;max-height:60px;overflow:hidden;}
-   273|   273|    .film-poster .film-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-   274|   274|    .film-poster .film-tags span{font-family:'GBai','Caveat',cursive;font-size:11px;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:10px;color:rgba(255,255,255,0.6);}
-   275|   275|
-   276|   276|    /* === 主内容区 === */
-   277|   277|    #main{display:none;background:var(--bg);background-size:400% 400%;animation:gradientFlow 12s ease infinite;min-height:100vh;overflow:auto;}
-   278|   278|    .glass-card{background:var(--card-bg);backdrop-filter:var(--card-blur);border:1px solid var(--card-border);box-shadow:var(--card-shadow);}
-   279|   279|    .nav-link{position:relative;cursor:pointer;padding:10px 20px;border-radius:10px;transition:all 0.3s;letter-spacing:0.5px;}
-   280|   280|    .nav-link .nav-cn{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:var(--text-primary);}
-   281|   281|    .nav-link:hover,.nav-link.active{background:rgba(192,132,252,0.12);color:var(--accent-s);}
-   282|   282|    .publish-box{background:var(--card-bg);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:var(--card-shadow);border:1px solid var(--card-border);}
-   283|   283|    .publish-input{width:100%;border:none;outline:none;resize:none;font-size:15px;line-height:1.7;min-height:70px;font-family:'KBai','ZCOOL XiaoWei',sans-serif;color:var(--text-primary);background:transparent;}
-   284|   284|    .moments-card{background:var(--card-bg);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:var(--card-shadow);border:1px solid var(--card-border);transition:transform 0.2s;}
-   285|   285|    .moments-card:hover{transform:translateY(-2px);}
-   286|   286|    .moments-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:22px;flex-shrink:0;}
-   287|   287|    .moments-images{display:grid;gap:6px;margin-top:12px;}
-   288|   288|    .moments-images.grid-1{grid-template-columns:1fr;}.moments-images.grid-2{grid-template-columns:repeat(2,1fr);}.moments-images.grid-3{grid-template-columns:repeat(3,1fr);}
-   289|   289|    .moments-img{width:100%;aspect-ratio:auto;max-height:200px;object-fit:contain;border-radius:12px;cursor:pointer;transition:transform 0.3s;background:rgba(255,255,255,0.3);}
-   290|   290|    .moments-img:hover{transform:scale(1.03);}
-   291|   291|    .moments-actions{display:flex;justify-content:space-around;margin-top:12px;padding-top:12px;border-top:1px solid var(--card-border);}
-   292|   292|    .moments-action{display:flex;align-items:center;gap:8px;color:var(--text-light);cursor:pointer;transition:all 0.2s;font-size:14px;}
-   293|   293|    .moments-action:hover{color:var(--accent-s);transform:scale(1.05);}
-   294|   294|    .moments-action.liked{color:#f472b6;}
-   295|   295|    .checkin-card{background:var(--card-bg);border-radius:20px;padding:22px;margin-bottom:20px;box-shadow:var(--card-shadow);border:1px solid var(--card-border);}
-   296|   296|    .streak-badge{background:var(--accent);color:white;padding:8px 18px;border-radius:25px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px;}
-   297|   297|    .checkin-btn{background:var(--accent);color:white;border:none;padding:12px 36px;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;}
-   298|   298|    .checkin-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(192,132,252,0.3);}
-   299|   299|    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px;}
-   300|   300|    .calendar-day{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--text-secondary);}
-   301|   301|    .calendar-day.today{border:2px solid var(--accent-s);font-weight:700;}
-   302|   302|    .calendar-day.checked{background:var(--accent);color:white;}
-   303|   303|    .history-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--card-border);}
-   304|   304|    .history-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(52,211,153,0.1);color:#34d399;}
-   305|   305|    .section-title{display:flex;align-items:center;gap:12px;}
-   306|   306|    .section-title .title-cn{font-family:'KBai','Ma Shan Zheng',cursive;font-size:28px;color:var(--text-primary);}
-   307|   307|    .quote-cn{font-family:'KBai','Liu Jian Mao Cao',cursive;font-size:20px;line-height:1.6;color:var(--text-secondary);}
-   308|   308|    .quote-en{font-family:'GBai','Caveat',cursive;font-size:15px;color:var(--text-light);}
-   309|   309|    .fade-in{animation:fadeIn 0.6s ease-out;}
-   310|   310|    @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-   311|   311|    .font-cn-brush{font-family:'KBai','Ma Shan Zheng',cursive;}
-   312|   312|    .font-cn-title{font-family:'KBai','Ma Shan Zheng',cursive;}
-   313|   313|    .font-cn-body{font-family:'KBai','ZCOOL XiaoWei',serif;}
-   314|   314|    .font-cn-hand{font-family:'KBai','Liu Jian Mao Cao',cursive;}
-   315|   315|    .font-en-hand{font-family:'GBai','Caveat',cursive;}
-   316|   316|
-   317|   317|    /* === 全局点击波纹 === */
-   318|   318|    .click-ripple{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;background:radial-gradient(circle,rgba(192,132,252,0.4),rgba(244,114,182,0.2));animation:rippleExpand 0.6s ease-out forwards;}
-   319|   319|    @keyframes rippleExpand{from{width:0;height:0;opacity:1;}to{width:150px;height:150px;opacity:0;}}
-   320|   320|
-   321|   321|    @media(min-width:769px) and (max-width:1023px){
-   322|   322|        .home-title .main-title{font-size:52px;letter-spacing:6px;}
-   323|   323|        .home-title .sub-title{font-size:26px;}
-   324|   324|        .sunglasses-entry{gap:100px;}.eye-icon .icon-symbol{font-size:64px;}
-   325|   325|        .module-grid{max-width:520px;}
-   326|   326|    }
-   327|   327|    @media(max-width:768px){
-   328|   328|        .home-title .main-title{font-size:36px;letter-spacing:4px;}.home-title .sub-title{font-size:22px;}.home-title{top:8%;}
-   329|   329|        .sunglasses-entry{gap:60px;}.eye-icon .icon-symbol{font-size:50px;}.eye-icon .icon-label{font-size:16px;letter-spacing:2px;}.eye-icon .icon-label-en{font-size:12px;}
-   330|   330|        .module-grid{max-width:100%;gap:12px;}
-   331|   331|        .module-card .mc-left{width:50px;padding:16px 0 16px 16px;}
-   332|   332|        .module-card .mc-icon{font-size:32px;}
-   333|   333|        .module-card .mc-title{font-size:18px;}
-   334|   334|        .module-card .mc-sub{font-size:12px;}
-   335|   335|        .module-card .mc-arrow{display:none;}
-   336|   336|        .module-card .mc-center{padding:14px 0;}
-   337|   337|        .keys-row{flex-direction:column;align-items:center;gap:8px;}
-   338|   338|        .explore-title{font-size:26px;}.explore-content{padding:20px 14px 60px;}
-   339|   339|        .timeline-name{font-size:20px;}.moment-item{padding:12px;}.moment-avatar{width:34px;height:34px;font-size:15px;}.moment-nick{font-size:14px;}.moment-text{font-size:13px;}
-   340|   340|        .pw-modal,.form-modal{width:280px;padding:24px 20px;}
-   341|   341|        .book-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:14px;}.book-inner{min-height:150px;padding:12px 8px;}
-   342|   342|        .vinyl-grid{grid-template-columns:1fr;gap:20px;padding:14px;}.vinyl-disc{width:120px;height:120px;}
-   343|   343|        .film-card{width:200px;}
-   344|   344|        .sub-header,.explore-header{padding:12px 14px;}.back-btn{padding:8px 14px;font-size:14px;}
-   345|   345|        .moments-card,.publish-box,.checkin-card{padding:12px;}
-   346|   346|        .study-day{min-height:42px;padding:4px 2px;}.study-day .day-num{font-size:12px;}
-   347|   347|    }
-   348|   348|    ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(192,132,252,0.2);border-radius:4px;}
-   349|   349|    
-   350|    /* === 云同步 === */
-   351|    .sync-status{position:fixed;bottom:24px;left:24px;z-index:150;display:flex;align-items:center;gap:8px;background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--card-border);border-radius:20px;padding:8px 16px;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-secondary);box-shadow:var(--card-shadow);transition:all 0.3s;cursor:pointer;}
-   352|    .sync-status:hover{background:rgba(255,255,255,0.7);transform:translateY(-2px);}
-   353|    .sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-   354|    .sync-dot.online{background:#34d399;animation:pulse-dot 2s infinite;}
-   355|    .sync-dot.syncing{background:#fbbf24;animation:pulse-dot 0.5s infinite;}
-   356|    .sync-dot.offline{background:#9ca3af;}
-   357|    .sync-dot.error{background:#ef4444;}
-   358|    .sync-settings{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(253,242,248,0.6);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
-   359|    .sync-settings.visible{display:flex;opacity:1;}
-   360|    .sync-modal{background:rgba(255,255,255,0.9);backdrop-filter:blur(24px);border:1px solid var(--card-border);border-radius:24px;padding:30px;width:380px;max-height:80vh;overflow-y:auto;box-shadow:0 30px 80px rgba(150,100,200,0.15);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
-   361|    .sync-modal h3{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;margin-bottom:18px;text-align:center;}
-   362|    .sync-modal label{display:block;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:var(--text-light);margin-bottom:5px;margin-top:12px;}
-   363|    .sync-modal input[type="text"],.sync-modal input[type="password"]{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--card-border);background:rgba(255,255,255,0.5);color:var(--text-primary);font-size:14px;font-family:'GBai','Quicksand',sans-serif;outline:none;transition:border-color 0.3s;}
-   364|    .sync-modal input:focus{border-color:var(--accent-s);}
-   365|    .sync-modal .sync-btns{display:flex;gap:12px;margin-top:18px;}
-   366|    .sync-modal .sync-btns button{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;letter-spacing:2px;transition:all 0.2s;}
-   367|    .sync-btn-save{background:var(--accent);color:#fff;}
-   368|    .sync-btn-cancel{background:rgba(200,180,255,0.15);color:var(--text-secondary);}
-   369|    .sync-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
-   370|    .sync-actions button{flex:1;min-width:100px;padding:10px 14px;border-radius:12px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--text-secondary);cursor:pointer;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;transition:all 0.2s;}
-   371|    .sync-actions button:hover{background:rgba(192,132,252,0.1);border-color:var(--accent-s);}
-   372|    .sync-info{font-size:12px;color:var(--text-light);margin-top:12px;line-height:1.6;text-align:center;}
-   373|    @media(max-width:768px){.sync-modal{width:280px;padding:24px 20px;}.sync-status{bottom:auto;top:24px;left:14px;padding:6px 12px;font-size:11px;}}
-   374|</style>
-   375|   350|</head>
-   376|   351|<body>
-   377|   352|
-   378|   353|<section id="home">
-   379|   354|    <div class="bg-layer"></div>
-   380|   355|    <div class="bg-overlay"></div>
-   381|   356|    <div class="particles-container" id="particlesContainer"></div>
-   382|   357|    <div class="content-layer">
-   383|   358|    <div class="home-title"><div class="main-title">人生乱套 我睡大觉</div><div class="sub-title">Life's a mess · I'm going to sleep</div></div>
-   384|   359|    <div class="sunglasses-entry">
-   385|   360|        <div class="eye-icon" id="eyeStar" data-target="explore-me"><span class="icon-symbol">✦</span><span class="icon-label">探索我</span><span class="icon-label-en">Explore Me</span></div>
-   386|   361|        <div class="eye-icon" id="eyeMoon" data-target="explore-world"><span class="icon-symbol">☾</span><span class="icon-label">探索世界</span><span class="icon-label-en">Explore World</span></div>
-   387|   362|    </div>
-   388|   363|    <div class="watermark"><div class="wm-text">OUYANGMINGYUE</div></div>
-   389|   364|    </div>
-   390|   365|</section>
-   391|   366|<div id="meteorContainer"></div>
-   392|   367|
-   393|   368|<!-- 探索页面虚化背景 -->
-   394|   369|<div class="explore-bg" id="exploreBg" style="display:none;"></div>
-   395|   370|
-   396|   371|<!-- 探索我 -->
-   397|   372|<section class="explore-page" id="explore-me">
-   398|   373|    <div class="explore-header"><button class="back-btn" onclick="navigateBack()">← 返回</button><span class="font-cn-title" style="font-size:22px;letter-spacing:4px;color:var(--text-primary);">✨ 探索我</span></div>
-   399|   374|    <div class="explore-content">
-   400|   375|        <div class="module-grid" id="moduleGrid">
-   401|   376|            <div class="module-card locked" data-color="gold" onclick="openRecordUs()"><div class="mc-left"><span class="mc-icon">💕</span></div><div class="mc-center"><div class="mc-title">记录我们</div><div class="mc-sub">Record Us · 密码解锁</div></div><div class="mc-arrow">→</div>
-   402|   377|                <div class="keys-row" style="position:absolute;right:80px;top:50%;transform:translateY(-50%);">
-   403|   378|                    <div class="key-btn" onclick="event.stopPropagation();openPwModal('jiejie')"><span class="key-icon">🔑</span><span class="key-name">姐姐</span></div>
-   404|   379|                    <div class="key-btn" onclick="event.stopPropagation();openPwModal('xiaowei')"><span class="key-icon">🔑</span><span class="key-name">小微</span></div>
-   405|   380|                    <div class="key-btn" onclick="event.stopPropagation();openPwModal('meimei')"><span class="key-icon">🔑</span><span class="key-name">妹妹</span></div>
-   406|   381|                </div>
-   407|   382|            </div>
-   408|   383|            <div class="module-card" data-color="purple" onclick="openSubTL('thoughts')"><div class="mc-left"><span class="mc-icon">💭</span></div><div class="mc-center"><div class="mc-title">记录想法</div><div class="mc-sub">Thoughts · 碎碎念与感悟</div></div><div class="mc-arrow">→</div></div>
-   409|   384|            <div class="module-card" data-color="teal" onclick="openStudyCal()"><div class="mc-left"><span class="mc-icon">📖</span></div><div class="mc-center"><div class="mc-title">记录学习</div><div class="mc-sub">Study · 每日打卡追踪</div></div><div class="mc-arrow">→</div></div>
-   410|   385|        </div>
-   411|   386|        <div class="timeline-view" id="timelineView">
-   412|   387|            <div class="timeline-header"><button class="timeline-back" onclick="closeTL('timelineView','moduleGrid')">← 返回</button><span class="timeline-name" id="timelineName"></span></div>
-   413|   388|            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('recordus')">➕ 添加动态</button><div class="auth-tip">当前为浏览模式，点击右下角 🔐 进入编辑</div></div>
-   414|   389|            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索..." oninput="filterTL()"></div>
-   415|   390|            <div id="timelineList"></div>
-   416|   391|        </div>
-   417|   392|        <div class="timeline-view" id="subTimelineView" data-theme="thoughts">
-   418|   393|            <div class="timeline-header"><button class="timeline-back" onclick="closeTL('subTimelineView','moduleGrid')">← 返回探索我</button><span class="timeline-name" id="subTimelineName"></span></div>
-   419|   394|            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" id="subAddBtn" onclick="openAddForm('thoughts')">➕ 添加想法</button></div>
-   420|   395|            <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="subSearchInput" placeholder="搜索..." oninput="filterSubTL()"></div>
-   421|   396|            <div id="subTimelineList"></div>
-   422|   397|        </div>
-   423|   398|        <div class="study-calendar" id="studyCalView" style="display:none;">
-   424|   399|            <div class="timeline-header"><button class="timeline-back" onclick="closeStudyCal()">← 返回探索我</button><span class="timeline-name">📖 学习打卡</span></div>
-   425|   400|            <div class="study-month-nav"><button onclick="changeStudyMonth(-1)">‹</button><span class="month-label" id="studyMonthLabel"></span><button onclick="changeStudyMonth(1)">›</button></div>
-   426|   401|            <div class="study-grid" id="studyGrid"></div>
-   427|   402|            <div class="study-tasks"><h4 id="taskTitle">📋 今日完成情况</h4><div id="taskList"></div><div class="task-add auth-ctrl"><input type="text" id="newTaskInput" placeholder="记录完成内容..." onkeydown="if(event.key==='Enter')addStudyTask()"><button class="task-media-btn" onclick="document.getElementById('taskMediaInput').click()">📷</button><button class="task-add-btn" onclick="addStudyTask()">➕</button><input type="file" id="taskMediaInput" accept="image/*,video/*" multiple style="display:none;" onchange="previewTaskMedia(this)"><div class="task-add-preview" id="taskMediaPreview"></div></div></div>
-   428|   403|            <div class="study-stats" id="studyStats"></div>
-   429|   404|        </div>
-   430|   405|    </div>
-   431|   406|</section>
-   432|   407|
-   433|   408|<div class="pw-overlay" id="pwOverlay" onclick="if(event.target===this)closePwModal()">
-   434|   409|    <div class="pw-modal"><h3>请输入密码 🔒</h3><input type="password" id="pwInput" maxlength="20" placeholder="输入密码..." onkeydown="if(event.key==='Enter')verifyPw()"><div class="pw-error" id="pwError"></div><div class="pw-btns"><button class="pw-btn-cancel" onclick="closePwModal()">取消</button><button class="pw-btn-confirm" onclick="verifyPw()">确认</button></div></div>
-   435|   410|</div>
-   436|   411|
-   437|   412|<div class="form-overlay" id="formOverlay" onclick="if(event.target===this)closeForm()">
-   438|   413|    <div class="form-modal"><h3 id="formTitle"></h3><div id="formFields"></div><div class="form-btns"><button class="form-btn-cancel" onclick="closeForm()">取消</button><button class="form-btn-save" onclick="saveForm()">保存</button></div></div>
-   439|   414|</div>
-   440|   415|
-   441|   416|<!-- 探索世界 -->
-   442|   417|<section class="explore-page" id="explore-world">
-   443|   418|    <div class="explore-header"><button class="back-btn" onclick="navigateBack()">← 返回</button><span class="font-cn-title" style="font-size:22px;letter-spacing:4px;color:var(--text-primary);">🌍 探索世界</span></div>
-   444|   419|    <div class="explore-content">
-   445|   420|        <div class="module-grid" id="worldGrid">
-   446|   421|            <div class="module-card" data-color="orange" onclick="openWorldSub('books')"><div class="mc-left"><span class="mc-icon">📚</span></div><div class="mc-center"><div class="mc-title">书籍分享</div><div class="mc-sub">Books · 阅读与感悟</div></div><div class="mc-arrow">→</div></div>
-   447|   422|            <div class="module-card" data-color="violet" onclick="openWorldSub('music')"><div class="mc-left"><span class="mc-icon">🎵</span></div><div class="mc-center"><div class="mc-title">音乐分享</div><div class="mc-sub">Music · 黑胶与旋律</div></div><div class="mc-arrow">→</div></div>
-   448|   423|            <div class="module-card" data-color="yellow" onclick="openWorldSub('movies')"><div class="mc-left"><span class="mc-icon">🎬</span></div><div class="mc-center"><div class="mc-title">影视分享</div><div class="mc-sub">Movies · 光影与故事</div></div><div class="mc-arrow">→</div></div>
-   449|   424|        </div>
-   450|   425|    </div>
-   451|   426|</section>
-   452|   427|
-   453|   428|<div class="sub-view books-bg" id="view-books">
-   454|   429|    <div class="sub-header"><button class="back-btn" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:4px;">📚 书籍分享</span></div>
-   455|   430|    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('books')">📚 添加书籍</button></div>
-   456|   431|    <div class="book-grid" id="bookContent"></div>
-   457|   432|</div>
-   458|   433|<div class="sub-view music-bg" id="view-music">
-   459|   434|    <div class="sub-header"><button class="back-btn" style="color:#fff;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15);" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎵 音乐分享</span></div>
-   460|   435|    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('music')">🎵 添加歌曲</button></div>
-   461|   436|    <div style="position:relative;"><div class="soundwave" id="soundwave"></div><div class="vinyl-grid" id="vinylContent"></div></div>
-   462|   437|</div>
-   463|   438|<div class="sub-view movies-bg" id="view-movies">
-   464|   439|    <div class="sub-header"><button class="back-btn" style="color:#fff;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15);" onclick="closeWorldSub()">← 返回</button><span style="font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:#fff;letter-spacing:4px;">🎬 影视分享</span></div>
-   465|   440|    <div style="padding:0 30px;margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('movies')">🎬 添加电影</button></div>
-   466|   441|    <div style="position:relative;"><div class="projector-light"></div><div class="filmstrip-scroll" id="filmContent"></div></div>
-   467|   442|</div>
-   468|   443|
-   469|   444|<!-- 主内容 -->
-   470|   445|<section id="main">
-   471|   446|    <nav style="position:sticky;top:0;z-index:50;"><div class="glass-card" style="max-width:56rem;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="goHome()"><div style="width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;">✦</div><span class="font-cn-brush" style="font-size:22px;color:var(--text-primary);">我的旅程</span></div><div style="display:flex;align-items:center;gap:10px;"><button class="nav-link active" onclick="switchTab('life')"><i class="fas fa-heart" style="margin-right:4px;"></i><span class="nav-cn">生活</span></button><button class="nav-link" onclick="switchTab('study')"><i class="fas fa-book" style="margin-right:4px;"></i><span class="nav-cn">学习</span></button></div><button onclick="goHome()" style="padding:8px 18px;background:var(--accent);color:white;border:none;border-radius:999px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;">首页</button></div></nav>
-   472|   447|    <div style="max-width:56rem;margin:0 auto;padding:20px 16px 80px;">
-   473|   448|        <div id="lifeTab" class="fade-in">
-   474|   449|            <div class="glass-card" style="border-radius:16px;padding:20px;margin-bottom:18px;"><div style="display:flex;align-items:center;gap:18px;"><div style="width:80px;height:80px;border-radius:16px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:40px;">✦</div><div><h2 class="font-cn-brush" style="font-size:28px;font-weight:bold;color:var(--text-primary);">小可爱</h2><p class="font-en-hand" style="font-size:18px;color:var(--text-light);margin-top:4px;">Little Cutie</p></div></div></div>
-   475|   450|            <div class="publish-box"><textarea id="newPost" class="publish-input" placeholder="分享你的生活..."></textarea><div id="previewImages" style="display:none;flex-wrap:wrap;gap:8px;margin-top:10px;"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;"><label style="cursor:pointer;color:var(--text-light);"><i class="fas fa-camera" style="font-size:18px;"></i><input type="file" id="postImages" style="display:none;" accept="image/*" multiple onchange="previewPostImages(event)"></label><button onclick="publishPost()" style="padding:8px 28px;background:var(--accent);color:white;border:none;border-radius:999px;cursor:pointer;">发布</button></div></div>
-   476|   451|            <div id="momentsList"></div>
-   477|   452|        </div>
-   478|   453|        <div id="studyTab" style="display:none;" class="fade-in">
-   479|   454|            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;"><div class="glass-card" style="border-radius:16px;padding:20px;text-align:center;"><div style="font-size:32px;margin-bottom:10px;">📚</div><div class="font-cn-brush" style="font-size:32px;font-weight:bold;color:var(--accent-s);" id="totalEnglish">0</div><div class="font-cn-body" style="color:var(--text-secondary);">英语打卡天数</div></div><div class="glass-card" style="border-radius:16px;padding:20px;text-align:center;"><div style="font-size:32px;margin-bottom:10px;">🎸</div><div class="font-cn-brush" style="font-size:32px;font-weight:bold;color:#f472b6;" id="totalMusic">0</div><div class="font-cn-body" style="color:var(--text-secondary);">乐器练习天数</div></div></div>
-   480|   455|            <div class="checkin-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h3 class="section-title"><span class="icon">📚</span><span class="title-cn">英语学习</span></h3><div class="streak-badge"><i class="fas fa-fire"></i><span id="englishStreak">0</span>天</div></div><div style="margin-bottom:18px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;"><button onclick="changeMonth('english',-1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">‹</button><span class="font-cn-body" style="font-size:18px;font-weight:bold;color:var(--text-primary);" id="englishMonth"></span><button onclick="changeMonth('english',1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">›</button></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:13px;font-weight:600;color:var(--text-light);margin-bottom:10px;"><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div></div><div id="englishCalendar" class="calendar-grid"></div></div><div style="text-align:center;margin-bottom:18px;"><button id="englishCheckinBtn" onclick="checkin('english')" class="checkin-btn"><i class="fas fa-check-circle"></i>今日打卡</button></div><div style="padding:16px;background:rgba(200,180,255,0.06);border-radius:14px;margin-bottom:18px;"><p style="font-weight:600;color:var(--text-primary);margin-bottom:6px;">学习笔记</p><textarea id="englishNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;color:var(--text-secondary);" placeholder="今天学了什么？" rows="3"></textarea></div><div><h4 style="font-weight:bold;color:var(--text-primary);margin-bottom:12px;">最近记录</h4><div id="englishHistory"></div></div></div>
-   481|   456|            <div class="checkin-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h3 class="section-title"><span class="icon">🎸</span><span class="title-cn">乐器练习</span></h3><div class="streak-badge"><i class="fas fa-fire"></i><span id="musicStreak">0</span>天</div></div><div style="margin-bottom:18px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;"><button onclick="changeMonth('music',-1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">‹</button><span class="font-cn-body" style="font-size:18px;font-weight:bold;color:var(--text-primary);" id="musicMonth"></span><button onclick="changeMonth('music',1)" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--card-border);cursor:pointer;background:var(--card-bg);color:var(--text-primary);">›</button></div><div id="musicCalendar" class="calendar-grid"></div></div><div style="text-align:center;margin-bottom:18px;"><button id="musicCheckinBtn" onclick="checkin('music')" class="checkin-btn"><i class="fas fa-check-circle"></i>今日打卡</button></div><div style="padding:16px;background:rgba(200,180,255,0.06);border-radius:14px;margin-bottom:18px;"><p style="font-weight:600;color:var(--text-primary);margin-bottom:6px;">练习笔记</p><textarea id="musicNote" style="width:100%;background:transparent;outline:none;resize:none;border:none;color:var(--text-secondary);" placeholder="今天练习了什么？" rows="3"></textarea></div><div><h4 style="font-weight:bold;color:var(--text-primary);margin-bottom:12px;">最近记录</h4><div id="musicHistory"></div></div></div>
-   482|   457|        </div>
-   483|   458|    </div>
-   484|   459|</section>
-   485|   460|
-   486|   461|<!-- 权限浮动按钮 -->
-   487|   462|<button class="auth-fab guest" id="authFab" onclick="toggleAuth()">
-   488|   463|    <span class="fab-dot"></span>
-   489|   464|    <span id="authFabText">🔐 进入编辑模式</span>
-   490|   465|</button>
-   491|   466|
-   492|   467|<!-- 权限密码弹窗 -->
-   493|   468|<div class="pw-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()">
-   494|   469|    <div class="pw-modal"><h3>请输入作者密码 🔐</h3>
-   495|   470|        <input type="password" id="authPwInput" maxlength="30" placeholder="输入密码..." onkeydown="if(event.key==='Enter')verifyAuth()">
-   496|   471|        <div class="pw-error" id="authPwError"></div>
-   497|   472|        <div class="pw-btns"><button class="pw-btn-cancel" onclick="closeAuthModal()">取消</button><button class="pw-btn-confirm" onclick="verifyAuth()">确认</button></div>
-   498|   473|    </div>
-   499|   474|</div>
-   500|   475|
-   501|
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生乱套 我睡大觉 | OUYANGMINGYUE</title>
+    <meta name="description" content="欧阳明月的个人网站 — 探索我，探索世界">
+    <meta name="theme-color" content="#fdf2f8">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&family=Long+Cang&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    @font-face{font-family:'KBai';src:url('/assets/fonts/演示魁本楷书.ttf') format('truetype');font-weight:normal;font-display:swap;}
+    @font-face{font-family:'GBai';src:url('/assets/fonts/851 GBai 马克笔体.ttf') format('truetype');font-weight:normal;font-display:swap;}
+    *{margin:0;padding:0;box-sizing:border-box;}body{min-height:100vh;overflow:hidden;}
+
+    :root{
+        --bg-start:#fdf2f8;--bg-end:#f0f0ff;
+        --bg:linear-gradient(135deg,var(--bg-start),var(--bg-end));
+        --card-bg:rgba(255,255,255,0.55);--card-border:rgba(200,180,255,0.2);--card-shadow:0 8px 32px rgba(150,100,200,0.10);--card-blur:blur(20px);
+        --text-primary:#2d1b69;--text-secondary:#5b3b8c;--text-light:#8a7aaa;
+        --accent-s:#c084fc;--accent-e:#f472b6;--accent:linear-gradient(135deg,var(--accent-s),var(--accent-e));
+        --c-thoughts:#c084fc;--c-study:#34d399;--c-books:#f59e0b;--c-music:#8b5cf6;--c-movies:#f59e0b;
+    }
+
+    /* === 着陆页 === */
+    #home{min-height:100vh;position:relative;overflow:hidden;}
+    .bg-layer{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/assets/images/bg-home.jpg');background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#1a1a2e;z-index:0;}
+    .bg-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.15);z-index:1;}
+    .content-layer{position:relative;z-index:10;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:30vh;}
+    @keyframes gradientFlow{0%{background-position:0% 50%}25%{background-position:50% 0%}50%{background-position:100% 50%}75%{background-position:50% 100%}100%{background-position:0% 50%}}
+    .particles-container{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden;}
+    .particle{position:absolute;pointer-events:none;user-select:none;will-change:transform;}
+    .particle.floating{animation:starFloat var(--float-duration,4s) ease-in-out infinite;animation-delay:var(--float-delay,0s);}
+    @keyframes starFloat{0%,100%{transform:translateY(0) rotate(0deg);opacity:var(--base-opacity,0.3)}50%{transform:translateY(-18px) rotate(8deg);opacity:calc(var(--base-opacity,0.3) + 0.15)}}
+    .home-title{position:absolute;top:12%;left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%;max-width:700px;}
+    .home-title .main-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:64px;color:#FFFFFF;letter-spacing:8px;line-height:1.3;text-shadow:0 4px 20px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.5);}
+    .home-title .sub-title{font-family:'GBai','Caveat',cursive;font-size:30px;color:#FFEAA7;margin-top:16px;letter-spacing:4px;text-shadow:0 2px 15px rgba(0,0,0,0.8),0 0 30px rgba(0,0,0,0.4);}
+    .sunglasses-entry{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:130px;margin-bottom:30px;}
+    .eye-icon{display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
+    .eye-icon .icon-symbol{font-size:76px;color:#FFFFFF;line-height:1;animation:pulse 2.5s ease-in-out infinite;transition:transform 0.1s ease;text-shadow:0 2px 15px rgba(0,0,0,0.6);}
+    .eye-icon:nth-child(2) .icon-symbol{animation-delay:0.6s;}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    .eye-icon.pressing .icon-symbol{animation:none;transform:scale(0.85)!important;transition:transform 0.1s ease;}
+    .eye-icon.bounce .icon-symbol{animation:none;transform:scale(1)!important;transition:transform 0.2s cubic-bezier(0.34,1.56,0.64,1);}
+    .eye-icon .icon-label{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:rgba(255,255,255,0.85);letter-spacing:4px;}
+    .eye-icon .icon-label-en{font-family:'GBai','Caveat',cursive;font-size:15px;color:rgba(255,255,255,0.5);letter-spacing:2px;}
+    .eye-icon:hover .icon-symbol{filter:brightness(1.1) drop-shadow(0 0 15px rgba(192,132,252,0.4));}
+    #meteorContainer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;pointer-events:none;overflow:hidden;}
+    .meteor-particle{position:fixed;border-radius:50%;pointer-events:none;animation:meteorFly var(--meteor-dur,0.8s) cubic-bezier(0.25,0.46,0.45,0.94) forwards;}
+    @keyframes meteorFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--mx,100px),var(--my,100px)) scale(0.2);opacity:0}}
+    .hover-sparkle{position:fixed;pointer-events:none;border-radius:50%;animation:sparkleLife 1.2s ease-out forwards;}
+    @keyframes sparkleLife{0%{transform:scale(1);opacity:0.5}100%{transform:scale(0) translateY(-20px);opacity:0}}
+    .watermark{position:absolute;bottom:30px;z-index:10;text-align:center;animation:fadeInUp 2s ease-out 1.5s backwards;}
+    .watermark .wm-text{font-family:'GBai','Caveat',cursive;font-size:14px;color:var(--accent-s);opacity:0.08;letter-spacing:6px;text-transform:uppercase;background:var(--accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0.15;}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    /* === 探索页面 === */
+    .explore-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url('/assets/images/bg-home.jpg');background-size:cover;background-position:center;z-index:0;filter:blur(12px);transform:scale(1.05);}
+    .explore-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;overflow-y:auto;opacity:0;transition:opacity 0.4s ease;}
+    .explore-page.visible{display:flex;flex-direction:column;opacity:1;}
+    .explore-header{display:flex;align-items:center;gap:16px;padding:20px 30px;position:sticky;top:0;z-index:110;background:rgba(253,242,248,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);}
+    .back-btn{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);padding:10px 24px;border-radius:25px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;letter-spacing:2px;transition:all 0.3s;}
+    .back-btn:hover{background:rgba(192,132,252,0.1);transform:translateX(-4px);}
+    .explore-content{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 30px 80px;}
+    .explore-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:36px;color:var(--text-primary);letter-spacing:6px;margin-bottom:30px;}
+
+    /* === 模块卡片网格（三行叠放）=== */
+    .module-grid{display:flex;flex-direction:column;gap:16px;max-width:600px;width:100%;}
+    .module-card{background:var(--card-bg);backdrop-filter:var(--card-blur);-webkit-backdrop-filter:var(--card-blur);border:1px solid var(--card-border);border-radius:20px;padding:0;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;box-shadow:var(--card-shadow);display:flex;align-items:center;gap:20px;height:auto;}
+    .module-card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 16px 50px rgba(150,100,200,0.18);}
+    .module-card:active{transform:scale(0.98);transition:transform 0.1s;}
+    .module-card .mc-left{display:flex;align-items:center;justify-content:center;width:80px;padding:24px 0 24px 24px;flex-shrink:0;}
+    .module-card .mc-icon{font-size:42px;}
+    .module-card .mc-center{flex:1;padding:20px 0;}
+    .module-card .mc-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;}
+    .module-card .mc-sub{font-family:'GBai','Caveat',cursive;font-size:14px;color:var(--text-light);margin-top:4px;}
+    .module-card .mc-arrow{padding:20px 24px 20px 0;font-size:28px;color:var(--text-light);flex-shrink:0;transition:transform 0.2s;}
+    .module-card:hover .mc-arrow{transform:translateX(4px);color:var(--accent-s);}
+    .module-card.locked::after{content:'🔒';position:absolute;top:12px;right:60px;font-size:14px;}
+    .module-card[data-color="gold"]{border-left:4px solid #f59e0b;}
+    .module-card[data-color="purple"]{border-left:4px solid #c084fc;}
+    .module-card[data-color="teal"]{border-left:4px solid #34d399;}
+    .module-card[data-color="orange"]{border-left:4px solid #f59e0b;}
+    .module-card[data-color="violet"]{border-left:4px solid #8b5cf6;}
+    .module-card[data-color="yellow"]{border-left:4px solid #fcd34d;}
+
+    .keys-row{display:flex;gap:14px;justify-content:center;margin-top:14px;}
+    .key-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,0.4);border:1px solid var(--card-border);border-radius:14px;padding:10px 14px;cursor:pointer;transition:all 0.25s;color:var(--text-primary);min-width:65px;}
+    .key-btn:hover{background:rgba(192,132,252,0.12);transform:translateY(-3px);}
+    .key-btn .key-icon{font-size:22px;}.key-btn .key-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:13px;letter-spacing:2px;color:var(--text-secondary);}
+
+    /* === 密码浮层 === */
+    .pw-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(253,242,248,0.6);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
+    .pw-overlay.visible{display:flex;opacity:1;}
+    .pw-modal{background:rgba(255,255,255,0.85);backdrop-filter:blur(24px);border:1px solid var(--card-border);border-radius:24px;padding:36px 32px;width:340px;text-align:center;box-shadow:0 30px 80px rgba(150,100,200,0.15);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+    @keyframes modalPop{from{transform:scale(0.8) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+    .pw-modal h3{font-family:'KBai','Ma Shan Zheng',cursive;font-size:24px;color:var(--text-primary);letter-spacing:3px;margin-bottom:20px;}
+    .pw-modal input{width:100%;padding:14px 18px;border-radius:14px;border:1.5px solid var(--card-border);background:rgba(255,255,255,0.6);color:var(--text-primary);font-size:18px;font-family:'GBai','Quicksand',sans-serif;letter-spacing:4px;text-align:center;outline:none;transition:border-color 0.3s;}
+    .pw-modal input:focus{border-color:var(--accent-s);}
+    .pw-modal input::placeholder{color:var(--text-light);letter-spacing:1px;font-size:14px;}
+    .pw-modal .pw-error{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:#ef4444;margin-top:10px;min-height:20px;}
+    .pw-modal input.shake{animation:shake 0.4s ease;}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+    .pw-btns{display:flex;gap:12px;margin-top:20px;}
+    .pw-btns button{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;letter-spacing:2px;transition:all 0.2s;}
+    .pw-btn-confirm{background:var(--accent);color:#fff;}
+    .pw-btn-cancel{background:rgba(200,180,255,0.15);color:var(--text-secondary);}
+
+    /* === 通用时间线 === */
+    .timeline-view{display:none;width:100%;max-width:560px;animation:fadeSlideUp 0.5s ease;}
+    .timeline-view.active{display:block;}
+    @keyframes fadeSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .timeline-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+    .timeline-back{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);padding:8px 18px;border-radius:20px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:15px;transition:all 0.2s;}
+    .timeline-back:hover{background:rgba(192,132,252,0.1);}
+    .timeline-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:26px;color:var(--text-primary);letter-spacing:4px;}
+    .search-box{position:relative;margin-bottom:20px;}
+    .search-box input{width:100%;padding:12px 16px 12px 42px;border-radius:16px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--text-primary);font-size:15px;font-family:'KBai','ZCOOL XiaoWei',serif;outline:none;transition:all 0.3s;}
+    .search-box input:focus{border-color:var(--accent-s);}
+    .search-box input::placeholder{color:var(--text-light);}
+    .search-box .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-light);pointer-events:none;}
+    .moment-item{background:var(--card-bg);backdrop-filter:var(--card-blur);border:1px solid var(--card-border);border-radius:18px;padding:18px;margin-bottom:14px;transition:all 0.2s;position:relative;box-shadow:var(--card-shadow);}
+    .moment-item:hover{background:rgba(255,255,255,0.7);}
+    .moment-top{display:flex;gap:12px;align-items:flex-start;}
+    .moment-avatar{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .moment-info{flex:1;}
+    .moment-nick{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:var(--text-primary);letter-spacing:2px;}
+    .moment-time{font-family:'GBai','Caveat',cursive;font-size:12px;color:var(--text-light);margin-top:2px;}
+    .moment-text{color:var(--text-secondary);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:15px;line-height:1.7;margin-top:10px;}
+    .moment-text.clamped{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+    .moment-expand{color:var(--accent-s);font-family:'GBai','Caveat',cursive;font-size:13px;cursor:pointer;margin-top:4px;display:none;}
+    .moment-images{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+    .moment-images img{border-radius:8px;object-fit:contain;cursor:pointer;transition:transform 0.2s;max-height:220px;background:rgba(255,255,255,0.3);}
+    .moment-images.img-1 img{width:100%;max-height:300px;}
+    .moment-images.img-2 img{width:calc(50% - 3px);height:auto;max-height:180px;}
+    .moment-images.img-3 img{width:calc(33.3% - 4px);height:auto;max-height:140px;}
+    .moment-images img:hover{transform:scale(1.03);}
+    .moment-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:1px solid rgba(200,180,255,0.1);}
+    .moment-crud{display:flex;gap:8px;}
+    .moment-crud button{background:none;border:none;cursor:pointer;font-size:13px;opacity:0.35;transition:all 0.2s;padding:4px;}
+    .moment-crud button:hover{opacity:1;transform:scale(1.2);}
+    .like-btn{display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--text-light);font-size:14px;transition:all 0.2s;user-select:none;}
+    .like-btn:hover,.like-btn.liked{color:#f472b6;}
+    .no-results{text-align:center;padding:60px 20px;color:var(--text-light);}
+    .no-results .nr-icon{font-size:48px;margin-bottom:16px;}
+    .no-results .nr-text{font-family:'KBai','Ma Shan Zheng',cursive;font-size:20px;letter-spacing:3px;color:var(--text-secondary);}
+
+    .add-btn{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:20px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:15px;letter-spacing:2px;transition:all 0.3s;margin-bottom:18px;display:inline-flex;align-items:center;gap:8px;}
+    .add-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(192,132,252,0.3);}
+
+    .timeline-view[data-theme="thoughts"] .moment-avatar{background:linear-gradient(135deg,#c084fc,#e8d5f5);}
+
+    /* === 学习打卡 === */
+    .study-calendar{width:100%;max-width:560px;animation:fadeSlideUp 0.5s ease;}
+    .study-month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+    .study-month-nav button{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;transition:all 0.2s;}
+    .study-month-nav button:hover{background:rgba(52,211,153,0.1);}
+    .study-month-nav .month-label{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;}
+    .study-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:20px;}
+    .study-grid .weekday{text-align:center;font-family:'GBai','Caveat',cursive;font-size:13px;color:var(--text-light);padding:6px 0;}
+    .study-day{background:var(--card-bg);backdrop-filter:blur(10px);border:1px solid var(--card-border);border-radius:12px;padding:8px 4px;text-align:center;min-height:56px;transition:all 0.2s;cursor:pointer;}
+    .study-day:hover{background:rgba(255,255,255,0.7);}
+    .study-day.today{border:2px solid var(--c-study);box-shadow:0 0 12px rgba(52,211,153,0.15);}
+    .study-day .day-num{font-family:'GBai','Caveat',cursive;font-size:15px;color:var(--text-secondary);}
+    .study-day .day-count{font-family:'GBai','Caveat',cursive;font-size:11px;color:var(--text-light);margin-top:2px;}
+    .study-day.empty{background:transparent;border-color:transparent;}
+
+    .study-tasks{background:var(--card-bg);backdrop-filter:var(--card-blur);border:1px solid var(--card-border);border-radius:18px;padding:18px;margin-bottom:18px;box-shadow:var(--card-shadow);}
+    .study-tasks h4{font-family:'KBai','Ma Shan Zheng',cursive;font-size:17px;color:var(--text-primary);letter-spacing:3px;margin-bottom:12px;}
+    .task-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(200,180,255,0.08);}
+    .task-item:last-child{border-bottom:none;}
+    .task-text{flex:1;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:var(--text-secondary);}
+    .task-media{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;}
+    .task-media img,.task-media video{max-height:80px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,0.2);cursor:pointer;}
+    .task-item .task-actions{display:flex;gap:6px;}
+    .task-item .task-actions button{background:none;border:none;cursor:pointer;font-size:12px;opacity:0.3;transition:all 0.2s;padding:2px;}
+    .task-item .task-actions button:hover{opacity:1;}
+
+    /* === 权限系统 === */
+    .auth-fab{position:fixed;bottom:24px;right:24px;z-index:150;background:var(--accent);color:#fff;border:none;padding:12px 24px;border-radius:40px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;letter-spacing:2px;box-shadow:0 4px 20px rgba(192,132,252,0.3);transition:all 0.3s;display:flex;align-items:center;gap:8px;}
+    .auth-fab:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,132,252,0.5);}
+    .auth-fab .fab-dot{width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse-dot 1.5s infinite;}
+    .auth-fab.guest .fab-dot{background:#fbbf24;}
+    @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
+    .auth-ctrl{display:none!important;}
+    body[data-author="true"] .auth-ctrl{display:flex!important;}
+    .auth-tip{display:block;font-size:12px;color:var(--text-light);text-align:center;padding:8px;font-family:'KBai','ZCOOL XiaoWei',serif;}
+    body[data-auth
+
+... [OUTPUT TRUNCATED - 46689 chars omitted out of 96689 total] ...
+
+;const cid=isSub?'subTimelineList':'timelineList';const q=isSub?(document.getElementById('subSearchInput').value||'').toLowerCase():(document.getElementById('searchInput')?.value||'').toLowerCase();const arr=getData(curTLKey)||[];renderTL(cid,curTLKey,q?arr.filter(p=>p.text.toLowerCase().includes(q)):arr);}
+function closeTL(vid,gid){document.getElementById(vid).classList.remove('active');document.getElementById(gid).style.display='';curTLKey=null;authenticatedFriend=null;}
+
+// ═══ 学习打卡（可编辑任务）═══
+const monthNamesCN=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+let studyMonth=new Date().getMonth(),studyYear=new Date().getFullYear(),selectedStudyDay=null;
+function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function openStudyCal(){selectedStudyDay=todayStr();document.getElementById('moduleGrid').style.display='none';document.getElementById('studyCalView').style.display='block';renderStudyCal();}
+function closeStudyCal(){document.getElementById('studyCalView').style.display='none';document.getElementById('moduleGrid').style.display='';}
+function changeStudyMonth(d){studyMonth+=d;if(studyMonth>11){studyMonth=0;studyYear++;}else if(studyMonth<0){studyMonth=11;studyYear--;}renderStudyCal();}
+function renderStudyCal(){
+    document.getElementById('studyMonthLabel').textContent=studyYear+'年'+monthNamesCN[studyMonth];
+    const data=getData('studyCheckin')||{};
+    const today=todayStr();if(!selectedStudyDay)selectedStudyDay=today;
+    const first=new Date(studyYear,studyMonth,1),last=new Date(studyYear,studyMonth+1,0);
+    let sw=first.getDay();if(sw===0)sw=7;
+    let html=['一','二','三','四','五','六','日'].map(d=>`<div class="weekday">${d}</div>`).join('');
+    for(let i=1;i<sw;i++)html+='<div class="study-day empty"></div>';
+    let totalDays=0,doneDays=0;
+    for(let d=1;d<=last.getDate();d++){
+        const ds=studyYear+'-'+String(studyMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+        const tasks=data[ds]||[];
+        const isToday=ds===today;const isSel=ds===selectedStudyDay;
+        if(new Date(ds)<=new Date(today)){totalDays++;if(tasks.length>0)doneDays++;}
+        html+=`<div class="study-day ${isToday?'today':''} ${isSel?'selected':''}" onclick="selectStudyDay('${ds}')" style="${isSel?'background:rgba(52,211,153,0.12);border-color:var(--c-study);':''}"><div class="day-num">${d}</div>${tasks.length>0?`<div class="day-count">${tasks.length}项</div>`:''}</div>`;
+    }
+    document.getElementById('studyGrid').innerHTML=html;
+    // 任务列表
+    const tasks=data[selectedStudyDay]||[];
+    const today2=todayStr();
+    document.getElementById('taskTitle').textContent=`📋 ${selectedStudyDay===today2?'今日':selectedStudyDay} 完成情况`;
+    document.getElementById('taskList').innerHTML=tasks.length?tasks.map((t,i)=>{
+        const txt=typeof t==='string'?t:t.text;
+        const imgs=typeof t==='string'?[]:(t.images||[]);
+        const vids=typeof t==='string'?[]:(t.videos||[]);
+        let mediaHtml='';
+        if(imgs.length||vids.length){
+            mediaHtml='<div class="task-media">';
+            imgs.forEach(s=>{mediaHtml+=`<img src="${s}">`;});
+            vids.forEach(s=>{mediaHtml+=`<video src="${s}" muted></video>`;});
+            mediaHtml+='</div>';
+        }
+        return`<div class="task-item"><div><div class="task-text">${txt}</div>${mediaHtml}</div><div class="task-actions auth-ctrl"><button onclick="editStudyTask(${i})">✏️</button><button onclick="deleteStudyTask(${i})">🗑️</button></div></div>`;
+    }).join(''):'<div style="color:var(--text-light);font-size:13px;padding:8px 0;">暂无记录，添加一个吧 ✨</div>';
+    // 统计
+    const rate=totalDays>0?Math.round(doneDays/totalDays*100):0;
+    document.getElementById('studyStats').innerHTML=`<div class="study-stat"><div class="ss-num">${doneDays}</div><div class="ss-label">本月打卡</div></div><div class="study-stat"><div class="ss-num">${rate}%</div><div class="ss-label">完成率</div></div>`;
+}
+function selectStudyDay(ds){selectedStudyDay=ds;renderStudyCal();}
+// ═══ 学习打卡媒体 ═══
+let taskMediaImgs=[],taskMediaVids=[];
+async function previewTaskMedia(input){
+    taskMediaImgs=[];taskMediaVids=[];
+    const pre=document.getElementById('taskMediaPreview');
+    pre.innerHTML='<span style="color:var(--text-light);font-size:12px;">处理中...</span>';
+    for(const f of input.files){
+        if(f.type.startsWith('video/')){
+            const reader=new FileReader();
+            reader.onload=function(e){taskMediaVids.push(e.target.result);pre.innerHTML=taskMediaImgs.map(s=>`<img src="${s}">`).join('')+taskMediaVids.map(s=>`<video src="${s}" muted style="max-height:60px;border-radius:8px;"></video>`).join('');};
+            reader.readAsDataURL(f);
+        }else{
+            try{const b64=await compressImage(f,600,0.7);taskMediaImgs.push(b64);}catch(e){console.error(e);}
+        }
+    }
+    pre.innerHTML=taskMediaImgs.map(s=>`<img src="${s}">`).join('')+taskMediaVids.map(s=>`<video src="${s}" muted style="max-height:60px;border-radius:8px;"></video>`).join('');
+    input.value='';
+}
+
+function addStudyTask(){const input=document.getElementById('newTaskInput');const text=input.value.trim();if(!text&&!taskMediaImgs.length&&!taskMediaVids.length)return;const data=getData('studyCheckin')||{};if(!data[selectedStudyDay])data[selectedStudyDay]=[];const item={text:text||'📷 记录',images:[...taskMediaImgs],videos:[...taskMediaVids]};data[selectedStudyDay].push(item);setData('studyCheckin',data);input.value='';taskMediaImgs=[];taskMediaVids=[];document.getElementById('taskMediaPreview').innerHTML='';renderStudyCal();}
+function deleteStudyTask(idx){const data=getData('studyCheckin')||{};if(!data[selectedStudyDay])return;if(!confirm('删除这条记录？'))return;data[selectedStudyDay].splice(idx,1);setData('studyCheckin',data);renderStudyCal();}
+function editStudyTask(idx){const data=getData('studyCheckin')||{};const tasks=data[selectedStudyDay]||[];const old=tasks[idx];const oldTxt=typeof old==='string'?old:old.text;const newTxt=prompt('编辑内容',oldTxt);if(newTxt===null)return;const trimmed=newTxt.trim();if(!trimmed){deleteStudyTask(idx);return;}if(typeof old==='string'){tasks[idx]=trimmed;}else{tasks[idx].text=trimmed;}setData('studyCheckin',data);renderStudyCal();}
+
+// ═══ 表单弹窗（含图片上传）═══
+let formMode='add',formKey='',formEditId=null,formUploadImgs=[],formDataKey='';
+const formConfigs={
+    recordus:{title:'添加动态',fields:[{name:'text',label:'正文',type:'textarea'}]},
+    thoughts:{title:'添加想法',fields:[{name:'text',label:'正文',type:'textarea'}]},
+    books:{title:'添加书籍',fields:[{name:'title',label:'书名',type:'text'},{name:'author',label:'作者',type:'text'},{name:'stars',label:'评分(1-5)',type:'text'},{name:'emoji',label:'图标emoji',type:'text'},{name:'reflection',label:'📖 读后感',type:'textarea6'}]},
+    music:{title:'添加歌曲',fields:[{name:'title',label:'歌名',type:'text'},{name:'artist',label:'歌手',type:'text'},{name:'lyric',label:'一句歌词',type:'textarea'},{name:'color',label:'颜色(#hex)',type:'text'}]},
+    movies:{title:'添加电影',fields:[{name:'title',label:'片名',type:'text'},{name:'director',label:'导演',type:'text'},{name:'review',label:'观后感',type:'textarea4'},{name:'tags',label:'标签（逗号分隔）',type:'text'},{name:'img',label:'海报URL',type:'text'}]},
+};
+function openAddForm(key){formMode='add';formKey=key;formEditId=null;formUploadImgs=[];formDataKey=(key==='recordus')?(authenticatedFriend||curTLKey):key;renderForm(key,null);}
+function openEditForm(key,id){const fk=['jiejie','xiaowei','meimei'].includes(key)?'recordus':key;formMode='edit';formKey=fk;formEditId=id;formUploadImgs=[];formDataKey=key;renderForm(fk,getData(key).find(x=>x.id===id));}
+function renderForm(key,item){
+    const cfg=formConfigs[key];if(!cfg)return;
+    document.getElementById('formTitle').textContent=(formMode==='edit'?'编辑':'添加')+' '+cfg.title.replace('添加 ','');
+    const fields=cfg.fields.map(f=>{
+        let val='';
+        if(item){if(f.name==='tags'&&item.tags)val=item.tags.join(',');else if(f.name==='review')val=item.review||'';else val=item[f.name]||'';}
+        const t=f.type;
+        if(t==='textarea')return`<label>${f.label}</label><textarea id="f_${f.name}" rows="3">${val}</textarea>`;
+        if(t==='textarea4')return`<label>${f.label}</label><textarea id="f_${f.name}" rows="4">${val}</textarea>`;
+        if(t==='textarea6')return`<label>${f.label}</label><textarea id="f_${f.name}" rows="6">${val}</textarea>`;
+        return`<label>${f.label}</label><input type="text" id="f_${f.name}" value="${val}">`;
+    }).join('');
+    const needsImg=['recordus','thoughts','books'].includes(key);
+    const imgHtml=needsImg?`<label>📷 上传图片（最多9张）</label><div class="upload-btn" onclick="document.getElementById('formImgInput').click()">📷 选择图片</div><input type="file" id="formImgInput" accept="image/*" multiple style="display:none;" onchange="onFormImgUpload(this)"><div class="upload-preview" id="formImgPreview"></div><div style="font-size:11px;color:var(--text-light);margin-top:4px;">图片自动压缩，过多可能超出存储上限</div>`:'';
+    document.getElementById('formFields').innerHTML=fields+imgHtml;
+    document.getElementById('formOverlay').classList.add('visible');
+}
+async function onFormImgUpload(input){
+    try{
+        formUploadImgs=[];
+        const files=Array.from(input.files);
+        if(files.length>9){alert('最多选择9张图片');input.value='';return;}
+        const pre=document.getElementById('formImgPreview');
+        pre.innerHTML='<div style="color:var(--text-light);font-size:12px;">压缩中...</div>';
+        for(const f of files){
+            if(formUploadImgs.length>=9)break;
+            const b64=await compressImage(f,800,0.8);
+            formUploadImgs.push(b64);
+        }
+        pre.innerHTML=formUploadImgs.map(s=>`<img src="${s}">`).join('');
+    }catch(e){
+        console.error('图片上传失败:',e);
+        alert('图片上传失败：'+e.message);
+        formUploadImgs=[];
+        const pre=document.getElementById('formImgPreview');
+        if(pre)pre.innerHTML='';
+    }
+    input.value='';
+}
+function closeForm(){const o=document.getElementById('formOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
+function saveForm(){
+    const cfg=formConfigs[formKey];if(!cfg)return;
+    const item={id:formMode==='edit'?formEditId:Date.now()};
+    cfg.fields.forEach(f=>{const el=document.getElementById('f_'+f.name);const val=el?el.value.trim():'';if(f.name==='tags'){item[f.name]=val?val.split(',').map(s=>s.trim()).filter(Boolean):[];}else if(f.name==='stars'){item[f.name]=Math.min(5,Math.max(1,parseInt(val)||3));}else{item[f.name]=val;}});
+    if(!item.text&&!item.title){alert('请填写内容');return;}
+    if(formMode==='add'){
+        if(['recordus','thoughts'].includes(formKey)){
+            const af=authenticatedFriend||curTLKey;
+            const avatars={recordus:pwAvatars[af]||'✦',thoughts:'🌙'};
+            const nicks={recordus:pwNames[af]||'我',thoughts:'想法'};
+            const now=new Date();item.time=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');item.likes=0;item.liked=false;item.avatar=avatars[formKey]||'✦';item.nick=nicks[formKey]||'匿名';
+            item.images=formUploadImgs.length?formUploadImgs.slice(0,9):[];
+        }
+        if(formKey==='books'){item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');if(!item.emoji)item.emoji='📖';item.images=formUploadImgs.length?formUploadImgs.slice(0,9):[];}
+        if(formKey==='music'){if(!item.color)item.color='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');}
+        const saveKey=formDataKey||formKey;
+        try{addItem(saveKey,item);if(formKey==='recordus')alert('✅ 动态添加成功！');}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足，请删除部分旧图片');return;}else{alert('添加失败：'+e.message);return;}}
+    }else{
+        const updateKey=formDataKey||formKey;
+        if(formUploadImgs.length&&['recordus','thoughts','books'].includes(formKey)){item.images=formUploadImgs.slice(0,9);}
+        try{updateItem(updateKey,formEditId,item);}catch(e){if(e.name==='QuotaExceededError'){alert('存储空间不足');return;}}
+    }
+    closeForm();refreshAfterSave();
+}
+function confirmDelete(key,id){if(confirm('确定删除吗？')){deleteItem(key,id);refreshAfterSave();}}
+function refreshAfterSave(){if(curTLKey)refreshCurrentTL();if(document.getElementById('bookContent')?.offsetParent)renderBooks();if(document.getElementById('vinylContent')?.offsetParent)renderVinyl();if(document.getElementById('filmContent')?.offsetParent)renderFilms();}
+
+// ═══ 探索世界子模块 ═══
+function openWorldSub(key){document.getElementById('worldGrid').style.display='none';const v=document.getElementById('view-'+key);if(!v)return;v.classList.add('visible');v.style.opacity='0';requestAnimationFrame(()=>{v.style.transition='opacity 0.4s';v.style.opacity='1';});if(key==='books')renderBooks();if(key==='music')renderVinyl();if(key==='movies')renderFilms();}
+function closeWorldSub(){document.querySelectorAll('.sub-view.visible').forEach(v=>{v.style.transition='opacity 0.4s';v.style.opacity='0';setTimeout(()=>{v.classList.remove('visible');v.style.opacity='';v.style.transition='';},400);});document.getElementById('worldGrid').style.display='';}
+function renderBooks(){const data=getData('books')||[];let migrated=false;
+document.getElementById('bookContent').innerHTML=data.map(b=>{
+    // 旧数据迁移：review→reflection
+    if(!b.reflection&&b.review){b.reflection=b.review;delete b.review;migrated=true;}
+    const ref=b.reflection||'';
+    const refShort=ref.length>80?ref.slice(0,80)+'...':ref;
+    const refId='ref_'+b.id;
+    const imgs=b.images||[];
+    return`<div class="book-card"><div class="book-inner" style="border-left:4px solid ${b.color||'#ccc'};"><div class="bk-cover" style="background:${b.color||'#ccc'}20;">${b.emoji||'📖'}</div><div class="bk-title">${b.title}</div><div class="bk-author">${b.author}</div><div class="bk-stars">${'⭐'.repeat(b.stars||3)}</div>${ref?`<div style="border-top:1px dashed rgba(150,100,200,0.2);margin-top:10px;padding-top:8px;text-align:left;"><span style="font-size:13px;color:var(--accent-s);font-weight:bold;">📖 读后感：</span><p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:4px;" id="${refId}">${ref.length>120?refShort:ref}</p>${ref.length>120?`<span style="font-size:12px;color:var(--accent-s);cursor:pointer;" onclick="var e=document.getElementById('${refId}');if(e.dataset.expanded==='1'){e.textContent='${refShort.replace(/'/g,"\\'")}';this.textContent='...展开';e.dataset.expanded='0';}else{e.textContent='${ref.replace(/'/g,"\\'").replace(/\n/g," ")}';this.textContent='收起';e.dataset.expanded='1';}">...展开</span>`:''}</div>`:'<div style="margin-top:6px;font-size:12px;color:var(--text-light);">暂无读后感 📝</div>'}${imgs.length>0?`<div class="book-images">${imgs.map(s=>`<img src="${s}">`).join('')}</div>`:''}</div><div class="item-crud auth-ctrl" style="position:absolute;top:-8px;right:-8px;"><button onclick="openEditForm('books',${b.id})">✏️</button><button onclick="confirmDelete('books',${b.id})">🗑️</button></div></div>`;
+}).join('');
+if(migrated)setData('books',data);
+}
+function renderVinyl(){const data=getData('music')||[];document.getElementById('soundwave').innerHTML=Array.from({length:30},(_,i)=>`<span style="height:${10+Math.random()*25}px;animation-delay:${i*0.05}s;"></span>`).join('');document.getElementById('vinylContent').innerHTML=data.map(m=>`<div class="vinyl-card" onclick="this.classList.toggle('playing')"><div class="vinyl-disc"><div class="vinyl-sticker" style="background:${m.color||'#888'};">${(m.artist||'?')[0]}</div></div><div class="vinyl-title">${m.title}</div><div class="vinyl-artist">${m.artist}</div><div class="vinyl-lyric">"${m.lyric||''}"</div><div class="item-crud auth-ctrl" style="position:absolute;top:0;right:0;"><button onclick="event.stopPropagation();openEditForm('music',${m.id})">✏️</button><button onclick="event.stopPropagation();confirmDelete('music',${m.id})">🗑️</button></div></div>`).join('');}
+function renderFilms(){const data=getData('movies')||[];document.getElementById('filmContent').innerHTML=data.map(m=>`<div class="film-card"><div class="film-poster"><img src="${m.img||'https://picsum.photos/seed/mv/400/225'}" loading="lazy"><div class="film-overlay"><div class="film-name">${m.title}</div><div class="film-director">${m.director}</div><div class="film-review">${m.review||''}</div><div class="film-tags">${(m.tags||[]).map(t=>`<span>${t}</span>`).join('')}</div></div></div><div class="item-crud auth-ctrl" style="position:absolute;top:8px;right:8px;z-index:2;"><button onclick="openEditForm('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">✏️</button><button onclick="confirmDelete('movies',${m.id})" style="background:rgba(0,0,0,0.5);border-radius:6px;">🗑️</button></div></div>`).join('');}
+
+// ═══ 主页原有功能 ═══
+let appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};
+function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};saveData();}}
+function saveData(){localStorage.setItem('myLifeJourney',JSON.stringify(appData));}
+function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
+function goHome(){document.getElementById('main').style.display='none';document.getElementById('exploreBg').style.display='none';document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();}
+function switchTab(tab){document.querySelectorAll('.nav-link').forEach(el=>el.classList.remove('active'));event.target.closest('.nav-link').classList.add('active');document.getElementById('lifeTab').style.display=tab==='life'?'block':'none';document.getElementById('studyTab').style.display=tab==='study'?'block':'none';}
+let selectedImages=[];
+function previewPostImages(e){const f=Array.from(e.target.files),c=document.getElementById('previewImages');c.innerHTML='';c.style.display='flex';selectedImages=[];f.forEach(file=>{const r=new FileReader();r.onload=function(ev){selectedImages.push(ev.target.result);const img=document.createElement('img');img.src=ev.target.result;img.style.cssText='width:70px;height:70px;border-radius:8px;object-fit:cover;';c.appendChild(img);};r.readAsDataURL(file);});}
+function publishPost(){const ct=document.getElementById('newPost').value.trim();if(!ct&&selectedImages.length===0){alert('请写点什么！');return;}const n=new Date();const ts=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')+' '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');appData.moments.unshift({id:Date.now(),content:ct,images:[...selectedImages],time:ts,likes:0,liked:false});saveData();document.getElementById('newPost').value='';document.getElementById('previewImages').innerHTML='';document.getElementById('previewImages').style.display='';document.getElementById('postImages').value='';selectedImages=[];renderMoments();}
+function renderMoments(){const c=document.getElementById('momentsList');c.innerHTML=appData.moments.map(p=>`<div class="moments-card fade-in"><div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;"><div class="moments-avatar">✦</div><div><div class="font-cn-body" style="font-size:16px;font-weight:bold;color:var(--text-primary);">小可爱</div><div style="font-size:13px;color:var(--text-light);">${p.time}</div></div></div><div style="color:var(--text-secondary);font-size:16px;line-height:1.7;">${p.content}</div>${p.images.length>0?`<div class="moments-images grid-${Math.min(p.images.length,3)}">${p.images.map(i=>`<img src="${i}" class="moments-img">`).join('')}</div>`:''}<div class="moments-actions"><div class="moments-action ${p.liked?'liked':''}" onclick="toggleMainLike(${p.id})"><i class="fas fa-heart"></i><span>${p.likes}</span></div></div></div>`).join('')||'<div style="text-align:center;color:var(--text-light);padding:40px;">还没有动态</div>';}
+function toggleMainLike(id){const p=appData.moments.find(m=>m.id===id);if(p){p.liked=!p.liked;p.likes+=p.liked?1:-1;saveData();renderMoments();}}
+let currentMonths={english:new Date().getMonth(),music:new Date().getMonth()};
+function changeMonth(t,d){currentMonths[t]+=d;if(currentMonths[t]>11)currentMonths[t]=0;else if(currentMonths[t]<0)currentMonths[t]=11;renderCalendar(t);}
+function renderCalendar(type){const data=appData[type],month=currentMonths[type],year=new Date().getFullYear();document.getElementById(type+'Month').textContent=year+'年'+monthNamesCN[month];const first=new Date(year,month,1),last=new Date(year,month+1,0);let sw=first.getDay();if(sw===0)sw=7;const today=new Date(),ts=year+'-'+String(month+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');let html='';for(let i=1;i<sw;i++)html+='<div class="calendar-day"></div>';for(let d=1;d<=last.getDate();d++){const ds=year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');let cls='calendar-day';if(ds===ts)cls+=' today';if(data.checkedDates.includes(ds))cls+=' checked';html+=`<div class="${cls}">${d}</div>`;}document.getElementById(type+'Calendar').innerHTML=html;}
+function checkin(type){const now=new Date();const today=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');const data=appData[type];if(data.checkedDates.includes(today)){alert('已打卡！');return;}const note=document.getElementById(type+'Note').value.trim();data.checkedDates.push(today);if(note)data.notes[today]=note;saveData();renderCalendar(type);updateStats();checkTodayStatus();renderHistory(type);document.getElementById(type+'Note').value='';const btn=document.getElementById(type+'CheckinBtn'),orig=btn.innerHTML;btn.innerHTML='<i class="fas fa-check"></i> 打卡成功！';btn.style.background='linear-gradient(135deg,#34d399,#10b981)';setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';},2500);}
+function checkTodayStatus(){const now=new Date();const today=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');['english','music'].forEach(t=>{const btn=document.getElementById(t+'CheckinBtn');if(appData[t].checkedDates.includes(today)){btn.disabled=true;btn.innerHTML='<i class="fas fa-check-double"></i> 已完成';}else{btn.disabled=false;btn.innerHTML='<i class="fas fa-check-circle"></i> 今日打卡';}});}
+function updateStats(){document.getElementById('totalEnglish').textContent=appData.english.checkedDates.length;document.getElementById('totalMusic').textContent=appData.music.checkedDates.length;['english','music'].forEach(t=>{const dates=appData[t].checkedDates.sort().reverse();let streak=0;const today=new Date();for(let i=0;i<365;i++){const cd=new Date(today);cd.setDate(cd.getDate()-i);const ds=cd.getFullYear()+'-'+String(cd.getMonth()+1).padStart(2,'0')+'-'+String(cd.getDate()).padStart(2,'0');if(dates.includes(ds))streak++;else if(i>0)break;}document.getElementById(t+'Streak').textContent=streak;});}
+function renderHistory(type){const c=document.getElementById(type+'History'),data=appData[type],recent=data.checkedDates.sort().reverse().slice(0,7);c.innerHTML=recent.map(d=>`<div class="history-item"><div class="history-icon"><i class="fas fa-check"></i></div><div style="flex:1;"><div style="font-weight:600;color:var(--text-primary);">${d}</div>${data.notes[d]?`<div style="font-size:13px;color:var(--text-light);margin-top:2px;">${data.notes[d]}</div>`:''}</div></div>`).join('')||'<div style="text-align:center;color:var(--text-light);padding:20px;">暂无记录</div>';}
+
+loadData();
+
+// ═══ 权限系统 ═══
+let isAuthor=sessionStorage.getItem('isAuthor')==='true';
+function updateAuthUI(){
+    const fab=document.getElementById('authFab');
+    const txt=document.getElementById('authFabText');
+    document.body.dataset.author=isAuthor?'true':'false';
+    if(isAuthor){fab.classList.remove('guest');txt.textContent='🔓 退出编辑模式';}
+    else{fab.classList.add('guest');txt.textContent='🔐 进入编辑模式';}
+}
+function toggleAuth(){if(isAuthor){isAuthor=false;sessionStorage.removeItem('isAuthor');updateAuthUI();}else{document.getElementById('authOverlay').classList.add('visible');document.getElementById('authPwInput').value='';document.getElementById('authPwError').textContent='';setTimeout(()=>document.getElementById('authPwInput').focus(),300);}}
+function closeAuthModal(){const o=document.getElementById('authOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
+function verifyAuth(){const pw=document.getElementById('authPwInput').value.trim();if(pw==='ouyang2026'){isAuthor=true;sessionStorage.setItem('isAuthor','true');closeAuthModal();updateAuthUI();}else{document.getElementById('authPwError').textContent='密码错误';document.getElementById('authPwInput').classList.add('shake');document.getElementById('authPwInput').value='';setTimeout(()=>document.getElementById('authPwInput').classList.remove('shake'),400);}}
+updateAuthUI();
+
+// ═══ 全局点击波纹 ═══
+document.addEventListener('click',function(e){
+    const t=e.target;
+    if(t.closest('.eye-icon')||t.closest('.pw-overlay')||t.closest('.form-overlay')||t.closest('#authOverlay')||t.closest('.auth-fab'))return;
+    if(t.closest('button')||t.closest('a')||t.closest('[role="button"]')||t.closest('.module-card')||t.closest('.key-btn')||t.closest('.add-btn')||t.closest('.back-btn')||t.closest('.moment-crud')||t.closest('.like-btn')||t.closest('.task-item')||t.closest('.study-day')||t.closest('.checkin-btn')||t.closest('.nav-link')){
+        SoundFX.playClick();
+        const r=document.createElement('div');r.className='click-ripple';
+        r.style.left=(e.clientX-75)+'px';r.style.top=(e.clientY-75)+'px';
+        document.body.appendChild(r);setTimeout(()=>{if(r.parentNode)r.parentNode.removeChild(r);},600);
+    }
+});
+</script>
+
+<!-- ═══ 自动云同步 ═══ -->
+<script>
+const SYNC_TOKEN='***';
+const SYNC_FILE = 'ouyangmingyue-site-data.json';
+let syncGistId = localStorage.getItem('sync_gist_id') || '';
+let syncTimer = null;
+
+function updateSyncDot(status) {
+    const dot = document.getElementById('syncDot');
+    const text = document.getElementById('syncText');
+    if (!dot || !text) return;
+    dot.className = 'sync-dot ' + status;
+    text.textContent = {online:'已同步', syncing:'同步中...', error:'同步失败', offline:'未连接'}[status] || status;
+}
+
+async function syncFetch() {
+    if (!syncGistId) return null;
+    try {
+        const r = await fetch('https://api.github.com/gists/' + syncGistId, {
+            headers: { 'Authorization': 'token ' + SYNC_TOKEN }
+        });
+        if (!r.ok) return null;
+        const g = await r.json();
+        return g.files[SYNC_FILE] ? JSON.parse(g.files[SYNC_FILE].content) : null;
+    } catch (e) { return null; }
+}
+
+async function syncPush(data) {
+    data._lastModified = Date.now();
+    const body = { description: 'OYM Site Data', files: { [SYNC_FILE]: { content: JSON.stringify(data) } } };
+    try {
+        let r;
+        if (syncGistId) {
+            r = await fetch('https://api.github.com/gists/' + syncGistId, {
+                method: 'PATCH', headers: { 'Authorization': 'token ' + SYNC_TOKEN, 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+            });
+        } else {
+            body.public = false;
+            r = await fetch('https://api.github.com/gists', {
+                method: 'POST', headers: { 'Authorization': 'token ' + SYNC_TOKEN, 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+            });
+            if (r.ok) { const g = await r.json(); syncGistId = g.id; localStorage.setItem('sync_gist_id', g.id); }
+        }
+        return r.ok;
+    } catch (e) { return false; }
+}
+
+function getAllData() {
+    return {
+        site: JSON.parse(localStorage.getItem('ouyangmingyue_site_data') || '{}'),
+        journey: JSON.parse(localStorage.getItem('myLifeJourney') || '{}')
+    };
+}
+function setAllData(d) {
+    if (d.site) localStorage.setItem('ouyangmingyue_site_data', JSON.stringify(d.site));
+    if (d.journey) localStorage.setItem('myLifeJourney', JSON.stringify(d.journey));
+}
+
+async function doSync() {
+    updateSyncDot('syncing');
+    const local = getAllData();
+    const remote = await syncFetch();
+    if (remote && remote._lastModified > (local._lastModified || 0)) {
+        setAllData(remote);
+    }
+    await syncPush(getAllData());
+    updateSyncDot('online');
+    try { if (typeof renderStudyCal === 'function') renderStudyCal(); } catch(e) {}
+    try { if (typeof refreshCurrentTL === 'function' && curTLKey) refreshCurrentTL(); } catch(e) {}
+}
+
+function scheduleSync() {
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(doSync, 2000);
+}
+
+// Hook 数据操作触发同步
+const _s = setData, _a = addItem, _u = updateItem, _d = deleteItem, _v = saveData;
+setData = function(k, v) { _s(k, v); scheduleSync(); };
+addItem = function(k, i) { _a(k, i); scheduleSync(); };
+updateItem = function(k, id, u) { _u(k, id, u); scheduleSync(); };
+deleteItem = function(k, id) { _d(k, id); scheduleSync(); };
+saveData = function() { _v(); scheduleSync(); };
+
+// 页面加载自动同步
+setTimeout(doSync, 1000);
+</script>
+</body>
+</html>
