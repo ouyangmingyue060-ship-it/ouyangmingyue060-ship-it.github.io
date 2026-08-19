@@ -172,10 +172,15 @@
 
     /* 欢迎光临按钮（标题下方） */
     .welcome-btn-area{position:absolute;top:28%;left:50%;transform:translateX(-50%);z-index:10;cursor:pointer;}
-    .welcome-btn{font-family:'KBai','Ma Shan Zheng',cursive;font-size:20px;color:#FFEAA7;letter-spacing:4px;padding:12px 28px;border:2px solid rgba(255,234,167,0.4);border-radius:25px;background:rgba(0,0,0,0.3);backdrop-filter:blur(10px);transition:all 0.3s;text-shadow:0 2px 10px rgba(0,0,0,0.5);display:flex;flex-direction:column;align-items:center;gap:4px;}
-    .welcome-btn .cn{font-size:20px;letter-spacing:4px;}
-    .welcome-btn .en{font-family:'GBai','Caveat',cursive;font-size:14px;letter-spacing:2px;color:rgba(255,234,167,0.7);}
-    .welcome-btn:hover{background:rgba(0,0,0,0.5);border-color:rgba(255,234,167,0.8);transform:scale(1.05);box-shadow:0 0 20px rgba(255,234,167,0.3);}
+    .welcome-btn{font-family:'KBai','Ma Shan Zheng',cursive;font-size:24px;color:#FFEAA7;letter-spacing:4px;padding:16px 36px;border:2px solid rgba(255,234,167,0.6);border-radius:30px;background:rgba(255,234,167,0.15);backdrop-filter:blur(10px);transition:all 0.3s;text-shadow:0 0 15px rgba(255,234,167,0.8),0 0 30px rgba(255,234,167,0.4);display:flex;flex-direction:column;align-items:center;gap:6px;animation:btnGlow 2s ease-in-out infinite;}
+    @keyframes btnGlow{
+        0%,100%{box-shadow:0 0 10px rgba(255,234,167,0.3),0 0 20px rgba(255,234,167,0.2);}
+        50%{box-shadow:0 0 20px rgba(255,234,167,0.5),0 0 40px rgba(255,234,167,0.3),0 0 60px rgba(255,234,167,0.2);}
+    }
+    .welcome-btn .cn{font-size:28px;letter-spacing:6px;}
+    .welcome-btn .en{font-family:'GBai','Caveat',cursive;font-size:16px;letter-spacing:2px;color:rgba(255,234,167,0.8);}
+    .welcome-btn:hover{background:rgba(255,234,167,0.25);border-color:rgba(255,234,167,0.9);transform:scale(1.08);box-shadow:0 0 30px rgba(255,234,167,0.6),0 0 60px rgba(255,234,167,0.4);}
+    .welcome-btn:active{transform:scale(0.95);}
     #meteorContainer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;pointer-events:none;overflow:hidden;}
     .meteor-particle{position:fixed;border-radius:50%;pointer-events:none;animation:meteorFly var(--meteor-dur,0.8s) cubic-bezier(0.25,0.46,0.45,0.94) forwards;}
     @keyframes meteorFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--mx,100px),var(--my,100px)) scale(0.2);opacity:0}}
@@ -1121,26 +1126,48 @@ document.addEventListener('click', function(e) {
     // 在点击位置生成星星拖尾
     MeteorMgr.spawn(e.clientX, e.clientY, 8);
     
-    // 生成额外的小星星
-    for (let i = 0; i < 5; i++) {
+    // 生成✨✨✨闪光效果
+    for (let i = 0; i < 3; i++) {
         const sparkle = document.createElement('span');
         sparkle.className = 'click-sparkle';
-        sparkle.textContent = ['✦', '✧', '★', '☾'][Math.floor(Math.random() * 4)];
+        sparkle.textContent = '✨';
         sparkle.style.cssText = `
             position: fixed;
-            left: ${e.clientX}px;
-            top: ${e.clientY}px;
-            font-size: ${12 + Math.random() * 16}px;
-            color: ${['#c084fc', '#f472b6', '#FFEAA7', '#60a5fa'][Math.floor(Math.random() * 4)]};
+            left: ${e.clientX - 30 + i * 30}px;
+            top: ${e.clientY - 10}px;
+            font-size: ${20 + Math.random() * 10}px;
             pointer-events: none;
             z-index: 9999;
-            animation: sparkleFloat ${0.5 + Math.random() * 0.5}s ease-out forwards;
-            --tx: ${(Math.random() - 0.5) * 100}px;
-            --ty: ${-50 - Math.random() * 80}px;
+            animation: sparkleFloat ${0.6 + Math.random() * 0.4}s ease-out forwards;
+            --tx: ${(Math.random() - 0.5) * 60}px;
+            --ty: ${-40 - Math.random() * 60}px;
         `;
         document.body.appendChild(sparkle);
         setTimeout(() => {
             if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
+        }, 1200);
+    }
+    
+    // 额外生成小星星拖尾
+    for (let i = 0; i < 5; i++) {
+        const star = document.createElement('span');
+        star.className = 'click-sparkle';
+        star.textContent = ['✦', '✧', '★', '☾'][Math.floor(Math.random() * 4)];
+        star.style.cssText = `
+            position: fixed;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            font-size: ${10 + Math.random() * 12}px;
+            color: ${['#c084fc', '#f472b6', '#FFEAA7', '#60a5fa'][Math.floor(Math.random() * 4)]};
+            pointer-events: none;
+            z-index: 9998;
+            animation: sparkleFloat ${0.5 + Math.random() * 0.5}s ease-out forwards;
+            --tx: ${(Math.random() - 0.5) * 80}px;
+            --ty: ${-30 - Math.random() * 60}px;
+        `;
+        document.body.appendChild(star);
+        setTimeout(() => {
+            if (star.parentNode) star.parentNode.removeChild(star);
         }, 1000);
     }
 });
