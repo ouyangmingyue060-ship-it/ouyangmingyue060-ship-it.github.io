@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/giscus/2.2.0/giscus.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&family=Long+Cang&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
     @font-face{font-family:'KBai';src:url('/assets/fonts/演示魁本楷书.ttf') format('truetype');font-weight:normal;font-display:swap;}
@@ -354,6 +355,88 @@
     .sync-dot.error{background:#ef4444;}
     .sync-dot.offline{background:#9ca3af;}
     @media(max-width:768px){.sync-status{bottom:auto;top:24px;left:14px;padding:6px 12px;font-size:11px;}}
+
+    /* === 评论系统样式 === */
+    .comment-fab{position:fixed;bottom:80px;right:24px;z-index:160;background:var(--accent);color:white;border:none;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer;box-shadow:0 4px 20px rgba(150,100,200,0.3);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+    .comment-fab:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(150,100,200,0.4);}
+    .comment-fab .fab-badge{position:absolute;top:-5px;right:-5px;background:#f472b6;color:white;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+    .comment-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(253,242,248,0.85);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:250;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
+    .comment-overlay.visible{display:flex;opacity:1;}
+
+    .comment-modal{background:rgba(255,255,255,0.95);backdrop-filter:blur(24px);border:1px solid var(--card-border);border-radius:24px;padding:0;width:90%;max-width:700px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(150,100,200,0.2);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+
+    .comment-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--card-border);}
+    .comment-header h3{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;}
+    .comment-close{background:none;border:none;font-size:24px;color:var(--text-light);cursor:pointer;padding:4px 8px;border-radius:8px;transition:all 0.2s;}
+    .comment-close:hover{background:rgba(192,132,252,0.1);color:var(--text-primary);}
+
+    .comment-body{flex:1;overflow-y:auto;padding:20px 24px;min-height:400px;}
+    .comment-body .giscus{width:100%;}
+
+    .comment-tabs{display:flex;gap:8px;padding:16px 24px;border-bottom:1px solid var(--card-border);}
+    .comment-tab{padding:8px 16px;border-radius:20px;border:1px solid var(--card-border);background:transparent;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;}
+    .comment-tab.active{background:var(--accent);color:white;border-color:transparent;}
+
+    @media(max-width:768px){
+        .comment-fab{bottom:20px;right:16px;width:45px;height:45px;font-size:18px;}
+        .comment-modal{width:95%;max-height:90vh;border-radius:20px;}
+        .comment-header{padding:16px 18px;}
+        .comment-header h3{font-size:18px;}
+        .comment-body{padding:16px 18px;min-height:350px;}
+        .comment-tabs{padding:12px 18px;}
+    }
+
+    /* === 优化：增强滚动条 === */
+    ::-webkit-scrollbar{width:8px;}
+    ::-webkit-scrollbar-track{background:transparent;}
+    ::-webkit-scrollbar-thumb{background:rgba(192,132,252,0.2);border-radius:4px;}
+    ::-webkit-scrollbar-thumb:hover{background:rgba(192,132,252,0.3);}
+
+    /* === 优化：加载动画 === */
+    .loading-spinner{display:flex;align-items:center;justify-content:center;padding:40px;}
+    .loading-spinner::after{content:'';width:32px;height:32px;border:3px solid var(--card-border);border-top-color:var(--accent-s);border-radius:50%;animation:spin 0.8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* === 优化：空状态提示 === */
+    .empty-state{text-align:center;padding:60px 20px;color:var(--text-light);}
+    .empty-state .empty-icon{font-size:48px;margin-bottom:16px;opacity:0.5;}
+    .empty-state .empty-text{font-family:'KBai','Ma Shan Zheng',cursive;font-size:18px;letter-spacing:2px;}
+
+    /* === 优化：页面过渡动画 === */
+    .page-transition{animation:pageSlideIn 0.4s ease-out;}
+    @keyframes pageSlideIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    /* === 优化：卡片悬停效果增强 === */
+    .module-card{transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);}
+    .module-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(150,100,200,0.2);}
+    .module-card:active{transform:scale(0.98);transition:transform 0.1s;}
+
+    /* === 优化：按钮点击反馈 === */
+    .back-btn:active,.add-btn:active,.checkin-btn:active{transform:scale(0.95);transition:transform 0.1s;}
+
+    /* === 优化：输入框聚焦效果 === */
+    input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(192,132,252,0.2);border-color:var(--accent-s);}
+
+    /* === 优化：图片懒加载占位 === */
+    img[loading="lazy"]{background:linear-gradient(90deg,rgba(200,180,255,0.1) 25%,rgba(200,180,255,0.05) 50%,rgba(200,180,255,0.1) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;}
+    @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+    /* === 优化：移动端触摸优化 === */
+    @media(hover: none) and (pointer: coarse){
+        .module-card:hover{transform:none;box-shadow:var(--card-shadow);}
+        .module-card:active{transform:scale(0.97);box-shadow:0 10px 30px rgba(150,100,200,0.15);}
+        .eye-icon:hover .icon-symbol{filter:none;}
+        .eye-icon:active .icon-symbol{filter:brightness(1.1);}
+    }
+
+    /* === 优化：键盘导航高亮 === */
+    *:focus-visible{outline:2px solid var(--accent-s);outline-offset:2px;border-radius:4px;}
+
+    /* === 优化：减少动画模式 === */
+    @media(prefers-reduced-motion: reduce){
+        *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
+    }
     </style>
 </head>
 <body>
@@ -485,6 +568,35 @@
 <div class="sync-status" id="syncStatus">
     <span class="sync-dot offline" id="syncDot"></span>
     <span id="syncText">同步中...</span>
+</div>
+
+<!-- 评论浮动按钮 -->
+<button class="comment-fab" id="commentFab" onclick="openComments()" title="查看评论">
+    💬
+</button>
+
+<!-- 评论模态框 -->
+<div class="comment-overlay" id="commentOverlay" onclick="if(event.target===this)closeComments()">
+    <div class="comment-modal">
+        <div class="comment-header">
+            <h3>💬 大家的评论</h3>
+            <button class="comment-close" onclick="closeComments()">✕</button>
+        </div>
+        <div class="comment-tabs">
+            <button class="comment-tab active" onclick="switchCommentTab('general')">💭 闲聊区</button>
+            <button class="comment-tab" onclick="switchCommentTab('thoughts')">📝 想法评论</button>
+            <button class="comment-tab" onclick="switchCommentTab('books')">📚 书籍评论</button>
+            <button class="comment-tab" onclick="switchCommentTab('music')">🎵 音乐评论</button>
+        </div>
+        <div class="comment-body" id="commentBody">
+            <div class="loading-spinner" id="commentLoading"></div>
+            <!-- Giscus 评论将在这里加载 -->
+            <div id="giscus-general" class="giscus-container"></div>
+            <div id="giscus-thoughts" class="giscus-container" style="display:none;"></div>
+            <div id="giscus-books" class="giscus-container" style="display:none;"></div>
+            <div id="giscus-music" class="giscus-container" style="display:none;"></div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -865,6 +977,98 @@ saveData = function() { _v(); scheduleSync(); };
 
 // 页面加载自动同步
 setTimeout(doSync, 1000);
+
+// ═══ Giscus 评论系统 ═══
+const GISCUS_CONFIG = {
+    repo: 'ouyangmingyue060-ship-it/ouyangmingyue060-ship-it.github.io',
+    repoId: 'R_kgDOT66w7g',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDOT66w7s4DDtMz',
+    mapping: 'pathname',
+    reactionsEnabled: '1',
+    emitMetadata: '0',
+    inputPosition: 'top',
+    theme: 'light',
+    lang: 'zh-CN',
+    loading: 'lazy'
+};
+
+let currentCommentTab = 'general';
+let giscusLoaded = {};
+
+function openComments() {
+    document.getElementById('commentOverlay').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+    if (!giscusLoaded[currentCommentTab]) {
+        loadGiscus(currentCommentTab);
+    }
+}
+
+function closeComments() {
+    const overlay = document.getElementById('commentOverlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+        overlay.classList.remove('visible');
+        overlay.style.opacity = '';
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+function switchCommentTab(tab) {
+    // 更新标签样式
+    document.querySelectorAll('.comment-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // 隐藏所有容器
+    document.querySelectorAll('.giscus-container').forEach(c => c.style.display = 'none');
+
+    // 显示选中的容器
+    const container = document.getElementById('giscus-' + tab);
+    if (container) {
+        container.style.display = 'block';
+        if (!giscusLoaded[tab]) {
+            loadGiscus(tab);
+        }
+    }
+
+    currentCommentTab = tab;
+}
+
+function loadGiscus(tab) {
+    const container = document.getElementById('giscus-' + tab);
+    if (!container) return;
+
+    // 清空加载提示
+    const loading = document.getElementById('commentLoading');
+    if (loading) loading.style.display = 'none';
+
+    // 创建 Giscus iframe
+    const giscusFrame = document.createElement('iframe');
+    giscusFrame.src = `https://giscus.app/zh-CN/widget?repo=${GISCUS_CONFIG.repo}&repoId=${GISCUS_CONFIG.repoId}&category=${GISCUS_CONFIG.category}&categoryId=${GISCUS_CONFIG.categoryId}&mapping=${GISCUS_CONFIG.mapping}&reactionsEnabled=${GISCUS_CONFIG.reactionsEnabled}&emitMetadata=${GISCUS_CONFIG.emitMetadata}&inputPosition=${GISCUS_CONFIG.inputPosition}&theme=${GISCUS_CONFIG.theme}&lang=${GISCUS_CONFIG.lang}&loading=${GISCUS_CONFIG.loading}`;
+    giscusFrame.style.width = '100%';
+    giscusFrame.style.border = 'none';
+    giscusFrame.style.minHeight = '400px';
+    giscusFrame.title = 'Giscus 评论';
+
+    container.appendChild(giscusFrame);
+    giscusLoaded[tab] = true;
+}
+
+// 监听 ESC 键关闭评论
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeComments();
+    }
+});
+
+// 页面加载完成后显示评论按钮
+setTimeout(() => {
+    const fab = document.getElementById('commentFab');
+    if (fab) {
+        fab.style.opacity = '1';
+        fab.style.transform = 'scale(1)';
+    }
+}, 2000);
 </script>
 </body>
 </html>
