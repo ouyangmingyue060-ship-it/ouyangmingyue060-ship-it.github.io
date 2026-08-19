@@ -567,6 +567,9 @@
         <button class="login-btn" onclick="handleLogin()">✦ 登 录 ✦</button>
 
         <p class="login-footer">没有账号？联系管理员获取 🔐</p>
+        <div style="margin-top:16px;padding:12px;background:rgba(192,132,252,0.08);border-radius:12px;font-family:'KBai','ZCOOL XiaoWei',serif;font-size:12px;color:var(--text-light);">
+            <div>💡 测试账号：用户名 jiejie 密码 1230</div>
+        </div>
     </div>
 </div>
 
@@ -1349,10 +1352,10 @@ setTimeout(() => {
 
 // ═══ 登录系统 ═══
 const USERS = {
-    'admin': { password: 'admin123', name: '管理员', role: 'admin' },
-    'jiejie': { password: 'jiejie123', name: '姐姐', role: 'user' },
-    'xiaowei': { password: 'xiaowei123', name: '小微', role: 'user' },
-    'meimei': { password: 'meimei123', name: '妹妹', role: 'user' }
+    'admin': { password: 'admin', name: '管理员', role: 'admin' },
+    'jiejie': { password: '1230', name: '姐姐', role: 'user' },
+    'xiaowei': { password: '520', name: '小微', role: 'user' },
+    'meimei': { password: '1105', name: '妹妹', role: 'user' }
 };
 
 let currentUser = null;
@@ -1392,16 +1395,8 @@ async function handleLogin() {
         return;
     }
 
-    // 使用 SHA-256 验证密码
-    const hash = await sha256('hermes_salt_2026' + password);
-    const storedHashes = {
-        'admin': '7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',
-        'jiejie': '7f4c772f22e0f999faca5b3182f17f8246feb2b519f3bdf7ab943087c1569bb8',
-        'xiaowei': 'ffcbbbda6b532a2f746b4ace1b9d395b285c24333520a31ad07a508bccadc02b',
-        'meimei': '6c2f3db183ae2662c40ce7dd0874bcb58dcbae68ae685917c8961b10e1700311'
-    };
-
-    if (hash !== storedHashes[username]) {
+    // 验证密码
+    if (password !== user.password) {
         errorEl.textContent = '密码错误，请重试';
         document.getElementById('loginPassword').value = '';
         document.getElementById('loginPassword').classList.add('shake');
