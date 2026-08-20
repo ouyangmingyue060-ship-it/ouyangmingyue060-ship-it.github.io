@@ -845,42 +845,7 @@ function renderFilms(){const data=getData('movies')||[];document.getElementById(
 let appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};
 function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};saveData();}}
 function saveData(){localStorage.setItem('myLifeJourney',JSON.stringify(appData));}
-function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();
-
-// ═══ 侧边栏功能 ═══
-function toggleSidebar(){
-    const s=document.getElementById('sidebar'),t=document.getElementById('sidebarToggle'),m=document.getElementById('main');
-    s.classList.toggle('collapsed');t.classList.toggle('collapsed');m.classList.toggle('expanded');
-    localStorage.setItem('sidebar_collapsed',s.classList.contains('collapsed'));
-}
-function switchSection(target,el){
-    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
-    if(el)el.classList.add('active');
-    // 关闭所有子页面
-    document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{
-        p.style.transition='opacity 0.3s';p.style.opacity='0';
-        setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},300);
-    });
-    document.getElementById('exploreBg').style.display='none';
-    document.getElementById('home').style.display='none';
-    document.getElementById('main').style.display='block';
-    document.body.style.overflow='auto';
-    currentRoute='dashboard';history.pushState(null,'',window.location.pathname);
-    closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();
-
-    if(target==='dashboard')return;
-    if(target==='explore-me'){navigateTo('explore-me');currentRoute='explore-me';}
-    else if(target==='explore-world'){navigateTo('explore-world');currentRoute='explore-world';}
-    else if(target==='thoughts'){openSubTL('thoughts');}
-    else if(target==='study'){openStudyCal();}
-    else if(target==='books'){document.getElementById('main').style.display='none';openWorldSub('books');}
-    else if(target==='music'){document.getElementById('main').style.display='none';openWorldSub('music');}
-}
-(function(){
-    const c=localStorage.getItem('sidebar_collapsed')==='true';
-    if(c){document.getElementById('sidebar').classList.add('collapsed');document.getElementById('sidebarToggle').classList.add('collapsed');document.getElementById('main').classList.add('expanded');}
-})();
-renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
+function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
 function goHome(){document.getElementById('main').style.display='none';document.getElementById('exploreBg').style.display='none';document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();}
 function switchTab(tab){document.querySelectorAll('.nav-link').forEach(el=>el.classList.remove('active'));event.target.closest('.nav-link').classList.add('active');document.getElementById('lifeTab').style.display=tab==='life'?'block':'none';document.getElementById('studyTab').style.display=tab==='study'?'block':'none';}
 let selectedImages=[];
@@ -897,6 +862,38 @@ function updateStats(){document.getElementById('totalEnglish').textContent=appDa
 function renderHistory(type){const c=document.getElementById(type+'History'),data=appData[type],recent=data.checkedDates.sort().reverse().slice(0,7);c.innerHTML=recent.map(d=>`<div class="history-item"><div class="history-icon"><i class="fas fa-check"></i></div><div style="flex:1;"><div style="font-weight:600;color:var(--text-primary);">${d}</div>${data.notes[d]?`<div style="font-size:13px;color:var(--text-light);margin-top:2px;">${data.notes[d]}</div>`:''}</div></div>`).join('')||'<div style="text-align:center;color:var(--text-light);padding:20px;">暂无记录</div>';}
 
 loadData();
+
+// ═══ 侧边栏功能 ═══
+function toggleSidebar(){
+    const s=document.getElementById('sidebar'),t=document.getElementById('sidebarToggle'),m=document.getElementById('main');
+    s.classList.toggle('collapsed');t.classList.toggle('collapsed');m.classList.toggle('expanded');
+    localStorage.setItem('sidebar_collapsed',s.classList.contains('collapsed'));
+}
+function switchSection(target,el){
+    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+    if(el)el.classList.add('active');
+    document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{
+        p.style.transition='opacity 0.3s';p.style.opacity='0';
+        setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},300);
+    });
+    document.getElementById('exploreBg').style.display='none';
+    document.getElementById('home').style.display='none';
+    document.getElementById('main').style.display='block';
+    document.body.style.overflow='auto';
+    currentRoute='dashboard';history.pushState(null,'',window.location.pathname);
+    closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();
+    if(target==='dashboard')return;
+    if(target==='explore-me'){navigateTo('explore-me');currentRoute='explore-me';}
+    else if(target==='explore-world'){navigateTo('explore-world');currentRoute='explore-world';}
+    else if(target==='thoughts'){openSubTL('thoughts');}
+    else if(target==='study'){openStudyCal();}
+    else if(target==='books'){document.getElementById('main').style.display='none';openWorldSub('books');}
+    else if(target==='music'){document.getElementById('main').style.display='none';openWorldSub('music');}
+}
+(function(){
+    const c=localStorage.getItem('sidebar_collapsed')==='true';
+    if(c){document.getElementById('sidebar').classList.add('collapsed');document.getElementById('sidebarToggle').classList.add('collapsed');document.getElementById('main').classList.add('expanded');}
+})();
 
 // ═══ 权限系统 ═══
 let isAuthor=true;
