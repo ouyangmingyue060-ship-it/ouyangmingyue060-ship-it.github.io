@@ -597,6 +597,41 @@
 </div>
 
 <script>
+
+// === Sidebar ===
+function toggleSidebar(){
+    var s=document.getElementById('sidebar'),t=document.getElementById('sidebarToggle'),m=document.getElementById('main');
+    if(!s||!t||!m)return;
+    s.classList.toggle('collapsed');t.classList.toggle('collapsed');m.classList.toggle('expanded');
+    localStorage.setItem('sidebar_collapsed',s.classList.contains('collapsed'));
+}
+function switchSection(target,el){
+    var items=document.querySelectorAll('.nav-item');
+    for(var i=0;i<items.length;i++)items[i].classList.remove('active');
+    if(el)el.classList.add('active');
+    var pages=document.querySelectorAll('.explore-page.visible,.sub-view.visible');
+    for(var j=0;j<pages.length;j++){
+        pages[j].classList.remove('visible');pages[j].style.opacity='';pages[j].style.transition='';
+    }
+    var eb=document.getElementById('exploreBg');if(eb)eb.style.display='none';
+    var hm=document.getElementById('home');if(hm)hm.style.display='none';
+    var mn=document.getElementById('main');if(mn)mn.style.display='block';
+    document.body.style.overflow='auto';
+    if(typeof currentRoute!=='undefined')currentRoute='dashboard';
+    history.pushState(null,'',window.location.pathname);
+    if(typeof closeTL==='function'){closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');}
+    if(typeof closeStudyCal==='function')closeStudyCal();
+    if(typeof closePwModal==='function')closePwModal();
+    if(typeof closeForm==='function')closeForm();
+    if(target==='dashboard')return;
+    if(target==='explore-me'&&typeof navigateTo==='function'){navigateTo('explore-me');if(typeof currentRoute!=='undefined')currentRoute='explore-me';}
+    else if(target==='explore-world'&&typeof navigateTo==='function'){navigateTo('explore-world');if(typeof currentRoute!=='undefined')currentRoute='explore-world';}
+    else if(target==='thoughts'&&typeof openSubTL==='function'){openSubTL('thoughts');}
+    else if(target==='study'&&typeof openStudyCal==='function'){openStudyCal();}
+    else if(target==='books'&&typeof openWorldSub==='function'){document.getElementById('main').style.display='none';openWorldSub('books');}
+    else if(target==='music'&&typeof openWorldSub==='function'){document.getElementById('main').style.display='none';openWorldSub('music');}
+}
+
 // ═══ 粒子（浅色版透明度降低）═══
 (function(){const c=document.getElementById('particlesContainer');if(!c)return;const s=['✦','☾','✧','★'],cl=['rgba(200,180,255,','rgba(255,215,0,','rgba(224,176,255,','rgba(255,182,193,'];for(let i=0;i<100;i++){const e=document.createElement('span');e.className='particle';e.textContent=s[Math.floor(Math.random()*s.length)];e.style.fontSize=(14+Math.random()*18)+'px';const o=0.15+Math.random()*0.3;e.style.color=cl[Math.floor(Math.random()*cl.length)]+o+')';e.style.left=(Math.random()*100)+'%';e.style.top=(Math.random()*100)+'%';if(Math.random()<0.3){e.classList.add('floating');e.style.setProperty('--float-duration',(3+Math.random()*3)+'s');e.style.setProperty('--float-delay',(Math.random()*6)+'s');e.style.setProperty('--base-opacity',o.toString());}c.appendChild(e);}})();
 
@@ -863,38 +898,6 @@ function renderHistory(type){const c=document.getElementById(type+'History'),dat
 
 loadData();
 
-// ═══ 侧边栏功能 ═══
-function toggleSidebar(){
-    const s=document.getElementById('sidebar'),t=document.getElementById('sidebarToggle'),m=document.getElementById('main');
-    s.classList.toggle('collapsed');t.classList.toggle('collapsed');m.classList.toggle('expanded');
-    localStorage.setItem('sidebar_collapsed',s.classList.contains('collapsed'));
-}
-function switchSection(target,el){
-    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
-    if(el)el.classList.add('active');
-    document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{
-        p.style.transition='opacity 0.3s';p.style.opacity='0';
-        setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},300);
-    });
-    document.getElementById('exploreBg').style.display='none';
-    document.getElementById('home').style.display='none';
-    document.getElementById('main').style.display='block';
-    document.body.style.overflow='auto';
-    currentRoute='dashboard';history.pushState(null,'',window.location.pathname);
-    closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();
-    if(target==='dashboard')return;
-    if(target==='explore-me'){navigateTo('explore-me');currentRoute='explore-me';}
-    else if(target==='explore-world'){navigateTo('explore-world');currentRoute='explore-world';}
-    else if(target==='thoughts'){openSubTL('thoughts');}
-    else if(target==='study'){openStudyCal();}
-    else if(target==='books'){document.getElementById('main').style.display='none';openWorldSub('books');}
-    else if(target==='music'){document.getElementById('main').style.display='none';openWorldSub('music');}
-}
-(function(){
-    const c=localStorage.getItem('sidebar_collapsed')==='true';
-    if(c){document.getElementById('sidebar').classList.add('collapsed');document.getElementById('sidebarToggle').classList.add('collapsed');document.getElementById('main').classList.add('expanded');}
-})();
-
 // ═══ 权限系统 ═══
 let isAuthor=true;
 function updateAuthUI(){
@@ -1006,6 +1009,18 @@ saveData = function() { _v(); scheduleSync(); };
 
 // 页面加载自动同步
 setTimeout(doSync, 1000);
+
+// === Sidebar Init ===
+(function(){
+    var c=localStorage.getItem('sidebar_collapsed')==='true';
+    if(c){
+        var s=document.getElementById('sidebar'),t=document.getElementById('sidebarToggle'),m=document.getElementById('main');
+        if(s)s.classList.add('collapsed');
+        if(t)t.classList.add('collapsed');
+        if(m)m.classList.add('expanded');
+    }
+})();
+
 </script>
 </body>
 </html>
