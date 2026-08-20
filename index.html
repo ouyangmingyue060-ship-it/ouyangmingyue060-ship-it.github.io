@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/giscus/2.2.0/giscus.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&family=ZCOOL+XiaoWei&family=Long+Cang&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
     @font-face{font-family:'KBai';src:url('/assets/fonts/演示魁本楷书.ttf') format('truetype');font-weight:normal;font-display:swap;}
@@ -28,12 +27,7 @@
 
     /* === 着陆页 === */
     #home{min-height:100vh;position:relative;overflow:hidden;}
-    .bg-layer{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('https://i.pinimg.com/originals/ca/19/63/ca1963a22c0bd75089cb907a64e5c2d9.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#1a1a2e;z-index:0;}
-
-    /* 手机端背景图 */
-    @media(max-width:768px){
-        .bg-layer{background-image:url('https://i.pinimg.com/originals/eb/82/05/eb82058ea63f1a1835a8a8c96da0d57d.jpg');background-size:cover;}
-    }
+    .bg-layer{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/assets/images/bg-home.jpg');background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#1a1a2e;z-index:0;}
     .bg-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.15);z-index:1;}
     .content-layer{position:relative;z-index:10;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:30vh;}
     @keyframes gradientFlow{0%{background-position:0% 50%}25%{background-position:50% 0%}50%{background-position:100% 50%}75%{background-position:50% 100%}100%{background-position:0% 50%}}
@@ -41,100 +35,8 @@
     .particle{position:absolute;pointer-events:none;user-select:none;will-change:transform;}
     .particle.floating{animation:starFloat var(--float-duration,4s) ease-in-out infinite;animation-delay:var(--float-delay,0s);}
     @keyframes starFloat{0%,100%{transform:translateY(0) rotate(0deg);opacity:var(--base-opacity,0.3)}50%{transform:translateY(-18px) rotate(8deg);opacity:calc(var(--base-opacity,0.3) + 0.15)}}
-    .home-title{position:absolute;top:10%;left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%;max-width:900px;}
-    .main-title-line1{font-family:'KBai','Ma Shan Zheng',cursive;font-size:72px;color:#FFFFFF;letter-spacing:8px;line-height:1.3;}
-
-    .home-title .sub-title{font-family:'GBai','Caveat',cursive;font-size:24px;color:rgba(255,255,255,0.7);margin-top:20px;letter-spacing:4px;}
-
-    /* 呼吸发光效果 */
-
-        50%{
-            text-shadow:0 4px 20px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.5),0 0 80px rgba(192,132,252,0.6),0 0 120px rgba(192,132,252,0.4),0 0 160px rgba(244,114,182,0.3);
-            opacity:1;
-        }
-    }
-
-    /* 打字机效果 */
-    .typewriter{display:inline-block;overflow:hidden;white-space:nowrap;border-right:3px solid #FFEAA7;animation:typing 3.5s steps(14,end),blink-caret 0.75s step-end infinite;}
-    @keyframes typing{from{width:0}to{width:100%}}
-    @keyframes blink-caret{from,to{border-color:transparent}50%{border-color:#FFEAA7}}
-
-    .home-title .sub-title{font-family:'GBai','Caveat',cursive;font-size:24px;color:rgba(255,255,255,0.7);margin-top:20px;letter-spacing:4px;}
-
-    /* 个人介绍区 */
-    .intro-section{text-align:center;margin-top:40px;animation:fadeInUp 1s ease-out 4.5s forwards;opacity:0;}
-    .avatar-wrapper{position:relative;display:inline-block;margin-bottom:16px;}
-    .avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#c084fc,#f472b6);display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;z-index:2;}
-    .avatar-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(192,132,252,0.4) 0%,transparent 70%);animation:breatheGlow 3s ease-in-out infinite;}
-    .intro-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:28px;color:#FFEAA7;letter-spacing:4px;margin-bottom:8px;text-shadow:0 2px 10px rgba(0,0,0,0.5);}
-    .intro-desc{font-family:'GBai','Caveat',cursive;font-size:16px;color:rgba(255,255,255,0.7);margin-bottom:16px;}
-    .intro-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;}
-    .tag{padding:6px 16px;border-radius:20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:rgba(255,255,255,0.7);}
-
-    /* 网站介绍区 */
-    .website-intro{text-align:center;margin-top:40px;animation:fadeInUp 1s ease-out 5s forwards;opacity:0;}
-    .intro-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:24px;color:#FFEAA7;letter-spacing:3px;margin-bottom:12px;text-shadow:0 2px 10px rgba(0,0,0,0.5);}
-    .intro-text{font-family:'GBai','Caveat',cursive;font-size:16px;color:rgba(255,255,255,0.7);margin-bottom:24px;}
-    .feature-cards{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
-    .feature-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 24px;border-radius:16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(10px);transition:all 0.3s;}
-    .feature-card:hover{transform:translateY(-4px);background:rgba(255,255,255,0.15);}
-    .feature-icon{font-size:28px;}
-    .feature-name{font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:rgba(255,255,255,0.8);letter-spacing:2px;}
-
-    /* 金色呼吸发光 */
-
-        50%{
-            text-shadow:0 2px 15px rgba(0,0,0,0.8),0 0 30px rgba(0,0,0,0.4),0 0 70px rgba(255,234,167,0.5),0 0 100px rgba(255,234,167,0.3);
-            opacity:1;
-        }
-    }
-
-    /* 霓虹灯效果 */
-    .neon-text{}
-
-        20%,24%,55%{
-            text-shadow:none;
-        }
-    }
-
-    /* 霓虹灯效果 - 粉色 */
-    .neon-pink{}
-
-        20%,24%,55%{
-            text-shadow:none;
-        }
-    }
-
-    /* 霓虹灯效果 - 蓝色 */
-    .neon-blue{}
-
-        20%,24%,55%{
-            text-shadow:none;
-        }
-    }
-
-    /* 霓虹灯效果 - 金色 */
-    .neon-gold{}
-
-        20%,24%,55%{
-            text-shadow:none;
-        }
-    }
-
-    /* 渐变色流动 */
-    @keyframes gradientFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-
-    /* 星空背景 - 通用 */
-    .starry-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:#1a1a2e;z-index:0;overflow:hidden;background-image:url('https://i.pinimg.com/originals/ca/19/63/ca1963a22c0bd75089cb907a64e5c2d9.jpg');background-size:cover;background-position:center;}
-
-    /* 手机端星空背景 */
-    @media(max-width:768px){
-        .starry-bg{background-image:url('https://i.pinimg.com/originals/eb/82/05/eb82058ea63f1a1835a8a8c96da0d57d.jpg');}
-    }
-
-    .starry-bg::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(26,26,46,0) 0%,rgba(26,26,46,1) 100%);}
-    .starry-bg .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle var(--duration,3s) ease-in-out infinite;}
-    @keyframes twinkle{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+    .home-title{position:absolute;top:12%;left:50%;transform:translateX(-50%);z-index:10;text-align:center;width:90%;max-width:700px;}
+    .home-title .main-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:64px;color:#FFFFFF;letter-spacing:8px;line-height:1.3;text-shadow:0 4px 20px rgba(0,0,0,0.9),0 0 40px rgba(0,0,0,0.5);}
     .home-title .sub-title{font-family:'GBai','Caveat',cursive;font-size:30px;color:#FFEAA7;margin-top:16px;letter-spacing:4px;text-shadow:0 2px 15px rgba(0,0,0,0.8),0 0 30px rgba(0,0,0,0.4);}
     .sunglasses-entry{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;gap:130px;margin-bottom:30px;}
     .eye-icon{display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
@@ -146,17 +48,6 @@
     .eye-icon .icon-label{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:rgba(255,255,255,0.85);letter-spacing:4px;}
     .eye-icon .icon-label-en{font-family:'GBai','Caveat',cursive;font-size:15px;color:rgba(255,255,255,0.5);letter-spacing:2px;}
     .eye-icon:hover .icon-symbol{filter:brightness(1.1) drop-shadow(0 0 15px rgba(192,132,252,0.4));}
-
-    /* 欢迎光临按钮（标题下方） */
-    .welcome-btn-area{position:absolute;top:35%;left:50%;transform:translateX(-50%);z-index:10;cursor:pointer;}
-    .welcome-btn{font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:#FFEAA7;letter-spacing:3px;padding:10px 24px;border:2px solid rgba(255,234,167,0.4);border-radius:25px;background:rgba(255,234,167,0.1);backdrop-filter:blur(10px);transition:all 0.3s;display:flex;flex-direction:column;align-items:center;gap:4px;}
-
-        50%{box-shadow:0 0 15px rgba(255,234,167,0.3);}
-    }
-    .welcome-btn .cn{font-size:18px;letter-spacing:4px;}
-    .welcome-btn .en{font-family:'GBai','Caveat',cursive;font-size:12px;letter-spacing:2px;color:rgba(255,234,167,0.8);}
-    .welcome-btn:hover{background:rgba(255,234,167,0.25);border-color:rgba(255,234,167,0.9);transform:scale(1.05);box-shadow:0 0 30px rgba(255,234,167,0.6),0 0 60px rgba(255,234,167,0.4);}
-    .welcome-btn:active{transform:scale(0.95);}
     #meteorContainer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;pointer-events:none;overflow:hidden;}
     .meteor-particle{position:fixed;border-radius:50%;pointer-events:none;animation:meteorFly var(--meteor-dur,0.8s) cubic-bezier(0.25,0.46,0.45,0.94) forwards;}
     @keyframes meteorFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--mx,100px),var(--my,100px)) scale(0.2);opacity:0}}
@@ -464,526 +355,127 @@
     .sync-dot.offline{background:#9ca3af;}
     @media(max-width:768px){.sync-status{bottom:auto;top:24px;left:14px;padding:6px 12px;font-size:11px;}}
 
-    /* === 评论系统样式 === */
-    .comment-fab{position:fixed;bottom:80px;right:24px;z-index:160;background:var(--accent);color:white;border:none;border-radius:50%;width:50px;height:50px;font-size:20px;cursor:pointer;box-shadow:0 4px 20px rgba(150,100,200,0.3);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
-    .comment-fab:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(150,100,200,0.4);}
-    .comment-fab .fab-badge{position:absolute;top:-5px;right:-5px;background:#f472b6;color:white;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-
-    .comment-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(253,242,248,0.85);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:250;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;}
-    .comment-overlay.visible{display:flex;opacity:1;}
-
-    .comment-modal{background:rgba(255,255,255,0.95);backdrop-filter:blur(24px);border:1px solid var(--card-border);border-radius:24px;padding:0;width:90%;max-width:700px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(150,100,200,0.2);animation:modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);}
-
-    .comment-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--card-border);}
-    .comment-header h3{font-family:'KBai','Ma Shan Zheng',cursive;font-size:22px;color:var(--text-primary);letter-spacing:3px;}
-    .comment-close{background:none;border:none;font-size:24px;color:var(--text-light);cursor:pointer;padding:4px 8px;border-radius:8px;transition:all 0.2s;}
-    .comment-close:hover{background:rgba(192,132,252,0.1);color:var(--text-primary);}
-
-    .comment-body{flex:1;overflow-y:auto;padding:20px 24px;min-height:400px;}
-    .comment-body .giscus{width:100%;}
-
-    .comment-tabs{display:flex;gap:8px;padding:16px 24px;border-bottom:1px solid var(--card-border);}
-    .comment-tab{padding:8px 16px;border-radius:20px;border:1px solid var(--card-border);background:transparent;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;}
-    .comment-tab.active{background:var(--accent);color:white;border-color:transparent;}
-
+    /* === 侧边栏 === */
+    .sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-right:1px solid var(--card-border);z-index:120;transition:transform 0.3s ease;display:flex;flex-direction:column;box-shadow:2px 0 20px rgba(150,100,200,0.08);}
+    .sidebar.collapsed{transform:translateX(-260px);}
+    .sidebar-header{padding:20px;border-bottom:1px solid var(--card-border);display:flex;align-items:center;gap:12px;}
+    .sidebar-logo{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:20px;flex-shrink:0;}
+    .sidebar-brand{min-width:0;}
+    .sidebar-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:18px;color:var(--text-primary);letter-spacing:2px;line-height:1.4;}
+    .sidebar-subtitle{font-family:'GBai','Caveat',cursive;font-size:12px;color:var(--text-light);}
+    .sidebar-nav{flex:1;overflow-y:auto;padding:12px 8px;}
+    .nav-group{margin-bottom:6px;}
+    .nav-group-title{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:11px;color:var(--text-light);padding:10px 12px 4px;letter-spacing:2px;}
+    .nav-item{display:flex;align-items:center;gap:12px;padding:11px 16px;border-radius:12px;cursor:pointer;transition:all 0.2s;color:var(--text-secondary);font-family:'KBai','Ma Shan Zheng',cursive;font-size:15px;letter-spacing:1px;user-select:none;-webkit-tap-highlight-color:transparent;}
+    .nav-item:hover{background:rgba(192,132,252,0.08);color:var(--text-primary);}
+    .nav-item.active{background:linear-gradient(135deg,rgba(192,132,252,0.15),rgba(244,114,182,0.1));color:var(--text-primary);font-weight:bold;}
+    .nav-item .nav-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
+    .sidebar-footer{padding:14px 20px;border-top:1px solid var(--card-border);display:flex;align-items:center;gap:12px;}
+    .sidebar-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c084fc,#f472b6);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0;}
+    .sidebar-user{font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;color:var(--text-primary);}
+    .sidebar-toggle{position:fixed;top:16px;z-index:125;width:38px;height:38px;border-radius:12px;background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;box-shadow:var(--card-shadow);}
+    .sidebar-toggle{left:222px;}
+    .sidebar-toggle.collapsed{left:16px;}
+    .sidebar-toggle:hover{background:rgba(192,132,252,0.12);transform:scale(1.05);}
+    .sidebar-toggle svg{width:18px;height:18px;transition:transform 0.3s;}
+    .sidebar-toggle.collapsed svg{transform:rotate(180deg);}
+    #main{margin-left:260px;transition:margin-left 0.3s ease;}
+    #main.expanded{margin-left:0;}
+    .dashboard-header{background:linear-gradient(135deg,rgba(192,132,252,0.08),rgba(244,114,182,0.08));border-radius:20px;padding:30px 36px;margin-bottom:24px;border:1px solid var(--card-border);position:relative;overflow:hidden;}
+    .dashboard-header::before{content:'';position:absolute;top:-60%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(192,132,252,0.1),transparent);border-radius:50%;pointer-events:none;}
+    .dashboard-main-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:42px;color:var(--text-primary);letter-spacing:6px;line-height:1.3;}
+    .dashboard-sub-title{font-family:'GBai','Caveat',cursive;font-size:22px;color:var(--accent-s);margin-top:8px;letter-spacing:3px;}
+    .dashboard-desc{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:var(--text-light);margin-top:12px;letter-spacing:1px;}
     @media(max-width:768px){
-        .comment-fab{bottom:20px;right:16px;width:45px;height:45px;font-size:18px;}
-        .comment-modal{width:95%;max-height:90vh;border-radius:20px;}
-        .comment-header{padding:16px 18px;}
-        .comment-header h3{font-size:18px;}
-        .comment-body{padding:16px 18px;min-height:350px;}
-        .comment-tabs{padding:12px 18px;}
+        .sidebar{transform:translateX(-280px);width:280px;}
+        .sidebar.mobile-open{transform:translateX(0);}
+        .sidebar-toggle{left:12px;top:12px;}
+        .sidebar-toggle.mobile-open{left:292px;}
+        #main{margin-left:0;}
+        .dashboard-main-title{font-size:28px;letter-spacing:3px;}
+        .dashboard-sub-title{font-size:16px;}
+        .dashboard-header{padding:20px;border-radius:16px;}
     }
-
-    /* === 优化：增强滚动条 === */
-    ::-webkit-scrollbar{width:8px;}
-    ::-webkit-scrollbar-track{background:transparent;}
-    ::-webkit-scrollbar-thumb{background:rgba(192,132,252,0.2);border-radius:4px;}
-    ::-webkit-scrollbar-thumb:hover{background:rgba(192,132,252,0.3);}
-
-    /* === 优化：加载动画 === */
-    .loading-spinner{display:flex;align-items:center;justify-content:center;padding:40px;}
-    .loading-spinner::after{content:'';width:32px;height:32px;border:3px solid var(--card-border);border-top-color:var(--accent-s);border-radius:50%;animation:spin 0.8s linear infinite;}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* === 优化：空状态提示 === */
-    .empty-state{text-align:center;padding:60px 20px;color:var(--text-light);}
-    .empty-state .empty-icon{font-size:48px;margin-bottom:16px;opacity:0.5;}
-    .empty-state .empty-text{font-family:'KBai','Ma Shan Zheng',cursive;font-size:18px;letter-spacing:2px;}
-
-    /* === 优化：页面过渡动画 === */
-    .page-transition{animation:pageSlideIn 0.4s ease-out;}
-    @keyframes pageSlideIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-    /* === 优化：卡片悬停效果增强 === */
-    .module-card{transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);}
-    .module-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(150,100,200,0.2);}
-    .module-card:active{transform:scale(0.98);transition:transform 0.1s;}
-
-    /* === 优化：按钮点击反馈 === */
-    .back-btn:active,.add-btn:active,.checkin-btn:active{transform:scale(0.95);transition:transform 0.1s;}
-
-    /* === 优化：输入框聚焦效果 === */
-    input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(192,132,252,0.2);border-color:var(--accent-s);}
-
-    /* === 优化：图片懒加载占位 === */
-    img[loading="lazy"]{background:linear-gradient(90deg,rgba(200,180,255,0.1) 25%,rgba(200,180,255,0.05) 50%,rgba(200,180,255,0.1) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;}
-    @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
-
-    /* === 优化：移动端触摸优化 === */
-    @media(hover: none) and (pointer: coarse){
-        .module-card:hover{transform:none;box-shadow:var(--card-shadow);}
-        .module-card:active{transform:scale(0.97);box-shadow:0 10px 30px rgba(150,100,200,0.15);}
-        .eye-icon:hover .icon-symbol{filter:none;}
-        .eye-icon:active .icon-symbol{filter:brightness(1.1);}
-    }
-
-    /* === 优化：键盘导航高亮 === */
-    *:focus-visible{outline:2px solid var(--accent-s);outline-offset:2px;border-radius:4px;}
-
-    /* === 优化：减少动画模式 === */
-    @media(prefers-reduced-motion: reduce){
-        *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
-    }
-
-    /* === 登录覆盖层 === */
-    .login-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s ease;}
-    .login-overlay.visible{display:flex;opacity:1;}
-
-    .login-modal{background:rgba(255,255,255,0.95);backdrop-filter:blur(30px);border:1px solid rgba(200,180,255,0.3);border-radius:28px;padding:40px 36px;width:380px;text-align:center;box-shadow:0 40px 100px rgba(150,100,200,0.25);animation:modalPop 0.4s cubic-bezier(0.34,1.56,0.64,1);}
-    .login-modal .login-icon{font-size:56px;margin-bottom:20px;display:block;}
-    .login-modal h2{font-family:'KBai','Ma Shan Zheng',cursive;font-size:28px;color:var(--text-primary);letter-spacing:4px;margin-bottom:8px;}
-    .login-modal .login-subtitle{font-family:'GBai','Caveat',cursive;font-size:16px;color:var(--text-light);margin-bottom:30px;}
-
-    .login-field{position:relative;margin-bottom:18px;}
-    .login-field input{width:100%;padding:14px 18px 14px 48px;border-radius:16px;border:2px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.8);color:var(--text-primary);font-size:16px;font-family:'KBai','ZCOOL XiaoWei',serif;outline:none;transition:all 0.3s;}
-    .login-field input:focus{border-color:var(--accent-s);background:rgba(255,255,255,1);box-shadow:0 0 0 4px rgba(192,132,252,0.15);}
-    .login-field input::placeholder{color:var(--text-light);font-size:14px;}
-    .login-field .field-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--text-light);pointer-events:none;}
-
-    .login-error{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:#ef4444;min-height:20px;margin-bottom:10px;}
-
-    .login-btn{width:100%;padding:16px;border-radius:16px;border:none;background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:20px;letter-spacing:4px;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 25px rgba(192,132,252,0.3);}
-    .login-btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(192,132,252,0.4);}
-    .login-btn:active{transform:scale(0.98);}
-
-    .login-footer{margin-top:24px;font-family:'GBai','Caveat',cursive;font-size:13px;color:var(--text-light);}
-
-    /* === 仪表盘页面 === */
-    .dashboard-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;overflow-y:auto;}
-    .dashboard-page.visible{display:block;}
-
-    .dashboard-bg{position:fixed;top:0;left:0;width:100%;height:100%;background-image:url('/assets/images/bg-home.jpg');background-size:cover;background-position:center;z-index:0;filter:blur(20px) brightness(0.7);transform:scale(1.1);}
-    .dashboard-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(26,26,46,0.75);z-index:1;}
-
-    .dashboard-content{position:relative;z-index:10;min-height:100vh;padding:30px 20px 100px;}
-
-    .dashboard-header{text-align:center;padding:40px 20px 50px;position:relative;}
-    .dashboard-header .welcome-icon{font-size:64px;margin-bottom:16px;display:block;animation:pulse 2.5s ease-in-out infinite;}
-    .dashboard-header h1{font-family:'KBai','Ma Shan Zheng',cursive;font-size:42px;color:#FFEAA7;letter-spacing:6px;margin-bottom:12px;position:relative;display:inline-block;}
-    .dashboard-header .welcome-sub{font-family:'GBai','Caveat',cursive;font-size:20px;color:rgba(255,255,255,0.8);letter-spacing:2px;position:relative;display:inline-block;}
-
-    /* 闪烁星星效果 */
-    .sparkle-container{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;}
-    .sparkle{position:absolute;width:4px;height:4px;background:#FFEAA7;border-radius:50%;animation:sparkleAnim 2s ease-in-out infinite;}
-    @keyframes sparkleAnim{
-        0%,100%{opacity:0;transform:scale(0) rotate(0deg);}
-        50%{opacity:1;transform:scale(1) rotate(180deg);}
-    }
-
-    /* 文字呼吸发光 - 方案6 */
-    .sparkle-text{}
-
-        50%{
-            text-shadow:0 0 20px rgba(255,234,167,0.6),0 0 40px rgba(255,234,167,0.4),0 0 60px rgba(255,234,167,0.3),0 0 80px rgba(192,132,252,0.2);
-            opacity:1;
-        }
-    }
-
-    .dashboard-nav{display:flex;justify-content:center;gap:24px;margin-bottom:40px;margin-top:40px;}
-    .nav-tab{padding:16px 40px;border-radius:25px;border:2px solid rgba(200,180,255,0.3);background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);font-family:'KBai','Ma Shan Zheng',cursive;font-size:24px;color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.3s;letter-spacing:3px;display:flex;flex-direction:column;align-items:center;gap:4px;}
-    .nav-tab .tab-cn{font-size:24px;letter-spacing:3px;}
-    .nav-tab .tab-en{font-family:'GBai','Caveat',cursive;font-size:12px;letter-spacing:1px;color:rgba(255,255,255,0.5);}
-    .nav-tab:hover{background:rgba(255,255,255,0.2);border-color:rgba(200,180,255,0.5);}
-    .nav-tab.active{background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;border-color:transparent;box-shadow:0 8px 25px rgba(192,132,252,0.3);}
-    .nav-tab.active .tab-en{color:rgba(255,255,255,0.8);}
-
-    .dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:24px;max-width:1000px;margin:0 auto;padding:0 20px;}
-
-    .dashboard-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(20px);border:1px solid rgba(200,180,255,0.2);border-radius:24px;padding:0;cursor:pointer;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 8px 32px rgba(150,100,200,0.1);overflow:hidden;position:relative;}
-    .dashboard-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(150,100,200,0.3);background:rgba(255,255,255,0.15);}
-    .dashboard-card:active{transform:scale(0.98);}
-
-    .card-header{padding:28px 28px 20px;display:flex;align-items:center;gap:20px;}
-    .card-icon-wrap{width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;background:rgba(255,255,255,0.1);}
-    .card-icon-wrap.record{background:linear-gradient(135deg,rgba(192,132,252,0.3),rgba(244,114,182,0.3));}
-    .card-icon-wrap.share{background:linear-gradient(135deg,rgba(245,158,11,0.3),rgba(252,211,77,0.3));}
-
-    .card-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:26px;color:#FFEAA7;letter-spacing:4px;}
-    .card-subtitle{font-family:'GBai','Caveat',cursive;font-size:15px;color:rgba(255,255,255,0.6);margin-top:4px;}
-
-    .card-body{padding:0 28px 28px;}
-    .card-desc{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;}
-
-    .card-modules{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
-    .card-module-tag{padding:8px 16px;border-radius:12px;background:rgba(200,180,255,0.15);border:1px solid rgba(200,180,255,0.2);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:rgba(255,255,255,0.7);transition:all 0.2s;}
-    .card-module-tag:hover{background:rgba(200,180,255,0.25);transform:translateY(-2px);}
-
-    .card-footer{padding:16px 28px;border-top:1px solid rgba(200,180,255,0.15);display:flex;justify-content:space-between;align-items:center;}
-    .card-count{font-family:'GBai','Caveat',cursive;font-size:13px;color:rgba(255,255,255,0.5);}
-    .card-arrow{font-size:24px;color:rgba(255,255,255,0.5);transition:transform 0.2s;}
-    .dashboard-card:hover .card-arrow{transform:translateX(4px);color:#c084fc;}
-
-    .back-to-home{position:fixed;top:24px;left:24px;z-index:120;padding:12px 24px;border-radius:25px;border:1px solid rgba(200,180,255,0.3);background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.3s;letter-spacing:2px;}
-    .back-to-home:hover{background:rgba(255,255,255,0.2);transform:translateX(-4px);}
-
-    /* 右上角登录按钮 */
-    .login-area{position:fixed;top:24px;right:24px;z-index:120;}
-    .login-btn-header{display:flex;align-items:center;gap:8px;padding:12px 24px;border-radius:25px;border:1px solid rgba(200,180,255,0.3);background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.3s;}
-    .login-btn-header:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px);}
-    .login-btn-header .login-icon{font-size:18px;}
-    .login-btn-header .login-text{letter-spacing:2px;}
-
-    /* 登录弹窗 */
-    .login-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:200;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s ease;}
-    .login-overlay.visible{display:flex;opacity:1;}
-
-    .login-modal{background:rgba(255,255,255,0.95);backdrop-filter:blur(30px);border:1px solid rgba(200,180,255,0.3);border-radius:28px;padding:40px 36px;width:380px;text-align:center;box-shadow:0 40px 100px rgba(150,100,200,0.25);animation:modalPop 0.4s cubic-bezier(0.34,1.56,0.64,1);}
-    .login-modal .login-icon{font-size:56px;margin-bottom:20px;display:block;}
-    .login-modal h2{font-family:'KBai','Ma Shan Zheng',cursive;font-size:28px;color:var(--text-primary);letter-spacing:4px;margin-bottom:8px;}
-    .login-modal .login-subtitle{font-family:'GBai','Caveat',cursive;font-size:16px;color:var(--text-light);margin-bottom:30px;}
-
-    .login-field{position:relative;margin-bottom:18px;}
-    .login-field input{width:100%;padding:14px 18px 14px 48px;border-radius:16px;border:2px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.8);color:var(--text-primary);font-size:16px;font-family:'KBai','ZCOOL XiaoWei',serif;outline:none;transition:all 0.3s;}
-    .login-field input:focus{border-color:var(--accent-s);background:rgba(255,255,255,1);box-shadow:0 0 0 4px rgba(192,132,252,0.15);}
-    .login-field input::placeholder{color:var(--text-light);font-size:14px;}
-    .login-field .field-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--text-light);pointer-events:none;}
-
-    .login-error{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:13px;color:#ef4444;min-height:20px;margin-bottom:10px;}
-
-    .login-submit-btn{width:100%;padding:16px;border-radius:16px;border:none;background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:20px;letter-spacing:4px;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 25px rgba(192,132,252,0.3);}
-    .login-submit-btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(192,132,252,0.4);}
-    .login-submit-btn:active{transform:scale(0.98);}
-
-    .login-footer{margin-top:24px;font-family:'GBai','Caveat',cursive;font-size:13px;color:var(--text-light);}
-    .login-footer a{color:var(--accent-s);cursor:pointer;text-decoration:none;}
-    .login-footer a:hover{text-decoration:underline;}
-
-    /* 评论区样式 */
-    .comments-section{margin-top:20px;padding-top:20px;border-top:1px solid rgba(200,180,255,0.2);}
-    .comments-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:18px;color:rgba(255,255,255,0.8);margin-bottom:16px;letter-spacing:2px;}
-    .comment-list{margin-bottom:20px;}
-    .comment-item{display:flex;gap:12px;padding:12px;background:rgba(255,255,255,0.05);border-radius:12px;margin-bottom:10px;}
-    .comment-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c084fc,#f472b6);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-    .comment-content{flex:1;}
-    .comment-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-    .comment-user{font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;color:#FFEAA7;letter-spacing:1px;}
-    .comment-time{font-family:'GBai','Caveat',cursive;font-size:12px;color:rgba(255,255,255,0.4);}
-    .comment-text{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;}
-
-    .comment-form{display:flex;gap:10px;}
-    .comment-input{flex:1;padding:12px 16px;border-radius:12px;border:1px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;outline:none;transition:all 0.3s;}
-    .comment-input:focus{border-color:var(--accent-s);background:rgba(255,255,255,0.15);}
-    .comment-input::placeholder{color:rgba(255,255,255,0.4);}
-    .comment-submit{padding:12px 24px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;letter-spacing:2px;cursor:pointer;transition:all 0.3s;}
-    .comment-submit:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,132,252,0.3);}
-
-    /* 内容项样式 */
-    .content-item{background:rgba(255,255,255,0.05);border-radius:16px;padding:20px;margin-bottom:16px;border:1px solid rgba(200,180,255,0.1);}
-    .content-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-    .content-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c084fc,#f472b6);display:flex;align-items:center;justify-content:center;font-size:18px;}
-    .content-meta{display:flex;flex-direction:column;}
-    .content-user{font-family:'KBai','Ma Shan Zheng',cursive;font-size:16px;color:#FFEAA7;letter-spacing:1px;}
-    .content-time{font-family:'GBai','Caveat',cursive;font-size:12px;color:rgba(255,255,255,0.4);}
-    .content-body{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:15px;color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:12px;}
-    .content-actions{display:flex;gap:20px;padding-top:12px;border-top:1px solid rgba(200,180,255,0.1);}
-    .action-btn{font-family:'KBai','ZCOOL XiaoWei',serif;font-size:14px;color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.2s;}
-    .action-btn:hover{color:#FFEAA7;}
-
-    /* 内容容器 */
-    .content-container{padding:20px;max-width:600px;margin:0 auto;}
-
-    /* 模块详情页面 */
-    .module-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:150;overflow-y:auto;}
-    .module-page.visible{display:block;}
-
-    .module-page-header{position:sticky;top:0;z-index:160;display:flex;align-items:center;justify-content:space-between;padding:20px 30px;background:rgba(26,26,46,0.9);backdrop-filter:blur(15px);border-bottom:1px solid rgba(200,180,255,0.2);}
-    .back-to-dashboard{padding:10px 20px;border-radius:20px;border:1px solid rgba(200,180,255,0.3);background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;cursor:pointer;transition:all 0.3s;}
-    .back-to-dashboard:hover{background:rgba(255,255,255,0.2);}
-    .module-page-title{font-family:'KBai','Ma Shan Zheng',cursive;font-size:24px;color:#FFEAA7;letter-spacing:4px;text-align:center;}
-    .module-page-spacer{width:80px;}
-
-    .module-page-content{padding:30px;max-width:800px;margin:0 auto;}
-
-    /* 发布按钮 */
-    .publish-btn{padding:10px 20px;border-radius:20px;border:1px solid rgba(200,180,255,0.3);background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;cursor:pointer;transition:all 0.3s;}
-    .publish-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,132,252,0.3);}
-
-    /* 发布表单 */
-    .publish-form-container{padding:20px 30px;max-width:800px;margin:0 auto;}
-    .publish-form{background:rgba(255,255,255,0.1);border-radius:16px;padding:20px;border:1px solid rgba(200,180,255,0.2);}
-    .publish-form textarea{width:100%;padding:15px;border-radius:12px;border:1px solid rgba(200,180,255,0.2);background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);font-family:'KBai','ZCOOL XiaoWei',serif;font-size:15px;resize:vertical;outline:none;transition:all 0.3s;}
-    .publish-form textarea:focus{border-color:var(--accent-s);background:rgba(255,255,255,0.15);}
-    .publish-form textarea::placeholder{color:rgba(255,255,255,0.4);}
-    .publish-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px;}
-    .publish-cancel{padding:10px 20px;border-radius:12px;border:1px solid rgba(200,180,255,0.2);background:transparent;color:rgba(255,255,255,0.6);font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;cursor:pointer;transition:all 0.3s;}
-    .publish-cancel:hover{background:rgba(255,255,255,0.1);}
-    .publish-submit{padding:10px 20px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--accent-s),var(--accent-e));color:white;font-family:'KBai','Ma Shan Zheng',cursive;font-size:14px;cursor:pointer;transition:all 0.3s;}
-    .publish-submit:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,132,252,0.3);}
-
-    @media(max-width:768px){
-        .login-modal{width:90%;padding:32px 24px;}
-        .login-modal h2{font-size:24px;}
-        .dashboard-header h1{font-size:32px;letter-spacing:4px;}
-        .dashboard-grid{grid-template-columns:1fr;padding:0 10px;}
-        .nav-tab{padding:10px 20px;font-size:16px;}
-        .back-to-home,.logout-btn{top:16px;padding:10px 18px;font-size:14px;}
-        .back-to-home{left:16px;}
-        .logout-btn{right:16px;}
-    }
-
     </style>
 </head>
 <body>
 
-<section id="home">
+<!-- 侧边栏 -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">✦</div>
+        <div class="sidebar-brand">
+            <div class="sidebar-title">人生乱套 我睡大觉</div>
+            <div class="sidebar-subtitle">Life's a mess · I'm going to sleep</div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-group">
+            <div class="nav-group-title">导航</div>
+            <div class="nav-item active" data-section="dashboard" onclick="switchSection('dashboard',this)">
+                <span class="nav-icon">🏠</span><span>仪表盘</span>
+            </div>
+            <div class="nav-item" data-section="explore-me" onclick="switchSection('explore-me',this)">
+                <span class="nav-icon">✨</span><span>探索我</span>
+            </div>
+            <div class="nav-item" data-section="explore-world" onclick="switchSection('explore-world',this)">
+                <span class="nav-icon">🌍</span><span>探索世界</span>
+            </div>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">功能</div>
+            <div class="nav-item" data-section="thoughts" onclick="switchSection('thoughts',this)">
+                <span class="nav-icon">💭</span><span>记录想法</span>
+            </div>
+            <div class="nav-item" data-section="study" onclick="switchSection('study',this)">
+                <span class="nav-icon">📖</span><span>学习打卡</span>
+            </div>
+            <div class="nav-item" data-section="books" onclick="switchSection('books',this)">
+                <span class="nav-icon">📚</span><span>书籍分享</span>
+            </div>
+            <div class="nav-item" data-section="music" onclick="switchSection('music',this)">
+                <span class="nav-icon">🎵</span><span>音乐分享</span>
+            </div>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">朋友圈</div>
+            <div class="nav-item" onclick="openPwModal('jiejie')">
+                <span class="nav-icon">👩</span><span>姐姐</span>
+            </div>
+            <div class="nav-item" onclick="openPwModal('xiaowei')">
+                <span class="nav-icon">🧑</span><span>小微</span>
+            </div>
+            <div class="nav-item" onclick="openPwModal('meimei')">
+                <span class="nav-icon">👧</span><span>妹妹</span>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="sidebar-avatar">✦</div>
+        <div class="sidebar-user">OUYANGMINGYUE</div>
+    </div>
+</aside>
+
+<!-- 侧边栏折叠按钮 -->
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+    <svg viewBox="0 0 24 24" fill="var(--text-primary)"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+</button>
+
+
+<section id="home" style="display:none;">
     <div class="bg-layer"></div>
     <div class="bg-overlay"></div>
     <div class="particles-container" id="particlesContainer"></div>
     <div class="content-layer">
-    <div class="home-title">
-        <div class="main-title-line1">人生乱套🌀 我睡大觉💤</div>
-        <div class="sub-title neon-gold">Life's a mess · I'm going to sleep</div>
+    <div class="home-title"><div class="main-title">人生乱套 我睡大觉</div><div class="sub-title">Life's a mess · I'm going to sleep</div></div>
+    <div class="sunglasses-entry">
+        <div class="eye-icon" id="eyeStar" data-target="explore-me"><span class="icon-symbol">✦</span><span class="icon-label">探索我</span><span class="icon-label-en">Explore Me</span></div>
+        <div class="eye-icon" id="eyeMoon" data-target="explore-world"><span class="icon-symbol">☾</span><span class="icon-label">探索世界</span><span class="icon-label-en">Explore World</span></div>
     </div>
-
-    <!-- 欢迎光临按钮（标题下方） -->
-    <div class="welcome-btn-area" onclick="enterWorld()">
-        <div class="welcome-btn">
-            <span class="cn">🏠 欢迎光临</span>
-            <span class="en">Welcome Home</span>
-        </div>
-    </div>
-
     <div class="watermark"><div class="wm-text">OUYANGMINGYUE</div></div>
     </div>
 </section>
 <div id="meteorContainer"></div>
-
-<!-- 登录弹窗 -->
-<div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLoginModal()">
-    <div class="login-modal">
-        <span class="login-icon">🔐</span>
-        <h2>欢迎回来</h2>
-        <p class="login-subtitle">Welcome Back · 登录后参与评论</p>
-
-        <div class="login-field">
-            <span class="field-icon">👤</span>
-            <input type="text" id="loginUsername" placeholder="用户名/邮箱" onkeydown="if(event.key==='Enter')document.getElementById('loginPassword').focus()">
-        </div>
-
-        <div class="login-field">
-            <span class="field-icon">🔑</span>
-            <input type="password" id="loginPassword" placeholder="密码" onkeydown="if(event.key==='Enter')handleLogin()">
-        </div>
-
-        <div class="login-error" id="loginError"></div>
-
-        <button class="login-submit-btn" onclick="handleLogin()">✦ 登 录 ✦</button>
-
-        <p class="login-footer">
-            还没有账号？<a onclick="showRegisterModal()">立即注册</a><br>
-            <a onclick="showForgotPassword()">忘记密码？</a>
-        </p>
-    </div>
-</div>
-
-<!-- 注册弹窗 -->
-<div class="login-overlay" id="registerOverlay" onclick="if(event.target===this)closeRegisterModal()">
-    <div class="login-modal">
-        <span class="login-icon">✨</span>
-        <h2>创建账号</h2>
-        <p class="login-subtitle">Create Account · 加入我们</p>
-
-        <div class="login-field">
-            <span class="field-icon">👤</span>
-            <input type="text" id="regUsername" placeholder="用户名" onkeydown="if(event.key==='Enter')document.getElementById('regEmail').focus()">
-        </div>
-
-        <div class="login-field">
-            <span class="field-icon">📧</span>
-            <input type="email" id="regEmail" placeholder="邮箱" onkeydown="if(event.key==='Enter')document.getElementById('regPassword').focus()">
-        </div>
-
-        <div class="login-field">
-            <span class="field-icon">🔑</span>
-            <input type="password" id="regPassword" placeholder="密码" onkeydown="if(event.key==='Enter')document.getElementById('regConfirmPassword').focus()">
-        </div>
-
-        <div class="login-field">
-            <span class="field-icon">🔑</span>
-            <input type="password" id="regConfirmPassword" placeholder="确认密码" onkeydown="if(event.key==='Enter')handleRegister()">
-        </div>
-
-        <div class="login-error" id="registerError"></div>
-
-        <button class="login-submit-btn" onclick="handleRegister()">✦ 注 册 ✦</button>
-
-        <p class="login-footer">
-            已有账号？<a onclick="showLoginModal()">立即登录</a>
-        </p>
-    </div>
-</div>
-
-<!-- 仪表盘页面 -->
-<div class="dashboard-page" id="dashboardPage">
-    <div class="starry-bg" id="dashboardStarryBg"></div>
-
-    <button class="back-to-home" onclick="goHome()">← 返回首页</button>
-    
-    <!-- 右上角登录/用户区域 -->
-    <div class="login-area" id="loginArea">
-        <button class="login-btn-header" id="loginBtnHeader" onclick="showLoginModal()">
-            <span class="login-icon">👤</span>
-            <span class="login-text">登录</span>
-        </button>
-    </div>
-
-    <div class="dashboard-content">
-        <div class="dashboard-nav">
-            <button class="nav-tab active neon-text" onclick="switchDashboardTab('records')">
-                <span class="tab-cn">📝 记录</span>
-                <span class="tab-en">Records</span>
-            </button>
-            <button class="nav-tab neon-pink" onclick="switchDashboardTab('shares')">
-                <span class="tab-cn">🌍 分享</span>
-                <span class="tab-en">Share</span>
-            </button>
-        </div>
-
-        <div id="recordsSection">
-            <div class="dashboard-grid">
-                <div class="dashboard-card" onclick="openModulePage('record-us')">
-                    <div class="card-header">
-                        <div class="card-icon-wrap record">💕</div>
-                        <div>
-                            <div class="card-title">记录我们</div>
-                            <div class="card-subtitle">Record Us · 我们的专属记忆</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-desc">记录属于我们的点点滴滴，每一条动态都是珍贵的回忆。</div>
-                        <div class="card-modules">
-                            <span class="card-module-tag" onclick="event.stopPropagation(); openModulePage('record-jiejie')">👩 姐姐</span>
-                            <span class="card-module-tag" onclick="event.stopPropagation(); openModulePage('record-xiaowei')">🧑 小微</span>
-                            <span class="card-module-tag" onclick="event.stopPropagation(); openModulePage('record-meimei')">👧 妹妹</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-count">💕 私密空间</span>
-                        <span class="card-arrow">→</span>
-                    </div>
-                </div>
-
-                <div class="dashboard-card" onclick="openModulePage('thoughts')">
-                    <div class="card-header">
-                        <div class="card-icon-wrap record">💭</div>
-                        <div>
-                            <div class="card-title">记录想法</div>
-                            <div class="card-subtitle">Thoughts · 碎碎念与感悟</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-desc">随手记录灵感、感悟、碎碎念，让思绪有迹可循。</div>
-                        <div class="card-modules">
-                            <span class="card-module-tag">✨ 灵感</span>
-                            <span class="card-module-tag">📝 日记</span>
-                            <span class="card-module-tag">💡 感悟</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-count">💭 随心记录</span>
-                        <span class="card-arrow">→</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="sharesSection" style="display:none;">
-            <div class="dashboard-grid">
-                <div class="dashboard-card" onclick="openModulePage('books')">
-                    <div class="card-header">
-                        <div class="card-icon-wrap share">📚</div>
-                        <div>
-                            <div class="card-title">书籍分享</div>
-                            <div class="card-subtitle">Books · 阅读与感悟</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-desc">分享读过的好书，记录阅读感悟，传递知识的力量。</div>
-                        <div class="card-modules">
-                            <span class="card-module-tag">📖 书评</span>
-                            <span class="card-module-tag">⭐ 推荐</span>
-                            <span class="card-module-tag">📌 笔记</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-count">📚 知识海洋</span>
-                        <span class="card-arrow">→</span>
-                    </div>
-                </div>
-
-                <div class="dashboard-card" onclick="openModulePage('music')">
-                    <div class="card-header">
-                        <div class="card-icon-wrap share">🎵</div>
-                        <div>
-                            <div class="card-title">音乐分享</div>
-                            <div class="card-subtitle">Music · 黑胶与旋律</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-desc">分享喜欢的音乐，用旋律记录心情，让耳朵去旅行。</div>
-                        <div class="card-modules">
-                            <span class="card-module-tag">🎤 歌曲</span>
-                            <span class="card-module-tag">💿 专辑</span>
-                            <span class="card-module-tag">🎧 歌单</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-count">🎵 旋律之旅</span>
-                        <span class="card-arrow">→</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 模块详情页面 -->
-<div class="module-page" id="modulePage">
-    <div class="starry-bg" id="moduleStarryBg"></div>
-    
-    <div class="module-page-header">
-        <button class="back-to-dashboard" onclick="closeModulePage()">← 返回</button>
-        <h1 class="module-page-title" id="modulePageTitle">模块标题</h1>
-        <button class="publish-btn" id="publishBtn" onclick="openPublishForm()" style="display:none;">✏️ 发布</button>
-    </div>
-    
-    <!-- 发布表单 -->
-    <div class="publish-form-container" id="publishFormContainer" style="display:none;">
-        <div class="publish-form">
-            <textarea id="publishContent" placeholder="写下你想分享的内容..." rows="4"></textarea>
-            <div class="publish-actions">
-                <button class="publish-cancel" onclick="closePublishForm()">取消</button>
-                <button class="publish-submit" onclick="submitPublish()">发布</button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="module-page-content" id="modulePageContent">
-        <!-- 内容将在这里动态加载 -->
-    </div>
-</div>
-
 
 <!-- 探索页面虚化背景 -->
 <div class="explore-bg" id="exploreBg" style="display:none;"></div>
@@ -1005,7 +497,7 @@
         </div>
         <div class="timeline-view" id="timelineView">
             <div class="timeline-header"><button class="timeline-back" onclick="closeTL('timelineView','moduleGrid')">← 返回</button><span class="timeline-name" id="timelineName"></span></div>
-            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('recordus')">➕ 添加动态</button><div class="auth-tip">当前为浏览模式，点击右下角 🔐 进入编辑</div></div>
+            <div style="margin-bottom:14px;"><button class="add-btn auth-ctrl" onclick="openAddForm('recordus')">➕ 添加动态</button></div>
             <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索..." oninput="filterTL()"></div>
             <div id="timelineList"></div>
         </div>
@@ -1063,8 +555,13 @@
 
 <!-- 主内容 -->
 <section id="main">
-    <nav style="position:sticky;top:0;z-index:50;"><div class="glass-card" style="max-width:56rem;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="goHome()"><div style="width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;">✦</div><span class="font-cn-brush" style="font-size:22px;color:var(--text-primary);">我的旅程</span></div><div style="display:flex;align-items:center;gap:10px;"><button class="nav-link active" onclick="switchTab('life')"><i class="fas fa-heart" style="margin-right:4px;"></i><span class="nav-cn">生活</span></button><button class="nav-link" onclick="switchTab('study')"><i class="fas fa-book" style="margin-right:4px;"></i><span class="nav-cn">学习</span></button></div><button onclick="goHome()" style="padding:8px 18px;background:var(--accent);color:white;border:none;border-radius:999px;cursor:pointer;font-family:'KBai','Ma Shan Zheng',cursive;">首页</button></div></nav>
-    <div style="max-width:56rem;margin:0 auto;padding:20px 16px 80px;">
+    <nav style="position:sticky;top:0;z-index:50;"><div class="glass-card" style="max-width:72rem;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><div style="display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="goHome()"><div style="width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;">✦</div><span class="font-cn-brush" style="font-size:22px;color:var(--text-primary);">我的旅程</span></div><div style="display:flex;align-items:center;gap:10px;"><button class="nav-link active" onclick="switchTab('life')"><i class="fas fa-heart" style="margin-right:4px;"></i><span class="nav-cn">生活</span></button><button class="nav-link" onclick="switchTab('study')"><i class="fas fa-book" style="margin-right:4px;"></i><span class="nav-cn">学习</span></button></div></div></nav>
+    <div style="max-width:72rem;margin:0 auto;padding:20px 16px 80px;">
+        <div class="dashboard-header">
+            <div class="dashboard-main-title">人生乱套🌀 我睡大觉💤</div>
+            <div class="dashboard-sub-title">Life's a mess · I'm going to sleep</div>
+            <div class="dashboard-desc">欢迎来到我的个人空间 ✦ 愿你在这里找到温暖与灵感</div>
+        </div>
         <div id="lifeTab" class="fade-in">
             <div class="glass-card" style="border-radius:16px;padding:20px;margin-bottom:18px;"><div style="display:flex;align-items:center;gap:18px;"><div style="width:80px;height:80px;border-radius:16px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:40px;">✦</div><div><h2 class="font-cn-brush" style="font-size:28px;font-weight:bold;color:var(--text-primary);">小可爱</h2><p class="font-en-hand" style="font-size:18px;color:var(--text-light);margin-top:4px;">Little Cutie</p></div></div></div>
             <div class="publish-box"><textarea id="newPost" class="publish-input" placeholder="分享你的生活..."></textarea><div id="previewImages" style="display:none;flex-wrap:wrap;gap:8px;margin-top:10px;"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;"><label style="cursor:pointer;color:var(--text-light);"><i class="fas fa-camera" style="font-size:18px;"></i><input type="file" id="postImages" style="display:none;" accept="image/*" multiple onchange="previewPostImages(event)"></label><button onclick="publishPost()" style="padding:8px 28px;background:var(--accent);color:white;border:none;border-radius:999px;cursor:pointer;">发布</button></div></div>
@@ -1078,6 +575,27 @@
     </div>
 </section>
 
+<!-- 权限浮动按钮（已隐藏，登入后直接可编辑） -->
+<button class="auth-fab guest" id="authFab" onclick="toggleAuth()" style="display:none;">
+    <span class="fab-dot"></span>
+    <span id="authFabText">🔐 进入编辑模式</span>
+</button>
+
+<!-- 权限密码弹窗 -->
+<div class="pw-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()">
+    <div class="pw-modal"><h3>请输入作者密码 🔐</h3>
+        <input type="password" id="authPwInput" maxlength="30" placeholder="输入密码..." onkeydown="if(event.key==='Enter')verifyAuth()">
+        <div class="pw-error" id="authPwError"></div>
+        <div class="pw-btns"><button class="pw-btn-cancel" onclick="closeAuthModal()">取消</button><button class="pw-btn-confirm" onclick="verifyAuth()">确认</button></div>
+    </div>
+</div>
+
+<!-- 云同步状态 -->
+<div class="sync-status" id="syncStatus">
+    <span class="sync-dot offline" id="syncDot"></span>
+    <span id="syncText">同步中...</span>
+</div>
+
 <script>
 // ═══ 粒子（浅色版透明度降低）═══
 (function(){const c=document.getElementById('particlesContainer');if(!c)return;const s=['✦','☾','✧','★'],cl=['rgba(200,180,255,','rgba(255,215,0,','rgba(224,176,255,','rgba(255,182,193,'];for(let i=0;i<100;i++){const e=document.createElement('span');e.className='particle';e.textContent=s[Math.floor(Math.random()*s.length)];e.style.fontSize=(14+Math.random()*18)+'px';const o=0.15+Math.random()*0.3;e.style.color=cl[Math.floor(Math.random()*cl.length)]+o+')';e.style.left=(Math.random()*100)+'%';e.style.top=(Math.random()*100)+'%';if(Math.random()<0.3){e.classList.add('floating');e.style.setProperty('--float-duration',(3+Math.random()*3)+'s');e.style.setProperty('--float-delay',(Math.random()*6)+'s');e.style.setProperty('--base-opacity',o.toString());}c.appendChild(e);}})();
@@ -1087,72 +605,16 @@ const SoundFX={_c:null,_g(){if(!this._c)this._c=new(window.AudioContext||window.
 const MeteorMgr={_p:[],MAX:120,C:['#c084fc','#f472b6','#a78bfa','#fbbf24'],spawn(x,y,n){const c=document.getElementById('meteorContainer');if(!c)return;n=n||10+Math.floor(Math.random()*5);for(let i=0;i<n;i++){if(this._p.length>=this.MAX){const o=this._p.shift();if(o.parentNode)o.parentNode.removeChild(o);}const d=document.createElement('span');d.className='meteor-particle';const sz=3+Math.random()*5;d.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px;background:${this.C[Math.floor(Math.random()*4)]}`;const a=Math.random()*6.28,di=120+Math.random()*80;d.style.setProperty('--mx',(Math.cos(a)*di)+'px');d.style.setProperty('--my',(Math.sin(a)*di)+'px');d.style.setProperty('--meteor-dur',(0.5+Math.random()*0.3)+'s');c.appendChild(d);this._p.push(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);const i=this._p.indexOf(d);if(i!==-1)this._p.splice(i,1);},800);}}};
 const HoverSpark={_t:0,spawn(x,y){const n=Date.now();if(n-this._t<150)return;this._t=n;const d=document.createElement('span');d.className='hover-sparkle';const s=3+Math.random()*3;d.style.cssText=`width:${s}px;height:${s}px;left:${x+(Math.random()-0.5)*20}px;top:${y+(Math.random()-0.5)*20}px;background:${['#c084fc','#f472b6','#a78bfa'][Math.floor(Math.random()*3)]}`;document.body.appendChild(d);setTimeout(()=>{if(d.parentNode)d.parentNode.removeChild(d);},1200);}};
 
-// ═══ 眼睛交互（已禁用）═══
-// 注意：主页面的星星按钮使用enterWorld()函数，不需要这些交互
-
-// ═══ 全局点击效果（音效+星星拖尾）═══
-document.addEventListener('click', function(e) {
-    // 播放点击音效
-    SoundFX.playClick();
-    
-    // 在点击位置生成星星拖尾
-    MeteorMgr.spawn(e.clientX, e.clientY, 8);
-    
-    // 生成✨✨✨闪光效果
-    for (let i = 0; i < 3; i++) {
-        const sparkle = document.createElement('span');
-        sparkle.className = 'click-sparkle';
-        sparkle.textContent = '✨';
-        sparkle.style.cssText = `
-            position: fixed;
-            left: ${e.clientX - 30 + i * 30}px;
-            top: ${e.clientY - 10}px;
-            font-size: ${20 + Math.random() * 10}px;
-            pointer-events: none;
-            z-index: 9999;
-            animation: sparkleFloat ${0.6 + Math.random() * 0.4}s ease-out forwards;
-            --tx: ${(Math.random() - 0.5) * 60}px;
-            --ty: ${-40 - Math.random() * 60}px;
-        `;
-        document.body.appendChild(sparkle);
-        setTimeout(() => {
-            if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
-        }, 1200);
-    }
-    
-    // 额外生成小星星拖尾
-    for (let i = 0; i < 5; i++) {
-        const star = document.createElement('span');
-        star.className = 'click-sparkle';
-        star.textContent = ['✦', '✧', '★', '☾'][Math.floor(Math.random() * 4)];
-        star.style.cssText = `
-            position: fixed;
-            left: ${e.clientX}px;
-            top: ${e.clientY}px;
-            font-size: ${10 + Math.random() * 12}px;
-            color: ${['#c084fc', '#f472b6', '#FFEAA7', '#60a5fa'][Math.floor(Math.random() * 4)]};
-            pointer-events: none;
-            z-index: 9998;
-            animation: sparkleFloat ${0.5 + Math.random() * 0.5}s ease-out forwards;
-            --tx: ${(Math.random() - 0.5) * 80}px;
-            --ty: ${-30 - Math.random() * 60}px;
-        `;
-        document.body.appendChild(star);
-        setTimeout(() => {
-            if (star.parentNode) star.parentNode.removeChild(star);
-        }, 1000);
-    }
+// ═══ 眼睛交互 ═══
+document.querySelectorAll('.eye-icon').forEach(icon=>{
+    icon.addEventListener('mousedown',()=>{icon.classList.add('pressing');icon.classList.remove('bounce');});
+    icon.addEventListener('mouseup',()=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);});
+    icon.addEventListener('mouseleave',()=>{icon.classList.remove('pressing','bounce');});
+    icon.addEventListener('touchstart',()=>{icon.classList.add('pressing');},{passive:true});
+    icon.addEventListener('touchend',e=>{icon.classList.remove('pressing');icon.classList.add('bounce');setTimeout(()=>icon.classList.remove('bounce'),250);const t=e.changedTouches[0];if(t)MeteorMgr.spawn(t.clientX,t.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
+    icon.addEventListener('click',e=>{MeteorMgr.spawn(e.clientX,e.clientY);SoundFX.playClick();setTimeout(()=>navigateTo(icon.dataset.target),400);});
+    icon.addEventListener('mousemove',e=>{HoverSpark.spawn(e.clientX,e.clientY);});
 });
-
-// 星星漂浮动画
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes sparkleFloat {
-        0% { transform: translate(0, 0) scale(1); opacity: 1; }
-        100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
 
 // ═══ 路由 ═══
 let currentRoute='home';
@@ -1383,7 +845,42 @@ function renderFilms(){const data=getData('movies')||[];document.getElementById(
 let appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};
 function loadData(){const s=localStorage.getItem('myLifeJourney');if(s){appData=JSON.parse(s);}else{appData={moments:[],english:{checkedDates:[],notes:{}},music:{checkedDates:[],notes:{}}};saveData();}}
 function saveData(){localStorage.setItem('myLifeJourney',JSON.stringify(appData));}
-function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
+function enterSite(){document.getElementById('home').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';loadData();
+
+// ═══ 侧边栏功能 ═══
+function toggleSidebar(){
+    const s=document.getElementById('sidebar'),t=document.getElementById('sidebarToggle'),m=document.getElementById('main');
+    s.classList.toggle('collapsed');t.classList.toggle('collapsed');m.classList.toggle('expanded');
+    localStorage.setItem('sidebar_collapsed',s.classList.contains('collapsed'));
+}
+function switchSection(target,el){
+    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+    if(el)el.classList.add('active');
+    // 关闭所有子页面
+    document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{
+        p.style.transition='opacity 0.3s';p.style.opacity='0';
+        setTimeout(()=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';},300);
+    });
+    document.getElementById('exploreBg').style.display='none';
+    document.getElementById('home').style.display='none';
+    document.getElementById('main').style.display='block';
+    document.body.style.overflow='auto';
+    currentRoute='dashboard';history.pushState(null,'',window.location.pathname);
+    closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();
+
+    if(target==='dashboard')return;
+    if(target==='explore-me'){navigateTo('explore-me');currentRoute='explore-me';}
+    else if(target==='explore-world'){navigateTo('explore-world');currentRoute='explore-world';}
+    else if(target==='thoughts'){openSubTL('thoughts');}
+    else if(target==='study'){openStudyCal();}
+    else if(target==='books'){document.getElementById('main').style.display='none';openWorldSub('books');}
+    else if(target==='music'){document.getElementById('main').style.display='none';openWorldSub('music');}
+}
+(function(){
+    const c=localStorage.getItem('sidebar_collapsed')==='true';
+    if(c){document.getElementById('sidebar').classList.add('collapsed');document.getElementById('sidebarToggle').classList.add('collapsed');document.getElementById('main').classList.add('expanded');}
+})();
+renderMoments();renderCalendar('english');renderCalendar('music');updateStats();checkTodayStatus();renderHistory('english');renderHistory('music');}
 function goHome(){document.getElementById('main').style.display='none';document.getElementById('exploreBg').style.display='none';document.querySelectorAll('.explore-page.visible,.sub-view.visible').forEach(p=>{p.classList.remove('visible');p.style.opacity='';p.style.transition='';});const h=document.getElementById('home');h.style.display='flex';h.style.opacity='0';requestAnimationFrame(()=>{h.style.transition='opacity 0.4s';h.style.opacity='1';});document.body.style.overflow='hidden';history.pushState(null,'',window.location.pathname);currentRoute='home';closeTL('timelineView','moduleGrid');closeTL('subTimelineView','moduleGrid');closeStudyCal();closePwModal();closeForm();}
 function switchTab(tab){document.querySelectorAll('.nav-link').forEach(el=>el.classList.remove('active'));event.target.closest('.nav-link').classList.add('active');document.getElementById('lifeTab').style.display=tab==='life'?'block':'none';document.getElementById('studyTab').style.display=tab==='study'?'block':'none';}
 let selectedImages=[];
@@ -1401,20 +898,19 @@ function renderHistory(type){const c=document.getElementById(type+'History'),dat
 
 loadData();
 
-// ═══ 权限系统（已禁用）═══
-// 注意：编辑模式按钮已删除，权限系统不再需要
-// let isAuthor=sessionStorage.getItem('isAuthor')==='true';
-// function updateAuthUI(){
-//     const fab=document.getElementById('authFab');
-//     const txt=document.getElementById('authFabText');
-//     document.body.dataset.author=isAuthor?'true':'false';
-//     if(isAuthor){fab.classList.remove('guest');txt.textContent='🔓 退出编辑模式';}
-//     else{fab.classList.add('guest');txt.textContent='🔐 进入编辑模式';}
-// }
-// function toggleAuth(){if(isAuthor){isAuthor=false;sessionStorage.removeItem('isAuthor');updateAuthUI();}else{document.getElementById('authOverlay').classList.add('visible');document.getElementById('authPwInput').value='';document.getElementById('authPwError').textContent='';setTimeout(()=>document.getElementById('authPwInput').focus(),300);}}
-// function closeAuthModal(){const o=document.getElementById('authOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
-// function verifyAuth(){const pw=document.getElementById('authPwInput').value.trim();if(pw==='ouyang2026'){isAuthor=true;sessionStorage.setItem('isAuthor','true');closeAuthModal();updateAuthUI();}else{document.getElementById('authPwError').textContent='密码错误';document.getElementById('authPwInput').classList.add('shake');document.getElementById('authPwInput').value='';setTimeout(()=>document.getElementById('authPwInput').classList.remove('shake'),400);}}
-// updateAuthUI(); // 已禁用
+// ═══ 权限系统 ═══
+let isAuthor=true;
+function updateAuthUI(){
+    const fab=document.getElementById('authFab');
+    const txt=document.getElementById('authFabText');
+    document.body.dataset.author=isAuthor?'true':'false';
+    if(isAuthor){fab.classList.remove('guest');txt.textContent='🔓 退出编辑模式';}
+    else{fab.classList.add('guest');txt.textContent='🔐 进入编辑模式';}
+}
+function toggleAuth(){if(isAuthor){isAuthor=false;sessionStorage.removeItem('isAuthor');updateAuthUI();}else{document.getElementById('authOverlay').classList.add('visible');document.getElementById('authPwInput').value='';document.getElementById('authPwError').textContent='';setTimeout(()=>document.getElementById('authPwInput').focus(),300);}}
+function closeAuthModal(){const o=document.getElementById('authOverlay');o.style.opacity='0';setTimeout(()=>{o.classList.remove('visible');o.style.opacity='';},300);}
+function verifyAuth(){const pw=document.getElementById('authPwInput').value.trim();if(pw==='ouyang2026'){isAuthor=true;sessionStorage.setItem('isAuthor','true');closeAuthModal();updateAuthUI();}else{document.getElementById('authPwError').textContent='密码错误';document.getElementById('authPwInput').classList.add('shake');document.getElementById('authPwInput').value='';setTimeout(()=>document.getElementById('authPwInput').classList.remove('shake'),400);}}
+updateAuthUI();
 
 // ═══ 全局点击波纹 ═══
 document.addEventListener('click',function(e){
@@ -1513,754 +1009,6 @@ saveData = function() { _v(); scheduleSync(); };
 
 // 页面加载自动同步
 setTimeout(doSync, 1000);
-
-// ═══ 星空背景生成 ═══
-function createStarryBackground(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    // 清空容器
-    container.innerHTML = '';
-
-    // 创建星星
-    const starCount = 150;
-    for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
-        star.style.animationDelay = Math.random() * 3 + 's';
-        star.style.width = (1 + Math.random() * 2) + 'px';
-        star.style.height = star.style.width;
-        container.appendChild(star);
-    }
-}
-
-// 页面加载时创建星空背景
-document.addEventListener('DOMContentLoaded', function() {
-    createStarryBackground('dashboardStarryBg');
-    createSparkles('headerSparkles', 20);
-});
-
-// ═══ 闪烁星星效果 ═══
-function createSparkles(containerId, count) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    // 清空容器
-    container.innerHTML = '';
-
-    // 创建闪烁星星
-    for (let i = 0; i < count; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * 100 + '%';
-        sparkle.style.top = Math.random() * 100 + '%';
-        sparkle.style.animationDelay = Math.random() * 2 + 's';
-        sparkle.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-        container.appendChild(sparkle);
-    }
-}
-
-// ═══ 登录系统 ═══
-const USERS = {
-    'admin': { password: 'admin', name: '管理员', role: 'admin', email: 'admin@example.com' },
-    'jiejie': { password: '1230', name: '姐姐', role: 'user', email: 'jiejie@example.com' },
-    'xiaowei': { password: '520', name: '小微', role: 'user', email: 'xiaowei@example.com' },
-    'meimei': { password: '1105', name: '妹妹', role: 'user', email: 'meimei@example.com' }
-};
-
-let currentUser = null;
-let loginCallback = null; // 登录后的回调函数
-
-// 直接进入世界（无需登录）
-function enterWorld() {
-    showDashboard();
-}
-
-// 显示登录弹窗
-function showLoginModal(callback) {
-    loginCallback = callback || null;
-    document.getElementById('loginOverlay').classList.add('visible');
-    document.getElementById('loginUsername').value = '';
-    document.getElementById('loginPassword').value = '';
-    document.getElementById('loginError').textContent = '';
-    setTimeout(() => document.getElementById('loginUsername').focus(), 300);
-}
-
-// 关闭登录弹窗
-function closeLoginModal() {
-    const overlay = document.getElementById('loginOverlay');
-    overlay.style.opacity = '0';
-    setTimeout(() => {
-        overlay.classList.remove('visible');
-        overlay.style.opacity = '';
-    }, 400);
-}
-
-// 显示注册弹窗
-function showRegisterModal() {
-    closeLoginModal();
-    setTimeout(() => {
-        document.getElementById('registerOverlay').classList.add('visible');
-        document.getElementById('regUsername').value = '';
-        document.getElementById('regEmail').value = '';
-        document.getElementById('regPassword').value = '';
-        document.getElementById('regConfirmPassword').value = '';
-        document.getElementById('registerError').textContent = '';
-        setTimeout(() => document.getElementById('regUsername').focus(), 300);
-    }, 400);
-}
-
-// 关闭注册弹窗
-function closeRegisterModal() {
-    const overlay = document.getElementById('registerOverlay');
-    overlay.style.opacity = '0';
-    setTimeout(() => {
-        overlay.classList.remove('visible');
-        overlay.style.opacity = '';
-    }, 400);
-}
-
-// 处理登录
-async function handleLogin() {
-    const username = document.getElementById('loginUsername').value.trim();
-    const password = document.getElementById('loginPassword').value.trim();
-    const errorEl = document.getElementById('loginError');
-
-    if (!username || !password) {
-        errorEl.textContent = '请输入用户名和密码';
-        return;
-    }
-
-    // 检查用户
-    const user = USERS[username];
-    if (!user) {
-        errorEl.textContent = '用户不存在';
-        document.getElementById('loginPassword').value = '';
-        return;
-    }
-
-    // 验证密码
-    if (password !== user.password) {
-        errorEl.textContent = '密码错误，请重试';
-        document.getElementById('loginPassword').value = '';
-        document.getElementById('loginPassword').classList.add('shake');
-        setTimeout(() => document.getElementById('loginPassword').classList.remove('shake'), 400);
-        return;
-    }
-
-    // 登录成功
-    currentUser = { ...user, username };
-    closeLoginModal();
-
-    // 保存登录状态
-    localStorage.setItem('oym_current_user', JSON.stringify(currentUser));
-
-    // 更新登录按钮状态
-    updateLoginButton();
-
-    // 执行回调（如果有）
-    if (loginCallback) {
-        setTimeout(() => {
-            loginCallback();
-            loginCallback = null;
-        }, 400);
-    }
-}
-
-// 处理注册
-async function handleRegister() {
-    const username = document.getElementById('regUsername').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const password = document.getElementById('regPassword').value.trim();
-    const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
-    const errorEl = document.getElementById('registerError');
-
-    // 验证输入
-    if (!username || !email || !password || !confirmPassword) {
-        errorEl.textContent = '请填写所有字段';
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        errorEl.textContent = '两次密码不一致';
-        return;
-    }
-
-    if (password.length < 6) {
-        errorEl.textContent = '密码至少6位';
-        return;
-    }
-
-    // 检查用户名是否已存在
-    if (USERS[username]) {
-        errorEl.textContent = '用户名已存在';
-        return;
-    }
-
-    // 注册成功
-    USERS[username] = {
-        password: password,
-        name: username,
-        role: 'user',
-        email: email
-    };
-
-    // 自动登录
-    currentUser = { ...USERS[username], username };
-    localStorage.setItem('oym_current_user', JSON.stringify(currentUser));
-
-    // 关闭注册弹窗
-    closeRegisterModal();
-
-    // 更新登录按钮状态
-    updateLoginButton();
-
-    // 显示成功提示
-    alert('注册成功！欢迎加入～');
-}
-
-// 更新登录按钮状态
-function updateLoginButton() {
-    const loginBtn = document.getElementById('loginBtnHeader');
-    if (!loginBtn) return;
-
-    if (currentUser) {
-        loginBtn.innerHTML = `
-            <span class="login-icon">👤</span>
-            <span class="login-text">${currentUser.name}</span>
-        `;
-        loginBtn.onclick = showUserMenu;
-    } else {
-        loginBtn.innerHTML = `
-            <span class="login-icon">👤</span>
-            <span class="login-text">登录</span>
-        `;
-        loginBtn.onclick = () => showLoginModal();
-    }
-}
-
-// 显示用户菜单
-function showUserMenu() {
-    const confirmLogout = confirm('是否退出登录？');
-    if (confirmLogout) {
-        logout();
-    }
-}
-
-// 显示忘记密码
-function showForgotPassword() {
-    alert('请联系管理员重置密码\n邮箱：admin@example.com');
-}
-
-function showDashboard() {
-    const home = document.getElementById('home');
-    home.style.transition = 'opacity 0.5s';
-    home.style.opacity = '0';
-
-    setTimeout(() => {
-        home.style.display = 'none';
-        home.style.opacity = '';
-
-        const dashboard = document.getElementById('dashboardPage');
-        dashboard.classList.add('visible');
-        dashboard.style.opacity = '0';
-        requestAnimationFrame(() => {
-            dashboard.style.transition = 'opacity 0.5s';
-            dashboard.style.opacity = '1';
-        });
-
-        // 更新登录按钮状态
-        updateLoginButton();
-
-        // 加载示例数据
-        loadSampleData();
-
-        document.body.style.overflow = 'auto';
-    }, 500);
-}
-
-function logout() {
-    currentUser = null;
-    localStorage.removeItem('oym_current_user');
-
-    const dashboard = document.getElementById('dashboardPage');
-    dashboard.style.transition = 'opacity 0.5s';
-    dashboard.style.opacity = '0';
-
-    setTimeout(() => {
-        dashboard.classList.remove('visible');
-        dashboard.style.display = 'none';
-        dashboard.style.opacity = '';
-
-        const home = document.getElementById('home');
-        home.style.display = 'flex';
-        home.style.opacity = '0';
-        requestAnimationFrame(() => {
-            home.style.transition = 'opacity 0.5s';
-            home.style.opacity = '1';
-        });
-
-        document.body.style.overflow = 'hidden';
-    }, 500);
-}
-
-// 返回首页（不退出登录）
-function goHome() {
-    const dashboard = document.getElementById('dashboardPage');
-    dashboard.style.transition = 'opacity 0.5s';
-    dashboard.style.opacity = '0';
-
-    setTimeout(() => {
-        dashboard.classList.remove('visible');
-        dashboard.style.display = 'none';
-        dashboard.style.opacity = '';
-
-        const home = document.getElementById('home');
-        home.style.display = 'flex';
-        home.style.opacity = '0';
-        requestAnimationFrame(() => {
-            home.style.transition = 'opacity 0.5s';
-            home.style.opacity = '1';
-        });
-
-        document.body.style.overflow = 'hidden';
-    }, 500);
-}
-
-// ═══ 示例数据 ═══
-const sampleData = {
-    'record-us': {
-        title: '💕 记录我们',
-        items: [
-            {
-                id: 1,
-                user: '姐姐',
-                avatar: '👩',
-                time: '2026-08-19 19:30',
-                content: '今天和小微、妹妹一起去了公园，天气真好！拍了好多照片，开心～',
-                likes: 12,
-                comments: [
-                    { user: '小微', avatar: '🧑', content: '好开心！下次还要一起去！', time: '2026-08-19 20:00' },
-                    { user: '妹妹', avatar: '👧', content: '照片好好看！', time: '2026-08-19 20:15' }
-                ]
-            }
-        ]
-    },
-    'record-jiejie': {
-        title: '👩 姐姐的记录',
-        items: [
-            {
-                id: 101,
-                user: '姐姐',
-                avatar: '👩',
-                time: '2026-08-19 18:00',
-                content: '今天工作好累，但是很开心完成了项目～',
-                likes: 5,
-                comments: []
-            }
-        ]
-    },
-    'record-xiaowei': {
-        title: '🧑 小微的记录',
-        items: [
-            {
-                id: 102,
-                user: '小微',
-                avatar: '🧑',
-                time: '2026-08-19 17:00',
-                content: '学习了一天的托业，感觉有进步！',
-                likes: 8,
-                comments: []
-            }
-        ]
-    },
-    'record-meimei': {
-        title: '👧 妹妹的记录',
-        items: [
-            {
-                id: 103,
-                user: '妹妹',
-                avatar: '👧',
-                time: '2026-08-19 16:00',
-                content: '今天画了一幅画，好开心！',
-                likes: 10,
-                comments: []
-            }
-        ]
-    },
-    'thoughts': {
-        title: '💭 记录想法',
-        items: [
-            {
-                id: 2,
-                user: '欧阳大王',
-                avatar: '✦',
-                time: '2026-08-19 22:00',
-                content: '人生乱套我睡大觉，明天又是新的一天，加油！💪',
-                likes: 8,
-                comments: [
-                    { user: '小明', avatar: '😊', content: '加油！', time: '2026-08-19 22:30' }
-                ]
-            }
-        ]
-    },
-    'books': {
-        title: '📚 书籍分享',
-        items: [
-            {
-                id: 4,
-                user: '欧阳大王',
-                avatar: '✦',
-                time: '2026-08-18 15:00',
-                content: '推荐《小王子》！每个人心中都有一朵玫瑰花，值得反复阅读。🌹',
-                likes: 20,
-                comments: [
-                    { user: '小蓝', avatar: '💙', content: '我也喜欢这本书！', time: '2026-08-18 16:00' }
-                ]
-            }
-        ]
-    },
-    'music': {
-        title: '🎵 音乐分享',
-        items: [
-            {
-                id: 5,
-                user: '欧阳大王',
-                avatar: '✦',
-                time: '2026-08-17 20:00',
-                content: '最近在听周杰伦的《晴天》，百听不腻！🎵 "故事的小黄花，从出生那年就飘着"',
-                likes: 25,
-                comments: [
-                    { user: '小绿', avatar: '💚', content: '经典！我的青春！', time: '2026-08-17 21:00' }
-                ]
-            }
-        ]
-    }
-};
-
-// 打开模块详情页面
-let currentModuleKey = null; // 当前打开的模块
-
-function openModulePage(module) {
-    const data = sampleData[module];
-    if (!data) return;
-
-    currentModuleKey = module;
-
-    // 设置标题
-    document.getElementById('modulePageTitle').textContent = data.title;
-
-    // 渲染内容
-    const contentContainer = document.getElementById('modulePageContent');
-    renderModulePageContent(contentContainer, data);
-
-    // 显示/隐藏发布按钮
-    const publishBtn = document.getElementById('publishBtn');
-    if (publishBtn) {
-        publishBtn.style.display = currentUser ? 'block' : 'none';
-    }
-
-    // 隐藏发布表单
-    closePublishForm();
-
-    // 显示页面
-    const modulePage = document.getElementById('modulePage');
-    modulePage.classList.add('visible');
-
-    // 创建星空背景
-    createStarryBackground('moduleStarryBg');
-
-    // 隐藏仪表盘
-    const dashboard = document.getElementById('dashboardPage');
-    dashboard.style.display = 'none';
-}
-
-// 关闭模块详情页面
-function closeModulePage() {
-    const modulePage = document.getElementById('modulePage');
-    modulePage.classList.remove('visible');
-
-    // 显示仪表盘
-    const dashboard = document.getElementById('dashboardPage');
-    dashboard.style.display = 'block';
-    currentModuleKey = null;
-}
-
-// 打开发布表单
-function openPublishForm() {
-    if (!currentUser) {
-        showLoginModal(() => {
-            openPublishForm();
-        });
-        return;
-    }
-    document.getElementById('publishFormContainer').style.display = 'block';
-    document.getElementById('publishContent').value = '';
-    document.getElementById('publishContent').focus();
-}
-
-// 关闭发布表单
-function closePublishForm() {
-    document.getElementById('publishFormContainer').style.display = 'none';
-}
-
-// 提交发布
-function submitPublish() {
-    if (!currentUser) {
-        showLoginModal(() => {
-            submitPublish();
-        });
-        return;
-    }
-
-    const content = document.getElementById('publishContent').value.trim();
-    if (!content) {
-        alert('请输入内容');
-        return;
-    }
-
-    if (!currentModuleKey || !sampleData[currentModuleKey]) {
-        alert('模块不存在');
-        return;
-    }
-
-    // 添加新内容
-    const newItem = {
-        id: Date.now(),
-        user: currentUser.name,
-        avatar: '👤',
-        time: new Date().toLocaleString('zh-CN'),
-        content: content,
-        likes: 0,
-        comments: []
-    };
-
-    sampleData[currentModuleKey].items.unshift(newItem);
-
-    // 重新渲染
-    const contentContainer = document.getElementById('modulePageContent');
-    renderModulePageContent(contentContainer, sampleData[currentModuleKey]);
-
-    // 关闭发布表单
-    closePublishForm();
-
-    alert('发布成功！');
-}
-
-// 渲染模块详情页面内容
-function renderModulePageContent(container, data) {
-    if (!data || !data.items || data.items.length === 0) {
-        container.innerHTML = '<div style="text-align:center;padding:60px;color:rgba(255,255,255,0.5);">暂无内容</div>';
-        return;
-    }
-
-    let html = '';
-    data.items.forEach(item => {
-        html += `
-            <div class="content-item" data-id="${item.id}">
-                <div class="content-header">
-                    <div class="content-avatar">${item.avatar}</div>
-                    <div class="content-meta">
-                        <span class="content-user">${item.user}</span>
-                        <span class="content-time">${item.time}</span>
-                    </div>
-                </div>
-                <div class="content-body">${item.content}</div>
-                <div class="content-actions">
-                    <span class="action-btn like-btn" onclick="toggleLike(${item.id})">❤️ ${item.likes}</span>
-                    <span class="action-btn comment-btn" onclick="event.stopPropagation(); toggleComments(${item.id})">💬 ${item.comments.length}</span>
-                </div>
-                <div class="comments-section" id="comments-${item.id}" style="display:block;">
-                    <div class="comments-title">评论 (${item.comments.length})</div>
-                    <div class="comment-list">
-                        ${item.comments.map(c => `
-                            <div class="comment-item">
-                                <div class="comment-avatar">${c.avatar}</div>
-                                <div class="comment-content">
-                                    <div class="comment-header">
-                                        <span class="comment-user">${c.user}</span>
-                                        <span class="comment-time">${c.time}</span>
-                                    </div>
-                                    <div class="comment-text">${c.content}</div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="comment-form">
-                        <input type="text" class="comment-input" placeholder="写下你的评论..." id="comment-input-${item.id}">
-                        <button class="comment-submit" onclick="submitComment(${item.id})">发表评论</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-
-    container.innerHTML = html;
-}
-
-// 加载示例数据
-function loadSampleData() {
-    // 渲染每个模块的示例数据
-    Object.keys(sampleData).forEach(key => {
-        const container = document.getElementById(`${key}-content`);
-        if (container) {
-            renderSampleContent(container, sampleData[key]);
-        }
-    });
-}
-
-// 渲染示例内容
-function renderSampleContent(container, data) {
-    if (!data || !data.items || data.items.length === 0) {
-        container.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.5);">暂无内容</div>';
-        return;
-    }
-
-    let html = '';
-    data.items.forEach(item => {
-        html += `
-            <div class="content-item" data-id="${item.id}">
-                <div class="content-header">
-                    <div class="content-avatar">${item.avatar}</div>
-                    <div class="content-meta">
-                        <span class="content-user">${item.user}</span>
-                        <span class="content-time">${item.time}</span>
-                    </div>
-                </div>
-                <div class="content-body">${item.content}</div>
-                <div class="content-actions">
-                    <span class="action-btn like-btn" onclick="toggleLike(${item.id})">❤️ ${item.likes}</span>
-                    <span class="action-btn comment-btn" onclick="toggleComments(${item.id})">💬 ${item.comments.length}</span>
-                </div>
-                <div class="comments-section" id="comments-${item.id}" style="display:none;">
-                    <div class="comments-title">评论 (${item.comments.length})</div>
-                    <div class="comment-list">
-                        ${item.comments.map(c => `
-                            <div class="comment-item">
-                                <div class="comment-avatar">${c.avatar}</div>
-                                <div class="comment-content">
-                                    <div class="comment-header">
-                                        <span class="comment-user">${c.user}</span>
-                                        <span class="comment-time">${c.time}</span>
-                                    </div>
-                                    <div class="comment-text">${c.content}</div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="comment-form">
-                        <input type="text" class="comment-input" placeholder="写下你的评论..." id="comment-input-${item.id}">
-                        <button class="comment-submit" onclick="submitComment(${item.id})">发表评论</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-
-    container.innerHTML = html;
-}
-
-// 切换点赞
-function toggleLike(itemId) {
-    // 找到对应的数据
-    Object.keys(sampleData).forEach(key => {
-        const item = sampleData[key].items.find(i => i.id === itemId);
-        if (item) {
-            item.likes++;
-            // 更新显示
-            const likeBtn = document.querySelector(`[data-id="${itemId}"] .like-btn`);
-            if (likeBtn) {
-                likeBtn.textContent = `❤️ ${item.likes}`;
-            }
-        }
-    });
-}
-
-// 切换评论显示
-function toggleComments(itemId) {
-    const commentsSection = document.getElementById(`comments-${itemId}`);
-    if (commentsSection) {
-        commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
-    }
-}
-
-// 提交评论
-function submitComment(itemId) {
-    const input = document.getElementById(`comment-input-${itemId}`);
-    const content = input.value.trim();
-
-    if (!content) {
-        alert('请输入评论内容');
-        return;
-    }
-
-    // 检查是否已登录
-    if (!currentUser) {
-        // 未登录：弹出登录窗口
-        showLoginModal(() => {
-            // 登录成功后自动提交评论
-            submitComment(itemId);
-        });
-        return;
-    }
-
-    // 已登录：添加评论
-    let currentModule = null;
-    Object.keys(sampleData).forEach(key => {
-        const item = sampleData[key].items.find(i => i.id === itemId);
-        if (item) {
-            item.comments.push({
-                user: currentUser.name,
-                avatar: '👤',
-                content: content,
-                time: new Date().toLocaleString()
-            });
-            currentModule = key;
-        }
-    });
-
-    // 重新渲染模块详情页面
-    if (currentModule) {
-        const contentContainer = document.getElementById('modulePageContent');
-        if (contentContainer) {
-            renderModulePageContent(contentContainer, sampleData[currentModule]);
-        }
-    }
-
-    input.value = '';
-}
-
-// ═══ 原有功能 ═══
-function switchDashboardTab(tab) {
-    // 更新标签样式
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
-
-    // 切换内容
-    document.getElementById('recordsSection').style.display = tab === 'records' ? 'block' : 'none';
-    document.getElementById('sharesSection').style.display = tab === 'shares' ? 'block' : 'none';
-}
-
-// 检查登录状态（只恢复用户状态，不自动跳转）
-function checkLoginState() {
-    const saved = localStorage.getItem('oym_current_user');
-    if (saved) {
-        try {
-            currentUser = JSON.parse(saved);
-            // 只更新登录按钮显示，不自动跳转到仪表盘
-            updateLoginButton();
-        } catch(e) {
-            localStorage.removeItem('oym_current_user');
-        }
-    }
-}
-
-// 页面加载时检查登录状态
-setTimeout(checkLoginState, 500);
-
 </script>
 </body>
 </html>
