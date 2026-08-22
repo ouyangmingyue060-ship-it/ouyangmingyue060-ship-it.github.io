@@ -720,6 +720,71 @@
     .auth-ctrl { display: none !important; }
     body[data-author="true"] .auth-ctrl { display: flex !important; }
 
+    /* === Guestbook === */
+    .guestbook-form {
+        margin-bottom: 48px;
+    }
+    .gb-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .gb-inputs input, .gb-inputs textarea {
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-size: 15px;
+        font-family: var(--sans);
+        outline: none;
+        resize: vertical;
+    }
+    .gb-inputs input:focus, .gb-inputs textarea:focus {
+        border-color: var(--text);
+    }
+    .gb-submit {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .gb-item {
+        padding: 24px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .gb-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+    .gb-name {
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--text);
+    }
+    .gb-time {
+        font-size: 13px;
+        color: var(--text-light);
+    }
+    .gb-text {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        white-space: pre-wrap;
+    }
+    .gb-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+    }
+    .gb-actions button {
+        background: none;
+        border: none;
+        color: var(--text-light);
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .gb-actions button:hover { color: var(--text); }
+
     /* === Responsive === */
     @media (max-width: 768px) {
         nav { padding: 16px 24px; }
@@ -750,7 +815,7 @@
         <a href="#home" class="active" data-section="home">主页</a>
         <a href="#records" data-section="records">记录</a>
         <a href="#share" data-section="share">分享</a>
-        <a href="#contact" data-section="contact">联系我</a>
+        <a href="#contact" data-section="contact">留言板</a>
     </div>
     <button class="nav-auth" id="authBtn" onclick="toggleAuth()">编辑模式</button>
 </nav>
@@ -762,7 +827,7 @@
     <p class="hero-desc">记录生活中的美好瞬间，分享阅读与音乐的感悟，在忙碌的世界里找到属于自己的节奏。</p>
     <div class="hero-links">
         <a href="#records">开始探索</a>
-        <a href="#contact">联系我</a>
+        <a href="#contact">留言板</a>
     </div>
 </section>
 
@@ -872,20 +937,34 @@
 <!-- Contact Section -->
 <section id="contact">
     <div class="section-header">
-        <h2>联系我</h2>
-        <p>期待与你的交流。</p>
+        <h2>留言板</h2>
+        <p>留下你的足迹，期待与你相遇。</p>
     </div>
 
-    <div class="contact-grid">
-        <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-globe"></i></div>
-            <div class="contact-label">网站</div>
-            <div class="contact-value"><a href="https://ouyangmingyue060-ship-it.github.io" target="_blank">ouyangmingyue060-ship-it.github.io</a></div>
+    <div class="guestbook-form">
+        <div class="gb-inputs">
+            <input type="text" id="gbName" placeholder="你的名字" maxlength="20">
+            <textarea id="gbMsg" placeholder="写点什么..." rows="3" maxlength="500"></textarea>
         </div>
-        <div class="contact-item">
-            <div class="contact-icon"><i class="fab fa-github"></i></div>
-            <div class="contact-label">GitHub</div>
-            <div class="contact-value"><a href="https://github.com/ouyangmingyue060-ship-it" target="_blank">ouyangmingyue060</a></div>
+        <div class="gb-submit">
+            <button class="btn-primary" onclick="postGuestbook()">留言</button>
+        </div>
+    </div>
+
+    <div id="guestbookList"></div>
+
+    <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                <div class="contact-label">网站</div>
+                <div class="contact-value"><a href="https://ouyangmingyue060-ship-it.github.io" target="_blank">ouyangmingyue060-ship-it.github.io</a></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fab fa-github"></i></div>
+                <div class="contact-label">GitHub</div>
+                <div class="contact-value"><a href="https://github.com/ouyangmingyue060-ship-it" target="_blank">ouyangmingyue060</a></div>
+            </div>
         </div>
     </div>
 </section>
@@ -897,7 +976,7 @@
         <a href="#home">主页</a>
         <a href="#records">记录</a>
         <a href="#share">分享</a>
-        <a href="#contact">联系我</a>
+        <a href="#contact">留言板</a>
     </div>
 </footer>
 
@@ -1506,6 +1585,52 @@ setTimeout(doSync, 1000);
 // Initial render
 renderRecordList('recordus', 'recordusList');
 renderRecordList('thoughts', 'thoughtsList');
+
+// ═══ Guestbook ═══
+function renderGuestbook() {
+    const data = getData('guestbook') || [];
+    const c = document.getElementById('guestbookList');
+    if (!data.length) {
+        c.innerHTML = '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-text">还没有留言，来留下第一条吧</div></div>';
+        return;
+    }
+    c.innerHTML = data.map(m => `
+        <div class="gb-item">
+            <div class="gb-meta">
+                <span class="gb-name">${m.name || '匿名'}</span>
+                <span class="gb-time">${fmtTime(m.time)}</span>
+            </div>
+            <div class="gb-text">${m.msg}</div>
+            <div class="gb-actions auth-ctrl">
+                <button onclick="deleteGuestbook(${m.id})">删除</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function postGuestbook() {
+    const nameEl = document.getElementById('gbName');
+    const msgEl = document.getElementById('gbMsg');
+    const name = nameEl.value.trim() || '匿名';
+    const msg = msgEl.value.trim();
+    if (!msg) { alert('写点什么吧'); return; }
+    const now = new Date();
+    const time = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+    const item = { id: Date.now(), name, msg, time };
+    addItem('guestbook', item);
+    nameEl.value = '';
+    msgEl.value = '';
+    renderGuestbook();
+}
+
+function deleteGuestbook(id) {
+    if (!confirm('删除这条留言？')) return;
+    deleteItem('guestbook', id);
+    renderGuestbook();
+}
+
+// Initial guestbook render
+renderGuestbook();
 
 </script>
 </body>
